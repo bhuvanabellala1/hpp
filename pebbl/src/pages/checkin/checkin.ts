@@ -16,6 +16,7 @@ export class CheckinPage {
 
   public section: string;
   public base64Image: string;
+  public imageSrc: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.section = "camera";
   }
@@ -32,8 +33,8 @@ export class CheckinPage {
     console.log("gere");
     Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
-        targetWidth: 100,
-        targetHeight: 100
+        targetWidth: 1000,
+        targetHeight: 1000
     }).then((imageData) => {
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
@@ -41,6 +42,22 @@ export class CheckinPage {
         console.log(err);
     });
   }
+
+  private openGallery (): void {
+  let cameraOptions = {
+    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: Camera.DestinationType.FILE_URI,
+    quality: 100,
+    targetWidth: 1000,
+    targetHeight: 1000,
+    encodingType: Camera.EncodingType.JPEG,
+    correctOrientation: true
+  }
+
+  Camera.getPicture(cameraOptions)
+    .then(file_uri => this.imageSrc = file_uri,
+    err => console.log(err));
+}
 
 
 }
