@@ -45,16 +45,17 @@ Ionic pages and navigation.
       <button ion-button block large (click)="takePicture()">
         <ion-icon name="camera"></ion-icon>
       </button>
-      <button ion-button block large (click)="openGallery()">
-        <ion-icon name="camera"></ion-icon>
-      </button>
       <img [src]="base64Image" *ngIf="base64Image" />
-      <img [src]="imageSrc" *ngIf="imageSrc" />
     </div>
     <div *ngSwitchCase="'keyboard'">
       <button ion-button block large>
         <ion-icon name="camera"></ion-icon>
       </button>
+      <button ion-button block large (click)="openGallery()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+      <img [src]="base64Image" *ngIf="base64Image" />
+      <img [src]="imageSrc" *ngIf="imageSrc" />
     </div>
   </div>
 

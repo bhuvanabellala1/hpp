@@ -33,8 +33,8 @@ export class CheckinPage {
     console.log("gere");
     Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000
+        targetWidth: 100,
+        targetHeight: 100
     }).then((imageData) => {
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
