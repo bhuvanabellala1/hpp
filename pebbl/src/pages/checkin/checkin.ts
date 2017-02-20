@@ -43,7 +43,7 @@ export class CheckinPage {
     });
   }
 
-  private openGallery (): void {
+  openGallery(){
   let cameraOptions = {
     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: Camera.DestinationType.FILE_URI,
