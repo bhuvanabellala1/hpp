@@ -15,8 +15,9 @@ import {Camera, Keyboard} from 'ionic-native';
 export class CheckinPage {
 
   public section: string;
-  public base64Image: string;
-  public imageSrc: string;
+  public images: Array<{base64Image: string}>;
+  // public base64Image: string;
+  // public imageSrc: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.section = "camera";
   }
@@ -30,14 +31,15 @@ export class CheckinPage {
   }
 
   takePicture(){
-    console.log("gere");
     Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
+        quality: 100,
         targetWidth: 100,
-        targetHeight: 100
+        targetHeight: 100,
+        correctOrientation: true
     }).then((imageData) => {
       // imageData is a base64 encoded string
-        this.base64Image = "data:image/jpeg;base64," + imageData;
+      this.images.push({base64Image: "data:image/jpeg;base64," + imageData});
     }, (err) => {
         console.log(err);
     });
@@ -48,15 +50,16 @@ export class CheckinPage {
     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: Camera.DestinationType.FILE_URI,
     quality: 100,
-    targetWidth: 1000,
+    targetWidth: 100,
     targetHeight: 1000,
     encodingType: Camera.EncodingType.JPEG,
     correctOrientation: true
   }
 
   Camera.getPicture(cameraOptions)
-    .then(file_uri => this.imageSrc = file_uri,
-    err => console.log(err));
+    .then((file_uri) => {
+      this.images.push({base64Image: file_uri});
+    }, err => console.log(err));
 }
 
 
