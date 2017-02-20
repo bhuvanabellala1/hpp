@@ -48,11 +48,9 @@ Ionic pages and navigation.
       <button ion-button large (click)="openGallery()">
         <ion-icon name="camera"></ion-icon>
       </button>
-      <img [src]="{{image.base64Image}}" *ngFor="let image of images" />
+      <img *ngFor="let image of images" src="{{ image.base64Image }}"/>
     </div>
     <div *ngSwitchCase="'keyboard'">
-      <img [src]="base64Image" *ngIf="base64Image" />
-      <img [src]="imageSrc" *ngIf="imageSrc" />
     </div>
   </div>
 
