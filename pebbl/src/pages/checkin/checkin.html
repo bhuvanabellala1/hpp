@@ -42,18 +42,15 @@ Ionic pages and navigation.
 
   <div [ngSwitch]="section" class="forms-wrapper">
     <div *ngSwitchCase="'camera'">
-      <button ion-button block large (click)="takePicture()">
+      <button ion-button large (click)="takePicture()">
         <ion-icon name="camera"></ion-icon>
       </button>
-      <img [src]="base64Image" *ngIf="base64Image" />
+      <button ion-button large (click)="openGallery()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+      <img [src]="{{image.base64Image}}" *ngFor="let image of images" />
     </div>
     <div *ngSwitchCase="'keyboard'">
-      <button ion-button block large>
-        <ion-icon name="camera"></ion-icon>
-      </button>
-      <button ion-button block large (click)="openGallery()">
-        <ion-icon name="camera"></ion-icon>
-      </button>
       <img [src]="base64Image" *ngIf="base64Image" />
       <img [src]="imageSrc" *ngIf="imageSrc" />
     </div>
