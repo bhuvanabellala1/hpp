@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Pebbl
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  The world is your oyster.
+
+
+  <ion-fab bottom>
+    <button ion-fab large *ngFor="let page of navPages" (click)="pushPage(page)">
+      <ion-icon name="{{page.icon}}"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <!-- <ion-fab left bottom>
+    <button ion-fab large><ion-icon name="calendar"></ion-icon></button>
+  </ion-fab>
+  <ion-fab center bottom>
+    <button ion-fab large (click)="pushPage(checkin)"><ion-icon name="flag"></ion-icon></button>
+  </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab large><ion-icon name="map"></ion-icon></button>
+  </ion-fab> -->
+</ion-content>
