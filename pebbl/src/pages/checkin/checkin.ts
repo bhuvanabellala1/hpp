@@ -17,9 +17,10 @@ export class CheckinPage {
   public section: string;
   public images: Array<{base64Image: string}>;
   // public base64Image: string;
-  // public imageSrc: string;
+  public imageSrc: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.section = "camera";
+    this.images = [];
   }
 
   ionViewDidLoad() {
@@ -36,10 +37,11 @@ export class CheckinPage {
         quality: 100,
         targetWidth: 100,
         targetHeight: 100,
-        correctOrientation: true
+
     }).then((imageData) => {
       // imageData is a base64 encoded string
       this.images.push({base64Image: "data:image/jpeg;base64," + imageData});
+      console.log(this.images);
     }, (err) => {
         console.log(err);
     });
@@ -58,8 +60,17 @@ export class CheckinPage {
 
   Camera.getPicture(cameraOptions)
     .then((file_uri) => {
-      this.images.push({base64Image: file_uri});
-    }, err => console.log(err));
+        this.images.push({base64Image: file_uri});
+      }, (err) => {
+        console.log(err)
+      });
+}
+
+
+focusOnTextArea(input){
+
+  input.setFocus();
+
 }
 
 

@@ -1,5 +1,6 @@
 import{Component}from'@angular/core';
 
+
 import { NavController}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import {TimelinePage}from '../timeline/timeline';
@@ -19,10 +20,12 @@ export class HomePage {
       { title: 'Check In', icon: 'flag', component: CheckinPage },
       { title: 'Adventures', icon: 'map', component: AdventuresPage }
     ];
+
   }
 
   pushPage(page) {
-      this.navCtrl.push(page.component);;
+    this.navCtrl.push(page.component);;
   }
+
 
 }

@@ -10,6 +10,7 @@ import { FaqPage } from '../pages/faq/faq';
 import { CheckinPage } from '../pages/checkin/checkin';
 import { TimelinePage } from '../pages/timeline/timeline';
 import { AdventuresPage } from '../pages/adventures/adventures';
+import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AdventuresPage } from '../pages/adventures/adventures';
     FaqPage,
     CheckinPage,
     TimelinePage,
-    AdventuresPage
+    AdventuresPage,
+    BluetoothPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -37,7 +39,8 @@ import { AdventuresPage } from '../pages/adventures/adventures';
     FaqPage,
     CheckinPage,
     TimelinePage,
-    AdventuresPage
+    AdventuresPage,
+    BluetoothPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
