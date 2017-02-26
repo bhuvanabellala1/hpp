@@ -22,7 +22,9 @@
 <ion-spinner *ngIf="isScanning==true" name="circles"></ion-spinner>
 
 <button ion-button large *ngFor="let device of devices">
-  <ion-icon name="camera">{{device.name}}</ion-icon>
+  <ion-icon >
+    <button (click) = "connectToDevice(device)">{{device.name}}</button>
+  </ion-icon>
 </button>
 
 </ion-content>

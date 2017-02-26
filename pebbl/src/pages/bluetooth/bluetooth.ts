@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {BLE} from 'ionic-native';
+import {DevicePage} from '../device/device';
+import {HomePage} from '../home/home';
 
 /*
   Generated class for the Bluetooth page.
@@ -8,6 +10,7 @@ import {BLE} from 'ionic-native';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
 @Component({
   selector: 'page-bluetooth',
   templateUrl: 'bluetooth.html'
@@ -41,7 +44,16 @@ export class BluetoothPage {
         this.isScanning = false;
       });
     }, 3000);
-
   }
 
+  connectToDevice(device) {
+    console.log('Connect To Device');
+    console.log(JSON.stringify(device))
+    console.log('Device Name');
+    console.log(device);
+    this.navCtrl.push(DevicePage);
+    // this.navCtrl.push(DevicePage, {
+    //   device: device
+    // });
+  }
 }

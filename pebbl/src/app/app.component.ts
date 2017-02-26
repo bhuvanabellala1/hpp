@@ -32,7 +32,7 @@ export class MyApp {
     { title: 'Pebbles', icon: 'egg', component: PebblPage },
     { title: 'FAQ', icon: 'help', component: FaqPage },
     { title: 'Legal', icon: 'document', component: LegalPage },
-    {title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage  }
+    { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage  }
   ];
   }
 

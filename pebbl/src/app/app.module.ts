@@ -11,7 +11,7 @@ import { CheckinPage } from '../pages/checkin/checkin';
 import { TimelinePage } from '../pages/timeline/timeline';
 import { AdventuresPage } from '../pages/adventures/adventures';
 import { BluetoothPage } from '../pages/bluetooth/bluetooth';
-
+import { DevicePage } from '../pages/device/device';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { BluetoothPage } from '../pages/bluetooth/bluetooth';
     CheckinPage,
     TimelinePage,
     AdventuresPage,
-    BluetoothPage
+    BluetoothPage,
+    DevicePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -40,7 +41,8 @@ import { BluetoothPage } from '../pages/bluetooth/bluetooth';
     CheckinPage,
     TimelinePage,
     AdventuresPage,
-    BluetoothPage
+    BluetoothPage,
+    DevicePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
