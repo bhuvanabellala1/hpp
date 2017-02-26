@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 81 99" style="enable-background:new 0 0 81 99;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;}
+	.st1{fill:#54C3C2;}
+</style>
+<title>CheckIn</title>
+<desc>Created with Sketch.</desc>
+<g id="Main_1_">
+	<g id="Home-Page-_x28_Default-v2_x29__1_" transform="translate(-46.000000, -595.000000)">
+		<g id="Bottom-Navigation_1_" transform="translate(47.000000, 547.000000)">
+			<g id="TImeline" transform="translate(0.000000, 49.000000)">
+				<circle id="Left" class="st0" cx="25" cy="72" r="25"/>
+				<g id="Timeline-Icon" transform="translate(9.000000, 8.000000)">
+					<g id="Layer_1_1_">
+						<path id="Shape" class="st1" d="M32.4,49.8l-22-2.8c-0.4,0-0.7,0.2-0.8,0.6L9,51.9l1.9-0.2l0.4-2.9l19.6,2.5l-2.5,19.5
+							l-2.3-0.3l0.7,6.5l2.1,0.3c0.4,0,0.7-0.2,0.8-0.6l3.3-26c0-0.2,0-0.4-0.1-0.5C32.7,49.9,32.5,49.8,32.4,49.8L32.4,49.8z"/>
+						<path id="Shape_1_" class="st1" d="M23.4,51.8c0-0.2-0.1-0.4-0.3-0.5c-0.1-0.1-0.3-0.2-0.5-0.2l-22,2.3
+							c-0.2,0-0.4,0.1-0.5,0.3S0,54.1,0,54.2l2.8,26.1c0,0.4,0.4,0.7,0.8,0.6l22-2.3c0.4,0,0.7-0.4,0.6-0.8L23.4,51.8z M4,74.5
+							L4,74.5L4,74.5L2,55L21.6,53v0h0l2.1,19.5L4,74.5z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
