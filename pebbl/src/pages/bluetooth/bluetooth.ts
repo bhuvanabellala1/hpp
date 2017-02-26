@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {BLE} from 'ionic-native';
 import {DevicePage} from '../device/device';
-import {HomePage} from '../home/home';
 
 /*
   Generated class for the Bluetooth page.
@@ -51,9 +50,8 @@ export class BluetoothPage {
     console.log(JSON.stringify(device))
     console.log('Device Name');
     console.log(device);
-    this.navCtrl.push(DevicePage);
-    // this.navCtrl.push(DevicePage, {
-    //   device: device
-    // });
+    this.navCtrl.push(DevicePage, {
+      device: device
+    });
   }
 }
