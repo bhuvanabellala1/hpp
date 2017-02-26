@@ -1,0 +1,57 @@
+<!--
+  Generated template for the Walkthrough page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <!--<ion-navbar>
+    <ion-title>walkthrough</ion-title>
+  </ion-navbar>-->
+
+  <ion-toolbar>
+    <ion-buttons end>
+      <button ion-button class="skip-button" (click)="skipIntro()" [hidden]="lastSlide">Skip</button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-slides #slider (ionSlideDidChange)="onSlideChanged()" pager="true">
+    <ion-slide class="slide-1">
+      <h2 class="main-title">Welcome!</h2>
+      <p class="intro-text">
+        This is <b>Pebbl</b>
+      </p>
+    </ion-slide>
+    <ion-slide class="slide-2">
+      <h2 class="main-title">Wake up!</h2>
+      <p class="intro-text">
+        We should get started.
+      </p>
+      <p class="intro-text">
+        Here we have a beautiful walkthrough
+      </p>
+    </ion-slide>
+    <!--<ion-slide class="slide-3">
+      <h2 class="main-title">Get ready!</h2>
+      <p class="intro-text">
+        Soon your app will look and feel awesome!
+      </p>
+    </ion-slide>-->
+    <ion-slide class="slide-3">
+      <h2 class="main-title">Get Started!</h2>
+      <p class="intro-text">
+        Log in to your account.
+      </p>
+      <div class="button-bar">
+        <button ion-button primary (click)="goToLogin()">Log in</button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
