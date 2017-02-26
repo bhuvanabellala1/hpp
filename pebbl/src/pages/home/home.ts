@@ -16,9 +16,9 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
     this.navPages = [
-      { title: 'Timeline', icon: 'center', path: '../../../assets/fonts/Timeline_Stretched.svg', component: TimelinePage },
-      { title: 'Check In', icon: 'center', path: '../../../assets/fonts/CheckIn.svg', component: CheckinPage },
-      { title: 'Adventures', icon: 'center', path: '../../../assets/fonts/Adventure_Stretched.svg', component: AdventuresPage }
+      { title: 'Timeline', icon: 'center', path: 'img/Timeline_Stretched.svg', component: TimelinePage },
+      { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
+      { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
 
   }
