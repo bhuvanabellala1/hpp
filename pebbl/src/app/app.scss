@@ -92,6 +92,10 @@ ion-header {
   padding-bottom: (9rem/ 10);
 }
 
+ion-title {
+  padding: 0px;
+}
+
 .toolbar-title {
   // padding-bottom: (9rem/ 10);
 }
@@ -107,3 +111,8 @@ ion-header {
   margin: auto;
   text-align: center;
 }
+
+// ion-app.ios [padding],
+// ion-app.ios [padding] .scroll-content {
+//   padding: 0px !important;
+// }

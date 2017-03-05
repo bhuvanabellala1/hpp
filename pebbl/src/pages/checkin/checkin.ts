@@ -28,7 +28,7 @@ export class CheckinPage {
   }
 
   onSegmentChanged(segmentButton: SegmentButton) {
-    // console.log('Segment changed to', segmentButton.value);
+    console.log('Segment changed to', segmentButton.value);
   }
 
   takePicture(){
@@ -64,14 +64,14 @@ export class CheckinPage {
       }, (err) => {
         console.log(err)
       });
-}
+  }
 
 
-focusOnTextArea(input){
+  focusOnTextArea(input){
 
-  input.setFocus();
+    input.setFocus();
 
-}
+  }
 
 
 }

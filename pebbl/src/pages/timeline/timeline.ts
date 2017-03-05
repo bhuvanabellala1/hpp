@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {TimelineService} from '../../services/timeline-service';
 
 /*
   Generated class for the Timeline page.
@@ -12,8 +13,11 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'timeline.html'
 })
 export class TimelinePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public timeline: any;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public timelineService: TimelineService) {
+  	this.timeline = timelineService.getAll();
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TimelinePage');
