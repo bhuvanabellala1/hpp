@@ -27,7 +27,7 @@ export class WalkthroughPage {
     // this.lastSlide = true;
     // this.slider.slideTo(this.slider.length());
 
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
 
   onSlideChanged() {
@@ -36,7 +36,7 @@ export class WalkthroughPage {
   }
 
   goToLogin() {
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
 
   ionViewDidLoad() {
