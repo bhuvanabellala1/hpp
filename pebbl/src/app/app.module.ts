@@ -12,6 +12,9 @@ import { TimelinePage } from '../pages/timeline/timeline';
 import { AdventuresPage } from '../pages/adventures/adventures';
 import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 
+//import services
+import {TimelineService} from '../services/timeline-service';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { BluetoothPage } from '../pages/bluetooth/bluetooth';
     AdventuresPage,
     BluetoothPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    TimelineService
+  ]
+  // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}
