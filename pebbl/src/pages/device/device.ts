@@ -16,6 +16,7 @@ import {BLE} from 'ionic-native';
 export class DevicePage {
   characteristics: any;
   connecting: boolean;
+  gps_data = [];
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -35,6 +36,7 @@ export class DevicePage {
       let subscription = BLE.startNotification(deviceID, "FFE0", "FFE1");
       subscription.subscribe(data => {
            console.log(this.bytesToString(data));
+           this.getlatlong(this.bytesToString(data));
        });
       this.characteristics = peripheralData.characteristics;
       this.connecting = false;
@@ -43,6 +45,16 @@ export class DevicePage {
       console.log('disconnected');
   }
   );}
+
+  getlatlong(string) {
+    this.gps_data.push(string);
+    console.log(this.gps_data);
+
+  }
+
+
+
+
 
   onData(data) { // data received from Arduino
     console.log(this.bytesToString(data));
