@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Platform, App, Nav } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /*
   Generated class for the Login page.
@@ -13,7 +14,16 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  public emailField: any;
+  public passwordField: any;
+  //@ViewChild(Nav) nav: Nav;
+
+  constructor(public nav: NavController) {}
+
+  submitLogin(){
+    //this.nav.setRoot(HomePage);
+    this.nav.setRoot(HomePage)
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Slides, Nav } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { LoginPage } from '../login/login';
 /*
   Generated class for the Walkthrough page.
 
@@ -27,7 +28,7 @@ export class WalkthroughPage {
     // this.lastSlide = true;
     // this.slider.slideTo(this.slider.length());
 
-    this.nav.setRoot(HomePage);
+    this.nav.setRoot(LoginPage);
   }
 
   onSlideChanged() {
@@ -36,7 +37,7 @@ export class WalkthroughPage {
   }
 
   goToLogin() {
-    this.nav.setRoot(HomePage);
+    this.nav.setRoot(LoginPage);
   }
 
   ionViewDidLoad() {

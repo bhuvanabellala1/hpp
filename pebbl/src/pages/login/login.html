@@ -14,5 +14,16 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text"  [(ngModel)] = "emailField"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)] = "passwordField"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button (click) = "submitLogin()" >Submit</button>
 </ion-content>
