@@ -4,10 +4,10 @@ import {BLE} from 'ionic-native';
 import {DevicePage} from '../device/device';
 
 /*
-  Generated class for the Bluetooth page.
+Generated class for the Bluetooth page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
 */
 
 @Component({
@@ -17,6 +17,9 @@ import {DevicePage} from '../device/device';
 export class BluetoothPage {
   devices: any;
   isScanning: boolean;
+  deviceID: "49F9B620-8659-4ACF-8DF2-1305B6354A09";
+  characteristics: any;
+  connecting: false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.devices = [];
@@ -32,14 +35,13 @@ export class BluetoothPage {
     this.devices = [];
     this.isScanning = true;
     BLE.startScan([]).subscribe(device => {
-      console.log(device);
       this.devices.push(device);
     });
 
     setTimeout(() => {
       BLE.stopScan().then(() => {
         console.log('Scanning has stopped');
-        console.log(JSON.stringify(this.devices))
+        // console.log(JSON.stringify(this.devices))
         this.isScanning = false;
       });
     }, 3000);

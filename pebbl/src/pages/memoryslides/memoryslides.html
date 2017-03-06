@@ -1,0 +1,17 @@
+<!--
+  Generated template for the Memoryslides page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content padding>
+
+  <ion-slides [options]="mySlideOptions" (swipedown)="close()">
+    <ion-slide *ngFor="let slide of memory.images">
+      <img [src]="slide">
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
