@@ -1,0 +1,93 @@
+{
+  "memories":[
+    {
+      "id": 1,
+      "type": "liked",
+      "user_id": 2,
+      "comment": "Awesome Day in the Bay <3",
+      "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+      "location": "Berkeley, CA",
+      "time": "May 3, 2016"
+      },
+      {
+        "id": 2,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "May 4, 2016"
+      },
+      {
+        "id": 3,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "May 21, 2016"
+      },
+      {
+        "id": 4,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "May 21, 2016"
+      },
+      {
+        "id": 5,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "November 21, 2016"
+      },
+      {
+        "id": 6,
+        "type": "liked",
+        "user_id": 2,
+        "name": "Max Lynx",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "December 21, 2016"
+      },
+      {
+        "id": 7,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "December 24, 2016"
+      },
+      {
+        "id": 8,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "December 27, 2016"
+      },
+      {
+        "id": 9,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "December 27, 2016"
+      },
+      {
+        "id": 10,
+        "type": "liked",
+        "user_id": 2,
+        "comment": "Awesome Day in the Bay <3",
+        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "location": "Berkeley, CA",
+        "time": "December 30, 2016"
+        }]
+      }
