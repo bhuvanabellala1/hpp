@@ -10,6 +10,7 @@ import { FaqPage } from '../pages/faq/faq';
 import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page'
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
+import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login'
 import * as firebase from 'firebase';
 

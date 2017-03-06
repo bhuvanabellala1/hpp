@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 /*
   Generated class for the Register page.
@@ -13,7 +13,12 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl:ViewController) {}
+
+  closeRegisterPage(){
+    this.viewCtrl.dismiss();
+
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');

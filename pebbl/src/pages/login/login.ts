@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Platform, App, Nav } from 'ionic-angular';
+import { NavController, Platform, App, Nav, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { RegisterPage } from '../register/register';
+
 
 /*
   Generated class for the Login page.
@@ -18,11 +20,17 @@ export class LoginPage {
   public passwordField: any;
   //@ViewChild(Nav) nav: Nav;
 
-  constructor(public nav: NavController) {}
+  constructor(public nav: NavController, private modalCtrl: ModalController) {}
 
   submitLogin(){
     //this.nav.setRoot(HomePage);
     this.nav.setRoot(HomePage)
+  }
+
+  submitRegister(){
+    let registermodal = this.modalCtrl.create(RegisterPage);
+    registermodal.present();
+
   }
 
   ionViewDidLoad() {

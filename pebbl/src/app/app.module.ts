@@ -12,6 +12,7 @@ import { TimelinePage } from '../pages/timeline/timeline';
 import { AdventuresPage } from '../pages/adventures/adventures';
 import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 import { LoginPage } from '../pages/login/login'
+import { RegisterPage } from '../pages/register/register';
 
 import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page'
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
@@ -33,7 +34,8 @@ import {TimelineService} from '../services/timeline-service';
     BluetoothPage,
     FirebaseAuthPagePage,
     WalkthroughPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -52,7 +54,8 @@ import {TimelineService} from '../services/timeline-service';
     BluetoothPage,
     FirebaseAuthPagePage,
     WalkthroughPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     TimelineService
