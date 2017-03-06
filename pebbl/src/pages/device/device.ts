@@ -17,6 +17,14 @@ export class DevicePage {
   characteristics: any;
   connecting: boolean;
   gps_data = [];
+  a = '';
+  index = 0;
+  coordinates = '';
+  clean_coordinates = '';
+  index_N = 0;
+  index_W = 0;
+  latitude = 0.0;
+  longitude = 0.0;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -35,7 +43,6 @@ export class DevicePage {
       console.log(peripheralData.characteristics);
       let subscription = BLE.startNotification(deviceID, "FFE0", "FFE1");
       subscription.subscribe(data => {
-           console.log(this.bytesToString(data));
            this.getlatlong(this.bytesToString(data));
        });
       this.characteristics = peripheralData.characteristics;
@@ -48,7 +55,20 @@ export class DevicePage {
 
   getlatlong(string) {
     this.gps_data.push(string);
-    console.log(this.gps_data);
+    this.a = this.gps_data.join();
+    this.a = this.a.replace(/,/g, '');
+    this.index = this.a.indexOf("$GPGLL");
+    this.coordinates = this.a.slice(this.index+6,this.index+29);
+    this.index_N = this.coordinates.indexOf("N");
+    this.index_W = this.coordinates.indexOf("W");
+    this.latitude = parseFloat(this.coordinates.slice(0,this.index_N))/100;
+    this.longitude = parseFloat(this.coordinates.slice(this.index_N+1,this.index_W))/100;
+
+    console.log(this.latitude);
+    console.log(this.longitude);
+    // console.log(this.gps_data[1]);
+    // console.log(this.gps_data[2]);
+
 
   }
 

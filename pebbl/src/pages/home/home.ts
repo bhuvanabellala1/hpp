@@ -12,13 +12,13 @@ import { AdventuresPage}from '../adventures/adventures';
 })
 export class HomePage {
 
-  navPages: Array<{title: string, icon: string, component: any}>;
+  navPages: Array<{title: string, icon: string, path: string, component: any}>;
 
   constructor(public navCtrl: NavController) {
     this.navPages = [
-      { title: 'Timeline', icon: 'calendar', component: TimelinePage },
-      { title: 'Check In', icon: 'flag', component: CheckinPage },
-      { title: 'Adventures', icon: 'map', component: AdventuresPage }
+      { title: 'Timeline', icon: 'center', path: 'img/Timeline_Stretched.svg', component: TimelinePage },
+      { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
+      { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
 
   }

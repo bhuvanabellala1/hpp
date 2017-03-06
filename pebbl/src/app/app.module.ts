@@ -13,6 +13,13 @@ import { AdventuresPage } from '../pages/adventures/adventures';
 import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 import { DevicePage } from '../pages/device/device';
 
+
+import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page'
+import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
+
+//import services
+import {TimelineService} from '../services/timeline-service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -25,7 +32,9 @@ import { DevicePage } from '../pages/device/device';
     TimelinePage,
     AdventuresPage,
     BluetoothPage,
-    DevicePage
+    DevicePage,
+    FirebaseAuthPagePage,
+    WalkthroughPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -42,8 +51,13 @@ import { DevicePage } from '../pages/device/device';
     TimelinePage,
     AdventuresPage,
     BluetoothPage,
-    DevicePage
+    DevicePage,
+    FirebaseAuthPagePage,
+    WalkthroughPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    TimelineService
+  ]
+  // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}

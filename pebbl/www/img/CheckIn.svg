@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 81 99" style="enable-background:new 0 0 81 99;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F0008C;stroke:#000000;}
+	.st1{fill:#54C3C2;}
+	.st2{fill:none;stroke:#54C3C2;}
+	.st3{fill:#FFFFFF;}
+</style>
+<title>CheckIn</title>
+<desc>Created with Sketch.</desc>
+<g id="Main">
+	<g id="Home-Page-_x28_Default-v2_x29_" transform="translate(-147.000000, -547.000000)">
+		<g id="Bottom-Navigation" transform="translate(47.000000, 547.000000)">
+			<g id="CheckIn" transform="translate(101.000000, 0.000000)">
+				<circle id="Middle" class="st0" cx="39.5" cy="58.5" r="39.5"/>
+				<g id="Page-1" transform="translate(14.000000, 0.000000)">
+					<path id="Fill-1" class="st1" d="M26,40.2c-7.6,0-13.7-6.2-13.7-13.8S18.4,12.6,26,12.6c7.6,0,13.7,6.2,13.7,13.8
+						S33.6,40.2,26,40.2 M26,0.6C11.9,0.6,0.5,12,0.5,26.1C0.5,50.5,26,82.4,26,82.4s25.5-31.9,25.5-56.3C51.5,12,40.1,0.6,26,0.6"
+						/>
+					<path id="Stroke-3" class="st2" d="M26.5,40.7c-7.6,0-13.7-6.2-13.7-13.8S18.9,13,26.5,13c7.6,0,13.7,6.2,13.7,13.8
+						S34,40.7,26.5,40.7z M26.5,1C12.4,1,1,12.4,1,26.5C1,51,26.5,82.8,26.5,82.8S51.9,51,51.9,26.5C51.9,12.4,40.5,1,26.5,1z"/>
+					<path id="Fill-5" class="st3" d="M41,27.6c0,8-6.5,14.6-14.5,14.6c-8,0-14.5-6.5-14.5-14.6S18.5,13,26.5,13
+						C34.5,13,41,19.5,41,27.6"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

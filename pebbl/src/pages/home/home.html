@@ -1,26 +1,32 @@
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
+    <button class="top-navigation" menuToggle>
+      <img src="img/ion-icons/navicon-round.svg">
     </button>
     <ion-title>
       Pebbl
     </ion-title>
     <ion-buttons end>
-      <button ion-button>
-        <ion-icon name="person"></ion-icon>
+      <button class="top-navigation">
+        <img src="img/ion-icons/person.svg">
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
+  <div class="stats-area">
+    <img src="img/Profile-1.svg">
+    <p> Making memories for 811 days </p>
+    <img src="img/Profile-2.svg">
+  </div>
 
 <ion-fab bottom>
-  <button ion-fab large *ngFor="let page of navPages" (click)="pushPage(page)">
-    <ion-icon name="{{page.icon}}"></ion-icon>
-  </button>
+  <div class="bottom-buttons">
+    <button ion-fab class={{page.icon}} *ngFor="let page of navPages" (click)="pushPage(page)">
+      <img src={{page.path}}>
+    </button>
+  </div>
 </ion-fab>
 
 <!-- <ion-fab left bottom>

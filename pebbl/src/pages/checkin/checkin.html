@@ -8,11 +8,11 @@ Ionic pages and navigation.
 
   <ion-navbar color="primary">
     <ion-title>
-      <ion-buttons>
-        <button ion-button round icon-right>Round Button
+      <!-- <ion-buttons> -->
+        <button ion-button round icon-right id="location-button">Round Button
           <ion-icon name="arrow-dropdown"></ion-icon>
         </button>
-      </ion-buttons>
+      <!-- </ion-buttons> -->
     </ion-title>
     <ion-buttons end>
       <button ion-button>
@@ -25,7 +25,7 @@ Ionic pages and navigation.
 
 
 
-<ion-content padding>
+<ion-content>
   <ion-segment [(ngModel)]="section" (ionChange)="onSegmentChanged($event)">
     <ion-segment-button value="camera" >
       <ion-icon name="camera" large></ion-icon>
@@ -38,23 +38,32 @@ Ionic pages and navigation.
     </ion-segment-button>
   </ion-segment>
 
-  <ion-textarea #input rows="12" placeholder="Describe your memory"></ion-textarea>
-
-  <div [ngSwitch]="section" class="forms-wrapper">
-    <div *ngSwitchCase="'camera'">
-      <button ion-button large (click)="takePicture()">
-        <ion-icon name="camera"></ion-icon>
+  <div class="checkin-padding">
+    <ion-textarea #input placeholder="Describe your memory"></ion-textarea>
+    <div id="create-section">
+      <button ion-button>
+        Create
       </button>
-      <button ion-button large (click)="openGallery()">
-        <ion-icon name="camera"></ion-icon>
-      </button>
-      <div>
-        <img *ngFor="let image of images" src="{{ image.base64Image }}"/>
-      </div>
     </div>
-    <div *ngSwitchCase="'keyboard'">
+
+    <div [ngSwitch]="section" class="forms-wrapper">
+      <div *ngSwitchCase="'camera'">
+        <button ion-button large (click)="takePicture()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+        <button ion-button large (click)="openGallery()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+        <div>
+          <img *ngFor="let image of images" src="{{ image.base64Image }}"/>
+        </div>
+      </div>
+      <div *ngSwitchCase="'keyboard'">
+      </div>
+      <div *ngSwitchCase="'emoticons'">
+      </div>
     </div>
   </div>
 
 
-  </ion-content>
+</ion-content>
