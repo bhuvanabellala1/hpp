@@ -13,6 +13,7 @@ import { AdventuresPage } from '../pages/adventures/adventures';
 import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 import { LoginPage } from '../pages/login/login'
 import { RegisterPage } from '../pages/register/register';
+import { UsersService } from '../providers/users-service'
 
 import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page'
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
@@ -58,7 +59,8 @@ import {TimelineService} from '../services/timeline-service';
     RegisterPage
   ],
   providers: [
-    TimelineService
+    TimelineService,
+    UsersService
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

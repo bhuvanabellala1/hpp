@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, Platform, App, Nav, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import { UsersService } from '../../providers/users-service'
 
 
 /*
@@ -12,15 +13,28 @@ import { RegisterPage } from '../register/register';
 */
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  providers: [UsersService]
 })
 export class LoginPage {
 
   public emailField: any;
   public passwordField: any;
+  private users = [];
+  private usersList: any;
   //@ViewChild(Nav) nav: Nav;
 
-  constructor(public nav: NavController, private modalCtrl: ModalController) {}
+  constructor(public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService) {
+    
+  }
+
+
+  listOurUsers(){
+    this.usersService.loadUser(5)
+    .then(data => {
+      this.usersList = data;
+    })
+  }
 
   submitLogin(){
     //this.nav.setRoot(HomePage);
@@ -34,6 +48,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+    this.listOurUsers();
     console.log('ionViewDidLoad LoginPage');
   }
 

@@ -11,8 +11,27 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UsersService {
 
+private data: any;
+
   constructor(public http: Http) {
     console.log('Hello UsersService Provider');
+  }
+
+  loadUser(number){
+    if (this.data){
+      return Promise.resolve(this.data);
+    }
+
+    return new Promise(resolve => {
+
+      this.http.get('https://randomuser.me/api/?results='+number)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.data = data.results;
+        resolve(this.data);
+      })
+
+    })
   }
 
 }
