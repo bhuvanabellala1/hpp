@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Platform, App, Nav, ModalController } from 'ionic-angular';
+import { NavController, Platform, App, Nav, ModalController, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
 import { UsersService } from '../../providers/users-service'
@@ -24,10 +24,25 @@ export class LoginPage {
   private usersList: any;
   //@ViewChild(Nav) nav: Nav;
 
-  constructor(public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService) {
+  constructor(private loadingCtrl: LoadingController, public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService) {
     
   }
 
+  signUserUp(){
+    this.usersService.signUpUser(this.emailField, this.passwordField).then(authData => {
+      //successful
+      this.nav.setRoot(HomePage)
+    }, error => {
+      alert("error")
+    });
+
+    let loader = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+
+    loader.present();
+
+  }
 
   listOurUsers(){
     this.usersService.loadUser(5)
