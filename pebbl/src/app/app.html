@@ -5,7 +5,7 @@
       <h1> Sam </h1>
     </div>
     <ion-list class="menu-list">
-      <button ion-item detail-none *ngFor="let page of pages" (click)=pushPage(page)>
+      <button menuClose ion-item detail-none *ngFor="let page of pages" (click)=pushPage(page)>
         <ion-icon *ngIf="page.icon" name="{{page.icon}}" item-left></ion-icon>
         {{page.title}}
       </button>
