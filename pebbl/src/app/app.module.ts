@@ -21,6 +21,7 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
 //import services
 import {TimelineService} from '../services/timeline-service';
 
+
 @NgModule({
   declarations: [
     MyApp,

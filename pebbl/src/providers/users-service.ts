@@ -35,22 +35,38 @@ signUpUser(email: string , password: string){
 	});
 }
 
-  loadUser(number){
-    
-    if (this.data){
-      return Promise.resolve(this.data);
-    }
 
-    return new Promise(resolve => {
-
-      this.http.get('https://randomuser.me/api/?results='+number)
-      .map(res => res.json())
-      .subscribe(data => {
-        this.data = data.results;
-        resolve(this.data);
-      })
-
-    })
+loginUser(email: string, password: string): any {
+    return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
+
+logoutUser()
+{
+  console.log("I came here")
+  return this.fireAuth.signOut();
+  
+
+  //my code to redirect or anything
+}
+
+
+
+  // loadUser(number){
+    
+  //   if (this.data){
+  //     return Promise.resolve(this.data);
+  //   }
+
+  //   return new Promise(resolve => {
+
+  //     this.http.get('https://randomuser.me/api/?results='+number)
+  //     .map(res => res.json())
+  //     .subscribe(data => {
+  //       this.data = data.results;
+  //       resolve(this.data);
+  //     })
+
+  //   })
+  // }
 
 }

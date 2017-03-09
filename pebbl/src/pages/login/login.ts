@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Platform, App, Nav, ModalController, LoadingController } from 'ionic-angular';
+import { NavController, Platform, App, Nav, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
 import { UsersService } from '../../providers/users-service'
@@ -21,10 +21,10 @@ export class LoginPage {
   public emailField: any;
   public passwordField: any;
   private users = [];
-  private usersList: any;
+  // private usersList: any;
   //@ViewChild(Nav) nav: Nav;
 
-  constructor(private loadingCtrl: LoadingController, public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService) {
+  constructor(private alertCtrl: AlertController, private loadingCtrl: LoadingController, public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService) {
     
   }
 
@@ -44,16 +44,36 @@ export class LoginPage {
 
   }
 
-  listOurUsers(){
-    this.usersService.loadUser(5)
-    .then(data => {
-      this.usersList = data;
-    })
-  }
+  // listOurUsers(){
+  //   this.usersService.loadUser(5)
+  //   .then(data => {
+  //     this.usersList = data;
+  //   })
+  // }
 
   submitLogin(){
-    //this.nav.setRoot(HomePage);
-    this.nav.setRoot(HomePage)
+    
+    alert(this.passwordField);
+    this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {
+      //successful
+      this.nav.setRoot(HomePage)
+    }, error => {
+      //alert("error logging in: "+ error.message);
+  		let alert = this.alertCtrl.create({
+	      title: 'Error loggin in',
+	      subTitle: error.message,
+	      buttons: ['OK']
+	    });
+	    alert.present();
+    });
+
+    let loader = this.loadingCtrl.create({
+      dismissOnPageChange: true,
+    });
+
+    loader.present();
+
+    //this.nav.setRoot(HomePage)
   }
 
   submitRegister(){
@@ -63,7 +83,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    this.listOurUsers();
+    // this.listOurUsers();
     console.log('ionViewDidLoad LoginPage');
   }
 

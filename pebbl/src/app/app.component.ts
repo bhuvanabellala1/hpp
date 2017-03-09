@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, App, Nav } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+import {Injectable} from '@angular/core';
 
 import { HomePage } from '../pages/home/home';
 import { LegalPage } from '../pages/legal/legal';
@@ -16,16 +17,17 @@ import { UsersService } from '../providers/users-service'
 import * as firebase from 'firebase';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [UsersService]
 })
 export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
+  public user: UsersService;
   public rootPage: any;
   pages: Array<{title: string, icon: string, component: any}>;
 
-  constructor(platform: Platform,
-  public app: App) {
+  constructor(platform: Platform, public app: App) {
 
   //Initialize Firebase
   const config = {
@@ -35,25 +37,30 @@ export class MyApp {
     storageBucket: "pebbl-9bfab.appspot.com",
     messagingSenderId: "980489863069"
   };
+
+  this.testingfirebase(config)
   
-  firebase.initializeApp(config);
+  // firebase.initializeApp(config);
 
-    firebase.auth().onAuthStateChanged((user) => {
+  //   //check logged in status
+  //   firebase.auth().onAuthStateChanged((user) => {
 
-    if(user){
-      console.log("authenticated")
-      this.nav.setRoot(HomePage);
-      //self.rootPage = TabsPage;
-    } 
-    else{
-      console.log("not authenticated")
-      this.nav.setRoot(WalkthroughPage);
-      //self.rootPage = LoginPage;
-      //console.log()
-    }
+  //   if(user){
+  //     console.log("authenticated")
+  //     this.nav.setRoot(HomePage);
+  //     //self.rootPage = TabsPage;
+  //   } 
+  //   else{
+  //     console.log("not authenticated")
+  //     this.nav.setRoot(WalkthroughPage);
+  //     //self.rootPage = LoginPage;
+  //     //console.log()
+  //   }
 
 
-  });
+  // });
+
+ 
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -72,7 +79,36 @@ export class MyApp {
   ];
   }
 
+ userLogout(){
+   
+    //this.user.logoutUser()
+    this.nav.setRoot(LoginPage);
+  }
+
   pushPage(page){
     this.app.getRootNav().push(page.component);
+  }
+
+  testingfirebase(config){
+      firebase.initializeApp(config);
+
+    //check logged in status
+    firebase.auth().onAuthStateChanged((user) => {
+
+    if(user){
+      console.log("authenticated")
+      this.nav.setRoot(HomePage);
+      //self.rootPage = TabsPage;
+    } 
+    else{
+      console.log("not authenticated")
+      this.nav.setRoot(WalkthroughPage);
+      //self.rootPage = LoginPage;
+      //console.log()
+    }
+
+
+  });
+
   }
 }
