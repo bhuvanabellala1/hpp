@@ -40,7 +40,7 @@ export class MyApp {
   };
 
   this.testingfirebase(config)
-  
+
   // firebase.initializeApp(config);
 
   //   //check logged in status
@@ -50,7 +50,7 @@ export class MyApp {
   //     console.log("authenticated")
   //     this.nav.setRoot(HomePage);
   //     //self.rootPage = TabsPage;
-  //   } 
+  //   }
   //   else{
   //     console.log("not authenticated")
   //     this.nav.setRoot(WalkthroughPage);
@@ -77,7 +77,7 @@ export class MyApp {
     }
 
  userLogout(){
-   
+
     //this.user.logoutUser()
     this.nav.setRoot(LoginPage, {x:1});
   }
@@ -96,7 +96,7 @@ export class MyApp {
       console.log("authenticated")
       this.nav.setRoot(HomePage);
       //self.rootPage = TabsPage;
-    } 
+    }
     else{
       console.log("not authenticated")
       this.nav.setRoot(WalkthroughPage);
@@ -109,6 +109,3 @@ export class MyApp {
 
   }
 }
-      
-
-
