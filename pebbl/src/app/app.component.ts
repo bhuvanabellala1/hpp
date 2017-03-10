@@ -79,7 +79,7 @@ export class MyApp {
  userLogout(){
    
     //this.user.logoutUser()
-    this.nav.setRoot(LoginPage);
+    this.nav.setRoot(LoginPage, {x:1});
   }
 
   pushPage(page){

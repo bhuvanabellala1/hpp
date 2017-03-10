@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Platform, App, Nav, ModalController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, Platform, App, Nav, ModalController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
 import { UsersService } from '../../providers/users-service'
@@ -24,7 +24,7 @@ export class LoginPage {
   // private usersList: any;
   //@ViewChild(Nav) nav: Nav;
 
-  constructor(private alertCtrl: AlertController, private loadingCtrl: LoadingController, public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService) {
+  constructor(private alertCtrl: AlertController, private loadingCtrl: LoadingController, public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService, public params: NavParams) {
     
   }
 
@@ -84,7 +84,11 @@ export class LoginPage {
 
   ionViewDidLoad() {
     // this.listOurUsers();
-    console.log('ionViewDidLoad LoginPage');
+    let flag = this.params.get("x")
+    if (flag == 1)
+    {
+      this.usersService.logoutUser();
+    }
   }
 
 }
