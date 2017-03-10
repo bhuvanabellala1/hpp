@@ -16,33 +16,23 @@
 <ion-content>
   <ion-list class="list-no-border notifications-list">
 
-    <ion-item *ngFor="let timelineIndex of timeline">
-      <span class="item-label" *ngIf="timelineIndex.type == 'liked'">
+    <ion-item *ngFor="let memory of timeline.memories; let i=index">
+
+      <span class="item-label">
         <ion-icon name="home"></ion-icon>
       </span>
 
-      <span class="item-label secondary-bg" *ngIf="timelineIndex.type == 'commented'">
-        <ion-icon name="ios-chatboxes"></ion-icon>
-      </span>
+      <div>
+        <img *ngFor="let image of memory.images; let j=index" src="{{ image }}" (click)="slideImages(i, j)"/>
+      </div>
 
-      <span class="item-label green-bg" *ngIf="timelineIndex.type == 'friend_request'">
-        <ion-icon name="ios-add"></ion-icon>
-      </span>
-
-      <span color="primary"  class="post-author">
-        {{ timelineIndex.name }}
-      </span>
-      <span class="notifications-content" *ngIf="timelineIndex.type == 'liked'">liked your post</span>
-      <span class="notifications-content" *ngIf="timelineIndex.type == 'commented'">commented on your post</span>
-      <span class="notifications-content" *ngIf="timelineIndex.type == 'friend_request'">
-        wants to be your friend
-      </span>
-
+      <h4>
+        {{ memory.comment }}
+      </h4>
       <p class="post-time">
-        <ion-icon name="timer-outline"></ion-icon>
-        {{ timelineIndex.time }}
+        {{ memory.location }}
       </p>
+
     </ion-item>
   </ion-list>
 </ion-content>
-

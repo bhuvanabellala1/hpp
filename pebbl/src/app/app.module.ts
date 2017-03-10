@@ -14,12 +14,15 @@ import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 import { LoginPage } from '../pages/login/login'
 import { RegisterPage } from '../pages/register/register';
 import { UsersService } from '../providers/users-service'
+import { DevicePage } from '../pages/device/device';
+import { MemoryslidesPage } from '../pages/memoryslides/memoryslides';
+
 
 import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page'
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
 
 //import services
-import {TimelineService} from '../services/timeline-service';
+import {TimelineService} from '../pages/timeline/timeline.service';
 
 
 @NgModule({
@@ -34,10 +37,12 @@ import {TimelineService} from '../services/timeline-service';
     TimelinePage,
     AdventuresPage,
     BluetoothPage,
+    DevicePage,
     FirebaseAuthPagePage,
     WalkthroughPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    MemoryslidesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -54,10 +59,12 @@ import {TimelineService} from '../services/timeline-service';
     TimelinePage,
     AdventuresPage,
     BluetoothPage,
+    DevicePage,
     FirebaseAuthPagePage,
     WalkthroughPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    MemoryslidesPage
   ],
   providers: [
     TimelineService,

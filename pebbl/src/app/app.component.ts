@@ -27,6 +27,7 @@ export class MyApp {
   public rootPage: any;
   pages: Array<{title: string, icon: string, component: any}>;
 
+
   constructor(platform: Platform, public app: App) {
 
   //Initialize Firebase
@@ -58,26 +59,22 @@ export class MyApp {
   //   }
 
 
-  // });
+      platform.ready().then(() => {
+        // Okay, so the platform is ready and our plugins are available.
+        // Here you can do any higher level native things you might need.
+        StatusBar.styleDefault();
+        Splashscreen.hide();
+      });
 
- 
-
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
-    });
-
-    this.pages = [
-    { title: 'Home', icon: 'home', component: HomePage },
-    { title: 'Profile', icon: 'person', component: ProfilePage },
-    { title: 'Pebbles', icon: 'egg', component: PebblPage },
-    { title: 'FAQ', icon: 'help', component: FaqPage },
-    { title: 'Legal', icon: 'document', component: LegalPage },
-    {title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage  }
-  ];
-  }
+      this.pages = [
+        { title: 'Home', icon: 'home', component: HomePage },
+        { title: 'Profile', icon: 'person', component: ProfilePage },
+        { title: 'Pebbles', icon: 'egg', component: PebblPage },
+        { title: 'FAQ', icon: 'help', component: FaqPage },
+        { title: 'Legal', icon: 'document', component: LegalPage },
+        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage  }
+      ];
+    }
 
  userLogout(){
    
@@ -112,3 +109,6 @@ export class MyApp {
 
   }
 }
+      
+
+

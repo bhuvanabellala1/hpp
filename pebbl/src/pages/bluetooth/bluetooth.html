@@ -16,13 +16,17 @@
 <ion-content padding>
 
   <ion-buttons end>
-    <button ion-button (click) = "startScanning()" >Scan</button>
+    <button ion-button (click) = "startScanning()" >Connect</button>
   </ion-buttons>
 
 <ion-spinner *ngIf="isScanning==true" name="circles"></ion-spinner>
 
 <button ion-button large *ngFor="let device of devices">
-  <ion-icon name="camera">{{device.name}}</ion-icon>
+  <ion-icon >
+    <button (click) = "connectToDevice(device)">{{device.name}}</button>
+  </ion-icon>
 </button>
+
+
 
 </ion-content>
