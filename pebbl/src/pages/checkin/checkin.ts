@@ -28,7 +28,8 @@ export class CheckinPage {
       this.section = "camera";
       this.images = [];
       this.grabVenues();
-      this.venue = {'name': 'No Location'};
+      this.venue = navParams.get('venue');
+      this.venuesData = navParams.get('venueData');
     }
 
     ionViewDidLoad() {
