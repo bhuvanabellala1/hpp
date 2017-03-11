@@ -1,77 +1,104 @@
 import { Component } from '@angular/core';
-import { NavController, SegmentButton, AlertController, NavParams } from 'ionic-angular';
-import {Camera, Keyboard} from 'ionic-native';
+import { NavController, SegmentButton, ModalController, NavParams } from 'ionic-angular';
+import {Camera, Keyboard, Geolocation} from 'ionic-native';
+import { CheckinService } from '../../providers/checkin-service';
+import { VenuePage } from '../venue/venue';
 
 /*
-  Generated class for the Checkin page.
+Generated class for the Checkin page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
 */
 @Component({
   selector: 'page-checkin',
-  templateUrl: 'checkin.html'
+  templateUrl: 'checkin.html',
+  providers: [CheckinService]
 })
 export class CheckinPage {
 
   public section: string;
   public images: Array<{base64Image: string}>;
+  public venuesData: any;
+  public venue: any;
   // public base64Image: string;
   public imageSrc: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.section = "camera";
-    this.images = [];
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private checkinService: CheckinService, public modalCtrl: ModalController) {
+      this.section = "camera";
+      this.images = [];
+      this.grabVenues();
+      this.venue = {'name': 'No Location'};
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CheckinPage');
-  }
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad CheckinPage');
+    }
 
-  onSegmentChanged(segmentButton: SegmentButton) {
-    console.log('Segment changed to', segmentButton.value);
-  }
+    grabVenues(){
+      Geolocation.getCurrentPosition().then((resp) => {
+        this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
+        .then(data => {
+          this.venuesData = data;
+          this.venue = this.venuesData.response.venues[0];
+        });
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
 
-  takePicture(){
-    Camera.getPicture({
+    }
+
+    onSegmentChanged(segmentButton: SegmentButton) {
+      console.log('Segment changed to', segmentButton.value);
+    }
+
+    takePicture(){
+      Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
         quality: 100,
         targetWidth: 100,
         targetHeight: 100,
 
-    }).then((imageData) => {
-      // imageData is a base64 encoded string
-      this.images.push({base64Image: "data:image/jpeg;base64," + imageData});
-      console.log(this.images);
-    }, (err) => {
+      }).then((imageData) => {
+        // imageData is a base64 encoded string
+        this.images.push({base64Image: "data:image/jpeg;base64," + imageData});
+        console.log(this.images);
+      }, (err) => {
         console.log(err);
-    });
-  }
+      });
+    }
 
-  openGallery(){
-  let cameraOptions = {
-    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-    destinationType: Camera.DestinationType.FILE_URI,
-    quality: 100,
-    targetWidth: 100,
-    targetHeight: 1000,
-    encodingType: Camera.EncodingType.JPEG,
-    correctOrientation: true
-  }
+    openGallery(){
+      let cameraOptions = {
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: Camera.DestinationType.FILE_URI,
+        quality: 100,
+        targetWidth: 100,
+        targetHeight: 1000,
+        encodingType: Camera.EncodingType.JPEG,
+        correctOrientation: true
+      }
 
-  Camera.getPicture(cameraOptions)
-    .then((file_uri) => {
+      Camera.getPicture(cameraOptions)
+      .then((file_uri) => {
         this.images.push({base64Image: file_uri});
       }, (err) => {
-        console.log(err)
+        console.log(err);
       });
+    }
+
+
+    focusOnTextArea(input){
+      input.setFocus();
+    }
+
+    chooseLocation(){
+      let venueModal = this.modalCtrl.create(VenuePage, { venues: this.venuesData.response.venues,  venue: this.venue});
+      venueModal.onDidDismiss(data => {
+        this.venue = data;
+      });
+      venueModal.present();
+    }
+
+
   }
-
-
-  focusOnTextArea(input){
-
-    input.setFocus();
-
-  }
-
-
-}

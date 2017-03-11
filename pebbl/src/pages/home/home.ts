@@ -5,6 +5,7 @@ import { NavController}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import {TimelinePage}from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
+import {Camera, Keyboard, Geolocation} from 'ionic-native';
 
 @Component({
   selector: 'page-home',
@@ -13,6 +14,7 @@ import { AdventuresPage}from '../adventures/adventures';
 export class HomePage {
 
   navPages: Array<{title: string, icon: string, path: string, component: any}>;
+  
 
   constructor(public navCtrl: NavController) {
     this.navPages = [

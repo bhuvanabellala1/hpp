@@ -13,17 +13,17 @@ import { AdventuresPage } from '../pages/adventures/adventures';
 import { BluetoothPage } from '../pages/bluetooth/bluetooth';
 import { LoginPage } from '../pages/login/login'
 import { RegisterPage } from '../pages/register/register';
-import { UsersService } from '../providers/users-service'
 import { DevicePage } from '../pages/device/device';
 import { MemoryslidesPage } from '../pages/memoryslides/memoryslides';
+import { VenuePage } from '../pages/venue/venue';
 
-
-import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page'
-import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
+import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page';
+import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 
 //import services
-import {TimelineService} from '../pages/timeline/timeline.service';
-
+import { TimelineService } from '../pages/timeline/timeline.service';
+import { UsersService } from '../providers/users-service';
+import { CheckinService } from '../providers/checkin-service';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import {TimelineService} from '../pages/timeline/timeline.service';
     WalkthroughPage,
     LoginPage,
     RegisterPage,
-    MemoryslidesPage
+    MemoryslidesPage,
+    VenuePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -64,11 +65,13 @@ import {TimelineService} from '../pages/timeline/timeline.service';
     WalkthroughPage,
     LoginPage,
     RegisterPage,
-    MemoryslidesPage
+    MemoryslidesPage,
+    VenuePage
   ],
   providers: [
     TimelineService,
-    UsersService
+    UsersService,
+    CheckinService
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

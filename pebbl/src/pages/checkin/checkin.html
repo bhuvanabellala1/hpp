@@ -9,7 +9,7 @@ Ionic pages and navigation.
   <ion-navbar color="primary">
     <ion-title>
       <!-- <ion-buttons> -->
-        <button ion-button round icon-right id="location-button">Round Button
+        <button ion-button round icon-right id="location-button" (click)=chooseLocation()>{{ venue.name }}
           <ion-icon name="arrow-dropdown"></ion-icon>
         </button>
       <!-- </ion-buttons> -->

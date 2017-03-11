@@ -30,82 +30,83 @@ export class MyApp {
 
   constructor(platform: Platform, public app: App) {
 
-  //Initialize Firebase
-  const config = {
-    apiKey: "AIzaSyB_sE1LoPvNInvb0T-jejM2nMwX59qYwpU",
-    authDomain: "pebbl-9bfab.firebaseapp.com",
-    databaseURL: "https://pebbl-9bfab.firebaseio.com",
-    storageBucket: "pebbl-9bfab.appspot.com",
-    messagingSenderId: "980489863069"
-  };
+    //Initialize Firebase
+    const config = {
+      apiKey: "AIzaSyB_sE1LoPvNInvb0T-jejM2nMwX59qYwpU",
+      authDomain: "pebbl-9bfab.firebaseapp.com",
+      databaseURL: "https://pebbl-9bfab.firebaseio.com",
+      storageBucket: "pebbl-9bfab.appspot.com",
+      messagingSenderId: "980489863069"
+    };
 
-  this.testingfirebase(config)
+    this.testingfirebase(config)
 
-  // firebase.initializeApp(config);
+    // firebase.initializeApp(config);
 
-  //   //check logged in status
-  //   firebase.auth().onAuthStateChanged((user) => {
+    //   //check logged in status
+    //   firebase.auth().onAuthStateChanged((user) => {
 
-  //   if(user){
-  //     console.log("authenticated")
-  //     this.nav.setRoot(HomePage);
-  //     //self.rootPage = TabsPage;
-  //   }
-  //   else{
-  //     console.log("not authenticated")
-  //     this.nav.setRoot(WalkthroughPage);
-  //     //self.rootPage = LoginPage;
-  //     //console.log()
-  //   }
+    //   if(user){
+    //     console.log("authenticated")
+    //     this.nav.setRoot(HomePage);
+    //     //self.rootPage = TabsPage;
+    //   }
+    //   else{
+    //     console.log("not authenticated")
+    //     this.nav.setRoot(WalkthroughPage);
+    //     //self.rootPage = LoginPage;
+    //     //console.log()
+    //   }
 
 
-      platform.ready().then(() => {
-        // Okay, so the platform is ready and our plugins are available.
-        // Here you can do any higher level native things you might need.
-        StatusBar.styleDefault();
-        Splashscreen.hide();
-      });
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+      Splashscreen.hide();
+    });
 
-      this.pages = [
-        { title: 'Home', icon: 'home', component: HomePage },
-        { title: 'Profile', icon: 'person', component: ProfilePage },
-        { title: 'Pebbles', icon: 'egg', component: PebblPage },
-        { title: 'FAQ', icon: 'help', component: FaqPage },
-        { title: 'Legal', icon: 'document', component: LegalPage },
-        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage  }
-      ];
-    }
+    this.pages = [
+      { title: 'Home', icon: 'home', component: HomePage },
+      { title: 'Profile', icon: 'person', component: ProfilePage },
+      { title: 'Pebbles', icon: 'egg', component: PebblPage },
+      { title: 'FAQ', icon: 'help', component: FaqPage },
+      { title: 'Legal', icon: 'document', component: LegalPage },
+      { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage  }
+    ];
+  }
 
- userLogout(){
-
-    //this.user.logoutUser()
+  userLogout(){
     this.nav.setRoot(LoginPage, {x:1});
   }
 
   pushPage(page){
-    this.app.getRootNav().push(page.component);
+
+    if(page.title == 'Home'){
+      this.nav.setRoot(HomePage);
+    }else{
+      this.app.getRootNav().push(page.component);
+    }
   }
 
   testingfirebase(config){
-      firebase.initializeApp(config);
+    firebase.initializeApp(config);
 
-    //check logged in status
     firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+        console.log("authenticated")
+        this.nav.setRoot(HomePage);
+        //self.rootPage = TabsPage;
+      }
+      else{
+        console.log("not authenticated")
+        this.nav.setRoot(WalkthroughPage);
+        //self.rootPage = LoginPage;
+        //console.log()
+      }
 
-    if(user){
-      console.log("authenticated")
-      this.nav.setRoot(HomePage);
-      //self.rootPage = TabsPage;
-    }
-    else{
-      console.log("not authenticated")
-      this.nav.setRoot(WalkthroughPage);
-      //self.rootPage = LoginPage;
-      //console.log()
-    }
 
-
-  });
+    });
 
   }
 }
