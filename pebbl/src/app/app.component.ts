@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, App, Nav } from 'ionic-angular';
+import { Platform, App, Nav, MenuController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import {Injectable} from '@angular/core';
 
@@ -28,7 +28,7 @@ export class MyApp {
   pages: Array<{title: string, icon: string, component: any}>;
 
 
-  constructor(platform: Platform, public app: App) {
+  constructor(platform: Platform, public app: App, public menu:MenuController) {
 
     //Initialize Firebase
     const config = {
@@ -40,24 +40,6 @@ export class MyApp {
     };
 
     this.testingfirebase(config)
-
-    // firebase.initializeApp(config);
-
-    //   //check logged in status
-    //   firebase.auth().onAuthStateChanged((user) => {
-
-    //   if(user){
-    //     console.log("authenticated")
-    //     this.nav.setRoot(HomePage);
-    //     //self.rootPage = TabsPage;
-    //   }
-    //   else{
-    //     console.log("not authenticated")
-    //     this.nav.setRoot(WalkthroughPage);
-    //     //self.rootPage = LoginPage;
-    //     //console.log()
-    //   }
-
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -96,13 +78,11 @@ export class MyApp {
       if(user){
         console.log("authenticated")
         this.nav.setRoot(HomePage);
-        //self.rootPage = TabsPage;
       }
       else{
         console.log("not authenticated")
         this.nav.setRoot(WalkthroughPage);
-        //self.rootPage = LoginPage;
-        //console.log()
+        this.menu.enable(false);
       }
 
 

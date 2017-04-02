@@ -30,21 +30,22 @@ signUpUser(email: string , password: string){
 			//successful login, create user profile
 		this.userProfile.child(authenticatedUser.uid).set({
 			email: email
-		});	
+		});
 		});
 	});
 }
 
 
 loginUser(email: string, password: string): any {
+  console.log("User Service - Logging in user");
     return this.fireAuth.signInWithEmailAndPassword(email, password);
   }
 
 logoutUser()
 {
-  console.log("I came here")
+  console.log("User Service - Logging out user");
   return this.fireAuth.signOut();
-  
+
 
   //my code to redirect or anything
 }
@@ -52,7 +53,7 @@ logoutUser()
 
 
   // loadUser(number){
-    
+
   //   if (this.data){
   //     return Promise.resolve(this.data);
   //   }

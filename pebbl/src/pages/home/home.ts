@@ -1,7 +1,7 @@
 import{Component}from'@angular/core';
 
 
-import { NavController}from 'ionic-angular';
+import { NavController, MenuController}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import {TimelinePage}from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
@@ -19,7 +19,8 @@ export class HomePage {
   public venuesData: any;
   public venue: any;
 
-  constructor(public navCtrl: NavController, private checkinService: CheckinService, ) {
+  constructor(public navCtrl: NavController, private checkinService: CheckinService,
+  public menu: MenuController) {
     this.navPages = [
       { title: 'Timeline', icon: 'center', path: 'img/Timeline_Stretched.svg', component: TimelinePage },
       { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
@@ -50,6 +51,15 @@ export class HomePage {
 
   }
 
+  ionViewDidLoad() {
+    console.log("Entering home page - enabling menu");
+    this.menu.enable(true);
+  }
+  //
+  // ionViewDidLeave() {
+  //   // this.listOurUsers();
+  //   this.menu.enable(false);
+  // }
 
 
 }

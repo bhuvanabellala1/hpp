@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Slides, Nav } from 'ionic-angular';
+import { NavController, NavParams, Slides, Nav, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
 /*
@@ -18,7 +18,7 @@ export class WalkthroughPage {
 
   @ViewChild('slider') slider: Slides;
 
-  constructor(public nav: NavController) {}
+  constructor(public nav: NavController, public menu: MenuController) {}
 
     skipIntro() {
     // You can skip to main app
@@ -41,6 +41,7 @@ export class WalkthroughPage {
   }
 
   ionViewDidLoad() {
+    this.menu.enable(false);
     console.log('ionViewDidLoad WalkthroughPage');
   }
 

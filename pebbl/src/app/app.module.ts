@@ -24,6 +24,9 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { TimelineService } from '../pages/timeline/timeline.service';
 import { UsersService } from '../providers/users-service';
 import { CheckinService } from '../providers/checkin-service';
+import { ConnectivityService } from '../providers/connectivity-service';
+import { Locations } from '../providers/locations';
+import { GoogleMaps } from '../providers/google-maps';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,10 @@ import { CheckinService } from '../providers/checkin-service';
   providers: [
     TimelineService,
     UsersService,
-    CheckinService
+    CheckinService,
+    ConnectivityService,
+    Locations,
+    GoogleMaps
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

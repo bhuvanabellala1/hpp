@@ -1,6 +1,9 @@
 
-import { Component, ViewChild, ElementRef  } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Locations } from '../../providers/locations';
+import { GoogleMaps } from '../../providers/google-maps';
+import { NavController, Platform } from 'ionic-angular';
+
 /*
 Generated class for the Adventures page.
 
@@ -16,25 +19,33 @@ declare var google;
 export class AdventuresPage {
 
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
+  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public maps: GoogleMaps,
+    public platform: Platform, public locations: Locations) {}
 
-  ionViewDidLoad(){
-    this.loadMap();
-  }
+    ionViewDidLoad(){
 
-  loadMap(){
+      this.platform.ready().then(() => {
 
-    let latLng = new google.maps.LatLng(-34.9290, 138.6010);
+        let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
+        let locationsLoaded = this.locations.load();
 
-    let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+        Promise.all([
+          mapLoaded,
+          locationsLoaded
+        ]).then((result) => {
+
+          let locations = result[1];
+
+          for(let location of locations){
+            this.maps.addMarker(location.latitude, location.longitude);
+          }
+
+        });
+
+      });
+
     }
 
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-}
-
-}
+  }
