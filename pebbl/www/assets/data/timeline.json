@@ -1,6 +1,15 @@
 {
   "memories":[
     {
+      "id": 2,
+      "type": "liked",
+      "user_id": 2,
+      "comment": "Awesome Day in the Bay <3",
+      "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+      "location": "Berkeley, CA",
+      "time": "May 4, 2016"
+    },
+{
       "id": 1,
       "type": "liked",
       "user_id": 2,
@@ -8,15 +17,6 @@
       "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg"],
       "location": "Berkeley, CA",
       "time": "May 3, 2016"
-      },
-      {
-        "id": 2,
-        "type": "liked",
-        "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
-        "location": "Berkeley, CA",
-        "time": "May 4, 2016"
       },
       {
         "id": 3,

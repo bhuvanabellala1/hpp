@@ -1,23 +1,62 @@
 page-timeline,
+
 .notifications {
-  .notifications-list {
+
+  hr.vertical {
+    //width: 2px;
+    height: 100%;
+    /* or height in PX */
+    border: 2px solid color($colors, primary);
+    border-radius: 2px;
+    position: absolute;
+
+    margin-left: 3em;
+}
+img {
+  position: relative;
+  //z-index: 200;
+}
+.card-ios {
+  width: 100%;
+  margin: 0;
+}
+.label-ios {
+  margin: 11px 0 10px 0;
+}
+.item-ios {
+  padding-left: 0;
+}
+.item-ios p {
+  margin: 4px 0 4px 0;
+}
+.item-ios.item-block .item-inner {
+  padding-right: 0;
+}
+.card-content-ios {
+  padding: 13px 16px 14px 70px;
+}
+.notifications-list {
+
     .item {
-      position: relative;
-      margin: 0;
-      padding: 0;
+      //position: relative;
+      margin-left: -36px;
+      //padding: 0;
+      //z-index: 1;
 
-      .item-inner {
-        border-left: 1px solid color($colors, primary);
-        margin-left: 2em;
-        padding: 1em 1em 0;
-      }
+      // .item-inner {
+      //   border-left: 1px solid color($colors, primary);
+      //   margin-left: 2em;
+      //   padding: 1em 1em 0;
+      //   position: relative;
+      //   z-index: -1;
+      // }
     }
 
-    img {
-      height: 100px;
-      width: 100px;
-      padding: 5px;
-    }
+    // img {
+    //   height: 100px;
+    //   width: 100px;
+    //   padding: 5px;
+    // }
 
     .item-label {
       display: block;
@@ -46,9 +85,12 @@ page-timeline,
     }
   }
 }
-
+item-block {
+  background-color: silver;
+}
 page-timeline {
 	.list-no-border .item .item-inner {
     	border-bottom: none;
+      margin: 0;
 	}
 }

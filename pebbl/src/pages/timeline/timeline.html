@@ -9,11 +9,12 @@
     <button  ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>timeline</ion-title>
+    <ion-title>Timeline</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<!-- <ion-content>
+
   <ion-list class="list-no-border notifications-list">
 
     <ion-item *ngFor="let memory of timeline.memories; let i=index">
@@ -21,17 +22,70 @@
       <span class="item-label">
         <ion-icon name="home"></ion-icon>
       </span>
-
-      <div>
+      <ion-card>
+        <hr class="vertical"/>
+        <ion-card-header>
+          Memory Title
+        </ion-card-header>
         <img *ngFor="let image of memory.images; let j=index" src="{{ image }}" (click)="slideImages(i, j)"/>
-      </div>
 
-      <h4>
-        {{ memory.comment }}
-      </h4>
-      <p class="post-time">
-        {{ memory.location }}
-      </p>
+        <ion-card-content>
+          <h4>
+            {{ memory.comment }}
+          </h4>
+          <p class="post-time">
+            {{ memory.location }}
+          </p>
+        </ion-card-content> -->
+
+----
+<ion-content>
+<ion-list class="list-no-border">
+  <ion-item *ngFor="let memory of timeline.memories; let i=index">
+    <hr class="vertical"/>
+<ion-card class ="notifications-list">
+  <ion-card-content>
+
+          <ion-item>
+
+          <ion-avatar item-left>
+            <img src="img/Profile-1.svg">
+          </ion-avatar>
+          <h2>Memory Title</h2>
+          <p>Timestamp and location</p>
+        </ion-item>
+
+
+
+        <img *ngFor="let image of memory.images; let j=index" src="{{ image }}" (click)="slideImages(i, j)"/>
+
+
+          <p>{{ memory.comment }}</p>
+
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear >
+              <ion-icon name="text"></ion-icon>
+              <div>4 Comments</div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-only clear >
+              <ion-icon name="create"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-only clear >
+              <ion-icon name="camera"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+
+      </ion-card>
+
+
+
 
     </ion-item>
   </ion-list>
