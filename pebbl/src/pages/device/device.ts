@@ -57,14 +57,18 @@ export class DevicePage {
     this.gps_data.push(string);
     this.a = this.gps_data.join();
     this.a = this.a.replace(/,/g, '');
-    this.index = this.a.indexOf("$GPGLL");
-    this.coordinates = this.a.slice(this.index+6,this.index+29);
+    this.index = this.a.indexOf("$GPRMC");
+    this.coordinates = this.a.slice(this.index+17,this.index+38);
     this.index_N = this.coordinates.indexOf("N");
     this.index_W = this.coordinates.indexOf("W");
     this.latitude = parseFloat(this.coordinates.slice(0,this.index_N))/100;
     this.longitude = parseFloat(this.coordinates.slice(this.index_N+1,this.index_W))/100;
 
+    console.log('coordinates');
+    console.log(this.coordinates);
+    console.log('Latitude');
     console.log(this.latitude);
+    console.log('longitude');
     console.log(this.longitude);
     // console.log(this.gps_data[1]);
     // console.log(this.gps_data[2]);
