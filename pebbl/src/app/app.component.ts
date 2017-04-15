@@ -32,11 +32,11 @@ export class MyApp {
 
     //Initialize Firebase
     const config = {
-      apiKey: "AIzaSyB_sE1LoPvNInvb0T-jejM2nMwX59qYwpU",
-      authDomain: "pebbl-9bfab.firebaseapp.com",
-      databaseURL: "https://pebbl-9bfab.firebaseio.com",
-      storageBucket: "pebbl-9bfab.appspot.com",
-      messagingSenderId: "980489863069"
+      apiKey: "AIzaSyD70iOoMmko5N-WFL8bFq7IJFSDou4rkjs",
+      authDomain: "paired-fbb35.firebaseapp.com",
+      databaseURL: "https://paired-fbb35.firebaseio.com",
+      storageBucket: "paired-fbb35.appspot.com",
+      messagingSenderId: "846315346935"
     };
 
     this.testingfirebase(config)
