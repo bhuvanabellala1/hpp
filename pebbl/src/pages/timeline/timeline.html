@@ -5,88 +5,69 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="primary" >
-    <button  ion-button menuToggle>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Timeline</ion-title>
   </ion-navbar>
 </ion-header>
 
-<!-- <ion-content>
-
-  <ion-list class="list-no-border notifications-list">
-
-    <ion-item *ngFor="let memory of timeline.memories; let i=index">
-
-      <span class="item-label">
-        <ion-icon name="home"></ion-icon>
-      </span>
-      <ion-card>
-        <hr class="vertical"/>
-        <ion-card-header>
-          Memory Title
-        </ion-card-header>
-        <img *ngFor="let image of memory.images; let j=index" src="{{ image }}" (click)="slideImages(i, j)"/>
-
-        <ion-card-content>
-          <h4>
-            {{ memory.comment }}
-          </h4>
-          <p class="post-time">
-            {{ memory.location }}
-          </p>
-        </ion-card-content> -->
-
-----
 <ion-content>
-<ion-list class="list-no-border">
-  <ion-item *ngFor="let memory of timeline.memories; let i=index">
-    <hr class="vertical"/>
-<ion-card class ="notifications-list">
-  <ion-card-content>
+  <ion-list class="list-no-border">
+
+
+<svg width="28px" height="32px" viewBox="0 0 28 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Timeline-C&amp;H-Copy-3" transform="translate(-60.000000, -81.000000)">
+            <g id="MakeMemory" transform="translate(58.000000, 81.000000)">
+                <g id="Group-3">
+                    <polygon id="Polygon" fill="#54C3C2" points="16 0 29.8564065 8 29.8564065 24 16 32 2.14359354 24 2.14359354 8"></polygon>
+                    <path d="M16.8614966,15.2503154 L16.8614966,8.80458361 C16.8614966,8.35909201 16.5007934,8 16.055906,8 C15.6118241,8 15.2503154,8.36030039 15.2503154,8.80458361 L15.2503154,15.2503154 L8.80458361,15.2503154 C8.35909201,15.2503154 8,15.6110186 8,16.055906 C8,16.4999878 8.36030039,16.8614966 8.80458361,16.8614966 L15.2503154,16.8614966 L15.2503154,23.3074297 C15.2503154,23.7527199 15.6110186,24.1118119 16.055906,24.1118119 C16.4999878,24.1118119 16.8614966,23.7517129 16.8614966,23.3074297 L16.8614966,16.8614966 L23.3074297,16.8614966 C23.7527199,16.8614966 24.1118119,16.5007934 24.1118119,16.055906 C24.1118119,15.6118241 23.7517129,15.2503154 23.3074297,15.2503154 L16.8614966,15.2503154 Z" id="Page-1" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+    <ion-item class="mem-no-margin" *ngFor="let memory of timeline.memories; let i=index">
+      <hr class="vertical" />
+      <ion-item class="timeline-date">
+        <h2><span>Date</span></h2>
+      </ion-item>
+      <ion-card class="notifications-list">
+        <ion-card-content>
 
           <ion-item>
-
-          <ion-avatar item-left>
-            <img src="img/Profile-1.svg">
-          </ion-avatar>
-          <h2>Memory Title</h2>
-          <p>Timestamp and location</p>
-        </ion-item>
-
-
-
-        <img *ngFor="let image of memory.images; let j=index" src="{{ image }}" (click)="slideImages(i, j)"/>
-
-
+            <ion-avatar item-left>
+              <img src="img/Profile-1.svg">
+            </ion-avatar>
+            <h2>Memory Title</h2>
+            <p>Timestamp and location</p>
+          </ion-item>
+          <img *ngFor="let image of memory.images; let j=index" src="{{ image }}" (click)="slideImages(i, j)" />
           <p>{{ memory.comment }}</p>
-
-        <ion-row>
-          <ion-col>
-            <button ion-button icon-left clear >
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear>
               <ion-icon name="text"></ion-icon>
               <div>4 Comments</div>
             </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-only clear >
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-only clear>
               <ion-icon name="create"></ion-icon>
             </button>
-          </ion-col>
-          <ion-col>
-            <button ion-button icon-only clear >
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-only clear>
               <ion-icon name="camera"></ion-icon>
             </button>
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
 
       </ion-card>
-
-
-
-
     </ion-item>
   </ion-list>
 </ion-content>

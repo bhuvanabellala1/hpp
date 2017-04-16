@@ -1,48 +1,65 @@
 page-timeline,
-
 .notifications {
-
   hr.vertical {
     //width: 2px;
     height: 100%;
     /* or height in PX */
     border: 2px solid color($colors, primary);
-    border-radius: 2px;
     position: absolute;
-
-    margin-left: 3em;
-}
-img {
+    margin-left: 2em;
+    margin-top: 0;
+  }
+  .timeline-date {
+  margin-left: 38px;
   position: relative;
-  //z-index: 200;
+  padding-left: 25px;
 }
-.card-ios {
-  width: 100%;
-  margin: 0;
-}
-.label-ios {
-  margin: 11px 0 10px 0;
-}
-.item-ios {
-  padding-left: 0;
-}
-.item-ios p {
-  margin: 4px 0 4px 0;
-}
-.item-ios.item-block .item-inner {
-  padding-right: 0;
-}
-.card-content-ios {
-  padding: 13px 16px 14px 70px;
-}
-.notifications-list {
 
+.timeline-date h2 {
+  display: inline-block;
+  background-color: color($colors, primary);
+  color: white;
+  padding: 4px;
+  border-radius: 2px;
+  margin-left: 25px;
+}
+.timeline-date:before {
+  content: '';
+    position: absolute;
+    top: 48%;
+    border-bottom: 4px solid;
+    width: 30px; /* half of limiter */
+    margin: 0 -30px;
+    color: color($colors, primary);
+    right: 100%;
+}
+  img {
+    position: relative; //z-index: 200;
+  }
+  .card-ios {
+    width: 100%;
+    margin: 0;
+  }
+  .label-ios {
+    margin: 11px 0 10px 0;
+  }
+  .item-ios {
+    padding-left: 0;
+  }
+  .item-ios p {
+    margin: 8px 0 0px 0;
+  }
+  .item-ios.item-block .item-inner {
+    padding-right: 0;
+  }
+  .card-content-ios {
+    padding: 13px 16px 14px 70px;
+  }
+  .notifications-list {
     .item {
       //position: relative;
-      margin-left: -36px;
-      //padding: 0;
+      margin-left: -52px; //padding: 0;
       //z-index: 1;
-
       // .item-inner {
       //   border-left: 1px solid color($colors, primary);
       //   margin-left: 2em;
@@ -50,14 +67,11 @@ img {
       //   position: relative;
       //   z-index: -1;
       // }
-    }
-
-    // img {
+    } // img {
     //   height: 100px;
     //   width: 100px;
     //   padding: 5px;
     // }
-
     .item-label {
       display: block;
       position: absolute;
@@ -73,24 +87,34 @@ img {
       box-sizing: content-box;
       color: #FFF;
     }
-
-    .post-author, .notifications-content {
+    .post-author,
+    .notifications-content {
       font-size: 0.8em;
       font-weight: normal;
     }
-
     .post-time {
       margin-top: 1em;
       font-size: 0.7em;
     }
   }
 }
+
 item-block {
   background-color: silver;
 }
+
 page-timeline {
-	.list-no-border .item .item-inner {
-    	border-bottom: none;
-      margin: 0;
-	}
+  .list-no-border .item .item-inner {
+    border-bottom: none;
+    margin: 0;
+  }
+}
+.mem-no-margin .label-ios {
+  margin:0;
+}
+svg {
+  margin: 15px 0px -4px 22px;
+}
+ion-avatar {
+  margin: 0 16px 0 0;
 }
