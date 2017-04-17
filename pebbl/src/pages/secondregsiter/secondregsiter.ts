@@ -4,28 +4,28 @@ import { HomePage } from '../home/home';
 import { UsersService } from '../../providers/users-service'
 
 /*
-  Generated class for the Register page.
+  Generated class for the Secondregsiter page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-register',
-  templateUrl: 'register.html',
+  selector: 'page-secondregsiter',
+  templateUrl: 'secondregsiter.html',
   providers: [UsersService]
 })
-export class RegisterPage {
+export class SecondregsiterPage {
 
   public emailField: any;
   public passwordField: any;
   public username: any;
   private users = [];
+  public codepair: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private usersService: UsersService, public loadingCtrl: LoadingController) {}
 
-
   signUserUp(){
-      this.usersService.signUpUser(this.emailField, this.passwordField, this.username).then(authData => {
+      this.usersService.signUpUser2(this.emailField, this.passwordField, this.username, this.codepair).then(authData => {
         //successful
         this.navCtrl.setRoot(HomePage)
       }, error => {
@@ -41,7 +41,7 @@ export class RegisterPage {
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    console.log('ionViewDidLoad SecondregsiterPage');
   }
 
 }

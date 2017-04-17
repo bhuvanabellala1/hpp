@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, Platform, App, Nav, ModalController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import { SecondregsiterPage } from '../secondregsiter/secondregsiter';
 import { UsersService } from '../../providers/users-service'
 
 
@@ -31,21 +32,21 @@ export class LoginPage {
     }
 
 
-    signUserUp(){
-      this.usersService.signUpUser(this.emailField, this.passwordField).then(authData => {
-        //successful
-        this.nav.setRoot(HomePage)
-      }, error => {
-        alert("error")
-      });
+    // signUserUp(){
+    //   this.usersService.signUpUser(this.emailField, this.passwordField).then(authData => {
+    //     //successful
+    //     this.nav.setRoot(HomePage)
+    //   }, error => {
+    //     alert("error")
+    //   });
 
-      let loader = this.loadingCtrl.create({
-        dismissOnPageChange: true,
-      });
+    //   let loader = this.loadingCtrl.create({
+    //     dismissOnPageChange: true,
+    //   });
 
-      loader.present();
+    //   loader.present();
 
-    }
+    //}
 
     // listOurUsers(){
     //   this.usersService.loadUser(5)
@@ -77,6 +78,15 @@ export class LoginPage {
       // loader.present();
 
       //this.nav.setRoot(HomePage)
+    }
+
+
+    gotoregister(){
+      this.nav.setRoot(RegisterPage);
+    }
+
+    gotosecondregister(){
+      this.nav.setRoot(SecondregsiterPage);
     }
 
     submitRegister(){
