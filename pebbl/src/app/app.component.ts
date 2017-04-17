@@ -15,7 +15,9 @@ import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
 import { UsersService } from '../providers/users-service'
 import * as firebase from 'firebase';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
+declare var cordova: any;
 @Component({
   templateUrl: 'app.html',
   providers: [UsersService]
@@ -28,7 +30,10 @@ export class MyApp {
   pages: Array<{title: string, icon: string, component: any}>;
 
 
-  constructor(platform: Platform, public app: App, public menu:MenuController) {
+  constructor(platform: Platform, public app: App, public menu:MenuController,
+  private backgroundMode: BackgroundMode) {
+
+
 
     //Initialize Firebase
     const config = {
@@ -46,6 +51,10 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+      this.backgroundMode.enable();
+      cordova.plugins.backgroundMode.on('activate', function(){
+        console.log("eegrewtwehwgwhrwhJFHJHGUREHGGSDJGHJSGHJDHJKJKGHJKFGHFJKGHJKSGHJKGHSKGSGJSGHJSGJSHGJKSGHSJKGSJKGJSGJSDKGHJSKHGSKGHJSKGJKGHJKGJKSGHJKSKDSHGSDJKHSDJKGSDKG");
+      });
     });
 
     this.pages = [
