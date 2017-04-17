@@ -60,14 +60,14 @@ export class HomePage {
 
     var rect = [50,50, width - 50, height - 50];
 
-    var n = 20, m = 4, padding = 6, maxSpeed = 3,
+    var n = 10, m = 4, padding = 6, maxSpeed = 1.5,
     radius = d3.scale.sqrt().range([0, 8]),
     color = d3.scale.category10().domain(d3.range(m));
     var nodes = [];
 
     for (var i in d3.range(n)){
       nodes.push({
-      radius: radius(1 + Math.floor(Math.random() * 4)),
+      radius: radius(5 + Math.floor(Math.random() * 4)),
       color: color(Math.floor(Math.random() * m), 0.5),
       x:rect[0] + (Math.random() * (rect[2] - rect[0])),
       y:rect[1] + (Math.random() * (rect[3] - rect[1])),
@@ -104,17 +104,8 @@ export class HomePage {
       .attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; })
       .style("fill", function(d) { return d.color; })
+      // .style("fill", "url(#image)")
       .call(force.drag);
-
-    // var polygon = svg.selectAll("polygon")
-    //   .data(nodes)
-    //   .enter().append("polygon")
-    //   .attr("points", "151.68,194.948 223.09,187.233 257.218,124.034,286.621,189.564 357.273,202.493 304.036,250.707 313.574,321.896 251.268,286.164 186.511,317.232 201.24,246.935")
-    //   // .style("fill", "pink")
-    //   // .style("stroke", "#FFFFFF")
-    //   .style("troke-miterlimit", "#10")
-    //   .style("fill", function(d) { return d.color; })
-    //   .call(force.drag);
 
     var flag = false;
 
