@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {BLE} from 'ionic-native';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 /*
   Generated class for the Device page.
@@ -27,14 +28,17 @@ export class DevicePage {
   longitude = 0.0;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  private backgroundMode: BackgroundMode) {
     let device = this.navParams.get('device');
     this.connecting = true;
     this.connect(device.id);
+    console.log(backgroundMode.isEnabled());
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DevicePage');
+     console.log("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERREERDDDFDFDFREFDFDFDFDFDDFFFDGHHJHJHUYTYYFHGHGGTYYTYGY" + this.backgroundMode.isEnabled());
   }
 
   connect(deviceID) {
@@ -45,6 +49,8 @@ export class DevicePage {
       let subscription = BLE.startNotification(deviceID, "713D0000-503E-4C75-BA94-3148F18D941E", "713D0002-503E-4C75-BA94-3148F18D941E");
       subscription.subscribe(data => {
            this.getlatlong(this.bytesToString(data));
+             console.log("here" + this.backgroundMode.isEnabled());
+             console.log("here" + this.backgroundMode.isActive());
        });
       this.characteristics = peripheralData.characteristics;
       this.connecting = false;
@@ -58,25 +64,6 @@ export class DevicePage {
     console.log('in get lat long');
     this.gps_data.push(string);
     console.log(string);
-    // this.a = this.gps_data.join();
-    // this.a = this.a.replace(/,/g, '');
-    // this.index = this.a.indexOf("$GPRMC");
-    // this.coordinates = this.a.slice(this.index+17,this.index+38);
-    // this.index_N = this.coordinates.indexOf("N");
-    // this.index_W = this.coordinates.indexOf("W");
-    // this.latitude = parseFloat(this.coordinates.slice(0,this.index_N))/100;
-    // this.longitude = parseFloat(this.coordinates.slice(this.index_N+1,this.index_W))/100;
-
-    // console.log('coordinates');
-    // console.log(this.coordinates);
-    // console.log('Latitude');
-    // console.log(this.latitude);
-    // console.log('longitude');
-    // console.log(this.longitude);
-    // console.log(this.gps_data[1]);
-    // console.log(this.gps_data[2]);
-
-
   }
 
 

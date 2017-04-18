@@ -28,6 +28,7 @@ import { ConnectivityService } from '../providers/connectivity-service';
 import { Locations } from '../providers/locations';
 import { GoogleMaps } from '../providers/google-maps';
 
+import { BackgroundMode } from '@ionic-native/background-mode';
 @NgModule({
   declarations: [
     MyApp,
@@ -77,7 +78,8 @@ import { GoogleMaps } from '../providers/google-maps';
     CheckinService,
     ConnectivityService,
     Locations,
-    GoogleMaps
+    GoogleMaps,
+    BackgroundMode
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
