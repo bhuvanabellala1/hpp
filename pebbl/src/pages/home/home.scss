@@ -58,6 +58,24 @@ page-home {
     width: (50rem/ 10);
     height:(50rem/ 10);
   }
+  .chart {
+    margin: auto;
+  }
+
+  .card {
+      visibility: hidden;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 200px;
+      position: absolute;
+      display: block;
+      margin-left: 80px;
+      margin-right: auto;
+    }
+
+  .cardtitle {
+    position: relative;
+    text-align: center;
+  }
 
 
 }
