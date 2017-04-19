@@ -55,31 +55,37 @@ export class HomePage {
 
   createChart() {
     var width = 360,
-        height = 380,
+        height = 420,
         maxSpeed = 1.5,
-        padding = 6,
-        m = 4;
-
-    var rect = [50,50, width - 50, height - 50];
-
-    var nodes = d3.range(150).map(function() { return {radius: Math.random() * 12 + 4}; }),
-        root = nodes[0],
-        // color = d3.scale.category10(),
-        color = d3.scale.ordinal().range([d3.rgb(255,186,73), d3.rgb(84,195,194), d3.rgb(75,181,217), d3.rgb(222,243,243)]).domain(d3.range(m)),
-        x = rect[0] + (Math.random() * (rect[2] - rect[0])),
-        y = rect[1] + (Math.random() * (rect[3] - rect[1])),
-        speedX =(Math.random() - 0.5) * 2 * maxSpeed,
-        speedY = (Math.random() - 0.5) * 2 * maxSpeed;
+        nodes = [],
+        padding = 1,
+        m = 4,
+        n = 40,
+        radius = d3.scale.sqrt().range([0, 8]),
+        rect = [50,50, width - 50, height - 50],
+        card = d3.select("body").selectAll("div.card"),
+        color = d3.scale.ordinal().range([d3.rgb(255,186,73), d3.rgb(84,195,194), d3.rgb(75,181,217), d3.rgb(222,243,243)]).domain(d3.range(m));
+        for (var i in d3.range(n)){
+          nodes.push({radius: radius(1 + Math.floor(Math.random() * 4)),
+          x: rect[0] + (Math.random() * (rect[2] - rect[0])),
+          y: rect[1] + (Math.random() * (rect[3] - rect[1])),
+          activity: 'sex',
+          date: 'date night',
+          location: 'marina',
+          speedX: (Math.random() - 0.5) * 2 *maxSpeed,
+          speedY: (Math.random() - 0.5) * 2 *maxSpeed});
+        }
+        var root = nodes[0]
 
     root.radius = 0;
     root.fixed = true;
-
     var force = d3.layout.force()
-        .gravity(0.05)
+        .gravity(0)
         // charge determines the force applied to the cluster
-        .charge(function(d, i) { return i ? 0 : -1000; })
+        .charge(function(d, i) { return i ? 0 : -300; })
         .nodes(nodes)
         .size([width, height])
+        .on("tick", tick)
         .start();
 
     var svg = d3.select("#chart").append("svg")
@@ -91,57 +97,52 @@ export class HomePage {
         .data(nodes.slice(1))
         .enter().append("circle")
         .attr("r", function(d) { return d.radius; })
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
+        .attr("cx", function(d, i) { return d.x})
+        .attr("cy", function(d, i) { return d.y})
         .style("fill", function(d, i) { return color(i); });
-
-    // function tick(e) {
-    //       force.alpha(0.1)
-    //       circle
-    //         .each(gravity(e.alpha))
-    //         .each(collide(.5))
-    //         .attr("cx", function(d) { return d.x; })
-    //         .attr("cy", function(d) { return d.y; });
-    //     }
 
     //Firstly, it create a quadtree object, using the coordinate of the nodes.
     //Then the quadtree call the visit() to check whether it have collision.
     //We will check the collide method later, but from the code suggests,
     //it change the (x,y) coordinate so we need to update the cx and cy attribute accordingly.
-    force.on("tick", function(e) {
-      var q = d3.geom.quadtree(nodes), i = 0, n = nodes.length;
-      force.alpha(0.1)
-      while (++i < n)
-        q.visit(collide(nodes[i]))
-        q.visit(gravity(e.alpha));
+    function tick(e) {
+      // var q = d3.geom.quadtree(nodes), i = 0, n = nodes.length;
+      // while (++i < n)
+      //   q.visit(gravity(e.alpha))
+      //   q.visit(collide(nodes[i]));
+    force.alpha(0.1)
     circle
       // This sets the boundary for collision
-      // .each(gravity(e.alpha))
+      .each(gravity(e.alpha))
+      .each(collide(.5))
+      // .attr("cx", function(d) { return d.x; })
+      // .attr("cy", function(d) { return d.y; })
       .attr("cx", function(d) { return d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)); })
       .attr("cy", function(d) { return d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)); })
       //allows dragging
       .call(force.drag()
         .on("drag", dragged));
-
-    });
-
-    var card = d3.select("body").selectAll("div.card")
+    };
 
     function dragged(d) {
+      var activity = d.activity, location = d.location, date = d.date;
+      document.getElementById("date").innerHTML = date;
+      document.getElementById("location").innerHTML = location;
+      document.getElementById("activity").innerHTML = activity;
       card.style("visibility", "visible");
       setTimeout(function() {
         card.style("visibility", "hidden");
       }, 5000);
     }
 
-    //This code transit the mouse position as the fixed root node. when the mouse moves,
-    //the layout redefine the root position and recalculate the layout.
+    // This code transit the mouse position as the fixed root node. when the mouse moves,
+    // the layout redefine the root position and recalculate the layout.
     svg.on("mousemove", function() {
       var p1 = d3.mouse(this);
       root.px = p1[0];
       root.py = p1[1];
+      // force.charge(function(d, i) { return i ? 0 : -1000; });
       force.resume();
-      // rootFunction();
     });
 
     // Move nodes toward cluster focus.
@@ -155,62 +156,45 @@ export class HomePage {
         d.y = d.y + (-1 * d.speedY * alpha);
       };
     }
-
-    function collide(node) {
-      //The previous code calculate a square bounding-box (nx1, nx2, ny1, ny2), which the node can be put inside of it.
-      var r = node.radius + 16,
-          nx1 = node.x - r,
-          nx2 = node.x + r,
-          ny1 = node.y - r,
-          ny2 = node.y + r;
-      //This function (quad, x1, x2, y1, y2) is required by the quad.visit() function.
-      //The function now create compare whether bounding boxes of two nodes overlap by a simple collision detection algorithm.
-      return function(quad, x1, y1, x2, y2) {
-        if (quad.point && (quad.point !== node)) {
-          var x = node.x - quad.point.x,
-              y = node.y - quad.point.y,
-              l = Math.sqrt(x * x + y * y),
-              r = node.radius + quad.point.radius;
-          //The bounding-box collision detection algorithm.
-          if (l < r) {
-            l = (l - r) / l * .5;
-            node.x -= x *= l;
-            node.y -= y *= l;
-            quad.point.x += x;
-            quad.point.y += y;
+    function collide(alpha) {
+      var quadtree = d3.geom.quadtree(nodes);
+      return function(d) {
+        var r = d.radius + radius.domain()[1] + padding,
+        // var r = d.radius + padding,
+        nx1 = d.x - r,
+        nx2 = d.x + r,
+        ny1 = d.y - r,
+        ny2 = d.y + r;
+        quadtree.visit(function(quad, x1, y1, x2, y2) {
+          if (quad.point && (quad.point !== d)) {
+            var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y),
+            // r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+            r = 33.31370849898476;
+            if (l < r) {
+              l = (l - r) / l * alpha;
+              d.x -= x *= l;
+              d.y -= y *= l;
+              quad.point.x += x;
+              quad.point.y += y;
+            }
           }
-        }
-        return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+          return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+        });
       };
     }
-      //
-      // function collide(alpha) {
-      //   var quadtree = d3.geom.quadtree(nodes);
-      //   return function(d) {
-      //     var r = d.radius + radius.domain()[1] + padding,
-      //     nx1 = d.x - r,
-      //     nx2 = d.x + r,
-      //     ny1 = d.y - r,
-      //     ny2 = d.y + r;
-      //     quadtree.visit(function(quad, x1, y1, x2, y2) {
-      //       if (quad.point && (quad.point !== d)) {
-      //         var x = d.x - quad.point.x,
-      //         y = d.y - quad.point.y,
-      //         l = Math.sqrt(x * x + y * y),
-      //         // r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
-      //         r = 33.31370849898476;
-      //         if (l < r) {
-      //           l = (l - r) / l * alpha;
-      //           d.x -= x *= l;
-      //           d.y -= y *= l;
-      //           quad.point.x += x;
-      //           quad.point.y += y;
-      //         }
-      //       }
-      //       return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-      //     });
-      //   };
-      // }
+
+    // function tick(e) {
+    //       force.alpha(0.1)
+    //       circle
+    //         // .each(gravity(e.alpha))
+    //         .each(collide(.5))
+    //         .attr("cx", function(d) { return d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)); })
+    //         .attr("cy", function(d) { return d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)); })
+    //         .call(force.drag()
+    //           .on("drag", dragged));
+    //       }
 
     // generates random roots
     // var randomRoots;
