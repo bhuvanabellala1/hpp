@@ -11,7 +11,18 @@ page-checkin {
 
     .memory-padding {
       padding: 5px;
+    }
 
+    #user1 {
+       border-radius: 50%;
+       width: 70px;
+       height: 50px;
+    }
+
+    #user2 {
+       border-radius: 50%;
+       width: 35px;
+       height: 25px;
     }
 
     // need to remove stupid 16px around entire border....
