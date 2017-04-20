@@ -28,6 +28,33 @@ private fireRef: any;
   }
 
 
+fetchUid(code:any){
+  // return fireRef('/users/' + userId).once('value')
+
+  var codeRef = this.codepair.child(code);
+  var plus = codeRef.once('value')
+  console.log("trying")
+  console.log(plus)
+			return codeRef.once('value'); 
+}
+
+
+updateUser(userid1: any, userid2: any, username1: any, username2: any){
+this.userProfile.child(userid1).update({
+      user2id: JSON.stringify(userid2),
+      user2:{
+        uid: userid2,
+        username: username2
+      }
+		});
+
+this.userProfile.child(userid2).update({
+      user2id: userid1,
+      username: username1
+		});
+
+}
+
 signUpUser(email: string , password: string, username: string){
 	return this.fireAuth.createUserWithEmailAndPassword(email, password).then((newUser) => {
 		//sign in the user
@@ -35,7 +62,12 @@ signUpUser(email: string , password: string, username: string){
 			//successful login, create user profile
 		this.userProfile.child(authenticatedUser.uid).set({
 			email: email,
-      username: username
+      username: username,
+      user2id: "null",
+      user2:{
+        uid: "null",
+        username: "null"
+      }
 		});
     //console.log("Fetching Pair Code")
      //add preloader
@@ -44,7 +76,7 @@ signUpUser(email: string , password: string, username: string){
 				content: 'Fetching Pair Code'
 			});
 			 loading.present();
-    var code = this.fetchCode(authenticatedUser.uid)
+    var code = this.fetchCode(authenticatedUser.uid, username)
     loading.dismiss().then(() => {
             	     	//show pop up
             	     		let alert = this.alertCtrl.create({
@@ -60,6 +92,10 @@ signUpUser(email: string , password: string, username: string){
 			code: code
 		});
 
+//     var updatePath = {};
+
+// updatePath['/users/' + authenticatedUser.uid] = memoryData;
+//   return this.fireRef.update(updatePath);
 
 		});
 	});
@@ -75,11 +111,12 @@ signUpUser2(email: string , password: string, username: string, codepair: string
 			//successful login, create user profile
 		this.userProfile.child(authenticatedUser.uid).set({
 			email: email,
-      username: username
+      username: username,
+      code: codepair
 		});
   console.log("should see some data")
   console.log(codepair)
-    this.pushCode(authenticatedUser.uid,codepair)
+    this.pushCode(authenticatedUser.uid,codepair,username)
 
 
 		});
@@ -89,19 +126,21 @@ signUpUser2(email: string , password: string, username: string, codepair: string
 }
 
 
-pushCode(userid: any, codepair: any)
+pushCode(userid: any, codepair: any, uName2: any)
 {
   
   this.codepair.child(codepair).update({
-			uid2: userid
+			uid2: userid,
+      uname2: uName2
 		});
 }
 
 
-fetchCode(userid: any){
+fetchCode(userid: any, uName1: any){
 
   var codeData = {
     uid1: userid,
+    uname1: uName1,
     uid2: null
   }
 
@@ -109,6 +148,7 @@ fetchCode(userid: any){
   var updatePath = {};
 
   updatePath['/code-pair/' + newCodeKey] = codeData;
+  // updatePath['/users/' + userid+"/"+newCodeKey] = codeData
   this.fireRef.update(updatePath);
   return newCodeKey;
 

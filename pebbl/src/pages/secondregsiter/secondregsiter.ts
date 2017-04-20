@@ -27,6 +27,25 @@ export class SecondregsiterPage {
   signUserUp(){
       this.usersService.signUpUser2(this.emailField, this.passwordField, this.username, this.codepair).then(authData => {
         //successful
+      //   var uid1 = this.usersService.fetchUid(this.codepair);
+      // console.log("i am back")
+      // console.log(uid1.__zone_symbol__value.valueOf())
+
+
+
+      this.usersService.fetchUid(this.codepair).then(snapshot => {
+      
+        console.log(snapshot.val().uname1);
+        console.log(typeof snapshot.val().uname1)
+        this.usersService.updateUser(snapshot.val().uid1, snapshot.val().uid2, snapshot.val().uname1, this.username)
+  
+});
+
+
+
+
+
+
         this.navCtrl.setRoot(HomePage)
       }, error => {
         alert("error")
