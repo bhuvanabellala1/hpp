@@ -34,7 +34,7 @@
     <ion-item class="mem-no-margin" *ngFor="let memory of timeline.memories; let i=index">
       <hr class="vertical" />
       <ion-item class="timeline-date">
-        <h2><span>{{ memory.date }}</span></h2>
+        <span>{{ memory.date }}</span>
       </ion-item>
       <ion-card class="notifications-list">
         <ion-card-content>
@@ -44,8 +44,8 @@
               <img src="img/Profile-1.svg">
             </ion-avatar>
             <h2>{{ memory.venue }}</h2>
-            <p><ion-icon name="time-outline"></ion-icon> {{ memory.time}}</p>
-            <p><ion-icon name="pin-outline"></ion-icon> {{ memory.location}}</p>
+            <p><ion-icon name="time-outline"></ion-icon> {{ memory.time}}
+            <ion-icon name="pin-outline"></ion-icon> {{ memory.location}}</p>
           </ion-item>
           <img src="{{ memory.images[0] }}" (click)="slideImages(i, 0)" />
           <p>{{ memory.caption }}</p>

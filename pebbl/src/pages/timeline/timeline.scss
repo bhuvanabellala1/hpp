@@ -15,13 +15,14 @@ page-timeline,
   padding-left: 25px;
 }
 
-.timeline-date h2 {
+.timeline-date span {
   display: inline-block;
   background-color: color($colors, primary);
   color: white;
   padding: 4px;
   border-radius: 3px;
   margin-left: 20px;
+  font-size: 14px;
 }
 .timeline-date:before {
   content: '';
