@@ -9,8 +9,9 @@ page-checkin {
     //   padding: 8px !important;
     // }
 
-    .checkin-padding {
-      padding: 16px;
+    .memory-padding {
+      padding: 5px;
+
     }
 
     // need to remove stupid 16px around entire border....
@@ -29,9 +30,7 @@ page-checkin {
       // border-color: black;
       border-color: white !important;
       border-style: solid !important;
-      width: 190px;
       height: 35px;
-      radius: 100px;
       padding: 0px;
     }
 
@@ -46,7 +45,7 @@ page-checkin {
       width: 130px;
       height: 35px;
       border-radius: 100px;
-    
+
     }
 
   .segment-ios .segment-button {
