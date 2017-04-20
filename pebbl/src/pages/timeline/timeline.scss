@@ -6,11 +6,11 @@ page-timeline,
     /* or height in PX */
     border: 2px solid color($colors, primary);
     position: absolute;
-    margin-left: 35px;
+    margin-left: 34px;
     margin-top: 0;
   }
   .timeline-date {
-  margin-left: 36px;
+  margin-left: 33px;
   position: relative;
   padding-left: 25px;
 }
@@ -28,10 +28,20 @@ page-timeline,
   content: '';
     position: absolute;
     top: 48%;
-    border-bottom: 3px solid;
+    border-bottom: 4px solid;
     width: 20px; /* half of limiter */
     margin: 0 -20px;
     color: color($colors, primary);
+    right: 100%;
+}
+.timeline-date:after {
+  content: '';
+    position: absolute;
+    top: 48%;
+    border-bottom: 4px solid;
+    width: 5px; /* half of limiter */
+    margin: 0 -5px;
+    color: #E9ECED;
     right: 100%;
 }
   img {
@@ -40,6 +50,7 @@ page-timeline,
   .card-ios {
     width: 100%;
     margin: 0;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
   }
   .label-ios {
     margin: 11px 0 10px 0;
@@ -56,6 +67,8 @@ page-timeline,
   }
   .card-content-ios {
     padding: 13px 16px 14px 70px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
+
   }
   .notifications-list {
     .item {
@@ -109,16 +122,28 @@ page-timeline {
   .list-no-border .item .item-inner {
     border-bottom: none;
     margin: 0;
+        background-color: rgba(255, 255, 255, 0);
+
   }
   .content-ios {
-  background-color: #dedede;
+  background-color: #E9ECED;
 }
 }
 .mem-no-margin .label-ios {
   margin:0;
 }
 
+.button-ios {
+  margin: 0;
+  padding: 0;
+}
 
+[icon-right] ion-icon {
+  padding-left: 6.7em;
+}
+ion-col {
+  padding: 0;
+}
 svg {
   margin: 15px 0px -4px 22px;
 }

@@ -16,19 +16,13 @@ export class MemoryslidesPage {
 
   memory: TimelineItemModel;
   imageIndex: number;
-  mySlideOptions = {
-    pager: true,
-    initialSlide: 0,
-    spaceBetween: 50,
-    zoom: true,
-    loop: true
-  };
+  
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public viewCtrl: ViewController) {
     this.memory = navParams.get("memory");
-    this.mySlideOptions.initialSlide = navParams.get("index");
+    
   }
 
   ionViewDidLoad() {
