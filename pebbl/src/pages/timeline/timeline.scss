@@ -6,11 +6,11 @@ page-timeline,
     /* or height in PX */
     border: 2px solid color($colors, primary);
     position: absolute;
-    margin-left: 2em;
+    margin-left: 35px;
     margin-top: 0;
   }
   .timeline-date {
-  margin-left: 38px;
+  margin-left: 36px;
   position: relative;
   padding-left: 25px;
 }
@@ -20,16 +20,16 @@ page-timeline,
   background-color: color($colors, primary);
   color: white;
   padding: 4px;
-  border-radius: 2px;
-  margin-left: 25px;
+  border-radius: 3px;
+  margin-left: 20px;
 }
 .timeline-date:before {
   content: '';
     position: absolute;
     top: 48%;
-    border-bottom: 4px solid;
-    width: 30px; /* half of limiter */
-    margin: 0 -30px;
+    border-bottom: 3px solid;
+    width: 20px; /* half of limiter */
+    margin: 0 -20px;
     color: color($colors, primary);
     right: 100%;
 }
@@ -45,6 +45,7 @@ page-timeline,
   }
   .item-ios {
     padding-left: 0;
+    background-color: rgba(255, 255, 255, 0);
   }
   .item-ios p {
     margin: 8px 0 0px 0;
@@ -108,10 +109,15 @@ page-timeline {
     border-bottom: none;
     margin: 0;
   }
+  .content-ios {
+  background-color: #dedede;
+}
 }
 .mem-no-margin .label-ios {
   margin:0;
 }
+
+
 svg {
   margin: 15px 0px -4px 22px;
 }

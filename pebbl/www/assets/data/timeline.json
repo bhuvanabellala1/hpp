@@ -1,93 +1,112 @@
 {
   "memories":[
     {
-      "id": 1,
-      "type": "liked",
-      "user_id": 2,
-      "comment": "Awesome Day in the Bay <3",
-      "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg"],
-      "location": "Berkeley, CA",
-      "time": "May 3, 2016"
-      },
-      {
         "id": 2,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "Yayayyay",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "May 4, 2016"
+        "date": "May 4",
+        "time": "10:40am"
+      },
+    {
+      "id": 1,
+      "venue": "South Hall",
+      "type": "liked",
+      "user_id": 2,
+      "caption": "Awesome Day in the Bay <3",
+      "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+      "location": "Berkeley, CA",
+      "date": "May 3",
+      "time": "10:40am"
       },
       {
         "id": 3,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "So cool today",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "May 21, 2016"
+        "date": "May 21",
+        "time": "10:40am"
       },
       {
         "id": 4,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "Had a lot of fun woooooo",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "May 21, 2016"
+        "date": "May 21",
+        "time": "10:40am"
       },
       {
         "id": 5,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "Awesome Day in the Bay <3",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "November 21, 2016"
+        "date": "November 21",
+        "time": "10:40am"
       },
       {
         "id": 6,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
         "name": "Max Lynx",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "December 21, 2016"
+        "date": "December 21",
+        "time": "10:40am"
       },
       {
         "id": 7,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "Awesome Day in the Bay <3",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "December 24, 2016"
+        "date": "December 24",
+        "time": "10:40am"
       },
       {
         "id": 8,
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "Awesome Day in the Bay <3",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "December 27, 2016"
+        "date": "December 27",
+        "time": "10:40am"
       },
       {
         "id": 9,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "Awesome Day in the Bay <3",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "December 27, 2016"
+        "date": "December 27",
+        "time": "10:40am"
       },
       {
         "id": 10,
+        "venue": "South Hall",
         "type": "liked",
         "user_id": 2,
-        "comment": "Awesome Day in the Bay <3",
+        "caption": "Awesome Day in the Bay <3",
         "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
-        "time": "December 30, 2016"
+        "date": "December 30",
+        "time": "10:40am"
         }]
       }
