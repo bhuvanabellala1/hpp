@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, SegmentButton, ModalController, NavParams } from 'ionic-angular';
-import {Camera, Keyboard, Geolocation} from 'ionic-native';
+import {Camera, Keyboard, Geolocation, ImagePicker} from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
 import { VenuePage } from '../venue/venue';
 
@@ -18,22 +18,39 @@ Ionic pages and navigation.
 export class CheckinPage {
 
   public section: string;
-  public images: Array<{base64Image: string}>;
+  public images: Array<string>;
   public venuesData: any;
   public venue: any;
+  private hide: boolean;
+
   // public base64Image: string;
   public imageSrc: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, private _zone: NgZone,
     private checkinService: CheckinService, public modalCtrl: ModalController) {
       this.section = "camera";
       this.images = [];
-      this.grabVenues();
-      this.venue = navParams.get('venue');
-      this.venuesData = navParams.get('venueData');
+      this.hide = true;
     }
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad CheckinPage');
+    }
+
+    toggleMe(){
+      this._zone.run(() => {
+        this.hide = true;
+      });
+    }
+
+    toggleBoth(){
+      this._zone.run(() => {
+        this.hide = false;
+      });
+    }
+
+    ionViewWillEnter(){
+      console.log('About to enter make memory');
+      this.grabVenues();
     }
 
     grabVenues(){
@@ -61,31 +78,32 @@ export class CheckinPage {
         targetHeight: 100,
 
       }).then((imageData) => {
-        // imageData is a base64 encoded string
-        this.images.push({base64Image: "data:image/jpeg;base64," + imageData});
-        console.log(this.images);
+        this._zone.run(() => {
+          this.images.push("data:image/jpeg;base64," + imageData);
+        });
       }, (err) => {
         console.log(err);
       });
     }
 
     openGallery(){
-      let cameraOptions = {
-        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        destinationType: Camera.DestinationType.FILE_URI,
-        quality: 100,
-        targetWidth: 100,
-        targetHeight: 1000,
-        encodingType: Camera.EncodingType.JPEG,
-        correctOrientation: true
+      let options = {
+        width: 500,
+        height: 500,
+        quality: 75
       }
 
-      Camera.getPicture(cameraOptions)
-      .then((file_uri) => {
-        this.images.push({base64Image: file_uri});
-      }, (err) => {
-        console.log(err);
-      });
+      ImagePicker.getPictures(options).then(
+        (file_uris) => {
+          this._zone.run(() => {
+            this.images = this.images.concat(file_uris);
+            console.log(file_uris);
+          });
+        },
+        (err) => {
+          console.log('uh oh');
+        }
+      );
     }
 
 
