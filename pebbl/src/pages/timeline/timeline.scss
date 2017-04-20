@@ -9,6 +9,15 @@ page-timeline,
     margin-left: 34px;
     margin-top: 0;
   }
+  hr.vertical2 {
+    //width: 2px;
+    height: 85%;
+    /* or height in PX */
+    border: 2px solid #B1B1B1;
+    position: absolute;
+    margin-left: -36px;
+    margin-top: -13px;
+  }
   .timeline-date {
   margin-left: 33px;
   position: relative;
@@ -49,8 +58,8 @@ page-timeline,
   }
   .card-ios {
     width: 100%;
-    margin: 0;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
+    margin: 0 0 12px 0;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, .5);
   }
   .label-ios {
     margin: 11px 0 10px 0;
@@ -60,7 +69,14 @@ page-timeline,
     background-color: rgba(255, 255, 255, 0);
   }
   .item-ios p {
-    margin: 8px 0 0px 0;
+    margin: 0px 0 0px 0;
+    padding: 4px 0 8px 0;
+    font-size: 1.6rem;
+  }
+  .item-ios h2 {
+    font-size: 2rem;
+    color: color($colors, primary);
+    font-weight: bold;
   }
   .item-ios.item-block .item-inner {
     padding-right: 0;
@@ -136,6 +152,7 @@ page-timeline {
 .button-ios {
   margin: 0;
   padding: 0;
+  height: 30px;
 }
 
 [icon-right] ion-icon {
@@ -143,6 +160,7 @@ page-timeline {
 }
 ion-col {
   padding: 0;
+  height: 30px;
 }
 svg {
   margin: 15px 0px -4px 22px;

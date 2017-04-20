@@ -18,11 +18,11 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <ion-list>
     <button ion-item detail-none *ngFor="let v of venueData" (click)=close(v)>
-      <ion-icon name="close" item-left></ion-icon>
+      <ion-icon name="pin-outline" item-left></ion-icon>
       {{v.name}}
     </button>
   </ion-list>

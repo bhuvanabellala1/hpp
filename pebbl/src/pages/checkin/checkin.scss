@@ -8,6 +8,12 @@ page-checkin {
   // ion-content padding {
   //   padding: 8px !important;
   // }
+  .card-ios {
+    width: 100%;
+    margin: 0;
+    box-shadow: 0;
+  }
+
 
   .memory-padding {
     padding: 5px;
@@ -19,25 +25,58 @@ page-checkin {
   }
 
   .just_me{
-    background-color: gray;
+    color: black;
+    border: 1px solid color($colors, primary);
+    background-color: #F1F1F1;
   }
 
+  #justmebutton {
+    height: 24px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 10px;
+    width: 40%;
+    margin-left: 10%;
+  }
+  #usbothbutton {
+    height: 24px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    width: 40%;
+    //margin-right: 10%;
+  }
   .image_picks {
     width: 62px;
     height: 62px;
     padding: 2px;
   }
-
-  #user1 {
-    border-radius: 50%;
-    width: 70px;
-    height: 50px;
+.item-ios ion-avatar{
+      background-color: rgba(255, 255, 255, 0);
+}
+.item-ios ion-avatar img {
+    //border-radius: 50%;
+    width: 52px;
+    height: 52px;
+        border: 2px solid white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, .5);
   }
 
+.item-ios h2 {
+  text-align: center;
+}
+
   #user2 {
-    border-radius: 50%;
-    width: 35px;
+    width: 25px;
+    margin-bottom: -20px;
     height: 25px;
+    margin-left: 36px;
+    z-index: 20;
+    position: relative;
+    border: 2px solid white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, .5);
   }
 
   // need to remove stupid 16px around entire border....
@@ -52,13 +91,20 @@ page-checkin {
   }
 
   #location-button {
-    border: 0.5px;
-    // border-color: black;
-    border-color: white !important;
-    border-style: solid !important;
     height: 35px;
     padding: 0px;
+    margin-bottom: 15px;
+    color: black;
+    background-color: rgb(255, 255, 255);
   }
+
+  #location-button p {
+    font-size: 1.6rem;
+  }
+
+  .content-ios {
+  background-color: #E9ECED;
+}
 
   #create-section {
     height: 57px;
@@ -67,12 +113,12 @@ page-checkin {
     justify-content: flex-end;
   }
 
-  #create-section .button-ios {
-    width: 130px;
-    height: 35px;
-    border-radius: 100px;
+  // #create-section .button-ios {
+  //   width: 130px;
+  //   height: 35px;
+  //   border-radius: 100px;
 
-  }
+  // }
 
   .segment-ios .segment-button {
     height: 100%;
