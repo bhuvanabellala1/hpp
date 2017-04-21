@@ -43,14 +43,17 @@ updateUser(userid1: any, userid2: any, username1: any, username2: any){
 this.userProfile.child(userid1).update({
       user2id: JSON.stringify(userid2),
       user2:{
-        uid: userid2,
+        uid: JSON.stringify(userid2),
         username: username2
       }
 		});
 
 this.userProfile.child(userid2).update({
-      user2id: userid1,
-      username: username1
+      user2id: JSON.stringify(userid1),
+      user2:{
+        uid: JSON.stringify(userid1),
+        username: username1
+      }
 		});
 
 }
@@ -115,9 +118,13 @@ signUpUser2(email: string , password: string, username: string, codepair: string
       code: codepair
 		});
   console.log("should see some data")
-  console.log(codepair)
+  console.log(username + authenticatedUser.uid)
     this.pushCode(authenticatedUser.uid,codepair,username)
+    this.fetchUid(codepair).then(snapshot => {
+      console.log(snapshot.val().uname1)
+      this.updateUser(snapshot.val().uid1, snapshot.val().uid2, snapshot.val().uname1, username)
 
+    });
 
 		});
 	});
@@ -141,7 +148,8 @@ fetchCode(userid: any, uName1: any){
   var codeData = {
     uid1: userid,
     uname1: uName1,
-    uid2: null
+    uid2: null,
+    uname2: null
   }
 
   var newCodeKey = this.codepair.push().key;
