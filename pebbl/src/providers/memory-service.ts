@@ -25,27 +25,77 @@ export class MemoryService {
   }
 
   pushMemory(venueName: any, userId: any, images: any, venueLat: any, venueLng: any, memoryText: any, myDate: any){
+  //console.log(this.fireRef.ServerValue.TIMESTAMP)
+
+  var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
+  console.log(newMemoryKey)
+  
+  // this.usersMemoryNode.child(userId).child('memories').push({
+  //     text: memoryText,
+  //     date: myDate,
+  //     location_tag: venueName,
+  //     location:
+  //     {
+  //       lat: venueLat,
+  //       long: venueLng
+  //     }
+  // })
+
   var memoryData = {
     text: memoryText,
-    date: myDate,
-    location_tag: venueName,
-    location:
-    {
-      lat: venueLat,
-      long: venueLng
-    },
-    userid1: userId
-  }
+      date: myDate,
+      location_tag: venueName,
+      location:
+      {
+        lat: venueLat,
+        long: venueLng
+      }
+  }; 
 
-  var newMemoryKey = this.memoryNode.push().key;
-  console.log(newMemoryKey)
-  // console.log("i am here")
 
+  //   ref.once("value", function(snapshot) {
+  //   var data = snapshot.val();
+  //   // data === "hello"
+  // });
+
+  //  var codeRef = this.codepair.child(code);
+  // var plus = codeRef.once('value')
   var updatePath = {};
+  updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
 
-  updatePath['/memories/' + newMemoryKey] = memoryData;
-  return this.fireRef.update(updatePath);
+  var user2ref = this.usersMemoryNode.child(userId).child('user2');
+  user2ref.once('value', function(snapshot){
+    var data = snapshot.val();
+    console.log(data)
+    var updatePathuser2 = {};
+    updatePathuser2['/user-memories/' + data+"/memories/"+newMemoryKey] = memoryData;
+    firebase.database().ref().update(updatePathuser2)
+  });
+ 
 
+//console.log(this.usersMemoryNode.child(userId).child('user2'))
+
+   
+
+   //updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
+   return this.fireRef.update(updatePath);
+}
+
+setMemoryBase(userid1: any,userid2: any){
+  console.log("Setting Memory")
+  this.usersMemoryNode.child(userid1).set({
+    user2: userid2
+  
+  })
+}
+
+updateMemoryBase(userid1: any,userid2: any){
+  console.log("Setting Memory")
+  this.usersMemoryNode.child(userid1).update({
+    user2: userid2
+  
+  })
   }
+
 
 }

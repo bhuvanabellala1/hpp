@@ -69,13 +69,6 @@ export class CheckinPage {
 			});
 			 loading.present();
 
-
-      // console.log(this.venue.name)
-      // console.log(this.userId)
-      // console.log(this.images)
-      // console.log(this.venue.location.lat)
-      // console.log(this.venue.location.lng)
-      // console.log(this.memoryBody)
       this.myDate = new Date();
       // //this.myDate = new Date();
       // console.log(this.myDate)

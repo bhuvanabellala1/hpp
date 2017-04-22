@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, Platform, App, Nav, ModalController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import * as firebase from 'firebase';
+import { MemoryService } from '../providers/memory-service';
 
 /*
   Generated class for the UsersService provider.
@@ -10,6 +12,12 @@ import * as firebase from 'firebase';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
+
+@Component({
+  providers: [MemoryService]
+})
+
 @Injectable()
 export class UsersService {
 
@@ -18,12 +26,14 @@ public fireAuth: any;
 public userProfile: any;
 public codepair: any;
 private fireRef: any;
+private usersMemoryNode: any;
 
 
-  constructor(public http: Http, private loadingCtrl: LoadingController,private alertCtrl: AlertController) {
+  constructor(public http: Http, private loadingCtrl: LoadingController,private alertCtrl: AlertController,private memoryService: MemoryService) {
     this.fireAuth = firebase.auth();
     this.userProfile = firebase.database().ref('users');
     this.codepair = firebase.database().ref('code-pair');
+    this.usersMemoryNode = firebase.database().ref('user-memories');
     this.fireRef = firebase.database().ref();
   }
 
@@ -41,20 +51,22 @@ fetchUid(code:any){
 
 updateUser(userid1: any, userid2: any, username1: any, username2: any){
 this.userProfile.child(userid1).update({
-      user2id: JSON.stringify(userid2),
+      user2id: userid2, //JSON.stringify(userid2),
       user2:{
-        uid: JSON.stringify(userid2),
+        uid: userid2, //JSON.stringify(userid2),
         username: username2
       }
 		});
 
 this.userProfile.child(userid2).update({
-      user2id: JSON.stringify(userid1),
+      user2id: userid1,//JSON.stringify(userid1),
       user2:{
-        uid: JSON.stringify(userid1),
+        uid: userid1, //JSON.stringify(userid1),
         username: username1
       }
 		});
+
+// this.memoryService.setMemory(userid1,userid2)
 
 }
 
@@ -80,6 +92,7 @@ signUpUser(email: string , password: string, username: string){
 			});
 			 loading.present();
     var code = this.fetchCode(authenticatedUser.uid, username)
+    this.memoryService.setMemoryBase(authenticatedUser.uid,"null")
     loading.dismiss().then(() => {
             	     	//show pop up
             	     		let alert = this.alertCtrl.create({
@@ -120,10 +133,12 @@ signUpUser2(email: string , password: string, username: string, codepair: string
   console.log("should see some data")
   console.log(username + authenticatedUser.uid)
     this.pushCode(authenticatedUser.uid,codepair,username)
+    
     this.fetchUid(codepair).then(snapshot => {
       console.log(snapshot.val().uname1)
       this.updateUser(snapshot.val().uid1, snapshot.val().uid2, snapshot.val().uname1, username)
-
+      this.memoryService.setMemoryBase(snapshot.val().uid2, snapshot.val().uid1)
+      this.memoryService.updateMemoryBase(snapshot.val().uid1, snapshot.val().uid2)
     });
 
 		});
