@@ -10,15 +10,45 @@ page-checkin {
   // }
   .card-ios {
     width: 100%;
-    margin: 0;
-    box-shadow: 0;
+    margin: 0 0 15px 0;
+    box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.5);
   }
 
-
-  .memory-padding {
-    padding: 5px;
+  .list-ios {
+    margin: -1px 0 0px 0;
   }
 
+#changeloc {
+  //height: 35px;
+}
+#changeloc .button-inner{
+     justify-content:flex-start;
+     background: white;
+}
+
+.ion-ios-pin:before {
+  padding: 5px 10px 5px 16px;
+}
+
+ #location-button {
+    height: 35px;
+    padding: 0px;
+    margin-bottom: 15px;
+    color: black;
+    background-color: rgb(255, 255, 255);
+  }
+  #location-button .button-inner{
+    justify-content:flex-start;
+  }
+
+  #location-button ion-icon {
+    justify-content: flex-end;
+  }
+
+  #location-button p {
+    font-size: 1.6rem;
+    margin: 0 16px;
+  }
   ion-scroll {
     white-space: nowrap;
     height: 68px;
@@ -52,6 +82,20 @@ page-checkin {
     width: 62px;
     height: 62px;
     padding: 2px;
+    display: initial;
+  }
+
+  #addphotosbutton {
+    height: 62px;
+    width: 62px;
+    margin: 10px 0 0px 8px;
+    float: left;
+  }
+
+  #scroll-photos {
+    float:left;
+    padding-left: 60%;
+    margin: 10px 0 6px 8px;
   }
 .item-ios ion-avatar{
       background-color: rgba(255, 255, 255, 0);
@@ -87,20 +131,10 @@ page-checkin {
   }
 
   ion-textarea {
-    height: 216px;
+    height: 280px;
   }
 
-  #location-button {
-    height: 35px;
-    padding: 0px;
-    margin-bottom: 15px;
-    color: black;
-    background-color: rgb(255, 255, 255);
-  }
-
-  #location-button p {
-    font-size: 1.6rem;
-  }
+ 
 
   .content-ios {
   background-color: #E9ECED;
@@ -119,6 +153,11 @@ page-checkin {
   //   border-radius: 100px;
 
   // }
+
+  .text-input-ios {
+    margin: 11px 8px;
+    width: calc(100% - 16px);
+  }
 
   .segment-ios .segment-button {
     height: 100%;
@@ -144,5 +183,7 @@ page-checkin {
     align-items: center;
     justify-content: center;
   }
-
+  ion-textarea {
+    height: 300px;
+  }
 }

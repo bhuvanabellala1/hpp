@@ -28,7 +28,7 @@ export class CheckinPage {
   constructor(public navCtrl: NavController, private _zone: NgZone,
     private checkinService: CheckinService, public modalCtrl: ModalController) {
       this.section = "camera";
-      this.images = ["./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg"];
+      this.images = [];
       this.hide = true;
     }
 

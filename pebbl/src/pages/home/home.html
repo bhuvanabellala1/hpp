@@ -1,29 +1,29 @@
 <ion-header>
   <ion-navbar color="primary">
     <button ion-button class="top-navigation" menuToggle>
-      <img src="img/ion-icons/navicon-round.svg">
+      <img src="img/ion-icons/navicon.svg">
     </button>
     <ion-title>
-      Pebbl
+      Paired
     </ion-title>
     <ion-buttons end>
       <button class="top-navigation">
-        <img src="img/ion-icons/person.svg">
+        <img src="img/charmed.svg">
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div class="stats-area">
+  <!--<div class="stats-area">
     <img src="img/Profile-1.svg">
     <p> Making memories for 811 days </p>
     <img src="img/Profile-2.svg">
-  </div>
+  </div>-->
 
 <ion-fab bottom>
   <div class="bottom-buttons">
-    <button ion-fab class={{page.icon}} *ngFor="let page of navPages" (click)="pushPage(page)">
+    <button class={{page.icon}} *ngFor="let page of navPages" (click)="pushPage(page)">
       <img src={{page.path}}>
     </button>
   </div>
