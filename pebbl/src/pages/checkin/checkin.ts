@@ -1,8 +1,11 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, SegmentButton, ModalController, NavParams } from 'ionic-angular';
 import {Camera, Keyboard, Geolocation, ImagePicker} from 'ionic-native';
+import { NavController, SegmentButton, ModalController, NavParams, LoadingController, AlertController, ViewController } from 'ionic-angular';
 import { CheckinService } from '../../providers/checkin-service';
+import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
+import { UsersService } from '../../providers/users-service'
+import * as firebase from 'firebase';
 
 /*
 Generated class for the Checkin page.
@@ -13,7 +16,7 @@ Ionic pages and navigation.
 @Component({
   selector: 'page-checkin',
   templateUrl: 'checkin.html',
-  providers: [CheckinService]
+  providers: [MemoryService, UsersService]
 })
 export class CheckinPage {
 
@@ -22,11 +25,14 @@ export class CheckinPage {
   public venuesData: any;
   public venue: any;
   private hide: boolean;
-
+  private userId :any;
+  public memoryBody:any;
+  public myDate: any;
   // public base64Image: string;
   public imageSrc: string;
-  constructor(public navCtrl: NavController, private _zone: NgZone,
-    private checkinService: CheckinService, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
+    private checkinService: CheckinService, public modalCtrl: ModalController, private memoryService: MemoryService,private loadingCtrl: LoadingController, private alertCtrl: AlertController, private viewCtrl: ViewController) {
+      this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
       this.images = [];
       this.hide = true;
@@ -68,6 +74,48 @@ export class CheckinPage {
 
     onSegmentChanged(segmentButton: SegmentButton) {
       console.log('Segment changed to', segmentButton.value);
+    }
+
+    showvalues(){
+
+      //add preloader
+            let loading = this.loadingCtrl.create({
+				dismissOnPageChange: true,
+				content: 'Creating Your Memory..'
+			});
+			 loading.present();
+
+      this.myDate = new Date();
+      // //this.myDate = new Date();
+      // console.log(this.myDate)
+      this.memoryService.pushMemory(this.venue.name,this.userId,this.images,this.venue.location.lat,this.venue.location.lng,this.memoryBody,this.myDate).then(() => {
+        this.memoryBody="";
+
+            loading.dismiss().then(() => {
+            	     	//show pop up
+            	     		let alert = this.alertCtrl.create({
+					      title: 'Done!',
+					      subTitle: 'Memory Created',
+					      buttons: ['OK']
+					    });
+					    alert.present();
+
+      })
+      this.viewCtrl.dismiss();
+    }, error => {
+            		//show pop up
+            		loading.dismiss().then(() => {
+				  		let alert = this.alertCtrl.create({
+					      title: 'Error adding new post',
+					      subTitle: error.message,
+					      buttons: ['OK']
+					    });
+					    alert.present();
+					 })
+ 
+	    
+            	});
+    
     }
 
     takePicture(){

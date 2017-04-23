@@ -26,7 +26,16 @@
     </ion-item>
   </ion-list>
   <button (click) = "submitLogin()" >Submit</button>
-  <button (click) = "signUserUp()" >Register</button>
+  <!--<button (click) = "signUserUp()" >Register</button>-->
+
+<h2 class="main-title">
+        Want Some of This.
+</h2>
+
+  <div class="button-bar">
+        <button ion-button primary (click)="gotoregister()">Start a Pair</button>
+        <button ion-button primary (click)="gotosecondregister()">Have a Key</button>
+  </div>
 
   <!--<ion-list>
     <p>Latest Users</p>
