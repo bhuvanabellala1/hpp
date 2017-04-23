@@ -55,6 +55,11 @@
   src: url("../assets/fonts/Raleway-Thin.ttf");
 }
 
+@font-face {
+  font-family: BreeSerif-Regular;
+  src: url("../assets/fonts/BreeSerif-Regular.ttf");
+}
+
 p, h1, h2, h3, h4, h5, h6 {
   font-family: 'Raleway-Regular';
 }
@@ -64,7 +69,7 @@ p {
 }
 
 ion-title {
-  font-family: 'Raleway-Regular';
+  font-family: 'BreeSerif-Regular';
 }
 
 h1 {
