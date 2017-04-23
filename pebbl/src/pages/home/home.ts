@@ -26,9 +26,11 @@ export class HomePage {
       { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
     this.grabVenues();
+    
+    
   }
 
-  ngAfterViewInit() {
+  ionViewWillEnter() {
     this.createChart();
   }
 

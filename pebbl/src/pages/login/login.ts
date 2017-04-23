@@ -57,7 +57,7 @@ export class LoginPage {
 
     submitLogin(){
 
-      alert(this.passwordField);
+      //alert(this.passwordField);
       this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {
         //successful
         this.nav.setRoot(HomePage)
@@ -70,6 +70,9 @@ export class LoginPage {
         });
         alert.present();
       });
+
+
+
 
       // let loader = this.loadingCtrl.create({
       //   dismissOnPageChange: true,
