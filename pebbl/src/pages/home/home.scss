@@ -23,16 +23,15 @@ page-home {
   }
 
   .top-navigation {
-    width: (25rem/ 10);
-    height:  (25rem/ 10);
+   // width: (25rem/ 10);
+    //height:  (25rem/ 10);
     background-color: color($colors, primary);
     padding: 0px;
   }
 
   .bottom-buttons {
     // width:75%;
-    padding-left: (47rem/ 10);
-    padding-right:(47rem/ 10);
+    padding: 0 4rem;
     display: flex;
     justify-content:space-between;
   }

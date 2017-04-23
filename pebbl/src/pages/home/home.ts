@@ -62,10 +62,10 @@ export class HomePage {
         m = 4,
         // Number of balls we want
         n = 40,
-        activity = ['Taking a break', 'Taking a walk', 'Golden Poppies', 'Enjoying the sun', 'Team Meeting', 'Walking to School', 'Starting the day', 'Chilling'],
+        activity = ['Taking a break', 'Taking a walk', 'Golden Poppies', 'Enjoying the sun', 'Team Meeting', 'Walking to School', 'Starting the day', 'Chilling', 'Pratik & Carlo', 'Carlo&Lady', 'Carlo & Shirish', 'Getting Money', 'Party It Up', 'Hardware'],
         date = ['April 18th 2017', 'April 16th 2017', 'April 14th 2017', 'April 12th 2017', 'April 10th 2017', 'April 10th 2017', 'April 8th 2017', 'April 8th 2017'],
-        location = ['campanille', 'campanille', 'Alameda Beach', 'UC Berkeley', 'School of Information', 'UC Berkeley', 'Daniel\'s House', 'campanille'],
-        photo = ['m1.JPG','m2.JPG','m3.JPG','m4.JPG','m5.JPG','m6.JPG','m7.JPG','m8.JPG'],
+        location = ['campanille', 'campanille', 'Alameda Beach', 'UC Berkeley', 'School of Information', 'UC Berkeley', 'Daniel\'s House', 'campanille', 'Hawaii', 'South Hall', 'Carina\'s House', 'The House', 'Robin\'s House', 'HPP'],
+        photo = ['m1.JPG','m2.JPG','m3.JPG','m4.JPG','m5.JPG','m6.JPG','m7.JPG','m8.JPG', 'm9.jpg', 'm10.jpg', 'm11.jpg', 'm12.jpg', 'm13.jpg', 'm14.jpg'],
         radius = d3.scale.sqrt().range([0, 8]),
         // Creating a rectangle to control the boundary of the ball
         rect = [50,50, width - 50, height - 50],
@@ -76,13 +76,14 @@ export class HomePage {
 
         // Creating circles
         for (var i in d3.range(n)){
-          var j = parseInt(i) % 8
+          var j = parseInt(i) % 14
+          var k = parseInt(i) % 8
           nodes.push({radius: radius(1 + Math.floor(Math.random() * 4)),
           // x & y positions on canvas
           x: rect[0] + (Math.random() * (rect[2] - rect[0])),
           y: rect[1] + (Math.random() * (rect[3] - rect[1])),
           activity: activity[j],
-          date: date[j],
+          date: date[k],
           location: location[j],
           photo: photo[j],
           // Horizontal & Vertical Speed
@@ -145,7 +146,7 @@ export class HomePage {
     function dragged(d) {
       var activity = d.activity, location = d.location, date = d.date, photo = d.photo;
       var image = <HTMLImageElement>document.getElementById('memeoryImage');
-      image.src = "../assets/images/michelle/" + d.photo;
+      image.src = "../assets/images/memory/" + d.photo;
       document.getElementById("date").innerHTML = date;
       document.getElementById("location").innerHTML = location;
       document.getElementById("activity").innerHTML = activity;
@@ -205,7 +206,6 @@ export class HomePage {
       };
     }
   }
-
   ionViewDidLoad() {
     console.log("Entering home page - enabling menu");
     this.menu.enable(true);

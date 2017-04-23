@@ -1,58 +1,168 @@
 page-checkin {
 
-    // scroll-content {
-    //   margin-top: 0px !important;
-    //   padding-top: 0px !important;
-    // }
+  // scroll-content {
+  //   margin-top: 0px !important;
+  //   padding-top: 0px !important;
+  // }
 
-    // ion-content padding {
-    //   padding: 8px !important;
-    // }
+  // ion-content padding {
+  //   padding: 8px !important;
+  // }
+  .card-ios {
+    width: 100%;
+    margin: 0 0 15px 0;
+    box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.5);
+  }
 
-    .checkin-padding {
-      padding: 16px;
-    }
+  .list-ios {
+    margin: -1px 0 0px 0;
+  }
 
-    // need to remove stupid 16px around entire border....
-    ion-segment {
-      height: 63px;
-      // padding-top: ((63-32px)/2);
-      // padding-bottom: ((63-32px)/2);
-    }
+#changeloc {
+  //height: 35px;
+}
+#changeloc .button-inner{
+     justify-content:flex-start;
+     background: white;
+}
 
-    ion-textarea {
-      height: 216px;
-    }
+.ion-ios-pin:before {
+  padding: 5px 10px 5px 16px;
+}
 
-    #location-button {
-      border: 0.5px;
-      // border-color: black;
-      border-color: white !important;
-      border-style: solid !important;
-      width: 190px;
-      height: 35px;
-      radius: 100px;
-      padding: 0px;
-    }
+ #location-button {
+    height: 35px;
+    padding: 0px;
+    margin-bottom: 15px;
+    color: black;
+    background-color: rgb(255, 255, 255);
+  }
+  #location-button .button-inner{
+    justify-content:flex-start;
+  }
 
-    #create-section {
-      height: 57px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
+  #location-button ion-icon {
+    justify-content: flex-end;
+  }
 
-    #create-section .button-ios {
-      width: 130px;
-      height: 35px;
-      border-radius: 100px;
-    
-    }
+  #location-button p {
+    font-size: 1.6rem;
+    margin: 0 16px;
+  }
+  ion-scroll {
+    white-space: nowrap;
+    height: 68px;
+  }
+
+  .just_me{
+    color: black;
+    border: 1px solid color($colors, primary);
+    background-color: #F1F1F1;
+  }
+
+  #justmebutton {
+    height: 24px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 10px;
+    width: 40%;
+    margin-left: 10%;
+  }
+  #usbothbutton {
+    height: 24px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    width: 40%;
+    //margin-right: 10%;
+  }
+  .image_picks {
+    width: 62px;
+    height: 62px;
+    padding: 2px;
+    display: initial;
+  }
+
+  #addphotosbutton {
+    height: 62px;
+    width: 62px;
+    margin: 10px 0 0px 8px;
+    float: left;
+  }
+
+  #scroll-photos {
+    float:left;
+    padding-left: 60%;
+    margin: 10px 0 6px 8px;
+  }
+.item-ios ion-avatar{
+      background-color: rgba(255, 255, 255, 0);
+}
+.item-ios ion-avatar img {
+    //border-radius: 50%;
+    width: 52px;
+    height: 52px;
+        border: 2px solid white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, .5);
+  }
+
+.item-ios h2 {
+  text-align: center;
+}
+
+  #user2 {
+    width: 25px;
+    margin-bottom: -20px;
+    height: 25px;
+    margin-left: 36px;
+    z-index: 20;
+    position: relative;
+    border: 2px solid white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, .5);
+  }
+
+  // need to remove stupid 16px around entire border....
+  ion-segment {
+    height: 63px;
+    // padding-top: ((63-32px)/2);
+    // padding-bottom: ((63-32px)/2);
+  }
+
+  ion-textarea {
+    height: 280px;
+  }
+
+ 
+
+  .content-ios {
+  background-color: #E9ECED;
+}
+
+  #create-section {
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  // #create-section .button-ios {
+  //   width: 130px;
+  //   height: 35px;
+  //   border-radius: 100px;
+
+  // }
+
+  .text-input-ios {
+    margin: 11px 8px;
+    width: calc(100% - 16px);
+  }
 
   .segment-ios .segment-button {
     height: 100%;
-      //     margin-top: ((63-32px)/2);
-      // margin-bottom: ((63-32px)/2);
+    //     margin-top: ((63-32px)/2);
+    // margin-bottom: ((63-32px)/2);
     color: black;
     border-width: 0px;
     border-bottom-width: 1px;
@@ -61,8 +171,8 @@ page-checkin {
   }
 
   .segment-ios .segment-button.segment-activated {
-      //     padding-top: ((63-32px)/2);
-      // padding-bottom: ((63-32px)/2);
+    //     padding-top: ((63-32px)/2);
+    // padding-bottom: ((63-32px)/2);
     color: black;
     background-color: transparent;
     border-bottom-width: 2px;
@@ -73,5 +183,7 @@ page-checkin {
     align-items: center;
     justify-content: center;
   }
-
+  ion-textarea {
+    height: 300px;
+  }
 }
