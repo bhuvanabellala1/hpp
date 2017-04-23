@@ -15,11 +15,25 @@
 </ion-header>
 
 <ion-content padding>
-  <!--<div class="stats-area">
+  <div class="stats-area">
     <img src="img/Profile-1.svg">
     <p> Making memories for 811 days </p>
     <img src="img/Profile-2.svg">
-  </div>-->
+  </div>
+      <!-- <div id="chart"> -->
+      <div col-12 id="svg-container">
+      <!--Use the below pattern tags whenver if you want to cast pictures over circles-->
+      <!-- <pattern id="image" x="0" y="0" height="30" width="30">
+        <image x="0" y="0" width="40" height="50" xlink:href="../assets/images/campanile.png"></image>
+      </pattern> -->
+      <div col-4 class="card">
+        <img id="memeoryImage" src="img/memory/m1.JPG">
+          <h5 class="cardtitle" id="date"><b>March 19 2017</b></h5> <h5 class="cardtitle" id="activity"> Sunset</h5>
+          <h5 class="cardtitle" id="location">Marina</h5>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" id="mySvg" viewBox="0 0 500 550">
+      </svg>
+    </div>
 
 <ion-fab bottom>
   <div class="bottom-buttons">
@@ -29,13 +43,4 @@
   </div>
 </ion-fab>
 
-<!-- <ion-fab left bottom>
-<button ion-fab large><ion-icon name="calendar"></ion-icon></button>
-</ion-fab>
-<ion-fab center bottom>
-<button ion-fab large (click)="pushPage(checkin)"><ion-icon name="flag"></ion-icon></button>
-</ion-fab>
-<ion-fab right bottom>
-<button ion-fab large><ion-icon name="map"></ion-icon></button>
-</ion-fab> -->
 </ion-content>
