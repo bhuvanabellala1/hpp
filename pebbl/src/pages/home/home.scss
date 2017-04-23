@@ -68,12 +68,11 @@ page-home {
   .card {
       visibility: hidden;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      max-width: 250px;
+      max-width: 50%;
       position: absolute;
       display: block;
-      margin-left: 80px;
-      margin-right: auto;
-      margin-top: 60px;
+      margin-left: 23%;
+      margin-top: 10%;
     }
 
   .cardtitle {
@@ -81,5 +80,20 @@ page-home {
     text-align: center;
   }
 
+  .svg-container {
+  	display: inline-block;
+  	position: relative;
+  	width: 100%;
+  	padding-bottom: 100%;
+  	vertical-align: middle;
+  	overflow: hidden;
+  }
+
+  .svg-content {
+  	display: inline-block;
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  }
 
 }

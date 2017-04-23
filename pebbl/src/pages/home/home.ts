@@ -55,8 +55,8 @@ export class HomePage {
 
 
   createChart() {
-    var width = 380,
-        height = 420,
+    var width = 500,
+        height = 550,
         nodes = [], //Where all circles are stored
         maxSpeed = 1.5,
         padding = 1,
@@ -77,7 +77,7 @@ export class HomePage {
 
         // Creating circles
         for (var i in d3.range(n)){
-          var j = parseInt(i) % 14
+          var j = parseInt(i) % 13
           var k = parseInt(i) % 8
           nodes.push({radius: radius(1 + Math.floor(Math.random() * 4)),
           // x & y positions on canvas
@@ -106,13 +106,10 @@ export class HomePage {
         .on("tick", tick)
         .start();
 
-    // Creating the canvas
-    var svg = d3.select("#chart").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g");
+    var svgDiv = document.getElementById('mySvg');
 
-    document.getElementsByTagName('svg')[0].id = 'mySvg';
+    // Creating the canvas
+    var svg = d3.select("#mySvg")
 
     // Creating circles on canvas
     var circle = svg.selectAll("circle")
