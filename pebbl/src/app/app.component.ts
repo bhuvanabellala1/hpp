@@ -55,7 +55,7 @@ export class MyApp {
       Splashscreen.hide();
       this.backgroundMode.enable();
       cordova.plugins.backgroundMode.on('activate', function(){
-        console.log("eegrewtwehwgwhrwhJFHJHGUREHGGSDJGHJSGHJDHJKJKGHJKFGHFJKGHJKSGHJKGHSKGSGJSGHJSGJSHGJKSGHSJKGSJKGJSGJSDKGHJSKHGSKGHJSKGJKGHJKGJKSGHJKSKDSHGSDJKHSDJKGSDKG");
+        console.log("Background mode activated");
       });
     });
 
