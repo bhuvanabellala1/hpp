@@ -1,4 +1,4 @@
-import{Component}from'@angular/core';
+import{Component, NgZone}from'@angular/core';
 import { NavController, MenuController}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import {TimelinePage}from '../timeline/timeline';
@@ -15,48 +15,44 @@ declare var d3: any;
 export class HomePage {
 
   navPages: Array<{title: string, icon: string, path: string, component: any}>;
-  public venuesData: any;
-  public venue: any;
+  // public venuesData: any;
+  // public venue: any;
 
-  constructor(public navCtrl: NavController, private checkinService: CheckinService,
+  constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
   public menu: MenuController) {
     this.navPages = [
       { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
       { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
       { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
-    this.grabVenues();
-    
-    
+    // this.grabVenues();
   }
 
-  ionViewWillEnter() {
-    this.createChart();
-  }
+  // ngAfterViewInit() {
+  //   console.log("Home Page");
+  //   this.createChart();
+  // }
 
   pushPage(page) {
-    if(page.title == 'Check In'){
-      this.navCtrl.push(page.component, {venue: this.venue,
-                                          venueData: this.venuesData});
-    }else{
       this.navCtrl.push(page.component);
-    }
   }
 
-  grabVenues(){
-    Geolocation.getCurrentPosition().then((resp) => {
-      this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
-      .then(data => {
-        this.venuesData = data;
-        this.venue = this.venuesData.response.venues[0];
-      });
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-  }
+  // grabVenues(){
+  //   Geolocation.getCurrentPosition().then((resp) => {
+  //     this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
+  //     .then(data => {
+  //       this.venuesData = data;
+  //       this.venue = this.venuesData.response.venues[0];
+  //     });
+  //   }).catch((error) => {
+  //     console.log('Error getting location', error);
+  //   });
+  // }
 
 
   createChart() {
+
+    console.log("enetered chart making");
     var width = 500,
         height = 550,
         nodes = [], //Where all circles are stored
@@ -114,7 +110,10 @@ export class HomePage {
     var svg = d3.select("#mySvg")
 
     // Creating circles on canvas
-    var circle = svg.selectAll("circle")
+    var circle;
+    this._zone.run(() => {
+      console.log("fsdfsd")
+    circle = svg.selectAll("circle")
         .data(nodes.slice(1))
         .enter().append("circle")
         .attr("r", function(d) { return d.radius; })
@@ -125,6 +124,7 @@ export class HomePage {
         .attr("activity", function(d, i) { return d.activity})
         .attr("photo", function(d, i) { return d.photo})
         .style("fill", function(d, i) { return color(i); });
+      });
 
     //Firstly, it create a quadtree object, using the coordinate of the nodes.
     //Then the quadtree call the visit() to check whether it have collision.
@@ -209,8 +209,10 @@ export class HomePage {
     }
   }
   ionViewDidLoad() {
-    console.log("Entering home page - enabling menu");
+    console.log("HEKWKJRKWEWORJWORWORIWORIOWRIEORIEIOREIRO");
     this.menu.enable(true);
+    this.createChart();
+
   }
 
 }

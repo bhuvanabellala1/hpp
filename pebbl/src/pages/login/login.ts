@@ -22,8 +22,6 @@ export class LoginPage {
   public emailField: any;
   public passwordField: any;
   private users = [];
-  // private usersList: any;
-  //@ViewChild(Nav) nav: Nav;
 
   constructor(private alertCtrl: AlertController, private loadingCtrl: LoadingController,
     public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService,
@@ -31,38 +29,9 @@ export class LoginPage {
 
     }
 
-
-    // signUserUp(){
-    //   this.usersService.signUpUser(this.emailField, this.passwordField).then(authData => {
-    //     //successful
-    //     this.nav.setRoot(HomePage)
-    //   }, error => {
-    //     alert("error")
-    //   });
-
-    //   let loader = this.loadingCtrl.create({
-    //     dismissOnPageChange: true,
-    //   });
-
-    //   loader.present();
-
-    //}
-
-    // listOurUsers(){
-    //   this.usersService.loadUser(5)
-    //   .then(data => {
-    //     this.usersList = data;
-    //   })
-    // }
-
     submitLogin(){
 
-      //alert(this.passwordField);
-      this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {
-        //successful
-        this.nav.setRoot(HomePage)
-      }, error => {
-        //alert("error logging in: "+ error.message);
+      this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {}, error => {
         let alert = this.alertCtrl.create({
           title: 'Error loggin in',
           subTitle: error.message,
@@ -70,17 +39,6 @@ export class LoginPage {
         });
         alert.present();
       });
-
-
-
-
-      // let loader = this.loadingCtrl.create({
-      //   dismissOnPageChange: true,
-      // });
-      //
-      // loader.present();
-
-      //this.nav.setRoot(HomePage)
     }
 
 
