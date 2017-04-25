@@ -11,7 +11,7 @@ page-timeline,
   }
   hr.vertical2 {
     //width: 2px;
-    height: 85%;
+    height: calc(100% - 60px);
     /* or height in PX */
     border: 2px solid #B1B1B1;
     position: absolute;
@@ -31,7 +31,7 @@ page-timeline,
   padding: 4px;
   border-radius: 3px;
   margin-left: 20px;
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 .timeline-date:before {
   content: '';
@@ -56,10 +56,18 @@ page-timeline,
   img {
     position: relative; //z-index: 200;
   }
+
+  #images {
+
+  object-fit: cover;
+  width:100%;
+  height:230px;
+
+  }
   .card-ios {
     width: 100%;
     margin: 0 0 12px 0;
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .5);
   }
   .label-ios {
     margin: 11px 0 10px 0;
@@ -71,10 +79,10 @@ page-timeline,
   .item-ios p {
     margin: 0px 0 0px 0;
     padding: 4px 0 8px 0;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
   .item-ios h2 {
-    font-size: 2rem;
+    font-size: 18px;
     color: color($colors, primary);
     font-weight: bold;
   }
@@ -83,11 +91,14 @@ page-timeline,
   }
   .card-content-ios {
     padding: 13px 16px 14px 70px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
+    //box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
 
   }
+  #caption {
+    color: black;
+  }
   .notifications-list {
-    .item {
+    .item{
       //position: relative;
       margin-left: -52px; //padding: 0;
       //z-index: 1;
@@ -127,6 +138,12 @@ page-timeline,
       margin-top: 1em;
       font-size: 0.7em;
     }
+
+    .memorybuttons {
+      margin:0;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -156,8 +173,9 @@ page-timeline {
 }
 
 [icon-right] ion-icon {
-  padding-left: 6.7em;
+  padding-left: 80%;
 }
+
 ion-col {
   padding: 0;
   height: 30px;

@@ -60,16 +60,32 @@
   src: url("../assets/fonts/BreeSerif-Regular.ttf");
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+@font-face {
+  font-family: Comfortaa-Bold;
+  src: url("../assets/fonts/Comfortaa-Bold.ttf");
+}
+
+@font-face {
+  font-family: Comfortaa-Light;
+  src: url("../assets/fonts/Comfortaa-Light.ttf");
+}
+
+@font-face {
+  font-family: Comfortaa-Regular;
+  src: url("../assets/fonts/Comfortaa-Regular.ttf");
+}
+
+p, h2, h3, h4, h5, h6, button {
   font-family: 'Raleway-Regular';
 }
+
 
 p {
   font-size: (12rem/ 10);
 }
 
-ion-title {
-  font-family: 'BreeSerif-Regular';
+ion-title, h1 {
+  font-family: 'Comfortaa-Bold';
 }
 
 h1 {
