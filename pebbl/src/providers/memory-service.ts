@@ -26,11 +26,17 @@ export class MemoryService {
           this.storageRef = firebase.storage().ref();
   }
 
-  pushMemory(venueName: any, userId: any, images: any, venueLat: any, venueLng: any, memoryText: any, myDate: any){
+  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, memoryText: any, myDate: any, images:any){
   //console.log(this.fireRef.ServerValue.TIMESTAMP)
 
   var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
-  console.log(newMemoryKey)
+  console.log(images)
+  console.log("we are checking for images")
+  console.log(images[0])
+
+  images.forEach(element => {
+    console.log(element)
+  });
   
   // this.usersMemoryNode.child(userId).child('memories').push({
   //     text: memoryText,
@@ -42,6 +48,10 @@ export class MemoryService {
   //       long: venueLng
   //     }
   // })
+
+  if(!memoryText){
+    memoryText = venueName
+  }
 
   var memoryData = {
     text: memoryText,

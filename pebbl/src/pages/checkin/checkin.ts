@@ -88,7 +88,7 @@ export class CheckinPage {
       this.myDate = new Date();
       // //this.myDate = new Date();
       // console.log(this.myDate)
-      this.memoryService.pushMemory(this.venue.name,this.userId,this.images,this.venue.location.lat,this.venue.location.lng,this.memoryBody,this.myDate).then(() => {
+      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng,this.memoryBody,this.myDate, this.images).then(() => {
         this.memoryBody="";
 
             loading.dismiss().then(() => {
