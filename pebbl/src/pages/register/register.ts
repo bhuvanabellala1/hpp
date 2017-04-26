@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, Platform, App, Nav, ModalController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { UsersService } from '../../providers/users-service'
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Register page.
@@ -21,7 +22,7 @@ export class RegisterPage {
   public username: any;
   private users = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private usersService: UsersService, public loadingCtrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public nav: NavController, public navParams: NavParams, private usersService: UsersService, public loadingCtrl: LoadingController) {}
 
 
   signUserUp(){
@@ -43,5 +44,8 @@ export class RegisterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
+  goBack(){
+      this.nav.setRoot(LoginPage);
+    }
 
 }

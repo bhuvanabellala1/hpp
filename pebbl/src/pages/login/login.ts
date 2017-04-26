@@ -4,7 +4,7 @@ import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
 import { SecondregsiterPage } from '../secondregsiter/secondregsiter';
 import { UsersService } from '../../providers/users-service'
-
+import { WalkthroughPage } from '../walkthrough/walkthrough';
 
 /*
 Generated class for the Login page.
@@ -41,7 +41,9 @@ export class LoginPage {
       });
     }
 
-
+    goBack(){
+      this.nav.setRoot(WalkthroughPage);
+    }
     gotoregister(){
       this.nav.setRoot(RegisterPage);
     }
