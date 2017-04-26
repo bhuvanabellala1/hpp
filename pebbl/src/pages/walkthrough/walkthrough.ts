@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Slides, Nav, MenuController } from 'ionic-angular';
+import { NavController, Platform, Slides, App, Nav, ModalController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { RegisterPage } from '../register/register';
+import { SecondregsiterPage } from '../secondregsiter/secondregsiter';
+import { UsersService } from '../../providers/users-service'
 import { LoginPage } from '../login/login';
 /*
   Generated class for the Walkthrough page.
@@ -15,20 +18,25 @@ import { LoginPage } from '../login/login';
 export class WalkthroughPage {
 
   lastSlide = false;
+   public emailField: any;
+  public passwordField: any;
+  private users = [];
 
   @ViewChild('slider') slider: Slides;
 
-  constructor(public nav: NavController, public menu: MenuController) {}
+  constructor(private alertCtrl: AlertController, private loadingCtrl: LoadingController,
+    public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService,
+    public params: NavParams, public menu: MenuController) {}
 
     skipIntro() {
     // You can skip to main app
     // this.nav.setRoot(TabsNavigationPage);
 
     // Or you can skip to last slide (login/signup slide)
-    // this.lastSlide = true;
-    // this.slider.slideTo(this.slider.length());
+    this.lastSlide = true;
+    this.slider.slideTo(this.slider.length());
 
-    this.nav.setRoot(LoginPage);
+    //this.nav.setRoot(LoginPage);
   }
 
   onSlideChanged() {
@@ -44,5 +52,17 @@ export class WalkthroughPage {
     this.menu.enable(false);
     console.log('ionViewDidLoad WalkthroughPage');
   }
+
+      submitLogin(){
+
+      this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {}, error => {
+        let alert = this.alertCtrl.create({
+          title: 'Error loggin in',
+          subTitle: error.message,
+          buttons: ['OK']
+        });
+        alert.present();
+      });
+    }
 
 }

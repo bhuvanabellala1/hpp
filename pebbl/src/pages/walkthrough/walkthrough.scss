@@ -5,9 +5,14 @@ page-walkthrough {
 		background-size: 100% 100%;
 		color: color($colors, light);
 	}
+	    .toolbar-background-ios {
+        background: transparent;
+		border-style: none !important;
+		border-width: 0;
+    }
 	ion-slides {
 		padding: 0;
-		ion-slide {}
+	
 		.main-title {
 			margin: 35px 20px 20px;
 			font-weight: 900;
@@ -42,6 +47,6 @@ page-walkthrough {
 	
 .skip-button {
 	color: color($colors, light);
-	margin: 20px 20px;;
+	margin: 30px 20px 0;
 }
 }

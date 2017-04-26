@@ -8,8 +8,18 @@ page-register {
                 margin: 9%;
 
     }
+    .skip-button {
+	color: color($colors, light);
+	margin: 30px 20px 0;
+}
+  .toolbar-background-ios {
+        background: transparent;
+		border-style: none !important;
+		border-width: 0;
+    }
+
     .main-title {
-			margin: 40% 20px 10%;
+			margin: 30% 20px 10%;
 			font-weight: 900;
 			text-align: center;
 		}

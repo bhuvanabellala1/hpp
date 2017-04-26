@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform, App, Nav, ModalController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { UsersService } from '../../providers/users-service'
-
+import { LoginPage } from '../login/login';
 /*
   Generated class for the Secondregsiter page.
 
@@ -22,7 +22,7 @@ export class SecondregsiterPage {
   private users = [];
   public codepair: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private usersService: UsersService, public loadingCtrl: LoadingController) {}
+  constructor(public nav: NavController, public navCtrl: NavController, public navParams: NavParams, private usersService: UsersService, public loadingCtrl: LoadingController) {}
 
   signUserUp(){
       this.usersService.signUpUser2(this.emailField, this.passwordField, this.username, this.codepair).then(authData => {
@@ -62,5 +62,7 @@ export class SecondregsiterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SecondregsiterPage');
   }
-
+  goBack(){
+      this.nav.setRoot(LoginPage);
+    }
 }

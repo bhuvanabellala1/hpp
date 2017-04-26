@@ -5,8 +5,13 @@ page-login {
 		background-size: 100% 100%;
 		color: color($colors, light);
 	}
+		    .toolbar-background-ios {
+        background: transparent;
+		border-style: none !important;
+		border-width: 0;
+    }
 .main-title {
-			margin: 40% 20px 20%;
+			margin: 30% 20px 20%;
 			font-weight: 900;
 			text-align: center;
 		}
@@ -28,5 +33,9 @@ page-login {
         svg {
             margin: 0 9%;
         }
+		.skip-button {
+	color: color($colors, light);
+	margin: 30px 20px 0;
+}
 
 }
