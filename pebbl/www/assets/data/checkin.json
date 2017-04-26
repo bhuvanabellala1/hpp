@@ -7,8 +7,9 @@
         "user_id": 2,
         "caption": "This is THE FIRST HARDWARE CHECKIN BOOYA",
         "images": ["./assets/images/memory/m1.jpg", "./assets/images/friend.jpg"],
-        "location": "Hell, ST",
-        "date": "May 13th",
-        "time": "10:20am"
+        "location": "Hawaii, US",
+        "date": "Wed Apr 26 2017 12:12:48 GMT-0700 (PDT)",
+        "lat": 40.707612,
+        "lng": -74.011996
       }]
 }

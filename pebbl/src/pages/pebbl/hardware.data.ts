@@ -3,16 +3,16 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { TimelineModel } from '../timeline/timeline.model';
+import { HardwareTimeLineModel } from '../timeline/timeline.model';
 
 @Injectable()
 export class HardwareData {
   constructor(public http: Http) {}
 
-  getData(): Promise<TimelineModel> {
+  getData(): Promise<HardwareTimeLineModel> {
     return this.http.get('./assets/data/checkin.json')
      .toPromise()
-     .then(response => response.json() as TimelineModel)
+     .then(response => response.json() as HardwareTimeLineModel)
      .catch(this.handleError);
   }
 

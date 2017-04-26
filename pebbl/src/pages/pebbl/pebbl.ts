@@ -2,7 +2,7 @@ import { Component,  } from '@angular/core';
 import { NavController, NavParams, Events } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { TimelineModel } from '../timeline/timeline.model';
+import { HardwareTimeLineModel } from '../timeline/timeline.model';
 import { HardwareData } from './hardware.data';
 import { CheckinPage } from '../checkin/checkin';
 
@@ -19,7 +19,7 @@ import { CheckinPage } from '../checkin/checkin';
   providers: [HardwareData]
 })
 export class PebblPage {
-  timeline: TimelineModel = new TimelineModel();
+  timeline: HardwareTimeLineModel = new HardwareTimeLineModel();
 
   constructor(
     public events: Events,
