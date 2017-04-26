@@ -3,8 +3,10 @@ import { NavController, MenuController}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import {TimelinePage}from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
+import { PebblPage } from '../pebbl/pebbl';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
+
 declare var d3: any;
 
 @Component({
@@ -35,6 +37,10 @@ export class HomePage {
 
   pushPage(page) {
       this.navCtrl.push(page.component);
+  }
+
+  gotoPebbl(){
+    this.navCtrl.push(PebblPage);
   }
 
   // grabVenues(){
@@ -208,6 +214,7 @@ export class HomePage {
       };
     }
   }
+
   ionViewDidLoad() {
     console.log("HEKWKJRKWEWORJWORWORIWORIOWRIEORIEIOREIRO");
     this.menu.enable(true);

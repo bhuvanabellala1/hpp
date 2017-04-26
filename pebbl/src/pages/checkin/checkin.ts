@@ -1,10 +1,11 @@
 import { Component, NgZone } from '@angular/core';
 import {Camera, Keyboard, Geolocation, ImagePicker} from 'ionic-native';
-import { NavController, SegmentButton, ModalController, NavParams, LoadingController, AlertController, ViewController } from 'ionic-angular';
+import { NavController, SegmentButton, ModalController, NavParams, LoadingController, AlertController, ViewController, Events } from 'ionic-angular';
 import { CheckinService } from '../../providers/checkin-service';
 import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
+import { TimelineModel } from '../timeline/timeline.model';
 import * as firebase from 'firebase';
 
 /*
@@ -30,7 +31,9 @@ export class CheckinPage {
   public myDate: any;
   // public base64Image: string;
   public imageSrc: string;
-  constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
+  timeline: TimelineModel = new TimelineModel();
+
+  constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams, public events: Events,
     private checkinService: CheckinService, public modalCtrl: ModalController, private memoryService: MemoryService,private loadingCtrl: LoadingController, private alertCtrl: AlertController, private viewCtrl: ViewController) {
       this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
@@ -40,6 +43,27 @@ export class CheckinPage {
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad CheckinPage');
+      this.events.subscribe('memory', (memory) => {
+        this.timeline.memories = memory;
+        console.log('This is the memory', this.timeline.memories);
+        this.fillMemory();
+      });
+    }
+
+    //fill memory will prepopulate venue name, userId, images, venue lat, lng, date, memoryBody
+
+    //Once we get hardware data we will need lat & lng, exact date.
+    fillMemory(){
+      this.images = this.timeline.memories[0].images;
+      this.userId = this.timeline.memories[0].user_id;
+      this.venue = this.timeline.memories[0].venue;
+      this.myDate = this.timeline.memories[0].date;
+      this.memoryBody = this.timeline.memories[0].caption;
+      console.log('filling the memories')
+      console.log(this.images);
+      console.log(this.userId);
+      console.log(this.venue);
+      console.log(this.myDate);
     }
 
     toggleMe(){
@@ -69,7 +93,6 @@ export class CheckinPage {
       }).catch((error) => {
         console.log('Error getting location', error);
       });
-
     }
 
     onSegmentChanged(segmentButton: SegmentButton) {
@@ -77,7 +100,6 @@ export class CheckinPage {
     }
 
     showvalues(){
-
       //add preloader
             let loading = this.loadingCtrl.create({
 				dismissOnPageChange: true,
@@ -112,11 +134,8 @@ export class CheckinPage {
 					    });
 					    alert.present();
 					 })
- 
-	    
-            	});
-    
-    }
+         });
+       }
 
     takePicture(){
       Camera.getPicture({
@@ -166,6 +185,4 @@ export class CheckinPage {
       });
       venueModal.present();
     }
-
-
   }
