@@ -16,12 +16,14 @@ export class MemoryService {
   private fireRef: any;
   private memoryNode: any;
   private usersMemoryNode: any;
+  private storageRef: any;
 
   constructor(public http: Http) {
           this.userNode = firebase.database().ref('users');
           this.memoryNode = firebase.database().ref('memories');
           this.usersMemoryNode = firebase.database().ref('user-memories');
           this.fireRef = firebase.database().ref();
+          this.storageRef = firebase.storage().ref();
   }
 
   pushMemory(venueName: any, userId: any, images: any, venueLat: any, venueLng: any, memoryText: any, myDate: any){
