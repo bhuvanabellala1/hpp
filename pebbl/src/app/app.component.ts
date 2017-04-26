@@ -14,6 +14,7 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
 import { RegisterPage } from '../pages/register/register';
 import { SecondregsiterPage } from '../pages/secondregsiter/secondregsiter';
 import { LoginPage } from '../pages/login/login';
+import { TestImagePage } from '../pages/test-image/test-image';
 import { UsersService } from '../providers/users-service'
 import { MemoryService } from '../providers/memory-service'
 import * as firebase from 'firebase';
@@ -62,7 +63,8 @@ export class MyApp {
     this.pages = [
       { title: 'Settings', icon: 'settings', component: ProfilePage },
       { title: 'FAQ', icon: 'help', component: FaqPage },
-      { title: 'Legal', icon: 'document', component: LegalPage }
+      { title: 'Legal', icon: 'document', component: LegalPage },
+      { title: 'ImageTest', icon: 'document', component: TestImagePage }
     ];
   }
 
