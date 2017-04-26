@@ -6,6 +6,7 @@ import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
 import * as firebase from 'firebase';
+import { CacheService } from 'ionic-cache/ionic-cache';
 
 /*
 Generated class for the Checkin page.
@@ -31,7 +32,10 @@ export class CheckinPage {
   // public base64Image: string;
   public imageSrc: string;
   constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
-    private checkinService: CheckinService, public modalCtrl: ModalController, private memoryService: MemoryService,private loadingCtrl: LoadingController, private alertCtrl: AlertController, private viewCtrl: ViewController) {
+    private checkinService: CheckinService, public modalCtrl: ModalController,
+    private memoryService: MemoryService,private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController, private viewCtrl: ViewController,
+    private cache: CacheService) {
       this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
       this.images = [];
@@ -40,6 +44,18 @@ export class CheckinPage {
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad CheckinPage');
+      let j = [];
+      this.cache.getItem("keys").catch(() => {
+        console.log("no keys");
+      }).then((data) => {
+        j = data;
+      });
+
+      for(let key in j){
+        console.log(key);
+      }
+      console.log("JJFDSFSDF");
+      console.log(j.length);
     }
 
     toggleMe(){
@@ -79,11 +95,11 @@ export class CheckinPage {
     showvalues(){
 
       //add preloader
-            let loading = this.loadingCtrl.create({
-				dismissOnPageChange: true,
-				content: 'Creating Your Memory..'
-			});
-			 loading.present();
+      let loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+        content: 'Creating Your Memory..'
+      });
+      loading.present();
 
       this.myDate = new Date();
       // //this.myDate = new Date();
@@ -91,31 +107,31 @@ export class CheckinPage {
       this.memoryService.pushMemory(this.venue.name,this.userId,this.images,this.venue.location.lat,this.venue.location.lng,this.memoryBody,this.myDate).then(() => {
         this.memoryBody="";
 
-            loading.dismiss().then(() => {
-            	     	//show pop up
-            	     		let alert = this.alertCtrl.create({
-					      title: 'Done!',
-					      subTitle: 'Memory Created',
-					      buttons: ['OK']
-					    });
-					    alert.present();
+        loading.dismiss().then(() => {
+          //show pop up
+          let alert = this.alertCtrl.create({
+            title: 'Done!',
+            subTitle: 'Memory Created',
+            buttons: ['OK']
+          });
+          alert.present();
 
-      })
-      this.viewCtrl.dismiss();
-    }, error => {
-            		//show pop up
-            		loading.dismiss().then(() => {
-				  		let alert = this.alertCtrl.create({
-					      title: 'Error adding new post',
-					      subTitle: error.message,
-					      buttons: ['OK']
-					    });
-					    alert.present();
-					 })
- 
-	    
-            	});
-    
+        })
+        this.viewCtrl.dismiss();
+      }, error => {
+        //show pop up
+        loading.dismiss().then(() => {
+          let alert = this.alertCtrl.create({
+            title: 'Error adding new post',
+            subTitle: error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+        })
+
+
+      });
+
     }
 
     takePicture(){

@@ -1,10 +1,12 @@
 import{Component, NgZone}from'@angular/core';
 import { NavController, MenuController}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
-import {TimelinePage}from '../timeline/timeline';
+import { BluetoothPage }from '../bluetooth/bluetooth';
+import { TimelinePage }from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
+import { CacheService } from 'ionic-cache/ionic-cache';
 declare var d3: any;
 
 @Component({
@@ -19,36 +21,25 @@ export class HomePage {
   // public venue: any;
 
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
-  public menu: MenuController) {
+  public menu: MenuController, private cache: CacheService) {
     this.navPages = [
       { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
       { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
       { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
-    // this.grabVenues();
+    let key = <string><any>(Date.now() / 1000);
+    this.cache.saveItem('1493096915.373', '31');
+    console.log(this.cache.getItem(key));
+    console.log(key);
   }
-
-  // ngAfterViewInit() {
-  //   console.log("Home Page");
-  //   this.createChart();
-  // }
 
   pushPage(page) {
       this.navCtrl.push(page.component);
   }
 
-  // grabVenues(){
-  //   Geolocation.getCurrentPosition().then((resp) => {
-  //     this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
-  //     .then(data => {
-  //       this.venuesData = data;
-  //       this.venue = this.venuesData.response.venues[0];
-  //     });
-  //   }).catch((error) => {
-  //     console.log('Error getting location', error);
-  //   });
-  // }
-
+  pushInstantMemory(){
+    this.navCtrl.push(BluetoothPage);
+  }
 
   createChart() {
 
@@ -209,7 +200,7 @@ export class HomePage {
     }
   }
   ionViewDidLoad() {
-    console.log("HEKWKJRKWEWORJWORWORIWORIOWRIEORIEIOREIRO");
+    console.log("Entering home page");
     this.menu.enable(true);
     this.createChart();
 
