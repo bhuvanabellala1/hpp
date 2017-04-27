@@ -35,8 +35,6 @@ export class MyApp {
   constructor(platform: Platform, public app: App, public menu:MenuController,
   private backgroundMode: BackgroundMode) {
 
-
-
     //Initialize Firebase
     const config = {
       apiKey: "AIzaSyD70iOoMmko5N-WFL8bFq7IJFSDou4rkjs",

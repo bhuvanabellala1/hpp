@@ -45,7 +45,7 @@ fetchUid(code:any){
   var plus = codeRef.once('value')
   console.log("trying")
   console.log(plus)
-			return codeRef.once('value'); 
+			return codeRef.once('value');
 }
 
 
@@ -133,7 +133,7 @@ signUpUser2(email: string , password: string, username: string, codepair: string
   console.log("should see some data")
   console.log(username + authenticatedUser.uid)
     this.pushCode(authenticatedUser.uid,codepair,username)
-    
+
     this.fetchUid(codepair).then(snapshot => {
       console.log(snapshot.val().uname1)
       this.updateUser(snapshot.val().uid1, snapshot.val().uid2, snapshot.val().uname1, username)
@@ -150,7 +150,7 @@ signUpUser2(email: string , password: string, username: string, codepair: string
 
 pushCode(userid: any, codepair: any, uName2: any)
 {
-  
+
   this.codepair.child(codepair).update({
 			uid2: userid,
       uname2: uName2
