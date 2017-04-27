@@ -27,7 +27,7 @@ export class UsersService {
   public codepair: any;
   private fireRef: any;
   private usersMemoryNode: any;
-
+  private hardwareMemories: any;
 
   constructor(public http: Http, private loadingCtrl: LoadingController,private alertCtrl: AlertController,private memoryService: MemoryService) {
     this.fireAuth = firebase.auth();
@@ -35,6 +35,7 @@ export class UsersService {
     this.codepair = firebase.database().ref('code-pair');
     this.usersMemoryNode = firebase.database().ref('user-memories');
     this.fireRef = firebase.database().ref();
+    this.hardwareMemories = firebase.database().ref('hardware-memories');
   }
 
   fetchUid(code:any){

@@ -38,7 +38,7 @@ export class HomePage {
   }
 
   pushInstantMemory(){
-    this.navCtrl.push(BluetoothPage);
+    this.navCtrl.push(InstantMemoryPage);
   }
 
   createChart() {

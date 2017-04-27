@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { BLE } from 'ionic-native';
+import { BLE , Geolocation} from 'ionic-native';
 import { DevicePage } from '../device/device';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { CacheService } from 'ionic-cache/ionic-cache';
 import * as firebase from 'firebase';
-import { UsersService } from '../../providers/users-service'
+import { UsersService } from '../../providers/users-service';
+import { MemoryService } from '../../providers/memory-service';
+import { CheckinService } from '../../providers/checkin-service';
 
 
 /*
@@ -30,7 +32,8 @@ export class BluetoothPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private backgroundMode: BackgroundMode, private cache: CacheService,
-    private alertCtrl: AlertController, private usersService: UsersService) {
+    private alertCtrl: AlertController, private usersService: UsersService,
+  private memoryService: MemoryService, private checkinService: CheckinService) {
       this.devices = [];
       this.keys = [];
       this.isScanning = false;
@@ -45,145 +48,106 @@ export class BluetoothPage {
       // console.log(this.charmID);
     }
 
-hee(fds){
-  console.log(fds);
-}
     startScanning() {
 
       console.log("Scanning Started");
       this.devices = [];
       this.isScanning = true;
-      this.hee("HIIIII FDFSFSDFss");
-      BLE.startScan([]).subscribe(device => {
-
-        // if(this.charmID == null){
-        //   if(device.name == "Simple Chat"){
-        //     this.devices.push(device);
-        //   }
-        // }else{
-        //   if(device.id == this.charmID){
-        //     this.connect(this.charmID);
-        //     BLE.stopScan();
-        //   }
-        // }
-
-        let hi;
-        this.userProfile.child(this.userId).once('value').then(function(snapshot) {
-          console.log(snapshot.val().charmId);
-
-          hi = snapshot.val().charmId;
-          console.log("HFFSFD"+hi);
-          this.hee("WJRHJHRJWHRJ");
-          console.log("HFFSFD"+hi);
+      let mainOne = this;
+      let foundDevice = false;
+      this.userProfile.child(this.userId).once('value').then(function(snapshot) {
+        BLE.startScan([]).subscribe(device => {
           if(snapshot.val().charmId){
             if(device.id == snapshot.val().charmId) {
-              BLE.stopScan();
-              console.log("fsfdsf" + snapshot.val().charmId);
-              this.isConnected = true;
-              let counter = 0;
-              setTimeout(BLE.connect(snapshot.val().charmId).subscribe(peripheralData => {
-                let subscription = BLE.startNotification(snapshot.val().charmId, "713D0000-503E-4C75-BA94-3148F18D941E", "713D0002-503E-4C75-BA94-3148F18D941E");
-                subscription.subscribe(data => {
-                  counter = this.getlatlong(counter);
+              mainOne.connect(device.id);
+              foundDevice = true;
+            }
+          }else{
+            mainOne.devices.push(device);
+          }
+        })
+      });
+
+      setTimeout(() => {
+        BLE.stopScan().then(() => {
+          console.log('Scanning has stopped');
+          this.isConnected = false;
+          this.isScanning = false;
+          if(this.devices.length == 0 || !foundDevice){
+            let alert = this.alertCtrl.create({
+              title: 'Bluetooth Error',
+              subTitle: 'Please check that both the device and the bluetooth are turned on.',
+              buttons: ['Dismiss']
+            });
+            alert.present();
+          }
+        });
+      }, 5000);
+    }
+
+    connectToDevice(device) {
+
+      this.usersService.pushCharmID(this.userId, device.id);
+      this.connect(device.id);
+
+    }
+
+    connect(deviceID) {
+      this.isConnected = true;
+      let counter = 0;
+      BLE.connect(deviceID).subscribe(peripheralData => {
+        let subscription = BLE.startNotification(deviceID, "713D0000-503E-4C75-BA94-3148F18D941E", "713D0002-503E-4C75-BA94-3148F18D941E");
+        subscription.subscribe(data => {
+          Geolocation.getCurrentPosition().then((resp) => {
+            this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
+            .then(data => {
+              let venuesData: any = data;
+              let venue = venuesData.response.venues[0];
+              this.memoryService.addHardWareMemory(this.userId,
+                resp.coords.latitude, resp.coords.longitude, new Date(),
+                venue.name, venue.location.city, venue.location.state).then(() => {
+                  console.log("success");
+                }, (error) => {
+                  console.log("failed to push memory");
                 });
-              },
-              peripheralData => {
-                console.log('Peripheral is disconnected');
-                this.isConnected = false;
-              }
-            ), 1000);
-          }
-        }else{
-          if(device.name == "Simple Chat"){
-            this.devices.push(device);
-          }
-        }
-        // console.log("DSFDFSD"+this.charmID);
-        // console.log(snapshot.val().charmId);
-      })
-    });
-
-    setTimeout(() => {
-      BLE.stopScan().then(() => {
-        console.log('Scanning has stopped');
-        this.isScanning = false;
-        if(this.devices.length == 0){
-          let alert = this.alertCtrl.create({
-            title: 'Bluetooth Error',
-            subTitle: 'Please check that both the device and the bluetooth are turned on.',
-            buttons: ['Dismiss']
+            });
+          }).catch((error) => {
+            console.log('Error getting location', error);
           });
-          alert.present();
-        }
-      });
-    }, 5000);
+
+        });
+      },
+      peripheralData => {
+        console.log('Peripheral is disconnected');
+        this.isConnected = false;
+      }
+    );
   }
 
-  connectToDevice(device) {
+  saveToCache(){
 
-    this.usersService.pushCharmID(this.userId, device.id);
-    this.connect(device.id);
-
-  }
-
-  connect(deviceID) {
-    this.isConnected = true;
-    let counter = 0;
-    BLE.connect(deviceID).subscribe(peripheralData => {
-      let subscription = BLE.startNotification(deviceID, "713D0000-503E-4C75-BA94-3148F18D941E", "713D0002-503E-4C75-BA94-3148F18D941E");
-      subscription.subscribe(data => {
-        counter = this.getlatlong(counter);
-      });
-    },
-    peripheralData => {
-      console.log('Peripheral is disconnected');
-      this.isConnected = false;
-    }
-  );
-}
-
-getlatlong(string) {
-  console.log(string);
-  return string + 1;
-}
-
-saveToCache(){
-
-  let key = <string><any>(Date.now() / 1000);
-  this.cache.getItem("keys").catch(() => {
-    this.keys.push(key)
-    this.cache.saveItem("keys", this.keys);
-    this.cache.saveItem(key, "hello");
-  }).then((data) => {
-    this.keys = data;
-    for(let key2 in this.keys){
-      console.log(key2);
-    }
-    console.log("KHHGHFGFGHFHGDHGDGHDGFGHFGHFGHFGHFGHFGH");
-    console.log(this.keys.length);
-    this.cache.getItem(key).catch(() => {
-      // fall here if item is expired or doesn't exist
-      console.log(key);
-      this.cache.saveItem(key, "hello");
-      this.keys.push(key);
+    let key = <string><any>(Date.now() / 1000);
+    this.cache.getItem("keys").catch(() => {
+      this.keys.push(key)
       this.cache.saveItem("keys", this.keys);
+      this.cache.saveItem(key, "hello");
     }).then((data) => {
-      console.log("Saved data: ", data);
+      this.keys = data;
+      for(let key2 in this.keys){
+        console.log(key2);
+      }
+      console.log("KHHGHFGFGHFHGDHGDGHDGFGHFGHFGHFGHFGHFGH");
+      console.log(this.keys.length);
+      this.cache.getItem(key).catch(() => {
+        // fall here if item is expired or doesn't exist
+        console.log(key);
+        this.cache.saveItem(key, "hello");
+        this.keys.push(key);
+        this.cache.saveItem("keys", this.keys);
+      }).then((data) => {
+        console.log("Saved data: ", data);
+      });
     });
-  });
-
-}
-
-stringToBytes(string) {
-  var array = new Uint8Array(string.length);
-  for (var i = 0, l = string.length; i < l; i++) {
-    array[i] = string.charCodeAt(i);
   }
-  return array.buffer;
-}
-// ASCII only
-bytesToString(buffer) {
-  return String.fromCharCode.apply(null, new Uint8Array(buffer));
-}
 
 }
