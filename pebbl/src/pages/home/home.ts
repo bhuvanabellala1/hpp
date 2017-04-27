@@ -58,7 +58,7 @@ export class HomePage {
 
   createChart() {
 
-    console.log("enetered chart making");
+    console.log("home.ts - enetered chart making");
     var width = 500,
         height = 550,
         nodes = [], //Where all circles are stored
@@ -118,7 +118,6 @@ export class HomePage {
     // Creating circles on canvas
     var circle;
     this._zone.run(() => {
-      console.log("fsdfsd")
     circle = svg.selectAll("circle")
         .data(nodes.slice(1))
         .enter().append("circle")
@@ -216,7 +215,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log("HEKWKJRKWEWORJWORWORIWORIOWRIEORIEIOREIRO");
+    console.log("home.ts - Entered home page");
     this.menu.enable(true);
     this.createChart();
 

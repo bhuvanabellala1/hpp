@@ -29,6 +29,7 @@ import { CheckinService } from '../providers/checkin-service';
 import { ConnectivityService } from '../providers/connectivity-service';
 import { Locations } from '../providers/locations';
 import { GoogleMaps } from '../providers/google-maps';
+import { SMS } from '@ionic-native/sms';
 
 import { BackgroundMode } from '@ionic-native/background-mode';
 @NgModule({
@@ -84,7 +85,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     Locations,
     GoogleMaps,
     BackgroundMode,
-    MemoryService
+    MemoryService,
+    SMS
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
