@@ -21,6 +21,8 @@
     "@angular/platform-server": "2.2.1",
     "@ionic-native/background-mode": "^3.5.0",
     "@ionic-native/core": "^3.4.4",
+    "@ionic-native/email-composer": "^3.5.0",
+    "@ionic-native/sms": "^3.5.0",
     "@ionic/storage": "1.1.7",
     "firebase": "^3.6.10",
     "ionic-angular": "2.0.1",

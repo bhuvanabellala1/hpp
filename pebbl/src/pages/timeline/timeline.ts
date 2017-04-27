@@ -4,7 +4,6 @@ import {TimelineService} from './timeline.service';
 import {TimelineModel} from './timeline.model';
 import { MemoryslidesPage } from '../memoryslides/memoryslides';
 
-
 /*
   Generated class for the Timeline page.
 

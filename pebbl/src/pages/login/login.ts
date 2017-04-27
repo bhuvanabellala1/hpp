@@ -31,7 +31,10 @@ export class LoginPage {
 
     submitLogin(){
 
-      this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {}, error => {
+      console.log("Trying to login");
+      this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {
+        this.nav.setRoot(HomePage);
+      }, error => {
         let alert = this.alertCtrl.create({
           title: 'Error loggin in',
           subTitle: error.message,

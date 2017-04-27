@@ -1,10 +1,11 @@
 import { Component, NgZone } from '@angular/core';
 import {Camera, Keyboard, Geolocation, ImagePicker} from 'ionic-native';
-import { NavController, SegmentButton, ModalController, NavParams, LoadingController, AlertController, ViewController } from 'ionic-angular';
+import { NavController, SegmentButton, ModalController, NavParams, LoadingController, AlertController, ViewController, Events } from 'ionic-angular';
 import { CheckinService } from '../../providers/checkin-service';
 import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
+import { HardwareTimeLineModel } from '../timeline/timeline.model';
 import * as firebase from 'firebase';
 
 /*
@@ -25,21 +26,40 @@ export class CheckinPage {
   public venuesData: any;
   public venue: any;
   private hide: boolean;
+  private hardware: boolean;
   private userId :any;
   public memoryBody:any;
   public myDate: any;
   // public base64Image: string;
   public imageSrc: string;
-  constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
+  timeline: HardwareTimeLineModel = new HardwareTimeLineModel();
+
+  constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams, public events: Events,
     private checkinService: CheckinService, public modalCtrl: ModalController, private memoryService: MemoryService,private loadingCtrl: LoadingController, private alertCtrl: AlertController, private viewCtrl: ViewController) {
       this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
       this.images = [];
       this.hide = true;
+      this.hardware = false;
     }
 
     ionViewDidLoad() {
+      this.hardware = true;
       console.log('ionViewDidLoad CheckinPage');
+      this.events.subscribe('memory', (memory) => {
+        this.timeline.memories = memory;
+        this.checkinService.searchVenues(this.timeline.memories[0].lat + "," + this.timeline.memories[0].lng)
+        .then(data => {
+          this.venuesData = data;
+          this.venue = this.venuesData.response.venues[0];
+        });
+        this.images = this.timeline.memories[0].images;
+        this.userId = this.timeline.memories[0].user_id;
+        this.venue = this.timeline.memories[0].venue;
+        this.myDate = this.timeline.memories[0].date;
+        this.memoryBody = this.timeline.memories[0].caption;
+        console.log('This is the memory', this.timeline.memories);
+      });
     }
 
     toggleMe(){
@@ -56,7 +76,10 @@ export class CheckinPage {
 
     ionViewWillEnter(){
       console.log('About to enter make memory');
-      this.grabVenues();
+      if(!this.hardware ){
+        console.log(this.hardware);
+        this.grabVenues();
+      }
     }
 
     grabVenues(){
@@ -69,7 +92,6 @@ export class CheckinPage {
       }).catch((error) => {
         console.log('Error getting location', error);
       });
-
     }
 
     onSegmentChanged(segmentButton: SegmentButton) {
@@ -77,7 +99,6 @@ export class CheckinPage {
     }
 
     showvalues(){
-
       //add preloader
             let loading = this.loadingCtrl.create({
 				dismissOnPageChange: true,
@@ -112,11 +133,8 @@ export class CheckinPage {
 					    });
 					    alert.present();
 					 })
- 
-	    
-            	});
-    
-    }
+         });
+       }
 
     takePicture(){
       Camera.getPicture({
@@ -166,6 +184,4 @@ export class CheckinPage {
       });
       venueModal.present();
     }
-
-
   }
