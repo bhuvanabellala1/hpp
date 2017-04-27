@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as firebase from 'firebase';
+import {TimelineModel} from '../pages/timeline/timeline.model';
 
 /*
   Generated class for the MemoryService provider.
@@ -14,10 +15,13 @@ export class MemoryService {
   private data: any;
   private userNode: any;
   private fireRef: any;
+  public myimagearray: Array<string>;
   private memoryNode: any;
   private usersMemoryNode: any;
   private storageRef: any;
   private myimage: any;
+  private myimage2: any;
+  private myimage3: any;
 
   constructor(public http: Http) {
           this.userNode = firebase.database().ref('users');
@@ -29,13 +33,21 @@ export class MemoryService {
 
 
 uploadImage(imageString:any)
-   {
+   {      
+          
           let image       : string  = 'mem-' + new Date().getTime() + '.jpg',
-          parseUpload : any;
+          parseUpload: any
          var imageRef = this.storageRef.child('memories/' + image);
          parseUpload      = imageRef.putString(imageString, firebase.storage.StringFormat.DATA_URL);
-
+          console.log (typeof parseUpload)
+          
         return parseUpload
+   }
+
+
+   convertImages(images){
+
+
    }
 
  
@@ -43,13 +55,18 @@ uploadImage(imageString:any)
   //console.log(this.fireRef.ServerValue.TIMESTAMP)
 
   var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
-  console.log(images)
   console.log("we are checking for images")
-  console.log(images[0])
-
-  // images.forEach(element => {
+  
+  //   images.forEach(element => {
+    
   //   console.log("each element")
-  //   console.log(element)
+  //   this.uploadImage(element).then(snapshot=> {
+  //     console.log("im am doing this GGGGGGGG");
+  //   console.log(snapshot.downloadURL);
+    
+  // });
+  //   });
+  
   //   // imageRef = storageRef.child(`images/${filename}.jpg`);
 
   //   // imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
@@ -82,7 +99,13 @@ var updatePath = {};
 //   var imageRef = this.storageRef.child(`images/test.jpg`);
 //  console.log("reched now")
 
-this.uploadImage(images[0]).then(snapshot=> {
+// a(function(snapshot) {
+
+// })
+
+if( images.length == 1){
+
+this.uploadImage(images[0]).then((snapshot)=> {
 console.log("Success");
     console.log(snapshot.downloadURL);
     this.myimage = snapshot.downloadURL
@@ -121,13 +144,121 @@ this.fireRef.update(updatePath);
 
 
 });
+}
+
+
+else if (images.length == 2){
+
+this.uploadImage(images[0]).then((snapshot)=> {
+console.log("Success");
+    console.log(snapshot.downloadURL);
+    this.myimage = snapshot.downloadURL
+    this.uploadImage(images[1]).then((snapshot)=> {
+      console.log(snapshot.downloadURL);
+      this.myimage2 = snapshot.downloadURL
+
+      console.log("i am inside now")
+  if(!memoryText){
+    memoryText = venueName
+  }
+
+ var memoryData = {
+    text: memoryText,
+      date: myDate,
+      location_tag: venueName,
+      location:
+      {
+        lat: venueLat,
+        long: venueLng
+      },
+    image:
+    {image1: this.myimage,
+    image2: this.myimage2}
+  }; 
+
+  console.log(memoryData);
+
+  updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
+
+  var user2ref = this.usersMemoryNode.child(userId).child('user2');
+  user2ref.once('value', function(snapshot){
+    var data = snapshot.val();
+    console.log(data)
+    var updatePathuser2 = {};
+    updatePathuser2['/user-memories/' + data+"/memories/"+newMemoryKey] = memoryData;
+    firebase.database().ref().update(updatePathuser2)
+  });
+
+this.fireRef.update(updatePath);
+
+    });
+});
+
+}
+
+
+else if (images.length == 3){
+
+this.uploadImage(images[0]).then((snapshot)=> {
+console.log("Success");
+    console.log(snapshot.downloadURL);
+    this.myimage = snapshot.downloadURL
+    this.uploadImage(images[1]).then((snapshot)=> {
+      console.log(snapshot.downloadURL);
+      this.myimage2 = snapshot.downloadURL
+        this.uploadImage(images[2]).then((snapshot)=> {
+console.log(snapshot.downloadURL);
+      this.myimage3 = snapshot.downloadURL
+
+      console.log("i am inside now")
+  if(!memoryText){
+    memoryText = venueName
+  }
+
+ var memoryData = {
+    text: memoryText,
+      date: myDate,
+      location_tag: venueName,
+      location:
+      {
+        lat: venueLat,
+        long: venueLng
+      },
+    image:
+    {image1: this.myimage,
+    image2: this.myimage2,
+    image3: this.myimage3}
+  }; 
+
+  console.log(memoryData);
+
+  updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
+
+  var user2ref = this.usersMemoryNode.child(userId).child('user2');
+  user2ref.once('value', function(snapshot){
+    var data = snapshot.val();
+    console.log(data)
+    var updatePathuser2 = {};
+    updatePathuser2['/user-memories/' + data+"/memories/"+newMemoryKey] = memoryData;
+    firebase.database().ref().update(updatePathuser2)
+  });
+
+this.fireRef.update(updatePath);
+
+    });
+});
+        });
+
+
+}
+
 
 // this.uploadImage2(images[0]).then((snapshot : any) =>
 //             {
 //               console.log("success")
 //             });
 
-return this.fireRef.update(updatePath);
+ return this.fireRef.update(updatePath);
 
 
   // imageRef.putString(images[0], firebase.storage.StringFormat.DATA_URL).then(snapshot=> {
@@ -196,10 +327,12 @@ return this.fireRef.update(updatePath);
    //updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
    
    
-   
+ 
    
    //return this.fireRef.update(updatePath);
 }
+// return this.fireRef.update(updatePath);
+//   }
 
 setMemoryBase(userid1: any,userid2: any){
   console.log("Setting Memory")
