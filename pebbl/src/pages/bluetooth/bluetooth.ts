@@ -72,9 +72,8 @@ export class BluetoothPage {
       setTimeout(() => {
         BLE.stopScan().then(() => {
           console.log('Scanning has stopped');
-          this.isConnected = false;
           this.isScanning = false;
-          if(this.devices.length == 0 || !foundDevice){
+          if(this.devices.length == 0 && !foundDevice){
             let alert = this.alertCtrl.create({
               title: 'Bluetooth Error',
               subTitle: 'Please check that both the device and the bluetooth are turned on.',

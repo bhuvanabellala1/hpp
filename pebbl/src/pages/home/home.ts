@@ -6,8 +6,7 @@ import { TimelinePage }from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
-import { CacheService } from 'ionic-cache/ionic-cache';
-import { PebblPage } from '../pages/pebbl/pebbl';
+import { PebblPage } from '../pebbl/pebbl';
 declare var d3: any;
 
 @Component({
@@ -22,16 +21,13 @@ export class HomePage {
   // public venue: any;
 
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
-  public menu: MenuController, private cache: CacheService) {
+  public menu: MenuController) {
     this.navPages = [
       { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
       { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
       { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
     let key = <string><any>(Date.now() / 1000);
-    this.cache.saveItem('1493096915.373', '31');
-    console.log(this.cache.getItem(key));
-    console.log(key);
   }
 
   pushPage(page) {

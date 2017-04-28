@@ -15,4 +15,28 @@
 
 <ion-content padding>
 
+  <ion-card *ngFor="let memory of instantMems.memories">
+
+  <ion-item>
+    <h2>{{ memory.mem.venue }}</h2>
+    <h4>{{ memory.mem.date }}, {{ memory.mem.day }}, {{ memory.mem.month }}</h4>
+    <p><ion-icon name="time-outline"></ion-icon> {{ memory.mem.time}}
+    <ion-icon name="pin-outline"></ion-icon> {{ memory.mem.city}}, {{ memory.mem.state}}</p>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-left clear small (click)=addMem(memory)>
+        <div>Add</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-left clear small (click)=deleteMem(memory)>
+        <div>Delete</div>
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-card>
+
 </ion-content>

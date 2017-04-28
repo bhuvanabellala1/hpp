@@ -80,12 +80,18 @@ export class MemoryService {
 
   addHardWareMemory(userId, lati, lon, myDate, venueName, cityName, stateName){
 
+    let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    let dayOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+    console.log(myDate.getHours() + ":" + myDate.getMinutes());
     //create the node
     // create the unique id for this hardware memory
     let newMemoryKey = this.usersMemoryNode.child(userId).push().key;
     let memoryData = {
       venue: venueName,
-      date: myDate,
+      time: myDate.getHours() + ":" + myDate.getMinutes(),
+      day: dayOfWeek[myDate.getDay()],
+      month: months[myDate.getMonth()],
+      date: myDate.getDate(),
       city: cityName,
       state: stateName,
       location:
