@@ -124,7 +124,7 @@ console.log("Success");
         lat: venueLat,
         long: venueLng
       },
-    image: this.myimage
+    image: [this.myimage]
   }; 
 
   console.log(memoryData);
@@ -171,9 +171,7 @@ console.log("Success");
         lat: venueLat,
         long: venueLng
       },
-    image:
-    {image1: this.myimage,
-    image2: this.myimage2}
+    image:[this.myimage,this.myimage2]
   }; 
 
   console.log(memoryData);
@@ -224,10 +222,7 @@ console.log(snapshot.downloadURL);
         lat: venueLat,
         long: venueLng
       },
-    image:
-    {image1: this.myimage,
-    image2: this.myimage2,
-    image3: this.myimage3}
+    image:[this.myimage, this.myimage2,this.myimage3]
   }; 
 
   console.log(memoryData);
@@ -354,7 +349,7 @@ fetchMemory(userid:any){
   // return fireRef('/users/' + userId).once('value')()
   console.log("printing")
   console.log(userid)
-  var memRef = this.usersMemoryNode.child(userid).child('memories').child('-KicTEuJpv0bEHGSvcPK');
+  var memRef = this.usersMemoryNode.child(userid).child('memories');
   
   var memoryData = memRef.once('value');
   console.log("trying")
