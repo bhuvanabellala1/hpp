@@ -36,10 +36,13 @@ ion-app.ios .popover-content .scroll-content {
     top: 0;
 }
 
-ion-slides {
-    padding: 40% 0 0 0;
+// ion-slides {
+//     padding: 0% 0 0 0;
+// }
+ion-slide {
+    vertical-align: middle;
+    display: inline-block;
 }
-
 .swiper-pagination-bullet-active {
     background: #E9ECED;
 }
