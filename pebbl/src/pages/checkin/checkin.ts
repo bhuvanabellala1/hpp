@@ -44,7 +44,7 @@ export class CheckinPage {
     }
 
     ionViewDidLoad() {
-      this.hardware = true;
+      // this.hardware = true;
       console.log('ionViewDidLoad CheckinPage');
       this.events.subscribe('memory', (memory) => {
         this.timeline.memories = memory;
