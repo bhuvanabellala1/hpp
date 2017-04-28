@@ -46,6 +46,7 @@ export class AdventuresPage {
           this.adventures = data;
           this.arrayLength = this.adventures.response.groups[0].items.length;
           for (var i = 0; i < this.arrayLength; i++) {
+            console.log(i);
             this.adventuresDetail.push(
               {
                 name : this.adventures.response.groups[0].items[i].venue.name,
@@ -54,7 +55,7 @@ export class AdventuresPage {
                 lat: Number(this.adventures.response.groups[0].items[i].venue.location.lat),
                 lng: Number(this.adventures.response.groups[0].items[i].venue.location.lng)
               });
-              this.maps.addMarker(this.adventuresDetail[i].lat, this.adventuresDetail[i].lng);
+              this.maps.addMarker(this.adventuresDetail[i].lat, this.adventuresDetail[i].lng, i, this.adventuresDetail[i].name);
           }
         });
       }).catch((error) => {

@@ -17,7 +17,6 @@ export class GoogleMaps {
   mapLoaded: any;
   mapLoadedObserver: any;
   markers: any = [];
-  marker: any;
   apiKey: string = "AIzaSyBcfih8wpdQJ5lgtD173GynrpZzcW__D-w";
   adventures: any;
   adventuresDetail: any;
@@ -124,14 +123,22 @@ export class GoogleMaps {
     }, false);
   }
 
-  addMarker(lat: number, lng: number): void {
+  addMarker(lat: number, lng: number, id: number, name: string): void {
     let latLng = new google.maps.LatLng(lat, lng);
-    this.marker = new google.maps.Marker({
+    window['marker'+id] = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: latLng,
+      icon: 'img/hotels_icon.png'
     });
-    this.markers.push(this.marker);
+    console.log(window['marker'+id]);
+
+    window['marker'+id].addListener('click', function() {
+      alert('Make Memory at ' + name + '?');
+    });
+
+    this.markers.push(window['marker'+id]);
+
   }
 
 }
