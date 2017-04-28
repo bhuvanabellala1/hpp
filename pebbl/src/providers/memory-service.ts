@@ -29,25 +29,10 @@ export class MemoryService {
   pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, memoryText: any, myDate: any, images:any){
   //console.log(this.fireRef.ServerValue.TIMESTAMP)
 
-  var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
-  console.log(images)
-  console.log("we are checking for images")
-  console.log(images[0])
+  var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key
 
-  images.forEach(element => {
-    console.log(element)
-  });
-  
-  // this.usersMemoryNode.child(userId).child('memories').push({
-  //     text: memoryText,
-  //     date: myDate,
-  //     location_tag: venueName,
-  //     location:
-  //     {
-  //       lat: venueLat,
-  //       long: venueLng
-  //     }
-  // })
+  console.log(newMemoryKey)
+
 
   if(!memoryText){
     memoryText = venueName
@@ -62,8 +47,7 @@ export class MemoryService {
         lat: venueLat,
         long: venueLng
       }
-  }; 
-
+  };
 
   //   ref.once("value", function(snapshot) {
   //   var data = snapshot.val();
@@ -83,12 +67,8 @@ export class MemoryService {
     updatePathuser2['/user-memories/' + data+"/memories/"+newMemoryKey] = memoryData;
     firebase.database().ref().update(updatePathuser2)
   });
- 
 
 //console.log(this.usersMemoryNode.child(userId).child('user2'))
-
-   
-
    //updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
    return this.fireRef.update(updatePath);
 }
@@ -97,7 +77,6 @@ setMemoryBase(userid1: any,userid2: any){
   console.log("Setting Memory")
   this.usersMemoryNode.child(userid1).set({
     user2: userid2
-  
   })
 }
 
@@ -105,7 +84,7 @@ updateMemoryBase(userid1: any,userid2: any){
   console.log("Setting Memory")
   this.usersMemoryNode.child(userid1).update({
     user2: userid2
-  
+
   })
   }
 
