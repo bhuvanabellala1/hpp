@@ -14,19 +14,20 @@ export class CheckinService {
   private clientID = 'MUFZU05XSMM11WWYG2ENW3CZVDNHIAUHSHFCGFEGU00C4FAY';
   private clientSecret = 'Q4YHLCOLD2VTNLATKGAWVEHURBUS1RRJPNPNIJITAOZOA2JE';
   private url  = 'https://api.foursquare.com/v2/venues/search';
+  // private params: URLSearchParams = new URLSearchParams();
+  private urlExplore = 'https://api.foursquare.com/v2/venues/explore';
 
   constructor(public http: Http) {
   }
 
   searchVenues(latLon){
-
     let params: URLSearchParams = new URLSearchParams();
     params.set('client_id', this.clientID);
     params.set('client_secret', this.clientSecret);
-    params.set('ll', latLon);
+    params.set('v', '20131016');
     params.set('intent', 'checkin');
     params.set('limit', '20');
-    params.set('v', '20131016');
+    params.set('ll', latLon);
     console.log(latLon);
     return new Promise(resolve => {
       this.http.get(this.url, {search: params})
@@ -36,4 +37,21 @@ export class CheckinService {
       });
     });
   }
+
+  exploreVenues(latLon){
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('client_id', this.clientID);
+    params.set('client_secret', this.clientSecret);
+    params.set('limit', '10');
+    params.set('v', '20131016');
+    params.set('ll', latLon);
+    return new Promise(resolve => {
+      this.http.get(this.urlExplore, {search: params})
+      .map(res => res.json())
+      .subscribe(data => {
+        resolve(data);
+      });
+    });
+  }
+
 }
