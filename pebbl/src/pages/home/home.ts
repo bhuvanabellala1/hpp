@@ -60,7 +60,7 @@ export class HomePage {
 
 
   createChart() {
-    console.log("enetered chart making");
+    console.log("home.ts - enetered chart making");
     var width = 500,
         height = 550,
         nodes = [], //Where all circles are stored
@@ -217,6 +217,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+    console.log("home.ts - Entered home page");
     this.menu.enable(true);
     this.createChart();
   }
