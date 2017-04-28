@@ -7,6 +7,7 @@ import { AdventuresPage}from '../adventures/adventures';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
 import { CacheService } from 'ionic-cache/ionic-cache';
+import { PebblPage } from '../pages/pebbl/pebbl';
 declare var d3: any;
 
 @Component({
@@ -38,7 +39,7 @@ export class HomePage {
   }
 
   pushInstantMemory(){
-    this.navCtrl.push(InstantMemoryPage);
+    this.navCtrl.push(PebblPage);
   }
 
   createChart() {

@@ -48,6 +48,7 @@ export class BluetoothPage {
       // console.log(this.charmID);
     }
 
+
     startScanning() {
 
       console.log("Scanning Started");
