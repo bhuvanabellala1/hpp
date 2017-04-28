@@ -100,7 +100,7 @@ export class UsersService {
           //show pop up
           let alert = this.alertCtrl.create({
             title: 'Share your code',
-            subTitle: 'Enter you fellow adventurer\'s code',
+            subTitle: 'Enter you fellow adventurer\'s phone number:',
             inputs: [
               {
                 name: 'Phone_No',
@@ -111,7 +111,7 @@ export class UsersService {
               {
                 text: 'Send Message',
                 handler: data => {
-                this.sms.send(data.Phone_No, "Here is the code fore paired. Lets start our adventures!" + code);
+                this.sms.send(data.Phone_No, "Here is the code for Paired. Let's start our adventures!\n" + code);
             }}]
           });
           alert.present();
