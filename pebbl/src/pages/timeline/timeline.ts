@@ -3,7 +3,7 @@ import { NavController, NavParams, LoadingController, PopoverController } from '
 import {TimelineService} from './timeline.service';
 import {TimelineModel} from './timeline.model';
 import { MemoryslidesPage } from '../memoryslides/memoryslides';
-
+import { CheckinPage} from '../checkin/checkin';
 /*
   Generated class for the Timeline page.
 
@@ -45,5 +45,7 @@ export class TimelinePage {
    popover.present();
 
   }
-
+  gotoMake() {
+    this.navCtrl.push(CheckinPage);
+  }
 }

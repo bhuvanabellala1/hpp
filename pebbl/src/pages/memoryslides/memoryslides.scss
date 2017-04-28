@@ -13,6 +13,14 @@ page-memoryslides {
 ion-backdrop {
     opacity: 0.9;
 }
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+img {
+    vertical-align: middle;
+}
 .button-ios {
     height: 50px;
     width: 50px;
