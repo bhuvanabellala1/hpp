@@ -123,8 +123,8 @@ export class CheckinPage {
         destinationType: Camera.DestinationType.DATA_URL,
         encodingType: Camera.EncodingType.JPEG,
         quality: 50,
-        targetWidth: 100,
-        targetHeight: 100,
+        // targetWidth: 100,
+        // targetHeight: 100,
 
       }).then((imageData) => {
         this._zone.run(() => {
@@ -147,8 +147,8 @@ export class CheckinPage {
         encodingType: Camera.EncodingType.JPEG,
         sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
         quality: 50,
-        targetWidth: 100,
-        targetHeight: 100,
+        // targetWidth: 100,
+        // targetHeight: 100,
 
       }).then((imageData) => {
         this._zone.run(() => {

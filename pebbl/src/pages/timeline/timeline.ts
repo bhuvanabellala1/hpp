@@ -41,31 +41,60 @@ private userId: any;
     ) {
   	this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
-this.fetchMemories(this.userId)
+    this.timeline.memories = []
+
   }
 
     fetchMemories(userid:any){
+      console.log("in function")
   this.memoryService.fetchMemory(userid).then(snapshot => {
+    console.log("in snapshot")
       console.log(snapshot.val())
       this.memory = (snapshot.val())
-      Object.keys(this.memory).forEach(key => {
-    console.log(key);          // the name of the current key.
-    console.log(this.memory[key]);   // the value of the current key.
-});
+      this.timeline.memories = this.memory;
+//       Object.keys(this.memory).forEach(key => {
+//     console.log(key);          // the name of the current key.
+//     console.log(this.memory[key]);   // the value of the current key.
+// });
 
     });
 }
 
   ionViewDidLoad() {
-    console.log(this.memory)
-    this.loading.present();
-    this.timelineService
-    .getData()
-    .then(mems => {
-      this.timeline.memories = mems.memories;
-      this.loading.dismiss();
+    console.log("in ion view")
+    
+    // this.loading.present();
+    // this.fetchMemories(this.userId)
+    // console.log("back in ion view")
+    // console.log(this.timeline.memories)
+
+  this.memoryService.fetchMemory(this.userId).then(snapshot => {
+    console.log("in snapshot")
+      console.log(snapshot.val())
+      this.memory = (snapshot.val())
       console.log(this.timeline.memories)
+      //this.timeline.memories = this.memory;
+      Object.keys(this.memory).forEach(key => {
+    console.log(key);          // the name of the current key.
+    console.log(typeof this.memory[key]);
+  this.timeline.memories = this.timeline.memories.concat(this.memory[key]) // the value of the current key.
+});
+
+// this.loading.dismiss();
+console.log(this.timeline.memories)
     });
+
+
+
+
+
+    // this.timelineService
+    // .getData()
+    // .then(mems => {
+    //   this.timeline.memories = this.memory;
+    //   this.loading.dismiss();
+    //   console.log(this.timeline.memories)
+    // });
   }
 
   slideImages(memIndex, imageIndex){
