@@ -33,6 +33,7 @@ export class MyApp {
 
 
   constructor(platform: Platform, public app: App, public menu:MenuController,
+
     private backgroundMode: BackgroundMode) {
 
 

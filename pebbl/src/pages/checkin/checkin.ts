@@ -44,9 +44,9 @@ export class CheckinPage {
     }
 
     ionViewDidLoad() {
-      // this.hardware = true;
       console.log('ionViewDidLoad CheckinPage');
       this.events.subscribe('memory', (memory) => {
+        this.hardware = true;
         this.timeline.memories = memory;
         this.checkinService.searchVenues(this.timeline.memories[0].lat + "," + this.timeline.memories[0].lng)
         .then(data => {
@@ -58,8 +58,23 @@ export class CheckinPage {
         this.venue = this.timeline.memories[0].venue;
         this.myDate = this.timeline.memories[0].date;
         this.memoryBody = this.timeline.memories[0].caption;
-        console.log('This is the memory', this.timeline.memories);
       });
+
+      this.events.subscribe('editMemory', (id) => {
+        // this.timeline.memories = memory;
+        // this.checkinService.searchVenues(this.timeline.memories[0].lat + "," + this.timeline.memories[0].lng)
+        // .then(data => {
+        //   this.venuesData = data;
+        //   this.venue = this.venuesData.response.venues[0];
+        // });
+        // this.images = this.timeline.memories[0].images;
+        // this.userId = this.timeline.memories[0].user_id;
+        // this.venue = this.timeline.memories[0].venue;
+        // this.myDate = this.timeline.memories[0].date;
+        // this.memoryBody = this.timeline.memories[0].caption;
+        console.log('This is the id', id);
+      });
+
     }
 
     toggleMe(){

@@ -1,5 +1,5 @@
 import{Component, NgZone}from'@angular/core';
-import { NavController, MenuController}from 'ionic-angular';
+import { NavController, MenuController, Events}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import {TimelinePage}from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
@@ -19,15 +19,18 @@ export class HomePage {
   navPages: Array<{title: string, icon: string, path: string, component: any}>;
   // public venuesData: any;
   // public venue: any;
+  adventures: any;
+  adventuresDetail: any;
+  arrayLength: any;
 
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
-  public menu: MenuController) {
+  public menu: MenuController, public events: Events) {
     this.navPages = [
       { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
       { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
       { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
-    // this.grabVenues();
+    // this.grabAdventure();
   }
 
   // ngAfterViewInit() {
@@ -57,7 +60,6 @@ export class HomePage {
 
 
   createChart() {
-
     console.log("home.ts - enetered chart making");
     var width = 500,
         height = 550,
@@ -218,7 +220,6 @@ export class HomePage {
     console.log("home.ts - Entered home page");
     this.menu.enable(true);
     this.createChart();
-
   }
 
 }

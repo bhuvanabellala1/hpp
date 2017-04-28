@@ -29,10 +29,8 @@ export class UsersService {
   private fireRef: any;
   private usersMemoryNode: any;
 
-
   constructor(public http: Http, private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController, private memoryService: MemoryService,
-  private sms: SMS) {
+    private alertCtrl: AlertController, private memoryService: MemoryService, private sms: SMS) {
     this.fireAuth = firebase.auth();
     this.userProfile = firebase.database().ref('users');
     this.codepair = firebase.database().ref('code-pair');
@@ -43,6 +41,7 @@ export class UsersService {
 
   fetchUid(code:any){
     // return fireRef('/users/' + userId).once('value')
+
 
     var codeRef = this.codepair.child(code);
     var plus = codeRef.once('value')
@@ -128,7 +127,6 @@ export class UsersService {
 
   }
 
-
   signUpUser2(email: string , password: string, username: string, codepair: string){
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then((newUser) => {
       //sign in the user
@@ -159,7 +157,6 @@ export class UsersService {
 
   pushCode(userid: any, codepair: any, uName2: any)
   {
-
     this.codepair.child(codepair).update({
       uid2: userid,
       uname2: uName2

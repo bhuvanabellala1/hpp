@@ -29,7 +29,7 @@ export class MemoryService {
 
   var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
   console.log(newMemoryKey)
-  
+
   // this.usersMemoryNode.child(userId).child('memories').push({
   //     text: memoryText,
   //     date: myDate,
@@ -50,8 +50,7 @@ export class MemoryService {
         lat: venueLat,
         long: venueLng
       }
-  }; 
-
+  };
 
   //   ref.once("value", function(snapshot) {
   //   var data = snapshot.val();
@@ -71,12 +70,8 @@ export class MemoryService {
     updatePathuser2['/user-memories/' + data+"/memories/"+newMemoryKey] = memoryData;
     firebase.database().ref().update(updatePathuser2)
   });
- 
 
 //console.log(this.usersMemoryNode.child(userId).child('user2'))
-
-   
-
    //updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
    return this.fireRef.update(updatePath);
 }
@@ -85,7 +80,6 @@ setMemoryBase(userid1: any,userid2: any){
   console.log("Setting Memory")
   this.usersMemoryNode.child(userid1).set({
     user2: userid2
-  
   })
 }
 
@@ -93,7 +87,7 @@ updateMemoryBase(userid1: any,userid2: any){
   console.log("Setting Memory")
   this.usersMemoryNode.child(userid1).update({
     user2: userid2
-  
+
   })
   }
 
