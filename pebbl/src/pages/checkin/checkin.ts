@@ -7,6 +7,7 @@ import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
 import * as firebase from 'firebase';
 import { CacheService } from 'ionic-cache/ionic-cache';
+import {  InstantMemModel, EachMem } from '../pebbl/instantmem.model';
 
 /*
 Generated class for the Checkin page.
@@ -29,8 +30,11 @@ export class CheckinPage {
   private userId :any;
   public memoryBody:any;
   public myDate: any;
+  public instantMem: EachMem;
   // public base64Image: string;
   public imageSrc: string;
+  public lat:any;
+  public long:any;
   constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
     private checkinService: CheckinService, public modalCtrl: ModalController,
     private memoryService: MemoryService,private loadingCtrl: LoadingController,
@@ -40,22 +44,30 @@ export class CheckinPage {
       this.section = "camera";
       this.images = [];
       this.hide = true;
+      if(this.navParams.get("mem")){
+        this.instantMem = this.navParams.get("mem");
+        this.lat = this.instantMem.mem.location.lat;
+        this.long = this.instantMem.mem.location.long;
+      }
     }
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad CheckinPage');
-      let j = [];
-      this.cache.getItem("keys").catch(() => {
-        console.log("no keys");
-      }).then((data) => {
-        j = data;
-      });
-
-      for(let key in j){
-        console.log(key);
+      if(this.instantMem){
+        console.log("yesss");
       }
-      console.log("JJFDSFSDF");
-      console.log(j.length);
+      // let j = [];
+      // this.cache.getItem("keys").catch(() => {
+      //   console.log("no keys");
+      // }).then((data) => {
+      //   j = data;
+      // });
+      //
+      // for(let key in j){
+      //   console.log(key);
+      // }
+      // console.log("JJFDSFSDF");
+      // console.log(j.length);
     }
 
     toggleMe(){
@@ -76,6 +88,14 @@ export class CheckinPage {
     }
 
     grabVenues(){
+
+      if(this.instantMem){
+        this.checkinService.searchVenues(this.lat + "," + this.long)
+        .then(data => {
+          this.venuesData = data;
+          this.venue = this.venuesData.response.venues[0];
+        });
+      }else{
       Geolocation.getCurrentPosition().then((resp) => {
         this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
         .then(data => {
@@ -85,6 +105,7 @@ export class CheckinPage {
       }).catch((error) => {
         console.log('Error getting location', error);
       });
+    }
 
     }
 
@@ -93,7 +114,7 @@ export class CheckinPage {
     }
 
     showvalues(){
-
+      
       //add preloader
       let loading = this.loadingCtrl.create({
         dismissOnPageChange: true,

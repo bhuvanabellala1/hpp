@@ -15,7 +15,7 @@
 
 <ion-content padding>
 
-  <ion-card *ngFor="let memory of instantMems.memories">
+  <ion-card *ngFor="let memory of instantMems.memories; let i=index">
 
   <ion-item>
     <h2>{{ memory.mem.venue }}</h2>
@@ -31,7 +31,7 @@
       </button>
     </ion-col>
     <ion-col>
-      <button ion-button icon-left clear small (click)=deleteMem(memory)>
+      <button ion-button icon-left clear small (click)="deleteMem(memory, i)">
         <div>Delete</div>
       </button>
     </ion-col>

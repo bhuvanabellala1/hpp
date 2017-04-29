@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MemoryService } from '../../providers/memory-service';
 import * as firebase from 'firebase';
 import {  InstantMemModel, EachMem } from './instantmem.model';
+import { CheckinPage}from '../checkin/checkin';
 /*
 Generated class for the Pebbl page.
 
@@ -41,7 +42,7 @@ export class PebblPage {
           let eachMemory: EachMem = new EachMem();
           eachMemory.memKey = key;
           eachMemory.mem = memories[key];
-          that.instantMems.memories = that.instantMems.memories.concat(eachMemory);// the value of the current key.
+          that.instantMems.memories.unshift(eachMemory);// the value of the current key.
         }, function (errorObject) {
           console.log("The read failed: " + errorObject.code);
         });
@@ -51,10 +52,13 @@ export class PebblPage {
     addMem(memory){
       console.log("redirect to make memory");
       console.log(memory.memKey);
+      this.navCtrl.push(CheckinPage, {mem: memory})
+
     }
 
-    deleteMem(memory){
+    deleteMem(memory, index){
       console.log("delete memory");
-      console.log(memory.memKey);
+      this.instantMems.memories.splice(index, 1);
+      this.hardwareMemories.child(this.userId).child(memory.memKey).remove();
     }
   }
