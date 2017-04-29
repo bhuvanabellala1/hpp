@@ -1,9 +1,18 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, PopoverController, Events } from 'ionic-angular';
 import {TimelineService} from './timeline.service';
+import { CheckinPage} from '../checkin/checkin';
 import {TimelineModel} from './timeline.model';
 import { MemoryslidesPage } from '../memoryslides/memoryslides';
-import { CheckinPage} from '../checkin/checkin';
+import { Http } from '@angular/http';
+import { NgZone, Injectable } from '@angular/core';
+import {Camera, Keyboard, Geolocation, ImagePicker} from 'ionic-native';
+import { SegmentButton, ModalController, AlertController, ViewController,NavController, NavParams, LoadingController, PopoverController, Events } from 'ionic-angular';
+import { CheckinService } from '../../providers/checkin-service';
+import { MemoryService } from '../../providers/memory-service';
+import { VenuePage } from '../venue/venue';
+import { UsersService } from '../../providers/users-service'
+import * as firebase from 'firebase';
+
 
 /*
   Generated class for the Timeline page.
@@ -13,38 +22,83 @@ import { CheckinPage} from '../checkin/checkin';
 */
 @Component({
   selector: 'page-timeline',
-  templateUrl: 'timeline.html'
+  templateUrl: 'timeline.html',
+  providers: [MemoryService, UsersService]
 })
 export class TimelinePage {
   timeline: TimelineModel = new TimelineModel();
   loading: any;
   editId: any;
   comments: any;
-
+private userId: any;
+  public memory: any;
   constructor(
     public events: Events,
     public navCtrl: NavController,
     public navParams: NavParams,
     public timelineService: TimelineService,
     public loadingCtrl: LoadingController,
-    public popoverCtrl: PopoverController) {
-
+    public popoverCtrl: PopoverController,public http: Http, private _zone: NgZone, 
+  private checkinService: CheckinService, public modalCtrl: ModalController, private memoryService: MemoryService,
+   private alertCtrl: AlertController, private viewCtrl: ViewController 
+    
+    ) {
   	this.loading = this.loadingCtrl.create();
+    this.userId = firebase.auth().currentUser.uid;
+    this.timeline.memories = []
     this.comments = ['comment1', 'comment2', 'comment3'];
-    // for (var i=0; i<1; i++) {
-    //   this.commentGroups[i] = { name: i, comments: [], show: false };
-    //   for (var j=0; j<3; j++) { this.commentGroups[i].comments.push(i + '-' + j);}
-    // }
   }
 
-  ionViewDidLoad() {
-    this.loading.present();
-    this.timelineService
-    .getData()
-    .then(mems => {
-      this.timeline.memories = mems.memories;
-      this.loading.dismiss();
+    fetchMemories(userid:any){
+      console.log("in function")
+  this.memoryService.fetchMemory(userid).then(snapshot => {
+    console.log("in snapshot")
+      console.log(snapshot.val())
+      this.memory = (snapshot.val())
+      this.timeline.memories = this.memory;
+//       Object.keys(this.memory).forEach(key => {
+//     console.log(key);          // the name of the current key.
+//     console.log(this.memory[key]);   // the value of the current key.
+// });
+
     });
+}
+
+  ionViewDidLoad() {
+    console.log("in ion view")
+    
+    // this.loading.present();
+    // this.fetchMemories(this.userId)
+    // console.log("back in ion view")
+    // console.log(this.timeline.memories)
+
+  this.memoryService.fetchMemory(this.userId).then(snapshot => {
+    console.log("in snapshot")
+      console.log(snapshot.val())
+      this.memory = (snapshot.val())
+      console.log(this.timeline.memories)
+      //this.timeline.memories = this.memory;
+      Object.keys(this.memory).forEach(key => {
+    console.log(key);          // the name of the current key.
+    console.log(typeof this.memory[key]);
+  this.timeline.memories = this.timeline.memories.concat(this.memory[key]) // the value of the current key.
+});
+
+// this.loading.dismiss();
+console.log(this.timeline.memories)
+    });
+
+
+
+
+
+    // this.timelineService
+    // .getData()
+    // .then(mems => {
+    //   this.timeline.memories = this.memory;
+    //   this.loading.dismiss();
+    //   console.log(this.timeline.memories)
+    // });
   }
 
   slideImages(memIndex, imageIndex){

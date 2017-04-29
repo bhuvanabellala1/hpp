@@ -16,6 +16,7 @@ import { RegisterPage } from '../pages/register/register';
 import { DevicePage } from '../pages/device/device';
 import { MemoryslidesPage } from '../pages/memoryslides/memoryslides';
 import { VenuePage } from '../pages/venue/venue';
+import { TestImagePage } from '../pages/test-image/test-image';
 import { SecondregsiterPage } from '../pages/secondregsiter/secondregsiter';
 
 import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page';
@@ -51,7 +52,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     RegisterPage,
     MemoryslidesPage,
     VenuePage,
-    SecondregsiterPage
+    SecondregsiterPage,
+    TestImagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -75,7 +77,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     RegisterPage,
     MemoryslidesPage,
     VenuePage,
-    SecondregsiterPage
+    SecondregsiterPage,
+    TestImagePage
   ],
   providers: [
     TimelineService,

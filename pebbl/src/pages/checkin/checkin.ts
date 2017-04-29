@@ -154,13 +154,42 @@ export class CheckinPage {
     takePicture(){
       Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
-        quality: 100,
-        targetWidth: 100,
-        targetHeight: 100,
+        encodingType: Camera.EncodingType.JPEG,
+        quality: 50,
+        // targetWidth: 100,
+        // targetHeight: 100,
 
       }).then((imageData) => {
         this._zone.run(() => {
           this.images.push("data:image/jpeg;base64," + imageData);
+          console.log("please see this")
+          console.log("\n\n\n\n\n\n ")
+          console.log(" \n\n\n\n\n\n")
+          console.log(this.images[0])
+        });
+      }, (err) => {
+        console.log(err);
+      });
+    }
+
+
+
+        takePicturefromGallery(){
+      Camera.getPicture({
+        destinationType: Camera.DestinationType.DATA_URL,
+        encodingType: Camera.EncodingType.JPEG,
+        sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+        quality: 50,
+        // targetWidth: 100,
+        // targetHeight: 100,
+
+      }).then((imageData) => {
+        this._zone.run(() => {
+          this.images.push("data:image/jpeg;base64," + imageData);
+          console.log("please see this")
+          console.log("\n\n\n\n\n\n ")
+          console.log(" \n\n\n\n\n\n")
+          console.log(this.images[0])
         });
       }, (err) => {
         console.log(err);
@@ -171,7 +200,8 @@ export class CheckinPage {
       let options = {
         width: 500,
         height: 500,
-        quality: 75
+        quality: 75,
+        outputType: 1
       }
 
       ImagePicker.getPictures(options).then(

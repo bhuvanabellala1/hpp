@@ -14,6 +14,7 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
 import { RegisterPage } from '../pages/register/register';
 import { SecondregsiterPage } from '../pages/secondregsiter/secondregsiter';
 import { LoginPage } from '../pages/login/login';
+import { TestImagePage } from '../pages/test-image/test-image';
 import { UsersService } from '../providers/users-service'
 import { MemoryService } from '../providers/memory-service'
 import * as firebase from 'firebase';
@@ -47,7 +48,9 @@ export class MyApp {
         messagingSenderId: "846315346935"
       };
 
+
       this.testingfirebase(config)
+
 
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
