@@ -98,47 +98,21 @@ page-home {
 
 
 
-  body {
-        font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
-        margin: 40px;
-      }
-      .axis path {
+  @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,600);
+      body {font-family: "Source Code Pro", Consolas, monaco, monospace; line-height: 160%; font-size: 16px;  margin: 0; }
+      path.link {
         fill: none;
-        stroke: #999;
-        stroke-dasharray: 2 3;
+        stroke-width: 2px;
       }
-      .axis text {
-        font-size: 13px;
-        stroke: #222;
+      .node:not(:hover) .nodetext {
+        display: none;
       }
-      text.title {
-        font-size: 24px;
-      }
-      circle.tick {
-        fill: #f3f3f3;
-        stroke: #999;
-        stroke-dasharray: 2 3;
-      }
-      path.spiral {
-        fill: none;
-        stroke: #ee8d18;
-        stroke-width: 3px;
-      }
-
-
-.tooltip {
-    background: #eee;
-    box-shadow: 0 0 5px #999999;
-    color: #333;
-    font-size: 12px;
-    left: 130px;
-    padding: 10px;
-    position: absolute;
-    text-align: center;
-    top: 95px;
-    z-index: 10;
-    display: block;
-    opacity: 0;
-}
+      h1 { font-size: 36px; margin: 10px 0; text-transform: uppercase; font-weight: normal;}
+      h2, h3 { font-size: 18px; margin: 5px 0 ; font-weight: normal;}
+      header {padding: 20px; position: absolute; top: 0; left: 0;}
+      a:link { color: #EE3124; text-decoration: none;}
+      a:visited { color: #EE3124; }
+      a:hover { color: #A4CD39; text-decoration: underline;}
+      a:active { color: #EE3124; }
 
 }
