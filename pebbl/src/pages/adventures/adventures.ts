@@ -5,6 +5,7 @@ import { NavController, Platform, Events } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
 
+
 /*
 Generated class for the Adventures page.
 

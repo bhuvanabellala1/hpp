@@ -1,11 +1,13 @@
 import{Component, NgZone}from'@angular/core';
 import { NavController, MenuController, Events}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
-import {TimelinePage}from '../timeline/timeline';
+import { BluetoothPage }from '../bluetooth/bluetooth';
+import { TimelinePage }from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
 import { PebblPage } from '../pebbl/pebbl';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
+
 
 declare var d3: any;
 
@@ -30,33 +32,16 @@ export class HomePage {
       { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
       { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
-    // this.grabAdventure();
   }
-
-  // ngAfterViewInit() {
-  //   console.log("Home Page");
-  //   this.createChart();
-  // }
 
   pushPage(page) {
       this.navCtrl.push(page.component);
   }
 
-  gotoPebbl(){
+
+  pushInstantMemory(){
     this.navCtrl.push(PebblPage);
   }
-
-  // grabVenues(){
-  //   Geolocation.getCurrentPosition().then((resp) => {
-  //     this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
-  //     .then(data => {
-  //       this.venuesData = data;
-  //       this.venue = this.venuesData.response.venues[0];
-  //     });
-  //   }).catch((error) => {
-  //     console.log('Error getting location', error);
-  //   });
-  // }
 
 
   createChart() {

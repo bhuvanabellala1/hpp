@@ -28,7 +28,7 @@ export class RegisterPage {
   signUserUp(){
       this.usersService.signUpUser(this.emailField, this.passwordField, this.username).then(authData => {
         //successful
-        this.navCtrl.setRoot(HomePage)
+        console.log("successful");
       }, error => {
         alert("error")
       });

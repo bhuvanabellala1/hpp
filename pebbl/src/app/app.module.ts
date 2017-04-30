@@ -28,11 +28,13 @@ import { MemoryService } from '../providers/memory-service';
 import { UsersService } from '../providers/users-service';
 import { CheckinService } from '../providers/checkin-service';
 import { ConnectivityService } from '../providers/connectivity-service';
+import { CacheService } from "ionic-cache/ionic-cache";
 import { Locations } from '../providers/locations';
 import { GoogleMaps } from '../providers/google-maps';
 import { SMS } from '@ionic-native/sms';
 
 import { BackgroundMode } from '@ionic-native/background-mode';
+import * as firebase from 'firebase';
 @NgModule({
   declarations: [
     MyApp,
@@ -89,7 +91,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     GoogleMaps,
     BackgroundMode,
     MemoryService,
-    SMS
+    SMS,
+    CacheService
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
