@@ -3,7 +3,8 @@ import { ConnectivityService } from './connectivity-service';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../providers/checkin-service';
 import { Events } from 'ionic-angular';
-
+import { NavController} from 'ionic-angular';
+import { CheckinPage } from '../pages/checkin/checkin';
 
 declare var google;
 
@@ -86,6 +87,7 @@ export class GoogleMaps {
         resolve(true);
       });
     });
+
   }
 
   disableMap(): void {
@@ -125,17 +127,32 @@ export class GoogleMaps {
 
   addMarker(lat: number, lng: number, id: number, name: string): void {
     let latLng = new google.maps.LatLng(lat, lng);
+    var infowindow = new google.maps.InfoWindow();
     window['marker'+id] = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: latLng,
       icon: 'img/hotels_icon.png'
     });
-    console.log(window['marker'+id]);
+
 
     window['marker'+id].addListener('click', function() {
-      alert('Make Memory at ' + name + '?');
+      // document.getElementById("adventurecard").style.visibility = 'visible';
+      console.log(document.getElementById("adventurecard"));
+      console.log(document.getElementById("adventureplace"));
+      infowindow.setContent('<div><strong>' + name + '</strong><br></div>' +
+      '<button ion-button outline item-left icon-left (click)="makeMemory()">Make Memory</button>');
+      infowindow.open(this.map, this);
     });
+
+    window['marker'+id].addListener('click', toggleBounce);
+    function toggleBounce() {
+      if (window['marker'+id].getAnimation() !== null) {
+        window['marker'+id].setAnimation(null);
+      } else {
+        window['marker'+id].setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
 
     this.markers.push(window['marker'+id]);
 

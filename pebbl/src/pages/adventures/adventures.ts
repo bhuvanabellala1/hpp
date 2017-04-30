@@ -4,6 +4,7 @@ import { GoogleMaps } from '../../providers/google-maps';
 import { NavController, Platform, Events } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
+import { CheckinPage } from '../checkin/checkin';
 
 /*
 Generated class for the Adventures page.
@@ -46,7 +47,6 @@ export class AdventuresPage {
           this.adventures = data;
           this.arrayLength = this.adventures.response.groups[0].items.length;
           for (var i = 0; i < this.arrayLength; i++) {
-            console.log(i);
             this.adventuresDetail.push(
               {
                 name : this.adventures.response.groups[0].items[i].venue.name,
@@ -76,4 +76,12 @@ export class AdventuresPage {
         })
       })
     };
+
+    makeMemory(){
+      this.navCtrl.push(CheckinPage);
+    }
+
+    // goBack(){
+    //   document.getElementById("adventurecard").style.visibility = 'hidden';
+    // }
   }

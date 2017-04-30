@@ -9,14 +9,29 @@
   <ion-navbar>
     <ion-title>adventures</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content no-padding>
   <div #pleaseConnect id="please-connect">
-    <p>Please connect to the Internet...</p>
+    <p>Loading...</p>
   </div>
-
   <div #map id="map"></div>
+
+  <!-- <div id="adventurecard">
+  <ion-card>
+    <ion-card-header>
+      <span id="adventureplace"> Adventure Place </span>
+    </ion-card-header>
+    <ion-card-content>
+      Make Memory Here?
+      <button ion-button outline item-left icon-left (click)="makeMemory()">
+        Yes
+      </button>
+      <button ion-button outline item-right icon-right (click)="goBack()">
+        No
+      </button>
+    </ion-card-content>
+  </ion-card>
+</div> -->
+
 </ion-content>
