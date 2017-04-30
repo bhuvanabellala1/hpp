@@ -7,6 +7,8 @@ import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
 import { HardwareTimeLineModel } from '../timeline/timeline.model';
 import * as firebase from 'firebase';
+import { CacheService } from 'ionic-cache/ionic-cache';
+import {  InstantMemModel, EachMem } from '../pebbl/instantmem.model';
 
 /*
 Generated class for the Checkin page.
@@ -30,50 +32,47 @@ export class CheckinPage {
   private userId :any;
   public memoryBody:any;
   public myDate: any;
+  public instantMem: EachMem;
   // public base64Image: string;
   public imageSrc: string;
-  timeline: HardwareTimeLineModel = new HardwareTimeLineModel();
 
-  constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams, public events: Events,
-    private checkinService: CheckinService, public modalCtrl: ModalController, private memoryService: MemoryService,private loadingCtrl: LoadingController, private alertCtrl: AlertController, private viewCtrl: ViewController) {
+  public lat:any;
+  public long:any;
+  constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
+    private checkinService: CheckinService, public modalCtrl: ModalController,
+    private memoryService: MemoryService,private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController, private viewCtrl: ViewController,
+    private cache: CacheService, public events: Events,) {
       this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
       this.images = [];
       this.hide = true;
       this.hardware = false;
+      if(this.navParams.get("mem")){
+        this.instantMem = this.navParams.get("mem");
+        this.lat = this.instantMem.mem.location.lat;
+        this.long = this.instantMem.mem.location.long;
+      }
+
     }
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad CheckinPage');
-      this.events.subscribe('memory', (memory) => {
-        this.hardware = true;
-        this.timeline.memories = memory;
-        this.checkinService.searchVenues(this.timeline.memories[0].lat + "," + this.timeline.memories[0].lng)
-        .then(data => {
-          this.venuesData = data;
-          this.venue = this.venuesData.response.venues[0];
-        });
-        this.images = this.timeline.memories[0].images;
-        this.userId = this.timeline.memories[0].user_id;
-        this.venue = this.timeline.memories[0].venue;
-        this.myDate = this.timeline.memories[0].date;
-        this.memoryBody = this.timeline.memories[0].caption;
-      });
-
-      this.events.subscribe('editMemory', (id) => {
-        // this.timeline.memories = memory;
-        // this.checkinService.searchVenues(this.timeline.memories[0].lat + "," + this.timeline.memories[0].lng)
-        // .then(data => {
-        //   this.venuesData = data;
-        //   this.venue = this.venuesData.response.venues[0];
-        // });
-        // this.images = this.timeline.memories[0].images;
-        // this.userId = this.timeline.memories[0].user_id;
-        // this.venue = this.timeline.memories[0].venue;
-        // this.myDate = this.timeline.memories[0].date;
-        // this.memoryBody = this.timeline.memories[0].caption;
-        console.log('This is the id', id);
-      });
+      if(this.instantMem){
+        console.log("yesss");
+      }
+      // let j = [];
+      // this.cache.getItem("keys").catch(() => {
+      //   console.log("no keys");
+      // }).then((data) => {
+      //   j = data;
+      // });
+      //
+      // for(let key in j){
+      //   console.log(key);
+      // }
+      // console.log("JJFDSFSDF");
+      // console.log(j.length);
 
     }
 
@@ -98,28 +97,34 @@ export class CheckinPage {
     }
 
     grabVenues(){
-      Geolocation.getCurrentPosition().then((resp) => {
-        this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
+
+      if(this.instantMem){
+        this.checkinService.searchVenues(this.lat + "," + this.long)
         .then(data => {
           this.venuesData = data;
           this.venue = this.venuesData.response.venues[0];
         });
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
+      }else{
+        Geolocation.getCurrentPosition().then((resp) => {
+          this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
+          .then(data => {
+            this.venuesData = data;
+            this.venue = this.venuesData.response.venues[0];
+          });
+        }).catch((error) => {
+          console.log('Error getting location', error);
+        });
+      }
     }
 
-    onSegmentChanged(segmentButton: SegmentButton) {
-      console.log('Segment changed to', segmentButton.value);
-    }
 
     showvalues(){
       //add preloader
-            let loading = this.loadingCtrl.create({
-				dismissOnPageChange: true,
-				content: 'Creating Your Memory..'
-			});
-			 loading.present();
+      let loading = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+        content: 'Creating Your Memory..'
+      });
+      loading.present();
 
       this.myDate = new Date();
       // //this.myDate = new Date();
@@ -127,29 +132,29 @@ export class CheckinPage {
       this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng,this.memoryBody,this.myDate, this.images).then(() => {
         this.memoryBody="";
 
-            loading.dismiss().then(() => {
-            	     	//show pop up
-            	     		let alert = this.alertCtrl.create({
-					      title: 'Done!',
-					      subTitle: 'Memory Created',
-					      buttons: ['OK']
-					    });
-					    alert.present();
+        loading.dismiss().then(() => {
+          //show pop up
+          let alert = this.alertCtrl.create({
+            title: 'Done!',
+            subTitle: 'Memory Created',
+            buttons: ['OK']
+          });
+          alert.present();
 
-      })
-      this.viewCtrl.dismiss();
-    }, error => {
-            		//show pop up
-            		loading.dismiss().then(() => {
-				  		let alert = this.alertCtrl.create({
-					      title: 'Error adding new post',
-					      subTitle: error.message,
-					      buttons: ['OK']
-					    });
-					    alert.present();
-					 })
-         });
-       }
+        })
+        this.viewCtrl.dismiss();
+      }, error => {
+        //show pop up
+        loading.dismiss().then(() => {
+          let alert = this.alertCtrl.create({
+            title: 'Error adding new post',
+            subTitle: error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+        })
+      });
+    }
 
     takePicture(){
       Camera.getPicture({
@@ -174,7 +179,7 @@ export class CheckinPage {
 
 
 
-        takePicturefromGallery(){
+    takePicturefromGallery(){
       Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
         encodingType: Camera.EncodingType.JPEG,

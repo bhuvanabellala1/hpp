@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, App, Nav, MenuController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar, Splashscreen, Keyboard } from 'ionic-native';
 import {Injectable} from '@angular/core';
 
 import { HomePage } from '../pages/home/home';
@@ -49,8 +49,8 @@ export class MyApp {
       };
 
 
-      this.testingfirebase(config)
 
+      this.testingfirebase(config)
 
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
@@ -61,14 +61,19 @@ export class MyApp {
         cordova.plugins.backgroundMode.on('activate', function(){
           console.log("Background mode activated");
         });
+        Keyboard.disableScroll(true);
       });
 
       this.pages = [
         { title: 'Settings', icon: 'settings', component: ProfilePage },
         { title: 'FAQ', icon: 'help', component: FaqPage },
-        { title: 'Legal', icon: 'document', component: LegalPage }
+        { title: 'Legal', icon: 'document', component: LegalPage },
+        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage }
       ];
     }
+
+
+
 
     userLogout(){
       console.log("Need to logout");
