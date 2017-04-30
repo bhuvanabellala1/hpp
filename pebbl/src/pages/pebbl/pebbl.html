@@ -15,6 +15,8 @@ Ionic pages and navigation.
 
 <ion-content padding>
 
+  <h4 *ngIf="!isInstantMem"> No Instant Memories to be accepted!</h4>
+
 
   <ion-card *ngFor="let memory of instantMems.memories; let i=index">
 
