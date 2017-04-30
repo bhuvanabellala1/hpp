@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Platform, App, Nav, ModalController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
+import { HomePage } from '../home/home';
+import { UsersService } from '../../providers/users-service'
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Register page.
@@ -9,19 +12,40 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 */
 @Component({
   selector: 'page-register',
-  templateUrl: 'register.html'
+  templateUrl: 'register.html',
+  providers: [UsersService]
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl:ViewController) {}
+  public emailField: any;
+  public passwordField: any;
+  public username: any;
+  private users = [];
 
-  closeRegisterPage(){
-    this.viewCtrl.dismiss();
+  constructor(public navCtrl: NavController, public nav: NavController, public navParams: NavParams, private usersService: UsersService, public loadingCtrl: LoadingController) {}
 
-  }
+
+  signUserUp(){
+      this.usersService.signUpUser(this.emailField, this.passwordField, this.username).then(authData => {
+        //successful
+        console.log("successful");
+      }, error => {
+        alert("error")
+      });
+
+      let loader = this.loadingCtrl.create({
+        dismissOnPageChange: true,
+      });
+
+      loader.present();
+
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
+  goBack(){
+      this.nav.setRoot(LoginPage);
+    }
 
 }

@@ -8,7 +8,7 @@
       Paired
     </ion-title>
     <ion-buttons end>
-      <button class="top-navigation">
+      <button class="top-navigation" (click)="pushInstantMemory()">
         <img src="img/charmed.svg">
       </button>
     </ion-buttons>
@@ -17,9 +17,9 @@
 
 <ion-content padding>
   <div class="stats-area">
-    <img src="img/Profile-1.svg">
-    <p> Making memories for 811 days </p>
-    <img src="img/Profile-2.svg">
+    <!--<img src="img/Profile-1.svg">-->
+    <p> Making memories since (enter first memory date) </p>
+    <!--<img src="img/Profile-2.svg">-->
   </div>
   <div style="height: 10px;">
   </div>

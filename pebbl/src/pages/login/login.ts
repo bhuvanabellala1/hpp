@@ -2,8 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, Platform, App, Nav, ModalController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RegisterPage } from '../register/register';
+import { SecondregsiterPage } from '../secondregsiter/secondregsiter';
 import { UsersService } from '../../providers/users-service'
-
+import { WalkthroughPage } from '../walkthrough/walkthrough';
 
 /*
 Generated class for the Login page.
@@ -21,8 +22,6 @@ export class LoginPage {
   public emailField: any;
   public passwordField: any;
   private users = [];
-  // private usersList: any;
-  //@ViewChild(Nav) nav: Nav;
 
   constructor(private alertCtrl: AlertController, private loadingCtrl: LoadingController,
     public nav: NavController, private modalCtrl: ModalController, private usersService: UsersService,
@@ -30,38 +29,12 @@ export class LoginPage {
 
     }
 
-
-    signUserUp(){
-      this.usersService.signUpUser(this.emailField, this.passwordField).then(authData => {
-        //successful
-        this.nav.setRoot(HomePage)
-      }, error => {
-        alert("error")
-      });
-
-      let loader = this.loadingCtrl.create({
-        dismissOnPageChange: true,
-      });
-
-      loader.present();
-
-    }
-
-    // listOurUsers(){
-    //   this.usersService.loadUser(5)
-    //   .then(data => {
-    //     this.usersList = data;
-    //   })
-    // }
-
     submitLogin(){
 
-      alert(this.passwordField);
+      console.log("Trying to login");
       this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {
-        //successful
-        this.nav.setRoot(HomePage)
+        this.nav.setRoot(HomePage);
       }, error => {
-        //alert("error logging in: "+ error.message);
         let alert = this.alertCtrl.create({
           title: 'Error loggin in',
           subTitle: error.message,
@@ -69,14 +42,17 @@ export class LoginPage {
         });
         alert.present();
       });
+    }
 
-      // let loader = this.loadingCtrl.create({
-      //   dismissOnPageChange: true,
-      // });
-      //
-      // loader.present();
+    goBack(){
+      this.nav.setRoot(WalkthroughPage);
+    }
+    gotoregister(){
+      this.nav.setRoot(RegisterPage);
+    }
 
-      //this.nav.setRoot(HomePage)
+    gotosecondregister(){
+      this.nav.setRoot(SecondregsiterPage);
     }
 
     submitRegister(){

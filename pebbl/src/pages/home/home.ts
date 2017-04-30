@@ -1,11 +1,13 @@
-import{Component}from'@angular/core';
-import { NavController, MenuController}from 'ionic-angular';
+import{Component, NgZone}from'@angular/core';
+import { NavController, MenuController, Events}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
-import {TimelinePage}from '../timeline/timeline';
+import { BluetoothPage }from '../bluetooth/bluetooth';
+import { TimelinePage }from '../timeline/timeline';
 import { AdventuresPage}from '../adventures/adventures';
+import { PebblPage } from '../pebbl/pebbl';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
-import {HttpProvider} from '../../providers/http-provider';
+
 declare var d3: any;
 
 @Component({
@@ -16,48 +18,34 @@ declare var d3: any;
 export class HomePage {
 
   navPages: Array<{title: string, icon: string, path: string, component: any}>;
-  public venuesData: any;
-  public venue: any;
+  // public venuesData: any;
+  // public venue: any;
+  adventures: any;
+  adventuresDetail: any;
+  arrayLength: any;
 
-  constructor(public navCtrl: NavController, private checkinService: CheckinService,
-  public menu: MenuController) {
+  constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
+  public menu: MenuController, public events: Events) {
     this.navPages = [
-      { title: 'Timeline', icon: 'center', path: 'img/Timeline_Stretched.svg', component: TimelinePage },
+      { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
       { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
       { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
     ];
-    this.grabVenues();
-  }
-
-  ngAfterViewInit() {
-    this.createChart();
   }
 
   pushPage(page) {
-    if(page.title == 'Check In'){
-      this.navCtrl.push(page.component, {venue: this.venue,
-                                          venueData: this.venuesData});
-    }else{
       this.navCtrl.push(page.component);
-    }
   }
 
 
 
-  grabVenues(){
-    Geolocation.getCurrentPosition().then((resp) => {
-      this.checkinService.searchVenues(resp.coords.latitude + "," + resp.coords.longitude)
-      .then(data => {
-        this.venuesData = data;
-        this.venue = this.venuesData.response.venues[0];
-      });
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+  pushInstantMemory(){
+    this.navCtrl.push(PebblPage);
   }
 
 
   createChart() {
+
    var width = 500,
       height = 500,
       start = 0,
@@ -67,7 +55,99 @@ export class HomePage {
 
     var theta = function(r) {
       return numSpirals * Math.PI * r;
-    };
+   };
+    // console.log("home.ts - enetered chart making");
+    // var width = 500,
+    //     height = 550,
+    //     nodes = [], //Where all circles are stored
+    //     maxSpeed = 1.5,
+    //     padding = 1,
+    //     m = 4,
+    //     // Number of balls we want
+    //     n = 40,
+    //     activity = ['Taking a break', 'Taking a walk', 'Golden Poppies', 'Enjoying the sun', 'Team Meeting', 'Walking to School', 'Starting the day', 'Chilling', 'Pratik & Carlo', 'Carlo & Shirish', 'Getting Money', 'Party It Up', 'Hardware'],
+    //     date = ['April 18th 2017', 'April 16th 2017', 'April 14th 2017', 'April 12th 2017', 'April 10th 2017', 'April 10th 2017', 'April 8th 2017', 'April 8th 2017'],
+    //     location = ['campanille', 'campanille', 'Alameda Beach', 'UC Berkeley', 'School of Information', 'UC Berkeley', 'Daniel\'s House', 'campanille', 'Hawaii', 'Carina\'s House', 'The House', 'Robin\'s House', 'HPP'],
+    //     photo = ['m1.JPG','m2.JPG','m3.JPG','m4.JPG','m5.JPG','m6.JPG','m7.JPG','m8.JPG', 'm9.jpg','m11.jpg', 'm12.jpg', 'm13.jpg', 'm14.jpg'],
+    //     radius = d3.scale.sqrt().range([0, 8]),
+    //     // Creating a rectangle to control the boundary of the ball
+    //     rect = [50,50, width - 50, height - 50],
+    //     // Where memory card is stored.
+    //     card = d3.select("body").selectAll("div.card"),
+    //     // Color Pallet
+    //     color = d3.scale.ordinal().range([d3.rgb(255,186,73), d3.rgb(84,195,194), d3.rgb(75,181,217), d3.rgb(222,243,243)]).domain(d3.range(m));
+
+    //     // Creating circles
+    //     for (var i in d3.range(n)){
+    //       var j = parseInt(i) % 13
+    //       var k = parseInt(i) % 8
+    //       nodes.push({radius: radius(1 + Math.floor(Math.random() * 4)),
+    //       // x & y positions on canvas
+    //       x: rect[0] + (Math.random() * (rect[2] - rect[0])),
+    //       y: rect[1] + (Math.random() * (rect[3] - rect[1])),
+    //       activity: activity[j],
+    //       date: date[k],
+    //       location: location[j],
+    //       photo: photo[j],
+    //       // Horizontal & Vertical Speed
+    //       speedX: (Math.random() - 0.5) * 2 *maxSpeed,
+    //       speedY: (Math.random() - 0.5) * 2 *maxSpeed});
+    //     }
+    // // Make the first
+    // var root = nodes[0]
+    // root.radius = 0;
+    // root.fixed = true;
+
+    // // Force Layout
+    // var force = d3.layout.force()
+    //     .gravity(0)
+    //     // charge determines the force applied to the cluster
+    //     .charge(function(d, i) { return i ? 0 : -300; })
+    //     .nodes(nodes)
+    //     .size([width, height])
+    //     .on("tick", tick)
+    //     .start();
+
+    // var svgDiv = document.getElementById('mySvg');
+
+    // // Creating the canvas
+    // var svg = d3.select("#mySvg")
+
+    // // Creating circles on canvas
+    // var circle;
+    // this._zone.run(() => {
+    // circle = svg.selectAll("circle")
+    //     .data(nodes.slice(1))
+    //     .enter().append("circle")
+    //     .attr("r", function(d) { return d.radius; })
+    //     .attr("cx", function(d, i) { return d.x})
+    //     .attr("cy", function(d, i) { return d.y})
+    //     .attr("date", function(d, i) { return d.date})
+    //     .attr("location", function(d, i) { return d.location})
+    //     .attr("activity", function(d, i) { return d.activity})
+    //     .attr("photo", function(d, i) { return d.photo})
+    //     .style("fill", function(d, i) { return color(i); });
+    //   });
+
+    // //Firstly, it create a quadtree object, using the coordinate of the nodes.
+    // //Then the quadtree call the visit() to check whether it have collision.
+    // //We will check the collide method later, but from the code suggests,
+    // //it change the (x,y) coordinate so we need to update the cx and cy attribute accordingly.
+    // function tick(e) {
+
+    // force.alpha(0.1)
+    // circle
+    //   // This sets the boundary for collision
+    //   .each(gravity(e.alpha))
+    //   .each(collide(.5))
+    //   // Updating location and making sure it doesnt go outside of the boundary
+    //   .attr("cx", function(d) { return d.x = Math.max(d.radius, Math.min(width - d.radius, d.x)); })
+    //   .attr("cy", function(d) { return d.y = Math.max(d.radius, Math.min(height - d.radius, d.y)); })
+    //   //allows dragging
+    //   .call(force.drag()
+    //     .on("drag", dragged));
+
+ 
 
     // used to assign nodes color by group
     var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -111,6 +191,7 @@ export class HomePage {
         group: currentDate.getMonth()
       });
     }
+
 
     var timeScale = d3.scaleTime()
       .domain(d3.extent(someData, function(d){
@@ -239,9 +320,42 @@ export class HomePage {
         tooltip.style('opacity',0);
     });  
 }
+
+  //   function collide(alpha) {
+  //     var quadtree = d3.geom.quadtree(nodes);
+  //     return function(d) {
+  //       var r = d.radius + radius.domain()[1] + padding,
+  //       // var r = d.radius + padding,
+  //       nx1 = d.x - r,
+  //       nx2 = d.x + r,
+  //       ny1 = d.y - r,
+  //       ny2 = d.y + r;
+  //       quadtree.visit(function(quad, x1, y1, x2, y2) {
+  //         if (quad.point && (quad.point !== d)) {
+  //           var x = d.x - quad.point.x,
+  //           y = d.y - quad.point.y,
+  //           l = Math.sqrt(x * x + y * y),
+  //           // r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
+  //           r = 33.31370849898476;
+  //           if (l < r) {
+  //             l = (l - r) / l * alpha;
+  //             d.x -= x *= l;
+  //             d.y -= y *= l;
+  //             quad.point.x += x;
+  //             quad.point.y += y;
+  //           }
+  //         }
+  //         return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+  //       });
+  //     };
+  //   }
+  // }
+
+
   ionViewDidLoad() {
-    console.log("Entering home page - enabling menu");
+    console.log("home.ts - Entered home page");
     this.menu.enable(true);
+    this.createChart();
   }
 
 }

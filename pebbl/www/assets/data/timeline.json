@@ -6,7 +6,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "Yayayyay",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m9.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "May 4",
         "time": "10:40am"
@@ -17,7 +17,7 @@
       "type": "liked",
       "user_id": 2,
       "caption": "Awesome Day in the Bay <3",
-      "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+      "images": ["./assets/images/memory/m11.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg", "./assets/images/friend.jpg"],
       "location": "Berkeley, CA",
       "date": "May 3",
       "time": "10:40am"
@@ -28,7 +28,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "So cool today",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m12.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "May 21",
         "time": "10:40am"
@@ -39,7 +39,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "Had a lot of fun woooooo",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m13.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "May 21",
         "time": "10:40am"
@@ -50,7 +50,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "Awesome Day in the Bay <3",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m14.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "November 21",
         "time": "10:40am"
@@ -72,7 +72,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "Awesome Day in the Bay <3",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m11.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "December 24",
         "time": "10:40am"
@@ -82,7 +82,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "Awesome Day in the Bay <3",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m12.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "December 27",
         "time": "10:40am"
@@ -93,7 +93,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "Awesome Day in the Bay <3",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m9.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "December 27",
         "time": "10:40am"
@@ -104,7 +104,7 @@
         "type": "liked",
         "user_id": 2,
         "caption": "Awesome Day in the Bay <3",
-        "images": ["./assets/images/friend.jpg", "./assets/images/friend.jpg"],
+        "images": ["./assets/images/memory/m10.jpg", "./assets/images/friend.jpg"],
         "location": "Berkeley, CA",
         "date": "December 30",
         "time": "10:40am"

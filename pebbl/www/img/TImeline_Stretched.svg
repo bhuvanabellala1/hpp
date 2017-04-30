@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-
-
-<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Home-Page-(Default-v3)" transform="translate(-46.000000, -595.000000)">
+        <g id="Home-Page-(Default-v3)" transform="translate(-47.000000, -596.000000)">
             <g id="Bottom-Navigation" transform="translate(47.000000, 566.000000)">
-                <g id="Group-2" transform="translate(0.000000, 30.000000)">
-                    <path d="M19,20 L19,22" id="Line-Copy" stroke="#3996E0" stroke-linecap="square"></path>
-                    <path d="M19,25 L19,27" id="Line-Copy-3" stroke="#3996E0" stroke-linecap="square"></path>
-                    <path d="M19,30 L19,32" id="Line-Copy-4" stroke="#3996E0" stroke-linecap="square"></path>
-                    <path d="M29.703045,21 L22,21" id="Line" stroke="#3996E0" stroke-width="2" stroke-linecap="square"></path>
-                    <path d="M29.703045,26 L22,26" id="Line-Copy-6" stroke="#3996E0" stroke-width="2" stroke-linecap="square"></path>
-                    <path d="M29.703045,31 L22,31" id="Line-Copy-7" stroke="#3996E0" stroke-width="2" stroke-linecap="square"></path>
-                    <circle id="Left" stroke="#000000" cx="25" cy="25" r="25"></circle>
-                    <g id="Group-3" transform="translate(9.000000, 9.000000)" stroke-width="3" stroke="#3996E0">
-                        <polygon id="Path-6" points="1.26481992 6.76937026 1.26481992 27.3892109 30.7034473 27.3892109 30.7034473 6.76937026"></polygon>
-                        <polyline id="Path-7" points="25.4608056 4.22547942 25.4608056 0.608390157 0.532685661 6.91496695"></polyline>
+                <g id="TimelineButton" transform="translate(0.000000, 30.000000)">
+                    <circle id="Left" fill="#3996E0" cx="25" cy="25" r="25"></circle>
+                    <path d="M29.703045,21 L22,21" id="Line" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square"></path>
+                    <path d="M29.703045,26 L22,26" id="Line-Copy-6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square"></path>
+                    <path d="M29.703045,31 L22,31" id="Line-Copy-7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square"></path>
+                    <g id="Group-3" transform="translate(11.000000, 9.000000)" stroke-width="2" stroke="#FFFFFF">
+                        <polygon id="Path-6" points="1 6.76937026 1 27.3892109 25.6000004 27.3892109 25.6000004 6.76937026"></polygon>
+                        <polyline id="Path-7" points="17 4.22547942 17 0.608390157 0.264819923 6.91496695"></polyline>
                     </g>
+                    <circle id="Oval-7" fill="#FFFFFF" cx="17.5" cy="20.5" r="1.5"></circle>
+                    <circle id="Oval-7" fill="#FFFFFF" cx="17.5" cy="25.5" r="1.5"></circle>
+                    <circle id="Oval-7" fill="#FFFFFF" cx="17.5" cy="30.5" r="1.5"></circle>
                 </g>
             </g>
         </g>
     </g>
 </svg>
-
-

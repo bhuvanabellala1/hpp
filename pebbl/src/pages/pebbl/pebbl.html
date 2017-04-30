@@ -1,8 +1,8 @@
 <!--
-  Generated template for the Pebbl page.
+Generated template for the Pebbl page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
 -->
 <ion-header>
 
@@ -15,4 +15,31 @@
 
 <ion-content padding>
 
-</ion-content>
+  <h4 *ngIf="!isInstantMem"> No Instant Memories to be accepted!</h4>
+
+
+  <ion-card *ngFor="let memory of instantMems.memories; let i=index">
+
+    <ion-item>
+      <h2>{{ memory.mem.venue }}</h2>
+      <h4>{{ memory.mem.date }}, {{ memory.mem.day }}, {{ memory.mem.month }}</h4>
+      <p><ion-icon name="time-outline"></ion-icon> {{ memory.mem.time}}
+        <ion-icon name="pin-outline"></ion-icon> {{ memory.mem.city}}, {{ memory.mem.state}}</p>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small (click)=addMem(memory)>
+            <div>Add</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small (click)="deleteMem(memory, i)">
+            <div>Delete</div>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+
+  </ion-content>

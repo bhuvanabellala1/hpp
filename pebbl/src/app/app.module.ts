@@ -16,19 +16,25 @@ import { RegisterPage } from '../pages/register/register';
 import { DevicePage } from '../pages/device/device';
 import { MemoryslidesPage } from '../pages/memoryslides/memoryslides';
 import { VenuePage } from '../pages/venue/venue';
+import { TestImagePage } from '../pages/test-image/test-image';
+import { SecondregsiterPage } from '../pages/secondregsiter/secondregsiter';
 
 import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 
 //import services
 import { TimelineService } from '../pages/timeline/timeline.service';
+import { MemoryService } from '../providers/memory-service';
 import { UsersService } from '../providers/users-service';
 import { CheckinService } from '../providers/checkin-service';
 import { ConnectivityService } from '../providers/connectivity-service';
+import { CacheService } from "ionic-cache/ionic-cache";
 import { Locations } from '../providers/locations';
 import { GoogleMaps } from '../providers/google-maps';
+import { SMS } from '@ionic-native/sms';
 
 import { BackgroundMode } from '@ionic-native/background-mode';
+import * as firebase from 'firebase';
 @NgModule({
   declarations: [
     MyApp,
@@ -47,7 +53,9 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     LoginPage,
     RegisterPage,
     MemoryslidesPage,
-    VenuePage
+    VenuePage,
+    SecondregsiterPage,
+    TestImagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -70,7 +78,9 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     LoginPage,
     RegisterPage,
     MemoryslidesPage,
-    VenuePage
+    VenuePage,
+    SecondregsiterPage,
+    TestImagePage
   ],
   providers: [
     TimelineService,
@@ -79,7 +89,10 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     ConnectivityService,
     Locations,
     GoogleMaps,
-    BackgroundMode
+    BackgroundMode,
+    MemoryService,
+    SMS,
+    CacheService
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

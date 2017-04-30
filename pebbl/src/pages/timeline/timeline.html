@@ -16,25 +16,27 @@
 <ion-content>
   <ion-list class="list-no-border">
 
-
-<svg width="28px" height="32px" viewBox="0 0 28 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs></defs>
-    <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Timeline-C&amp;H-Copy-3" transform="translate(-60.000000, -81.000000)">
+    <a (click)="addEntry()">
+      <svg width="28px" height="32px" viewBox="0 0 28 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs></defs>
+        <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Timeline-C&amp;H-Copy-3" transform="translate(-60.000000, -81.000000)">
             <g id="MakeMemory" transform="translate(58.000000, 81.000000)">
-                <g id="Group-3">
-                    <polygon id="Polygon" fill=#3996E0 points="16 0 29.8564065 8 29.8564065 24 16 32 2.14359354 24 2.14359354 8"></polygon>
-                    <path d="M16.8614966,15.2503154 L16.8614966,8.80458361 C16.8614966,8.35909201 16.5007934,8 16.055906,8 C15.6118241,8 15.2503154,8.36030039 15.2503154,8.80458361 L15.2503154,15.2503154 L8.80458361,15.2503154 C8.35909201,15.2503154 8,15.6110186 8,16.055906 C8,16.4999878 8.36030039,16.8614966 8.80458361,16.8614966 L15.2503154,16.8614966 L15.2503154,23.3074297 C15.2503154,23.7527199 15.6110186,24.1118119 16.055906,24.1118119 C16.4999878,24.1118119 16.8614966,23.7517129 16.8614966,23.3074297 L16.8614966,16.8614966 L23.3074297,16.8614966 C23.7527199,16.8614966 24.1118119,16.5007934 24.1118119,16.055906 C24.1118119,15.6118241 23.7517129,15.2503154 23.3074297,15.2503154 L16.8614966,15.2503154 Z" id="Page-1" fill="#FFFFFF"></path>
-                </g>
+              <g id="Group-3">
+                <polygon id="Polygon" fill=#3996E0 points="16 0 29.8564065 8 29.8564065 24 16 32 2.14359354 24 2.14359354 8"></polygon>
+                <path d="M16.8614966,15.2503154 L16.8614966,8.80458361 C16.8614966,8.35909201 16.5007934,8 16.055906,8 C15.6118241,8 15.2503154,8.36030039 15.2503154,8.80458361 L15.2503154,15.2503154 L8.80458361,15.2503154 C8.35909201,15.2503154 8,15.6110186 8,16.055906 C8,16.4999878 8.36030039,16.8614966 8.80458361,16.8614966 L15.2503154,16.8614966 L15.2503154,23.3074297 C15.2503154,23.7527199 15.6110186,24.1118119 16.055906,24.1118119 C16.4999878,24.1118119 16.8614966,23.7517129 16.8614966,23.3074297 L16.8614966,16.8614966 L23.3074297,16.8614966 C23.7527199,16.8614966 24.1118119,16.5007934 24.1118119,16.055906 C24.1118119,15.6118241 23.7517129,15.2503154 23.3074297,15.2503154 L16.8614966,15.2503154 Z"
+                  id="Page-1" fill="#FFFFFF"></path>
+              </g>
             </g>
+          </g>
         </g>
-    </g>
-</svg>
+      </svg>
+    </a>
 
     <ion-item class="mem-no-margin" *ngFor="let memory of timeline.memories; let i=index">
       <hr class="vertical" />
       <ion-item class="timeline-date">
-        <span>{{ memory.date }}</span>
+        <span>{{ today }}</span>
       </ion-item>
       <ion-card class="notifications-list">
         <ion-card-content>
@@ -43,26 +45,31 @@
             <ion-avatar item-left>
               <img src="img/Profile-1.svg">
             </ion-avatar>
-            <h2>{{ memory.venue }}</h2>
-            <p><ion-icon name="time-outline"></ion-icon> {{ memory.time}}
-            <ion-icon name="pin-outline"></ion-icon> {{ memory.location}}</p>
+            <h2>{{ memory.location_tag }}</h2>
+            <p>
+              <ion-icon name="time-outline"></ion-icon> 10:40am
+              <ion-icon name="pin-outline"></ion-icon> Berkeley, CA</p>
           </ion-item>
-          <img src="{{ memory.images[0] }}" (click)="slideImages(i, 0)" />
-          <p>{{ memory.caption }}</p>
-          <ion-row>
-            <ion-col>
-              <button ion-button icon-left clear>
-              <ion-icon name="text"></ion-icon>
-              <div>4 Comments</div>
+          <img id="images" src="{{ memory.image[0] }}" (click)="slideImages(i, 0)" />
+          <p id="caption">{{ memory.text }}</p>
+          
+          <div class="memorybuttons">
+            <button ion-button icon-left clear (click)="showComments()">
+              <ion-icon name="text">
+              </ion-icon><div>4 Comments</div>
             </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-right clear>
-              <ion-icon name="create"></ion-icon>
-            </button>
-            </ion-col>
 
-          </ion-row>
+          <button ion-button icon-left clear (click)="editEntry(memory.id)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+        </div>
+
+        <!-- <ion-list>
+          <ion-item *ngFor="let comment of comments" id="comment">
+            {{comment}}
+          </ion-item>
+        </ion-list> -->
+
         </ion-card-content>
 
       </ion-card>

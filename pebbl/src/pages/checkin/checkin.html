@@ -13,7 +13,7 @@ Ionic pages and navigation.
       <!-- </ion-buttons> -->
     </ion-title>
     <ion-buttons end>
-      <button ion-button>
+      <button ion-button (click)="showvalues()">
         Make
       </button>
     </ion-buttons>
@@ -23,7 +23,7 @@ Ionic pages and navigation.
 
 <ion-content>
 <ion-list>
-  <button id="changeloc" ion-button outline icon-left full (click)=chooseLocation()>  
+  <button id="changeloc" ion-button outline icon-left full (click)=chooseLocation()>
     <ion-icon name="ios-pin"></ion-icon>
     Change Location
     </button>
@@ -55,20 +55,17 @@ Ionic pages and navigation.
 </ion-card>
 
   <ion-card>
-    <button id="addphotosbutton" ion-button large outline icon-only (click)="takePicture()">
+    <button id="addphotosbutton" ion-button large icon-only (click)="takePicture()">
       <ion-icon name="camera"></ion-icon>
     </button>
-    <button id="addphotosbutton" ion-button large outline icon-only (click)="openGallery()">
+    <button id="addphotosbutton" ion-button large icon-only (click)="takePicturefromGallery()">
       <ion-icon name="images"></ion-icon>
     </button>
     <ion-scroll id="scroll-photos" scrollX="true">
       <img *ngFor="let image of images" src="{{ image }}" class="image_picks"/>
     </ion-scroll>
   </ion-card>
-
   <ion-card>
-    <ion-textarea #input placeholder="What are you up to ..."></ion-textarea>
+    <ion-textarea [(ngModel)]="memoryBody" #input placeholder="What are you up to?"></ion-textarea>
   </ion-card>
-
-
 </ion-content>
