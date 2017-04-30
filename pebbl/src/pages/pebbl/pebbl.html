@@ -5,24 +5,30 @@ See http://ionicframework.com/docs/v2/components/#navigation for more info on
 Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>pebbl</ion-title>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Instant Memories</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="page">
 
-  <h4 *ngIf="!isInstantMem"> No Instant Memories to be accepted!</h4>
+<div class="stats">
+<img src="img/bothCharmsShadow.png" alt="">
+</div>
+  <div class="mem-number" *ngIf="numMems == 0"> You have no new instant memories!</div>
+  <div class="mem-number" *ngIf="numMems > 1"> You have {{ numMems }} new instant memories!</div>
+  <div class="mem-number" *ngIf="numMems == 1"> You have {{ numMems }} new instant memory!</div>
 
-
+  <div class="scroll-memories">
   <ion-card *ngFor="let memory of instantMems.memories; let i=index">
 
     <ion-item>
-      <h2>{{ memory.mem.venue }}</h2>
       <h4>{{ memory.mem.date }}, {{ memory.mem.day }}, {{ memory.mem.month }}</h4>
+      <h2>{{ memory.mem.venue }}</h2>
       <p><ion-icon name="time-outline"></ion-icon> {{ memory.mem.time}}
         <ion-icon name="pin-outline"></ion-icon> {{ memory.mem.city}}, {{ memory.mem.state}}</p>
       </ion-item>
@@ -41,5 +47,5 @@ Ionic pages and navigation.
       </ion-row>
 
     </ion-card>
-
+  </div>
   </ion-content>

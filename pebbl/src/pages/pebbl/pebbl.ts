@@ -23,12 +23,14 @@ export class PebblPage {
   instantMems: InstantMemModel = new InstantMemModel();
   private hardwareMemories: any;
   private isInstantMem: boolean;
+  private numMems: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private memoryService: MemoryService, private _zone: NgZone) {
       this.userId = firebase.auth().currentUser.uid;
       this.hardwareMemories = firebase.database().ref('hardware-memories');
       this.isInstantMem = false;
+      this.numMems = 0;
     }
 
     ionViewDidLoad() {
@@ -46,9 +48,11 @@ export class PebblPage {
         this.hardwareMemories.child(this.userId).on('value', function(snapshot) {
           let memories = (snapshot.val());
           that.instantMems.memories = [];
+          that.numMems = 0;
           if(memories){
             that.isInstantMem = true;
             Object.keys(memories).forEach(key => {
+              that.numMems = that.numMems + 1;
               console.log(typeof memories[key].date);
               let eachMemory: EachMem = new EachMem();
               eachMemory.memKey = key;
@@ -72,6 +76,7 @@ export class PebblPage {
     deleteMem(memory, index){
       console.log("delete memory");
       this.instantMems.memories.splice(index, 1);
+      this.numMems = this.numMems - 1;
       this.hardwareMemories.child(this.userId).child(memory.memKey).remove();
     }
   }

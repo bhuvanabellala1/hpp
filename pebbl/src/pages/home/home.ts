@@ -27,9 +27,9 @@ export class HomePage {
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
   public menu: MenuController, public events: Events) {
     this.navPages = [
-      { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
-      { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
-      { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
+      { title: 'Timeline', icon: 'center', path: 'img/Timeline_white.svg', component: TimelinePage },
+      { title: 'Check In', icon: 'center', path: 'img/Checkin_white.svg', component: CheckinPage },
+      { title: 'Adventures', icon: 'center', path: 'img/Adventure_white.svg', component: AdventuresPage }
     ];
   }
 

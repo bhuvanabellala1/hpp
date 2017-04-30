@@ -94,7 +94,7 @@ h1 {
 
 .toolbar-title {
   font-size: 2.2rem;
-  //margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 // make header specific height
@@ -118,12 +118,9 @@ ion-title {
   padding: 0px;
 }
 
-.toolbar-title {
-  // padding-bottom: (9rem/ 10);
-}
 
 .toolbar-ios-primary .bar-button-default-ios {
-  color: white;
+  color: color($colors, light);
 }
 
 .profile-pic {
