@@ -22,17 +22,22 @@ export class PebblPage {
   private userId :any;
   instantMems: InstantMemModel = new InstantMemModel();
   private hardwareMemories: any;
+  private isInstantMem: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private memoryService: MemoryService, private _zone: NgZone) {
       this.userId = firebase.auth().currentUser.uid;
       this.hardwareMemories = firebase.database().ref('hardware-memories');
+      this.isInstantMem = false;
     }
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad PebblPage');
       console.log(this.userId);
-      this.pullMemories();
+      let that = this;
+      if(this.hardwareMemories.child(this.userId)){
+        that.pullMemories();
+      }
     }
 
     pullMemories(){
@@ -41,15 +46,18 @@ export class PebblPage {
         this.hardwareMemories.child(this.userId).on('value', function(snapshot) {
           let memories = (snapshot.val());
           that.instantMems.memories = [];
-          Object.keys(memories).forEach(key => {
-            console.log(typeof memories[key].date);
-            let eachMemory: EachMem = new EachMem();
-            eachMemory.memKey = key;
-            eachMemory.mem = memories[key];
-            that.instantMems.memories.unshift(eachMemory);// the value of the current key.
-          }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-          });
+          if(memories){
+            that.isInstantMem = true;
+            Object.keys(memories).forEach(key => {
+              console.log(typeof memories[key].date);
+              let eachMemory: EachMem = new EachMem();
+              eachMemory.memKey = key;
+              eachMemory.mem = memories[key];
+              that.instantMems.memories.unshift(eachMemory);// the value of the current key.
+            }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            });
+          }
         });
       });
     }
