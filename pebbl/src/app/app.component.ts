@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, App, Nav, MenuController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar, Splashscreen, Keyboard } from 'ionic-native';
 import {Injectable} from '@angular/core';
 
 import { HomePage } from '../pages/home/home';
@@ -14,6 +14,7 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough'
 import { RegisterPage } from '../pages/register/register';
 import { SecondregsiterPage } from '../pages/secondregsiter/secondregsiter';
 import { LoginPage } from '../pages/login/login';
+import { TestImagePage } from '../pages/test-image/test-image';
 import { UsersService } from '../providers/users-service'
 import { MemoryService } from '../providers/memory-service'
 import * as firebase from 'firebase';
@@ -47,6 +48,8 @@ export class MyApp {
         messagingSenderId: "846315346935"
       };
 
+
+
       this.testingfirebase(config)
 
       platform.ready().then(() => {
@@ -58,14 +61,19 @@ export class MyApp {
         cordova.plugins.backgroundMode.on('activate', function(){
           console.log("Background mode activated");
         });
+        Keyboard.disableScroll(true);
       });
 
       this.pages = [
         { title: 'Settings', icon: 'settings', component: ProfilePage },
         { title: 'FAQ', icon: 'help', component: FaqPage },
-        { title: 'Legal', icon: 'document', component: LegalPage }
+        { title: 'Legal', icon: 'document', component: LegalPage },
+        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage }
       ];
     }
+
+
+
 
     userLogout(){
       console.log("Need to logout");

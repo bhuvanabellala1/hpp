@@ -16,6 +16,7 @@ import { RegisterPage } from '../pages/register/register';
 import { DevicePage } from '../pages/device/device';
 import { MemoryslidesPage } from '../pages/memoryslides/memoryslides';
 import { VenuePage } from '../pages/venue/venue';
+import { TestImagePage } from '../pages/test-image/test-image';
 import { SecondregsiterPage } from '../pages/secondregsiter/secondregsiter';
 
 import { FirebaseAuthPagePage } from '../pages/firebase-auth-page/firebase-auth-page';
@@ -27,11 +28,13 @@ import { MemoryService } from '../providers/memory-service';
 import { UsersService } from '../providers/users-service';
 import { CheckinService } from '../providers/checkin-service';
 import { ConnectivityService } from '../providers/connectivity-service';
+import { CacheService } from "ionic-cache/ionic-cache";
 import { Locations } from '../providers/locations';
 import { GoogleMaps } from '../providers/google-maps';
 import { SMS } from '@ionic-native/sms';
 
 import { BackgroundMode } from '@ionic-native/background-mode';
+import * as firebase from 'firebase';
 @NgModule({
   declarations: [
     MyApp,
@@ -51,7 +54,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     RegisterPage,
     MemoryslidesPage,
     VenuePage,
-    SecondregsiterPage
+    SecondregsiterPage,
+    TestImagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -75,7 +79,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     RegisterPage,
     MemoryslidesPage,
     VenuePage,
-    SecondregsiterPage
+    SecondregsiterPage,
+    TestImagePage
   ],
   providers: [
     TimelineService,
@@ -86,7 +91,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     GoogleMaps,
     BackgroundMode,
     MemoryService,
-    SMS
+    SMS,
+    CacheService
   ]
   // providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

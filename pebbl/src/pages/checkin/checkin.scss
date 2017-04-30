@@ -16,7 +16,10 @@ page-checkin {
      justify-content:flex-start;
      background: white;
 }
-
+.button-full.button-outline {
+  padding: 18px 0;
+  background: white;
+}
 .ion-ios-pin:before {
   padding: 5px 10px 5px 16px;
 }

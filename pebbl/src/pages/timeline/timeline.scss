@@ -18,6 +18,9 @@ page-timeline,
     margin-left: -36px;
     margin-top: -13px;
   }
+  .toolbar-title {
+    margin-bottom: 5px;
+  }
   .timeline-date {
   margin-left: 33px;
   position: relative;
@@ -96,6 +99,8 @@ page-timeline,
   }
   #caption {
     color: black;
+    font-size: 1.6rem;
+    margin-top: 5px;
   }
   .notifications-list {
     .item{
@@ -165,7 +170,10 @@ page-timeline {
 .mem-no-margin .label-ios {
   margin:0;
 }
-
+button {
+  padding: 0;
+  background: transparent;
+}
 .button-ios {
   margin: 0;
   padding: 0;
@@ -181,7 +189,7 @@ ion-col {
   height: 30px;
 }
 svg {
-  margin: 15px 0px -4px 22px;
+  margin: 15px 20px -4px 22px;
 }
 ion-avatar {
   margin: 0 16px 0 0;

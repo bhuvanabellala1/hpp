@@ -6,6 +6,7 @@ import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
 import { CheckinPage } from '../checkin/checkin';
 
+
 /*
 Generated class for the Adventures page.
 

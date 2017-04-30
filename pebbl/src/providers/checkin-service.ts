@@ -33,6 +33,7 @@ export class CheckinService {
       .map(res => res.json())
       .subscribe(data => {
         resolve(data);
+        console.log("checkinService - GOT DATA FROM FOUR SQUARE");
       });
     });
   }
