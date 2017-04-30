@@ -13,7 +13,7 @@ declare var d3: any;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [CheckinService, HttpProvider]
+  providers: [CheckinService]
 })
 export class HomePage {
 
