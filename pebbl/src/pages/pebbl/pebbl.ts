@@ -27,6 +27,7 @@ export class PebblPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private memoryService: MemoryService, private _zone: NgZone) {
+      console.log("pebbl.ts - constructor");
       this.userId = firebase.auth().currentUser.uid;
       this.hardwareMemories = firebase.database().ref('hardware-memories');
       this.isInstantMem = false;
@@ -36,12 +37,15 @@ export class PebblPage {
     ionViewDidLoad() {
       console.log('ionViewDidLoad PebblPage');
       console.log(this.userId);
+    }
+
+    ionViewWillEnter(){
+      console.log("pebbl.ts - Entering pebbl");
       let that = this;
       if(this.hardwareMemories.child(this.userId)){
         that.pullMemories();
       }
     }
-
     pullMemories(){
       let that = this;
       this._zone.run(() => {
