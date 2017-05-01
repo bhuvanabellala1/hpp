@@ -35,6 +35,7 @@ export class CheckinPage {
   public instantMem: EachMem;
   // public base64Image: string;
   public imageSrc: string;
+  private hardwareMemories: any;
 
   public lat:any;
   public long:any;
@@ -48,6 +49,7 @@ export class CheckinPage {
       this.images = [];
       this.hide = true;
       this.hardware = false;
+      this.hardwareMemories = firebase.database().ref('hardware-memories');
       if(this.navParams.get("mem")){
         this.instantMem = this.navParams.get("mem");
         this.lat = this.instantMem.mem.location.lat;
@@ -120,6 +122,24 @@ export class CheckinPage {
 
     showvalues(){
       //add preloader
+      let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      let dayOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+      let time: string;
+      let day: string;
+      let date: any;
+      let month: string;
+      if(this.instantMem){
+        time = this.instantMem.mem.time;
+        day = this.instantMem.mem.day;
+        month = this.instantMem.mem.month;
+        date = this.instantMem.mem.date;
+      }else{
+        let timeOfDay = new Date();
+        time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes();
+        day = dayOfWeek[timeOfDay.getDay()];
+        month = months[timeOfDay.getMonth()];
+        date = timeOfDay.getDate();
+      }
       let loading = this.loadingCtrl.create({
         dismissOnPageChange: true,
         content: 'Creating Your Memory..'
@@ -129,9 +149,11 @@ export class CheckinPage {
       this.myDate = new Date();
       // //this.myDate = new Date();
       // console.log(this.myDate)
-      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng,this.memoryBody,this.myDate, this.images).then(() => {
+      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng,this.memoryBody, time, day, month, date, this.images).then(() => {
         this.memoryBody="";
-
+        if(this.instantMem){
+          this.hardwareMemories.child(this.userId).child(this.instantMem.memKey).remove();
+        }
         loading.dismiss().then(() => {
           //show pop up
           let alert = this.alertCtrl.create({
