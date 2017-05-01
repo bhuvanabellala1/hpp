@@ -4,7 +4,7 @@ import { GoogleMaps } from '../../providers/google-maps';
 import { NavController, Platform, Events } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
-
+import { CheckinPage } from '../checkin/checkin';
 
 /*
 Generated class for the Adventures page.
@@ -25,6 +25,8 @@ export class AdventuresPage {
   adventures: any;
   adventuresDetail: any;
   arrayLength: any;
+  lat: any;
+  lng: any;
 
   constructor(
     public navCtrl: NavController,
@@ -41,7 +43,10 @@ export class AdventuresPage {
 
     grabAdventure(){
       Geolocation.getCurrentPosition().then((resp) => {
-        this.checkinService.exploreVenues(resp.coords.latitude + "," + resp.coords.longitude)
+        this.lat = resp.coords.latitude;
+        this.lng = resp.coords.longitude;
+        this.maps.addMarker(this.lat, this.lng, 20, "Current Location");
+        this.checkinService.exploreVenues(this.lat + "," + this.lng)
         .then(data => {
           this.adventuresDetail = []
           this.adventures = data;
@@ -55,12 +60,14 @@ export class AdventuresPage {
                 lat: Number(this.adventures.response.groups[0].items[i].venue.location.lat),
                 lng: Number(this.adventures.response.groups[0].items[i].venue.location.lng)
               });
-              this.maps.addMarker(this.adventuresDetail[i].lat, this.adventuresDetail[i].lng);
+              this.maps.addMarker(this.adventuresDetail[i].lat, this.adventuresDetail[i].lng, i, this.adventuresDetail[i].name);
           }
         });
       }).catch((error) => {
         console.log('Error getting location', error);
       });
+      // this.maps.event.addListener(this.maps, 'dragend', function() { console.log('map dragged'); } );
+      // this.maps.mapElement.event.addListener(this.maps, 'dragend', function() { console.log('map dragged'); } );
     }
 
     ionViewDidLoad(){
@@ -68,12 +75,23 @@ export class AdventuresPage {
       this.platform.ready().then(() => {
         let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
         let locationsLoaded = this.locations.load();
-        Promise.all([mapLoaded, locationsLoaded]).then((result) => {
-          let locations = result[1];
-          // for(let location of locations){
-          //   this.maps.addMarker(location.latitude, location.longitude);
-          // }
-        })
+
+        // Promise.all([mapLoaded, locationsLoaded]).then((result) => {
+        //   let locations = result[1];
+        //   for(let location of locations){
+        //     this.maps.addMarker(location.latitude, location.longitude);
+        //   }
+        // })
       })
     };
+
+    makeMemory = function(){
+      console.log(document.getElementById("lat").innerHTML);
+      var lat = Number(document.getElementById("lat").innerHTML);
+      var lng = Number(document.getElementById("lng").innerHTML);
+      console.log(lat, lng);
+      var memory = {lat: lat, lng: lng};
+      this.navCtrl.push(CheckinPage, {adventureMem: memory});
+    }
+
   }

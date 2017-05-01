@@ -13,11 +13,26 @@
   </ion-navbar>
 </ion-header>
 
-
-<ion-content no-padding>
+<ion-content no-padding >
   <div #pleaseConnect id="please-connect">
-    <p>Please connect to the Internet...</p>
+    <p>Loading...</p>
+  </div>
+  <div #map id="map"></div>
+
+  <div id="adventurecard">
+    <ion-card>
+        <ion-card-header>
+          <span id="adventureplace"> Select an Adventure Spot </span>
+        </ion-card-header>
+        <div  id="makeMemoryPrompt">
+      <ion-card-content> Make Memory Here?
+        <button ion-button outline item-left icon-left (click)="makeMemory()"> Yes </button>
+      </ion-card-content>
+      <div id="location">
+      <a id="lat"></a><a id="lng"></a>
+    </div>
+    </div>
+    </ion-card>
   </div>
 
-  <div #map id="map"></div>
 </ion-content>
