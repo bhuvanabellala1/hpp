@@ -66,40 +66,6 @@ export class TimelinePage {
 
   ionViewDidLoad() {
     console.log("in ion view")
-
-    // this.loading.present();
-    // this.fetchMemories(this.userId)
-    // console.log("back in ion view")
-    // console.log(this.timeline.memories)
-    this._zone.run(() => {
-      this.memoryService.fetchMemory(this.userId).then(snapshot => {
-        console.log("in snapshot")
-        console.log(snapshot.val())
-        this.memory = (snapshot.val())
-        console.log(this.timeline.memories)
-        //this.timeline.memories = this.memory;
-        Object.keys(this.memory).forEach(key => {
-          console.log(key);          // the name of the current key.
-          console.log(typeof this.memory[key]);
-          this.timeline.memories = this.timeline.memories.concat(this.memory[key]) // the value of the current key.
-        });
-
-        // this.loading.dismiss();
-        console.log(this.timeline.memories)
-      });
-    });
-
-
-
-
-
-    // this.timelineService
-    // .getData()
-    // .then(mems => {
-    //   this.timeline.memories = this.memory;
-    //   this.loading.dismiss();
-    //   console.log(this.timeline.memories)
-    // });
   }
 
   slideImages(memIndex, imageIndex){
@@ -138,6 +104,30 @@ export class TimelinePage {
         return group.show;
       };
 
+      ionViewWillEnter(){
+        console.log("timeline.ts - entering ion view");
+        let that = this;
+        this._zone.runOutsideAngular(()=>{
+          this.memoryService.fetchMemory(this.userId).then(snapshot => {
+            console.log("in snapshot")
+            console.log(snapshot.val())
+            this.memory = (snapshot.val())
+            console.log(this.timeline.memories)
+            //this.timeline.memories = this.memory
+            Object.keys(that.memory).forEach(key => {
+              console.log(key);          // the name of the current key.
+              console.log(typeof that.memory[key]);
+              that._zone.run(() => {
+                // console.log(NgZone.current.name())
+                that.timeline.memories = that.timeline.memories.concat(that.memory[key]);
+              }); // the value of the current key.
+            });
+
+            // this.loading.dismiss();
+            console.log(this.timeline.memories)
+          });
+        });
+      }
       // Fired when you leave a page, after it stops being the active one. Similar to the previous one.
       ionViewDidLeave() {
         this.events.publish('editMemory', this.editId);

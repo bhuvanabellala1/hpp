@@ -53,7 +53,7 @@ export class MemoryService {
   }
 
 
-  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, memoryText: any, myDate: any, images:any){
+  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, memoryText: any, mem_time: string, mem_day: any, mem_month: any, mem_date: any, images:any){
     //console.log(this.fireRef.ServerValue.TIMESTAMP)
 
     var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
@@ -119,7 +119,10 @@ export class MemoryService {
 
         var memoryData = {
           text: memoryText,
-          date: myDate,
+          time: mem_time,
+          month: mem_month,
+          day: mem_day,
+          date: mem_date,
           location_tag: venueName,
           location:
           {
@@ -168,7 +171,10 @@ export class MemoryService {
 
           var memoryData = {
             text: memoryText,
-            date: myDate,
+            time: mem_time,
+            month: mem_month,
+            day: mem_day,
+            date: mem_date,
             location_tag: venueName,
             location:
             {
@@ -220,7 +226,10 @@ export class MemoryService {
 
             var memoryData = {
               text: memoryText,
-              date: myDate,
+              time: mem_time,
+              month: mem_month,
+              day: mem_day,
+              date: mem_date,
               location_tag: venueName,
               location:
               {
