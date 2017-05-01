@@ -135,6 +135,11 @@ export class CheckinPage {
         date = this.instantMem.mem.date;
       }else{
         let timeOfDay = new Date();
+        if(timeOfDay.getHours() > 12){
+          time = timeOfDay.getHours() - 12 + ":" + timeOfDay.getMinutes() + "PM";
+        }else{
+          time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes() + "AM";
+        }
         time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes();
         day = dayOfWeek[timeOfDay.getDay()];
         month = months[timeOfDay.getMonth()];

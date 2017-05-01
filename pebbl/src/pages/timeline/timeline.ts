@@ -45,7 +45,7 @@ export class TimelinePage {
   ) {
     this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
-    this.timeline.memories = []
+    this.timeline.memories = [];
     this.comments = ['comment1', 'comment2', 'comment3'];
   }
 
@@ -107,6 +107,7 @@ export class TimelinePage {
       ionViewWillEnter(){
         console.log("timeline.ts - entering ion view");
         let that = this;
+        this.timeline.memories = [];
         this._zone.runOutsideAngular(()=>{
           this.memoryService.fetchMemory(this.userId).then(snapshot => {
             console.log("in snapshot")
@@ -119,7 +120,7 @@ export class TimelinePage {
               console.log(typeof that.memory[key]);
               that._zone.run(() => {
                 // console.log(NgZone.current.name())
-                that.timeline.memories = that.timeline.memories.concat(that.memory[key]);
+                that.timeline.memories.unshift(that.memory[key]);
               }); // the value of the current key.
             });
 

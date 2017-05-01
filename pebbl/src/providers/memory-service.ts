@@ -94,7 +94,43 @@ export class MemoryService {
 
     var updatePath = {};
 
+    if(images.length == 0){
+      if(!memoryText){
+        memoryText = venueName
+      }
 
+      var memoryData = {
+        text: memoryText,
+        time: mem_time,
+        month: mem_month,
+        day: mem_day,
+        date: mem_date,
+        location_tag: venueName,
+        location:
+        {
+          lat: venueLat,
+          long: venueLng
+        }
+      };
+
+      console.log(memoryData);
+
+      updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
+
+
+      var user2ref = this.usersMemoryNode.child(userId).child('user2');
+      user2ref.once('value', function(snapshot){
+        var data = snapshot.val();
+        console.log(data)
+        var updatePathuser2 = {};
+        updatePathuser2['/user-memories/' + data+"/memories/"+newMemoryKey] = memoryData;
+        firebase.database().ref().update(updatePathuser2)
+      });
+
+      this.fireRef.update(updatePath);
+
+
+    }
 
 
     //   console.log("reached her")
@@ -373,12 +409,17 @@ export class MemoryService {
     let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     let dayOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
     console.log(myDate.getHours() + ":" + myDate.getMinutes());
-    //create the node
+    let mem_time: any;
+    if(myDate.getHours() > 12){
+      mem_time = myDate.getHours() - 12 + ":" + myDate.getMinutes() + "PM";
+    }else{
+      mem_time = myDate.getHours() + ":" + myDate.getMinutes() + "AM";
+    }
     // create the unique id for this hardware memory
     let newMemoryKey = this.usersMemoryNode.child(userId).push().key;
     let memoryData = {
       venue: venueName,
-      time: myDate.getHours() + ":" + myDate.getMinutes(),
+      time: mem_time,
       day: dayOfWeek[myDate.getDay()],
       month: months[myDate.getMonth()],
       date: myDate.getDate(),
