@@ -28,11 +28,13 @@ export class CheckinPage {
   public venuesData: any;
   public venue: any;
   private hide: boolean;
-  private hardware: boolean;
+  // private hardware: boolean;
   private userId :any;
   public memoryBody:any;
   public myDate: any;
   public instantMem: EachMem;
+  public adventureMem: any;
+
   // public base64Image: string;
   public imageSrc: string;
 
@@ -47,19 +49,29 @@ export class CheckinPage {
       this.section = "camera";
       this.images = [];
       this.hide = true;
-      this.hardware = false;
+      // this.hardware = false;
       if(this.navParams.get("mem")){
         this.instantMem = this.navParams.get("mem");
         this.lat = this.instantMem.mem.location.lat;
         this.long = this.instantMem.mem.location.long;
       }
-
+      if(this.navParams.get("adventureMem")){
+        console.log('inside of navParams');
+        this.adventureMem = this.navParams.get("adventureMem");
+        console.log(this.adventureMem);
+        this.lat = this.adventureMem.lat;
+        this.long = this.adventureMem.lng;
+      }
     }
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad CheckinPage');
       if(this.instantMem){
         console.log("yesss");
+      }
+
+      if(this.adventureMem){
+        console.log("it's adventure Memory");
       }
       // let j = [];
       // this.cache.getItem("keys").catch(() => {
@@ -90,15 +102,15 @@ export class CheckinPage {
 
     ionViewWillEnter(){
       console.log('About to enter make memory');
-      if(!this.hardware ){
-        console.log(this.hardware);
-        this.grabVenues();
-      }
+      // if(!this.hardware ){
+      //   console.log(this.hardware);
+      //   this.grabVenues();
+      // }
+      this.grabVenues();
     }
 
     grabVenues(){
-
-      if(this.instantMem){
+      if(this.instantMem || this.adventureMem){
         this.checkinService.searchVenues(this.lat + "," + this.long)
         .then(data => {
           this.venuesData = data;
@@ -176,7 +188,6 @@ export class CheckinPage {
         console.log(err);
       });
     }
-
 
 
     takePicturefromGallery(){
