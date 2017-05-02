@@ -14,5 +14,11 @@
 
 
 <ion-content padding>
+    <ion-spinner *ngIf="isScanning" name="circles"></ion-spinner>
+
+  <img *ngIf="proPic" src="{{ proPic }}" />
+
+  <button *ngIf="!proPic" ion-button (click)=takePicture()>Upload Profile Picture</button>
+  <button *ngIf="proPic" ion-button (click)=takePicture()>Change Profile Picture</button>
 
 </ion-content>

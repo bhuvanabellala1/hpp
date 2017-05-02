@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams, Events } from 'ionic-angular';
+import { NavController, NavParams, Events, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { MemoryService } from '../../providers/memory-service';
@@ -26,7 +26,8 @@ export class PebblPage {
   private numMems: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private memoryService: MemoryService, private _zone: NgZone) {
+    private memoryService: MemoryService, private _zone: NgZone,
+    private alertCtrl: AlertController) {
       console.log("pebbl.ts - constructor");
       this.userId = firebase.auth().currentUser.uid;
       this.hardwareMemories = firebase.database().ref('hardware-memories');
@@ -78,8 +79,28 @@ export class PebblPage {
 
     deleteMem(memory, index){
       console.log("delete memory");
-      this.instantMems.memories.splice(index, 1);
-      this.numMems = this.numMems - 1;
-      this.hardwareMemories.child(this.userId).child(memory.memKey).remove();
+      let alert = this.alertCtrl.create({
+        message: 'Are you sure you want to delete this memory?',
+        buttons: [
+          {
+            text: 'Keep',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Delete',
+            handler: () => {
+              console.log('Delete clicked');
+              this.instantMems.memories.splice(index, 1);
+              this.numMems = this.numMems - 1;
+              this.hardwareMemories.child(this.userId).child(memory.memKey).remove();
+            }
+          }
+        ]
+      });
+      alert.present();
+
     }
   }

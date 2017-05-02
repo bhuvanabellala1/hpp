@@ -222,10 +222,6 @@ export class CheckinPage {
       }).then((imageData) => {
         this._zone.run(() => {
           this.images.push("data:image/jpeg;base64," + imageData);
-          console.log("please see this")
-          console.log("\n\n\n\n\n\n ")
-          console.log(" \n\n\n\n\n\n")
-          console.log(this.images[0])
         });
       }, (err) => {
         console.log(err);
