@@ -14,38 +14,103 @@ Ionic pages and navigation.
 </ion-header>
 
 
-<ion-content class="page">
+<ion-content>
+  <div class="stats">
+<svg class="user1line" width="78px" height="21px" viewBox="0 0 78 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Hardware-Checkin" transform="translate(-65.000000, -123.000000)" stroke="#979797">
+            <g id="HardwareStats" transform="translate(19.000000, 98.000000)">
+                <polyline id="Path-5" transform="translate(84.500000, 36.000000) scale(-1, -1) translate(-84.500000, -36.000000) " points="46 26 46.1950205 46 123 46"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
+    <img class="user1" src="img/Profile-1.svg">
 
-<div class="stats">
-<img src="img/bothCharmsShadow.png" alt="">
-</div>
-  <div class="mem-number" *ngIf="numMems == 0"> You have no new instant memories!</div>
-  <div class="mem-number" *ngIf="numMems > 1"> You have {{ numMems }} new instant memories!</div>
-  <div class="mem-number" *ngIf="numMems == 1"> You have {{ numMems }} new instant memory!</div>
+    <p class="user1mem">20 instant memories</p>
 
-  <div class="scroll-memories">
-  <ion-card *ngFor="let memory of instantMems.memories; let i=index">
+    <img src="img/bothCharmsShadow.png" alt="">
+    
+<svg class="user2line" width="78px" height="21px" viewBox="0 0 78 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Hardware-Checkin" transform="translate(-232.000000, -246.000000)" stroke="#979797">
+            <g id="HardwareStats" transform="translate(19.000000, 98.000000)">
+                <polyline id="Path-5" points="214 148 214.48316 168.371819 291 168.371819"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
+    <img class="user2" src="img/Profile-1.svg">
+    <p class="user2mem">36 instant memories</p>
+  </div>
+  <div [ngClass]="{'scroll-memories': numMems > 0}">
+    <p class="mem-number" *ngIf="numMems == 0">You have no new instant memories!</p>
+    <p class="mem-number" *ngIf="numMems > 1"> You have {{ numMems }} new instant memories!</p>
+    <p class="mem-number" *ngIf="numMems == 1"> You have {{ numMems }} new instant memory!</p>
 
-    <ion-item>
-      <h4>{{ memory.mem.date }}, {{ memory.mem.day }}, {{ memory.mem.month }}</h4>
-      <h2>{{ memory.mem.venue }}</h2>
+
+    <ion-card *ngFor="let memory of instantMems.memories; let i=index">
+
+      <ion-item>
+        <span class="mem-date">
+        <!--<h4>{{ memory.mem.day }}</h4>-->
+        
+      <h4 class="num-date">{{ memory.mem.date }}</h4>
+      <h5 class="mem-month">{{ memory.mem.month }}</h5></span>
+
+        <svg class="hardwarecharm" width="21px" height="18px" viewBox="0 0 21 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+          <desc>Created with Sketch.</desc>
+          <defs></defs>
+          <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.80247962">
+            <g id="Hardware-Checkin-Copy" transform="translate(-76.000000, -523.000000)">
+              <g id="SecondMemory" transform="translate(19.000000, 504.000000)">
+                <g id="Date" transform="translate(15.000000, 17.000000)">
+                  <g id="Page-1-Copy-2" transform="translate(51.616132, 11.756617) rotate(55.000000) translate(-51.616132, -11.756617) translate(44.616132, 1.256617)">
+                    <path d="M9.19931514,20.1718441 C9.19931514,20.1718441 0.519217436,20.1723088 0.0369961761,10.3332137 C-0.445253839,0.494089535 6.91999298,-0.333972391 9.4886479,0.104427003 C11.2639238,0.407391364 13.8286968,2.49113906 13.3946976,6.09554652 C12.9606985,9.69998303 9.14315664,10.8488427 8.43704899,11.5996169 C5.68833029,14.522115 8.13839961,18.2235024 9.05464876,18.856704 C9.97089791,19.4899056 9.19931514,20.1718441 9.19931514,20.1718441"
+                      id="Fill-1" fill="#FF495C"></path>
+                    <path d="M9.19931514,20.1718441 C9.19931514,20.1718441 0.519217436,20.1723088 0.0369961761,10.3332137 C-0.445253839,0.494089535 6.91999298,-0.333972391 9.4886479,0.104427003 C11.2639238,0.407391364 13.8286968,2.49113906 13.3946976,6.09554652 C12.9606985,9.69998303 9.14315664,10.8488427 8.43704899,11.5996169 C5.68833029,14.522115 8.13839961,18.2235024 9.05464876,18.856704 C9.97089791,19.4899056 9.19931514,20.1718441 9.19931514,20.1718441 Z"
+                      id="Stroke-3" stroke="#FFFFFF"></path>
+                    <path d="M10.2142198,2.04168238 C10.4267192,2.92821111 9.15862395,3.99911505 7.38185283,4.43359342 C5.60508171,4.86810083 3.99247285,4.5016159 3.7800022,3.61508717 C3.56750279,2.72855844 4.83559805,1.6576545 6.61236917,1.22317613 C8.38911154,0.788697761 10.0017204,1.15515365 10.2142198,2.04168238"
+                      id="Fill-5" fill="#FF495C"></path>
+                    <path d="M10.2142198,2.04168238 C10.4267192,2.92821111 9.15862395,3.99911505 7.38185283,4.43359342 C5.60508171,4.86810083 3.99247285,4.5016159 3.7800022,3.61508717 C3.56750279,2.72855844 4.83559805,1.6576545 6.61236917,1.22317613 C8.38911154,0.788697761 10.0017204,1.15515365 10.2142198,2.04168238 Z"
+                      id="Stroke-7" stroke="#FFFFFF"></path>
+                    <path d="M7.35626376,4.43984963 C5.88029864,4.80078704 4.54178239,4.50084332 4.36657821,3.76990658 C4.19137403,3.03896984 5.24587719,2.15383525 6.72181356,1.79292688 C8.19777868,1.43198947 9.53629492,1.7319332 9.71149911,2.46286993 C9.88667453,3.19380667 8.83220012,4.07891222 7.35626376,4.43984963 Z"
+                      id="Fill-9" fill="#FF495C"></path>
+                    <path d="M9.71149911,2.46286993 C9.88667453,3.19380667 8.83220012,4.07891222 7.35626376,4.43984963 C5.88029864,4.80078704 4.54178239,4.50084332 4.36657821,3.76990658 C4.19137403,3.03896984 5.24587719,2.15383525 6.72181356,1.79292688 C8.19777868,1.43198947 9.53629492,1.7319332 9.71149911,2.46286993 Z"
+                      id="Stroke-11" stroke="#FFFFFF"></path>
+                    <path d="M9.25206618,19.4608755 C9.25206618,19.6882077 9.04086074,19.930585 8.8157954,19.930585 C8.59073006,19.930585 8.43703461,19.6882077 8.43703461,19.4608755 C8.43703461,19.2335433 8.61948505,19.0492553 8.84455039,19.0492553 C9.06961574,19.0492553 9.25206618,19.2335433 9.25206618,19.4608755"
+                      id="Fill-13" fill="#3996E0"></path>
+                    <path d="M9.25206618,19.4608755 C9.25206618,19.6882077 9.04086074,19.930585 8.8157954,19.930585 C8.59073006,19.930585 8.43703461,19.6882077 8.43703461,19.4608755 C8.43703461,19.2335433 8.61948505,19.0492553 8.84455039,19.0492553 C9.06961574,19.0492553 9.25206618,19.2335433 9.25206618,19.4608755 Z"
+                      id="Stroke-15" stroke="#FFFFFF"></path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <span class="mem-title"><h2>{{ memory.mem.venue }}</h2>
       <p><ion-icon name="time-outline"></ion-icon> {{ memory.mem.time}}
         <ion-icon name="pin-outline"></ion-icon> {{ memory.mem.city}}, {{ memory.mem.state}}</p>
+      </span>
       </ion-item>
 
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left clear small (click)=addMem(memory)>
+      <ion-item class="button-bar">
+        <button ion-button color="primary" small (click)=addMem(memory)>
             <div>Add</div>
           </button>
-        </ion-col>
-        <ion-col>
-          <button ion-button icon-left clear small (click)="deleteMem(memory, i)">
+        <button ion-button outline small (click)="deleteMem(memory, i)">
             <div>Delete</div>
           </button>
-        </ion-col>
-      </ion-row>
+      </ion-item>
 
     </ion-card>
   </div>
-  </ion-content>
+</ion-content>

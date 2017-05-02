@@ -65,10 +65,11 @@ export class MyApp {
       });
 
       this.pages = [
-        { title: 'Settings', icon: 'settings', component: ProfilePage },
-        { title: 'FAQ', icon: 'help', component: FaqPage },
-        { title: 'Legal', icon: 'document', component: LegalPage },
-        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage }
+        { title: 'Connect', icon: 'bluetooth', component: BluetoothPage },
+        { title: 'Profile', icon: 'settings', component: ProfilePage },
+        { title: 'FAQ', icon: 'help', component: FaqPage }
+        // { title: 'Legal', icon: 'document', component: LegalPage }
+        
       ];
     }
 

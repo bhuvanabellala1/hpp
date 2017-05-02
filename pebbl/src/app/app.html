@@ -1,15 +1,15 @@
 <ion-menu [content]="content">
-  <ion-content class="menu-content">
-    <div class="profile-pic">
+  <ion-content class="menu-content" id="sidebar">
+    <div id="profile-pic">
       <img src="img/Profile-1-Large.svg">
       <h1> Sam </h1>
     </div>
-    <ion-list class="menu-list">
-      <button menuClose ion-item detail-none *ngFor="let page of pages" (click)=pushPage(page)>
+    <ion-list id="menu-list">
+      <ion-item id="sidebar-item" menuClose ion-item detail-none *ngFor="let page of pages" (click)=pushPage(page)>
         <ion-icon *ngIf="page.icon" name="{{page.icon}}" item-left></ion-icon>
         {{page.title}}
-      </button>
-      <button menuClose ion-item (click) = "userLogout()">
+      </ion-item>
+      <button id="sidebar-item" menuClose ion-item (click) = "userLogout()">
         <ion-icon name="log-out" item-left></ion-icon>
         Logout
       </button>

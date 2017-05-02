@@ -7,7 +7,10 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear class="skip-button" (click)="goBack()">Back</button>
+      <button ion-button icon-left clear class="skip-button" (click)="goBack()">
+        <ion-icon name="arrow-back">
+              </ion-icon>
+              Back</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -29,6 +32,7 @@
       <ion-label floating>Password</ion-label>
       <ion-input type="password" [(ngModel)] = "passwordField"></ion-input>
     </ion-item>
+    <p>Password should be at least 6 characters long</p>
   </ion-list>
   <div class="submitbutton">
         <button ion-button primary (click)="signUserUp()"><b>SUBMIT</b></button>
