@@ -36,7 +36,7 @@
     <ion-item class="mem-no-margin" *ngFor="let memory of timeline.memories; let i=index">
       <hr class="vertical" />
       <ion-item class="timeline-date">
-        <span>{{ memory.day }} {{ memory.date }}, {{ memory.month }}</span>
+        <span>{{ memory.mem.day }} {{ memory.mem.date }}, {{ memory.mem.month }}</span>
       </ion-item>
       <ion-card class="notifications-list">
         <ion-card-content>
@@ -45,30 +45,36 @@
             <ion-avatar item-left>
               <img src="img/Profile-1.svg">
             </ion-avatar>
-            <h2>{{ memory.location_tag }}</h2>
+            <h2>{{ memory.mem.location_tag }}</h2>
             <p>
-              <ion-icon name="time-outline"></ion-icon> {{ memory.time }}
-              <ion-icon name="pin-outline"></ion-icon> Berkeley, CA</p>
+              <ion-icon name="time-outline"></ion-icon> {{ memory.mem.time }}
+              <ion-icon name="pin-outline"></ion-icon> {{ memory.mem.city}}, {{ memory.mem.state}}</p>
           </ion-item>
-          <img id="images" *ngIf="memory.image" src="{{ memory.image[0] }}" (click)="slideImages(i, 0)" />
-          <p id="caption">{{ memory.text }}</p>
-
-          <div class="memorybuttons">
-            <button ion-button icon-left clear (click)="showComments()">
-              <ion-icon name="text">
-              </ion-icon><div>4 Comments</div>
-            </button>
-
-          <button ion-button icon-left clear (click)="editEntry(memory.id)">
-            <ion-icon name="create"></ion-icon>
-          </button>
-        </div>
+          <img id="images" *ngIf="memory.mem.image && memory.mem.image.length > 0" src="{{ memory.mem.image[0] }}" (click)="slideImages(i, 0)" />
+          <p id="caption">{{ memory.mem.text }}</p>
 
         <!-- <ion-list>
           <ion-item *ngFor="let comment of comments" id="comment">
             {{comment}}
           </ion-item>
         </ion-list> -->
+        <div class="memorybuttons">
+                  <button *ngIf="memory.mem.comment && memory.mem.comment.length == 1" ion-button icon-left clear (click)="showComments(memory)">
+                    <ion-icon name="text">
+                    </ion-icon><div>{{ memory.mem.comment.length }} Message</div>
+                  </button>
+                  <button *ngIf="memory.mem.comment && memory.mem.comment.length > 1" ion-button icon-left clear (click)="showComments(memory)">
+                    <ion-icon name="text">
+                    </ion-icon><div>{{ memory.mem.comment.length }} Messages</div>
+                  </button>
+                  <button *ngIf="!memory.mem.comment" ion-button icon-left clear (click)="showComments(memory)">
+                    <ion-icon name="text"></ion-icon>
+                  </button>
+
+                <button ion-button icon-left clear >
+                  <ion-icon name="create"></ion-icon>
+                </button>
+              </div>
 
         </ion-card-content>
 

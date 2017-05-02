@@ -53,7 +53,7 @@ export class MemoryService {
   }
 
 
-  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, memoryText: any, mem_time: string, mem_day: any, mem_month: any, mem_date: any, images:any){
+  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, venueCity: any, venueState: any, memoryText: any, mem_time: string, mem_day: any, mem_month: any, mem_date: any, images:any){
     //console.log(this.fireRef.ServerValue.TIMESTAMP)
 
     var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
@@ -106,11 +106,13 @@ export class MemoryService {
         day: mem_day,
         date: mem_date,
         location_tag: venueName,
+        city: venueCity,
+        state: venueState,
         location:
         {
           lat: venueLat,
           long: venueLng
-        }
+        },
       };
 
       console.log(memoryData);
@@ -141,7 +143,7 @@ export class MemoryService {
 
     // })
 
-    if( images.length == 1){
+    else if( images.length == 1){
 
       this.uploadImage(images[0]).then((snapshot)=> {
         console.log("Success");
@@ -160,13 +162,15 @@ export class MemoryService {
           day: mem_day,
           date: mem_date,
           location_tag: venueName,
+          city: venueCity,
+          state: venueState,
           location:
           {
             lat: venueLat,
             long: venueLng
 
           },
-          image: [this.myimage]
+          image: [this.myimage],
         };
 
         console.log(memoryData);
@@ -212,12 +216,14 @@ export class MemoryService {
             day: mem_day,
             date: mem_date,
             location_tag: venueName,
+            city: venueCity,
+            state: venueState,
             location:
             {
               lat: venueLat,
               long: venueLng
             },
-            image:[this.myimage,this.myimage2]
+            image:[this.myimage,this.myimage2],
           };
 
           console.log(memoryData);
@@ -267,12 +273,14 @@ export class MemoryService {
               day: mem_day,
               date: mem_date,
               location_tag: venueName,
+              city: venueCity,
+              state: venueState,
               location:
               {
                 lat: venueLat,
                 long: venueLng
               },
-              image:[this.myimage, this.myimage2,this.myimage3]
+              image:[this.myimage, this.myimage2,this.myimage3],
             };
 
             console.log(memoryData);
@@ -411,9 +419,26 @@ export class MemoryService {
     console.log(myDate.getHours() + ":" + myDate.getMinutes());
     let mem_time: any;
     if(myDate.getHours() > 12){
-      mem_time = myDate.getHours() - 12 + ":" + myDate.getMinutes() + "PM";
+      mem_time = myDate.getHours() - 12 + ":";
+      if(myDate.getMinutes() < 10){
+        mem_time = mem_time+"0"+myDate.getMinutes() + "PM";
+      }else{
+        mem_time = mem_time+myDate.getMinutes() + "PM";
+      }
+    }else if(myDate.getHours() == 12){
+      mem_time = myDate.getHours() + ":";
+      if(myDate.getMinutes() < 10){
+        mem_time = mem_time+"0"+myDate.getMinutes() + "PM";
+      }else{
+        mem_time = mem_time+myDate.getMinutes() + "PM";
+      }
     }else{
-      mem_time = myDate.getHours() + ":" + myDate.getMinutes() + "AM";
+      mem_time = myDate.getHours() + ":";
+      if(myDate.getMinutes < 10){
+        mem_time = mem_time+"0"+myDate.getMinutes + "AM";
+      }else{
+        mem_time = mem_time+myDate.getMinutes + "AM";
+      }
     }
     // create the unique id for this hardware memory
     let newMemoryKey = this.usersMemoryNode.child(userId).push().key;
@@ -434,5 +459,43 @@ export class MemoryService {
     let updatePath = {};
     updatePath['/hardware-memories/' + userId+"/"+newMemoryKey] = memoryData;
     return this.fireRef.update(updatePath);
+  }
+
+  sendMessage(userID, message, memKey){
+
+    console.log("sending message");
+    let myComment = {
+      comment: message,
+      userid: userID
+    }
+
+    // firebase.database().ref('/user-memories/' + userID+"/memories/"+ memKey).update({
+    //   // console.log("updating comments");
+    //   comment: [myComment]
+    // });
+    let that = this;
+    this.usersMemoryNode.child(userID).child('memories').child(memKey).once('value', function(snapshot) {
+      console.log("updating comments");
+      let comments: any;
+      if(snapshot.val().comment){
+        comments = snapshot.val().comment;
+        comments.push(myComment);
+      }else{
+        comments = [myComment];
+      }
+      firebase.database().ref('/user-memories/' + userID+"/memories/"+ memKey).update({
+        comment: comments
+      });
+      var user2ref = that.usersMemoryNode.child(userID).child('user2');
+      user2ref.once('value', function(snapshot){
+        let updatePath2 = {};
+        if(snapshot.val()){
+          var data = snapshot.val();
+          firebase.database().ref('/user-memories/' + data +"/memories/"+ memKey).update({
+            comment: comments
+          });
+        }
+      });
+    });
   }
 }

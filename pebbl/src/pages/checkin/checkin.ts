@@ -5,7 +5,6 @@ import { CheckinService } from '../../providers/checkin-service';
 import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
-import { HardwareTimeLineModel } from '../timeline/timeline.model';
 import * as firebase from 'firebase';
 import { CacheService } from 'ionic-cache/ionic-cache';
 import {  InstantMemModel, EachMem } from '../pebbl/instantmem.model';
@@ -148,11 +147,28 @@ export class CheckinPage {
       }else{
         let timeOfDay = new Date();
         if(timeOfDay.getHours() > 12){
-          time = timeOfDay.getHours() - 12 + ":" + timeOfDay.getMinutes() + "PM";
+          time = timeOfDay.getHours() - 12+ ":";
+          if(timeOfDay.getMinutes() < 10){
+            time = time+"0"+timeOfDay.getMinutes() + "PM";
+          }else{
+            time = time+timeOfDay.getMinutes() + "PM";
+          }
+        }else if(timeOfDay.getHours() == 12){
+          time = timeOfDay.getHours() + ":";
+          if(timeOfDay.getMinutes() < 10){
+            time = time+"0"+timeOfDay.getMinutes() + "PM";
+          }else{
+            time = time+timeOfDay.getMinutes() + "PM";
+          }
         }else{
-          time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes() + "AM";
+          time = timeOfDay.getHours() + ":";
+          if(timeOfDay.getMinutes() < 10){
+            time = time+"0"+timeOfDay.getMinutes() + "AM";
+          }else{
+            time = time+timeOfDay.getMinutes() + "AM";
+          }
         }
-        time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes();
+        // time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes();
         day = dayOfWeek[timeOfDay.getDay()];
         month = months[timeOfDay.getMonth()];
         date = timeOfDay.getDate();
@@ -166,7 +182,7 @@ export class CheckinPage {
       this.myDate = new Date();
       // //this.myDate = new Date();
       // console.log(this.myDate)
-      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng,this.memoryBody, time, day, month, date, this.images).then(() => {
+      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng, this.venue.location.city, this.venue.location.state, this.memoryBody, time, day, month, date, this.images).then(() => {
         this.memoryBody="";
         if(this.instantMem){
           this.hardwareMemories.child(this.userId).child(this.instantMem.memKey).remove();

@@ -1,10 +1,5 @@
 export class TimelineModel {
-  memories: Array<TimelineItemModel>;
-}
-
-
-export class HardwareTimeLineModel {
-  memories: Array<HardwareTimelineItemModel>;
+  memories: Array<MemoryWithKey>;
 }
 
 export class TimelineItemModel {
@@ -13,6 +8,8 @@ export class TimelineItemModel {
   month: string;
   day: string;
   date:any;
+  city: string;
+  state: string;
   location:
   {
     lat: any;
@@ -20,24 +17,15 @@ export class TimelineItemModel {
   }
   location_tag: string;
   text: string;
+  comment: Array<CommentModel>;
 }
-
-export class HardwareTimelineItemModel {
-	id: number = 0;
-  type: string;
-	user_id: number = 0;
-	comment: Array<CommentModel>;
-  images: Array<string>;
-  location: string;
-  date: Date;
-  venue: string;
-  lat: string;
-  lng: string;
-  caption: string;
-}
-
 
 export class CommentModel {
   comment: string;
-  userid: number;
+  userid: any;
+}
+
+export class MemoryWithKey {
+  memKey: string;
+  mem: TimelineItemModel;
 }
