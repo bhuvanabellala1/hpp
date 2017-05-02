@@ -28,7 +28,35 @@ page-adventures {
   }
 
   #map {
+    // height: 80%;
+    // width: 80%;
+    // position: relative;
+    height: 85%;
     width: 100%;
-    height: 100%;
+  }
+
+  #adventurecard{
+    text-align: center;
+    margin: -10px -10px -20px -10px;
+    height: 17%;
+  }
+
+  #adventurecard button{
+      height: 50%;
+      width: 15%;
+      margin: 0px 0px 10px 10px;
+  }
+
+  #makeMemoryPrompt {
+    visibility: hidden;
+  }
+  #location {
+    visibility: hidden;
+  }
+
+  #adventurecard .card-ios {
+    margin: 0px !important;
+    width: calc(100%) !important;
+    height: calc(100%) !important;
   }
 }

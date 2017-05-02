@@ -5,7 +5,6 @@ import { CheckinService } from '../../providers/checkin-service';
 import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
-import { HardwareTimeLineModel } from '../timeline/timeline.model';
 import * as firebase from 'firebase';
 import { CacheService } from 'ionic-cache/ionic-cache';
 import {  InstantMemModel, EachMem } from '../pebbl/instantmem.model';
@@ -28,13 +27,16 @@ export class CheckinPage {
   public venuesData: any;
   public venue: any;
   private hide: boolean;
-  private hardware: boolean;
+  // private hardware: boolean;
   private userId :any;
   public memoryBody:any;
   public myDate: any;
   public instantMem: EachMem;
+  public adventureMem: any;
+
   // public base64Image: string;
   public imageSrc: string;
+  private hardwareMemories: any;
 
   public lat:any;
   public long:any;
@@ -47,19 +49,30 @@ export class CheckinPage {
       this.section = "camera";
       this.images = [];
       this.hide = true;
-      this.hardware = false;
+      // this.hardware = false;
+      this.hardwareMemories = firebase.database().ref('hardware-memories');
       if(this.navParams.get("mem")){
         this.instantMem = this.navParams.get("mem");
         this.lat = this.instantMem.mem.location.lat;
         this.long = this.instantMem.mem.location.long;
       }
-
+      if(this.navParams.get("adventureMem")){
+        console.log('inside of navParams');
+        this.adventureMem = this.navParams.get("adventureMem");
+        console.log(this.adventureMem);
+        this.lat = this.adventureMem.lat;
+        this.long = this.adventureMem.lng;
+      }
     }
 
     ionViewDidLoad() {
       console.log('ionViewDidLoad CheckinPage');
       if(this.instantMem){
         console.log("yesss");
+      }
+
+      if(this.adventureMem){
+        console.log("it's adventure Memory");
       }
       // let j = [];
       // this.cache.getItem("keys").catch(() => {
@@ -90,15 +103,15 @@ export class CheckinPage {
 
     ionViewWillEnter(){
       console.log('About to enter make memory');
-      if(!this.hardware ){
-        console.log(this.hardware);
-        this.grabVenues();
-      }
+      // if(!this.hardware ){
+      //   console.log(this.hardware);
+      //   this.grabVenues();
+      // }
+      this.grabVenues();
     }
 
     grabVenues(){
-
-      if(this.instantMem){
+      if(this.instantMem || this.adventureMem){
         this.checkinService.searchVenues(this.lat + "," + this.long)
         .then(data => {
           this.venuesData = data;
@@ -120,6 +133,46 @@ export class CheckinPage {
 
     showvalues(){
       //add preloader
+      let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      let dayOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+      let time: string;
+      let day: string;
+      let date: any;
+      let month: string;
+      if(this.instantMem){
+        time = this.instantMem.mem.time;
+        day = this.instantMem.mem.day;
+        month = this.instantMem.mem.month;
+        date = this.instantMem.mem.date;
+      }else{
+        let timeOfDay = new Date();
+        if(timeOfDay.getHours() > 12){
+          time = timeOfDay.getHours() - 12+ ":";
+          if(timeOfDay.getMinutes() < 10){
+            time = time+"0"+timeOfDay.getMinutes() + "PM";
+          }else{
+            time = time+timeOfDay.getMinutes() + "PM";
+          }
+        }else if(timeOfDay.getHours() == 12){
+          time = timeOfDay.getHours() + ":";
+          if(timeOfDay.getMinutes() < 10){
+            time = time+"0"+timeOfDay.getMinutes() + "PM";
+          }else{
+            time = time+timeOfDay.getMinutes() + "PM";
+          }
+        }else{
+          time = timeOfDay.getHours() + ":";
+          if(timeOfDay.getMinutes() < 10){
+            time = time+"0"+timeOfDay.getMinutes() + "AM";
+          }else{
+            time = time+timeOfDay.getMinutes() + "AM";
+          }
+        }
+        // time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes();
+        day = dayOfWeek[timeOfDay.getDay()];
+        month = months[timeOfDay.getMonth()];
+        date = timeOfDay.getDate();
+      }
       let loading = this.loadingCtrl.create({
         dismissOnPageChange: true,
         content: 'Creating Your Memory..'
@@ -129,9 +182,11 @@ export class CheckinPage {
       this.myDate = new Date();
       // //this.myDate = new Date();
       // console.log(this.myDate)
-      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng,this.memoryBody,this.myDate, this.images).then(() => {
+      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng, this.venue.location.city, this.venue.location.state, this.memoryBody, time, day, month, date, this.images).then(() => {
         this.memoryBody="";
-
+        if(this.instantMem){
+          this.hardwareMemories.child(this.userId).child(this.instantMem.memKey).remove();
+        }
         loading.dismiss().then(() => {
           //show pop up
           let alert = this.alertCtrl.create({
@@ -176,7 +231,6 @@ export class CheckinPage {
         console.log(err);
       });
     }
-
 
 
     takePicturefromGallery(){

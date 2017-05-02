@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { MemoryService } from '../../providers/memory-service';
 import * as firebase from 'firebase';
 import {  InstantMemModel, EachMem } from './instantmem.model';
-import { CheckinPage}from '../checkin/checkin';
+import { CheckinPage }from '../checkin/checkin';
 /*
 Generated class for the Pebbl page.
 
@@ -74,7 +74,6 @@ export class PebblPage {
       console.log("redirect to make memory");
       console.log(memory.memKey);
       this.navCtrl.push(CheckinPage, {mem: memory})
-
     }
 
     deleteMem(memory, index){

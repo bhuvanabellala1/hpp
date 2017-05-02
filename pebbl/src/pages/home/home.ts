@@ -147,7 +147,7 @@ export class HomePage {
     //   .call(force.drag()
     //     .on("drag", dragged));
 
- 
+
 
     // used to assign nodes color by group
     var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -198,7 +198,7 @@ export class HomePage {
         return d.date;
       }))
       .range([0, spiralLength]);
-    
+
     // yScale for the bar height
     var yScale = d3.scaleLinear()
       .domain([0, d3.max(someData, function(d){
@@ -211,15 +211,15 @@ export class HomePage {
       .enter()
       .append("rect")
       .attr("x", function(d,i){
-        
+
         var linePer = timeScale(d.date),
             posOnLine = path.node().getPointAtLength(linePer),
             angleOnLine = path.node().getPointAtLength(linePer - barWidth);
-      
+
         d.linePer = linePer; // % distance are on the spiral
         d.x = posOnLine.x; // x postion on the spiral
         d.y = posOnLine.y; // y position on the spiral
-        
+
         d.a = (Math.atan2(angleOnLine.y, angleOnLine.x) * 180 / Math.PI) - 90; //angle at the spiral position
 
         return d.x;
@@ -238,7 +238,7 @@ export class HomePage {
       .attr("transform", function(d){
         return "rotate(" + d.a + "," + d.x  + "," + d.y + ")"; // rotate the bar
       });
-    
+
     // add date labels
     var tF = d3.timeFormat("%b %Y"),
         firstInMonth = {};
@@ -318,7 +318,7 @@ export class HomePage {
 
         tooltip.style('display', 'none');
         tooltip.style('opacity',0);
-    });  
+    });
 }
 
   //   function collide(alpha) {

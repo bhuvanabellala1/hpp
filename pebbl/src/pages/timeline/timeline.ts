@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {TimelineService} from './timeline.service';
 import { CheckinPage} from '../checkin/checkin';
-import {TimelineModel} from './timeline.model';
+import { TimelineModel, MemoryWithKey } from './timeline.model';
 import { MemoryslidesPage } from '../memoryslides/memoryslides';
 import { Http } from '@angular/http';
 import { NgZone, Injectable } from '@angular/core';
@@ -12,6 +12,7 @@ import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
 import * as firebase from 'firebase';
+import { CommentPage} from '../comment/comment';
 
 
 /*
@@ -45,7 +46,7 @@ export class TimelinePage {
   ) {
     this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
-    this.timeline.memories = []
+    this.timeline.memories = [];
     this.comments = ['comment1', 'comment2', 'comment3'];
   }
 
@@ -56,10 +57,6 @@ export class TimelinePage {
       console.log(snapshot.val())
       this.memory = (snapshot.val())
       this.timeline.memories = this.memory;
-      //       Object.keys(this.memory).forEach(key => {
-      //     console.log(key);          // the name of the current key.
-      //     console.log(this.memory[key]);   // the value of the current key.
-      // });
 
     });
   }
@@ -86,10 +83,10 @@ export class TimelinePage {
         this.navCtrl.push(CheckinPage);
       }
 
-      // showComments(){
-      //   console.log('showing comments')
-      //   document.getElementById("comment").style.visibility = 'visible';
-      // }
+      showComments(memory){
+        console.log('showing comments')
+        this.navCtrl.push(CommentPage, {mem: memory});
+      }
 
       /*
       * if given group is the selected group, deselect it
@@ -107,20 +104,22 @@ export class TimelinePage {
       ionViewWillEnter(){
         console.log("timeline.ts - entering ion view");
         let that = this;
+        this.timeline.memories = [];
         this._zone.runOutsideAngular(()=>{
           this.memoryService.fetchMemory(this.userId).then(snapshot => {
             console.log("in snapshot")
-            console.log(snapshot.val())
             this.memory = (snapshot.val())
             console.log(this.timeline.memories)
             //this.timeline.memories = this.memory
             Object.keys(that.memory).forEach(key => {
-              console.log(key);          // the name of the current key.
-              console.log(typeof that.memory[key]);
+              let eachMemory: MemoryWithKey = new MemoryWithKey();
+              eachMemory.memKey = key;
+              eachMemory.mem = that.memory[key];
+              console.log(eachMemory.mem.location_tag);
               that._zone.run(() => {
                 // console.log(NgZone.current.name())
-                that.timeline.memories = that.timeline.memories.concat(that.memory[key]);
-              }); // the value of the current key.
+                that.timeline.memories.unshift(eachMemory);
+              });
             });
 
             // this.loading.dismiss();
