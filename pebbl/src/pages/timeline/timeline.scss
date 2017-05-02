@@ -86,6 +86,7 @@ page-timeline,
     font-size: 18px;
     color: color($colors, primary);
     font-weight: bold;
+    overflow-x: scroll;
   }
   .item-ios.item-block .item-inner {
     padding-right: 0;
@@ -142,10 +143,25 @@ page-timeline,
       font-size: 0.7em;
     }
 
-    .memorybuttons {
-      margin:0;
+    .commentbutton {
       display: flex;
-      justify-content: space-between;
+      float: left;
+    }
+    .commentbutton .button-ios {
+      margin-bottom: 10px;
+    }
+    .rightbuttons {
+      display: flex;
+      float: right;
+    }
+    .rightbuttons .button-ios {
+      margin-left: 10px;
+      margin-bottom: 10px;
+ }
+      .rightbuttons .button-clear-ios .trashbutton {
+        //background-color: transparent;
+    color: #B1B1B1;
+     
     }
   }
 }
