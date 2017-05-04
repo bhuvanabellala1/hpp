@@ -113,6 +113,7 @@ export class MemoryService {
           lat: venueLat,
           long: venueLng
         },
+        madeBy: userId
       };
 
       console.log(memoryData);
@@ -171,6 +172,7 @@ export class MemoryService {
 
           },
           image: [this.myimage],
+          madeBy: userId
         };
 
         console.log(memoryData);
@@ -224,6 +226,7 @@ export class MemoryService {
               long: venueLng
             },
             image:[this.myimage,this.myimage2],
+            madeBy: userId
           };
 
           console.log(memoryData);
@@ -281,6 +284,7 @@ export class MemoryService {
                 long: venueLng
               },
               image:[this.myimage, this.myimage2,this.myimage3],
+              madeBy: userId
             };
 
             console.log(memoryData);

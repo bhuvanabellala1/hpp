@@ -30,7 +30,8 @@ export class TimelinePage {
   timeline: TimelineModel = new TimelineModel();
   loading: any;
   editId: any;
-  comments: any;
+  user1: any;
+  user2: any;
   private userId: any;
   public memory: any;
   constructor(
@@ -47,7 +48,6 @@ export class TimelinePage {
     this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
     this.timeline.memories = [];
-    this.comments = ['comment1', 'comment2', 'comment3'];
   }
 
   fetchMemories(userid:any){
@@ -57,12 +57,12 @@ export class TimelinePage {
       console.log(snapshot.val())
       this.memory = (snapshot.val())
       this.timeline.memories = this.memory;
-
     });
   }
 
   ionViewDidLoad() {
-    console.log("in ion view")
+    console.log("in ion view");
+    this.loadUsers();
   }
 
   slideImages(memIndex, imageIndex){
@@ -109,13 +109,13 @@ export class TimelinePage {
           this.memoryService.fetchMemory(this.userId).then(snapshot => {
             console.log("in snapshot")
             this.memory = (snapshot.val())
-            console.log(this.timeline.memories)
+            // console.log(this.timeline.memories)
             //this.timeline.memories = this.memory
             Object.keys(that.memory).forEach(key => {
               let eachMemory: MemoryWithKey = new MemoryWithKey();
               eachMemory.memKey = key;
               eachMemory.mem = that.memory[key];
-              console.log(eachMemory.mem.location_tag);
+              console.log(eachMemory.mem.madeBy);
               that._zone.run(() => {
                 // console.log(NgZone.current.name())
                 that.timeline.memories.unshift(eachMemory);
@@ -132,4 +132,20 @@ export class TimelinePage {
         this.events.publish('editMemory', this.editId);
       }
 
+      loadUsers(){
+        let that = this;
+        let userProfile = firebase.database().ref('users');
+        userProfile.child(this.userId).on('value', function(snapshot) {
+          that.user1 = snapshot.val();
+          console.log(that.user1.proPic);
+          if(snapshot.val().user2id != "null"){
+            userProfile.child(snapshot.val().user2id).on('value', function(snapsh) {
+            that.user2 = snapsh.val();
+            });
+          }else{
+            that.user2 = null;
+          }
+
+        });
+      }
     }
