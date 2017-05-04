@@ -44,7 +44,7 @@ export class CheckinPage {
     private checkinService: CheckinService, public modalCtrl: ModalController,
     private memoryService: MemoryService,private loadingCtrl: LoadingController,
     private alertCtrl: AlertController, private viewCtrl: ViewController,
-    private cache: CacheService, public events: Events,) {
+    private cache: CacheService, public events: Events, private usersService: UsersService) {
       this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
       this.images = [];
@@ -186,6 +186,7 @@ export class CheckinPage {
         this.memoryBody="";
         if(this.instantMem){
           this.hardwareMemories.child(this.userId).child(this.instantMem.memKey).remove();
+          // this.usersService.updateInstantMemNum(this.userId);
         }
         loading.dismiss().then(() => {
           //show pop up
