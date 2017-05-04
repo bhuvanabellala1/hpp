@@ -43,10 +43,12 @@
           <hr class="vertical2" />
           <ion-item>
             <ion-avatar item-left>
-              <img src="img/Profile-1.svg">
+              <img *ngIf="!memory.mem.madeBy || (memory.mem.madeBy==userId && !user1.proPic) || (memory.mem.madeBy!=userId && !user2.proPic)" src="img/Profile-1.svg">
+              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy==userId && user1.proPic" src="{{ user1.proPic }}">
+              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy!=userId && user2.proPic" src="{{ user2.proPic }}">
             </ion-avatar>
             <h2>{{ memory.mem.location_tag }}</h2>
-            
+
             <p>
               <ion-icon name="time-outline"></ion-icon> {{ memory.mem.time }}
               <ion-icon name="pin-outline"></ion-icon> {{ memory.mem.city}}, {{ memory.mem.state}}</p>

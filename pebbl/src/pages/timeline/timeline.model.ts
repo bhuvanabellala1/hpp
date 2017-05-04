@@ -18,6 +18,7 @@ export class TimelineItemModel {
   location_tag: string;
   text: string;
   comment: Array<CommentModel>;
+  madeBy: string
 }
 
 export class CommentModel {

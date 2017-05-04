@@ -229,4 +229,18 @@ export class UsersService {
           });
         }
 
+        updateInstantMemNum(userId){
+              let that = this;
+              this.userProfile.child(userId).once('value', function(snapshot) {
+                console.log("updating num of Instant Mems");
+                let InstantMemNum = 0;
+                if(snapshot.val().instantMemNum){
+                  InstantMemNum  = snapshot.val().instantMemNum;
+                }
+                firebase.database().ref('/users/' + userId).update({
+                  instantMemNum: InstantMemNum + 1
+                });
+        });
+      }
+
       }

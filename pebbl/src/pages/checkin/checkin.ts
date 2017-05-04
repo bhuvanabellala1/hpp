@@ -33,18 +33,19 @@ export class CheckinPage {
   public myDate: any;
   public instantMem: EachMem;
   public adventureMem: any;
-
   // public base64Image: string;
   public imageSrc: string;
   private hardwareMemories: any;
-
   public lat:any;
   public long:any;
+  private user1_proPic: any;
+  private user2_proPic: any;
+
   constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
     private checkinService: CheckinService, public modalCtrl: ModalController,
     private memoryService: MemoryService,private loadingCtrl: LoadingController,
     private alertCtrl: AlertController, private viewCtrl: ViewController,
-    private cache: CacheService, public events: Events,) {
+    private cache: CacheService, public events: Events, private usersService: UsersService) {
       this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
       this.images = [];
@@ -70,7 +71,7 @@ export class CheckinPage {
       if(this.instantMem){
         console.log("yesss");
       }
-
+      this.loadImages();
       if(this.adventureMem){
         console.log("it's adventure Memory");
       }
@@ -186,6 +187,7 @@ export class CheckinPage {
         this.memoryBody="";
         if(this.instantMem){
           this.hardwareMemories.child(this.userId).child(this.instantMem.memKey).remove();
+          // this.usersService.updateInstantMemNum(this.userId);
         }
         loading.dismiss().then(() => {
           //show pop up
@@ -283,5 +285,29 @@ export class CheckinPage {
         this.venue = data;
       });
       venueModal.present();
+    }
+
+    loadImages(){
+      let that = this;
+      let userProfile = firebase.database().ref('users');
+      userProfile.child(this.userId).on('value', function(snapshot) {
+        if(snapshot.val().proPic){
+          that.user1_proPic = snapshot.val().proPic;
+        }else{
+          that.user1_proPic = "img/Profile-1.svg";
+        }
+        if(snapshot.val().user2id != "null"){
+          userProfile.child(snapshot.val().user2id).on('value', function(snapsh) {
+            if(snapsh.val().proPic){
+              that.user2_proPic = snapsh.val().proPic;
+            }else{
+              that.user2_proPic = "img/Profile-1.svg";
+            }
+          });
+        }else{
+          that.user2_proPic = "img/Profile-1.svg";
+        }
+
+      });
     }
   }

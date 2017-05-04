@@ -28,12 +28,12 @@ Ionic pages and navigation.
         </g>
     </g>
 </svg>
-    <img class="user1" src="img/Profile-1.svg">
+    <img class="user1" src="{{ user1_proPic }}">
 
     <p class="user1mem">20 instant memories</p>
 
     <img src="img/bothCharmsShadow.png" alt="">
-    
+
 <svg class="user2line" width="78px" height="21px" viewBox="0 0 78 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
     <desc>Created with Sketch.</desc>
@@ -46,7 +46,7 @@ Ionic pages and navigation.
         </g>
     </g>
 </svg>
-    <img class="user2" src="img/Profile-1.svg">
+    <img class="user2" src="{{ user2_proPic }}">
     <p class="user2mem">36 instant memories</p>
   </div>
   <div [ngClass]="{'scroll-memories': numMems > 0}">
@@ -60,7 +60,7 @@ Ionic pages and navigation.
       <ion-item>
         <span class="mem-date">
         <!--<h4>{{ memory.mem.day }}</h4>-->
-        
+
       <h4 class="num-date">{{ memory.mem.date }}</h4>
       <h5 class="mem-month">{{ memory.mem.month }}</h5></span>
 
