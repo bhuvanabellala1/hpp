@@ -190,9 +190,9 @@ export class CheckinPage {
         loading.dismiss().then(() => {
           //show pop up
           let alert = this.alertCtrl.create({
-            title: 'Done!',
-            subTitle: 'Memory Created',
-            buttons: ['OK']
+            title: 'Memory Made!',
+            buttons: ['OK'],
+            
           });
           alert.present();
 

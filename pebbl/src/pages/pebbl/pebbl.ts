@@ -80,11 +80,13 @@ export class PebblPage {
     deleteMem(memory, index){
       console.log("delete memory");
       let alert = this.alertCtrl.create({
+        cssClass: 'deleteconfirm',
         message: 'Are you sure you want to delete this memory?',
         buttons: [
           {
             text: 'Keep',
             role: 'cancel',
+            cssClass: 'keepbutton',
             handler: () => {
               console.log('Cancel clicked');
             }
