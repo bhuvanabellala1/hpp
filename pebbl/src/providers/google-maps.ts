@@ -86,6 +86,7 @@ export class GoogleMaps {
           center: latLng,
           zoom: 15,
           // mapTypeId: google.maps.MapTypeId.ROADMAP,
+          //source from https://snazzymaps.com/style/68961/pokemon-go
           styles: [
     {
         "featureType": "administrative",
