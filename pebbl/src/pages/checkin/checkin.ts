@@ -194,7 +194,7 @@ export class CheckinPage {
           let alert = this.alertCtrl.create({
             title: 'Memory Made!',
             buttons: ['OK'],
-            
+
           });
           alert.present();
 
