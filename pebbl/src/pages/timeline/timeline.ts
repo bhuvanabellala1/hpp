@@ -32,6 +32,7 @@ export class TimelinePage {
   editId: any;
   user1: any;
   user2: any;
+  private userMemories: any;
   private userId: any;
   public memory: any;
   constructor(
@@ -48,6 +49,7 @@ export class TimelinePage {
     this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
     this.timeline.memories = [];
+    this.userMemories = firebase.database().ref('user-memories');
   }
 
   fetchMemories(userid:any){
@@ -85,7 +87,7 @@ export class TimelinePage {
 
       showComments(memory){
         console.log('showing comments')
-        this.navCtrl.push(CommentPage, {mem: memory});
+        this.navCtrl.push(CommentPage, {mem: memory, user1: this.user1, user2: this.user2});
       }
 
       /*
@@ -111,6 +113,7 @@ export class TimelinePage {
             this.memory = (snapshot.val())
             // console.log(this.timeline.memories)
             //this.timeline.memories = this.memory
+            this.timeline.memories = [];
             Object.keys(that.memory).forEach(key => {
               let eachMemory: MemoryWithKey = new MemoryWithKey();
               eachMemory.memKey = key;
@@ -127,6 +130,36 @@ export class TimelinePage {
           });
         });
       }
+
+      deleteMem(mem_to_rm, index){
+        console.log("Deleting memory");
+        console.log(index);
+        console.log(mem_to_rm.mem.text);
+        let alert = this.alertCtrl.create({
+          cssClass: 'deleteconfirm',
+          message: 'Are you sure you want to delete this memory?',
+          buttons: [
+            {
+              text: 'Keep',
+              role: 'cancel',
+              cssClass: 'keepbutton',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'Delete',
+              handler: () => {
+                console.log('Delete clicked');
+                this.timeline.memories.splice(index, 1);
+                this.userMemories.child(this.userId).child('memories').child(mem_to_rm.memKey).remove();
+              }
+            }
+          ]
+        });
+        alert.present();
+
+      }
       // Fired when you leave a page, after it stops being the active one. Similar to the previous one.
       ionViewDidLeave() {
         this.events.publish('editMemory', this.editId);
@@ -140,7 +173,7 @@ export class TimelinePage {
           console.log(that.user1.proPic);
           if(snapshot.val().user2id != "null"){
             userProfile.child(snapshot.val().user2id).on('value', function(snapsh) {
-            that.user2 = snapsh.val();
+              that.user2 = snapsh.val();
             });
           }else{
             that.user2 = null;
