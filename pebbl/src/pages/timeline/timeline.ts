@@ -173,7 +173,7 @@ export class TimelinePage {
           console.log(that.user1.proPic);
           if(snapshot.val().user2id != "null"){
             userProfile.child(snapshot.val().user2id).on('value', function(snapsh) {
-            that.user2 = snapsh.val();
+              that.user2 = snapsh.val();
             });
           }else{
             that.user2 = null;

@@ -53,7 +53,7 @@ export class MemoryService {
   }
 
 
-  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, venueCity: any, venueState: any, memoryText: any, mem_time: string, mem_day: any, mem_month: any, mem_date: any, year: any, images:any){
+  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, venueCity: any, venueState: any, memoryText: any, mem_time: string, mem_day: any, mem_month: any, mem_date: any, year: any, images:any, justMe: boolean){
     //console.log(this.fireRef.ServerValue.TIMESTAMP)
 
     var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
@@ -81,7 +81,8 @@ export class MemoryService {
           long: venueLng
         },
         madeBy: userId,
-        year: year
+        year: year,
+        usBoth: !justMe
       };
 
       console.log(memoryData);
@@ -132,7 +133,8 @@ export class MemoryService {
           },
           image: [this.myimage],
           madeBy: userId,
-          year: year
+          year: year,
+          usBoth: !justMe
         };
 
         console.log(memoryData);
@@ -187,7 +189,8 @@ export class MemoryService {
             },
             image:[this.myimage,this.myimage2],
             madeBy: userId,
-            year: year
+            year: year,
+            usBoth: !justMe
           };
 
           console.log(memoryData);
@@ -246,7 +249,8 @@ export class MemoryService {
               },
               image:[this.myimage, this.myimage2,this.myimage3],
               madeBy: userId,
-              year: year
+              year: year,
+              usBoth: !justMe
             };
 
             console.log(memoryData);
@@ -272,9 +276,9 @@ export class MemoryService {
     console.log("CHECKING TYPE OF YEARRRRR");
     console.log(typeof mem_date);
     let full_date: any
-    
+
       full_date = mem_month + " "+ mem_date + ", " + year
-    
+
 
     let that = this;
     this.userNode.child(userId).once('value', function(snapshot){

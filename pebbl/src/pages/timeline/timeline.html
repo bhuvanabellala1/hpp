@@ -44,11 +44,14 @@
           <ion-item>
             <ion-avatar item-left>
               <!--<img src="{{ user2_proPic }}" id="user2" [style.visibility]="(hide) ? 'hidden' : 'visible'"/>-->
-              <img src="img/Profile-1.svg" id="user2both" />
+              <img *ngIf="memory.mem.usBoth && ((memory.mem.madeBy==userId && !user2.proPic) || (memory.mem.madeBy!=userId && !user1.proPic))" src="img/Profile-1.svg" id="user2both" />
+              <img *ngIf="memory.mem.usBoth && memory.mem.madeBy==userId && user2.proPic" src="{{ user2.proPic }}" id="user2both" />
+              <img *ngIf="memory.mem.usBoth && memory.mem.madeBy!=userId && user1.proPic" src="{{ user1.proPic }}" id="user2both" />
 
-              <img *ngIf="!memory.mem.madeBy || (memory.mem.madeBy==userId && !user1.proPic) || (memory.mem.madeBy!=userId && !user2.proPic)" src="img/Profile-1.svg">
-              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy==userId && user1.proPic" src="{{ user1.proPic }}">
-              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy!=userId && user2.proPic" src="{{ user2.proPic }}">
+
+              <img *ngIf="!memory.mem.madeBy || (memory.mem.madeBy==userId && !user1.proPic) || (memory.mem.madeBy!=userId && !user2.proPic)" src="img/Profile-1.svg" />
+              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy==userId && user1.proPic" src="{{ user1.proPic }}"/>
+              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy!=userId && user2.proPic" src="{{ user2.proPic }}"/>
             </ion-avatar>
             <h2>{{ memory.mem.location_tag }}</h2>
 
