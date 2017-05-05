@@ -65,7 +65,7 @@ export class MyApp {
         cordova.plugins.backgroundMode.on('activate', function(){
           console.log("Background mode activated");
         });
-        Keyboard.disableScroll(true);
+        //Keyboard.disableScroll(true);
       });
 
       this.pages = [
