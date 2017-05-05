@@ -109,21 +109,26 @@ export class TimelinePage {
         this.timeline.memories = [];
         this._zone.runOutsideAngular(()=>{
           this.memoryService.fetchMemory(this.userId).then(snapshot => {
-            console.log("in snapshot")
-            this.memory = (snapshot.val())
-            // console.log(this.timeline.memories)
-            //this.timeline.memories = this.memory
-            this.timeline.memories = [];
-            Object.keys(that.memory).forEach(key => {
-              let eachMemory: MemoryWithKey = new MemoryWithKey();
-              eachMemory.memKey = key;
-              eachMemory.mem = that.memory[key];
-              console.log(eachMemory.mem.madeBy);
-              that._zone.run(() => {
-                // console.log(NgZone.current.name())
-                that.timeline.memories.unshift(eachMemory);
+            that.timeline.memories = [];
+            console.log("FETCHING MEMORIES")
+            console.log(that.timeline.memories.length);
+            if(snapshot.val()){
+              that.timeline.memories = [];
+              that.memory = (snapshot.val())
+              console.log(that.timeline.memories.length);
+              // console.log(this.timeline.memories)
+              //this.timeline.memories = this.memory
+              Object.keys(that.memory).forEach(key => {
+                let eachMemory: MemoryWithKey = new MemoryWithKey();
+                eachMemory.memKey = key;
+                eachMemory.mem = that.memory[key];
+                console.log(eachMemory.mem.madeBy);
+                that._zone.run(() => {
+                  // console.log(NgZone.current.name())
+                  that.timeline.memories.unshift(eachMemory);
+                });
               });
-            });
+            }
 
             // this.loading.dismiss();
             console.log(this.timeline.memories)

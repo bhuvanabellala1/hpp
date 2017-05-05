@@ -24,7 +24,8 @@ export class HomePage {
   arrayLength: any;
   firstMem: any;
   userId: any;
-
+  private hardwareMemories: any;;
+  private numMems: any;
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
     public menu: MenuController, public events: Events, private navParams: NavParams) {
       this.navPages = [
@@ -32,6 +33,8 @@ export class HomePage {
         { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
         { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
       ];
+      this.numMems = 0;
+      this.hardwareMemories = firebase.database().ref('hardware-memories');
 
       if(navParams.get('fm')){
         this.firstMem = navParams.get('fm');
@@ -232,8 +235,19 @@ export class HomePage {
 
     ionViewDidLoad() {
       console.log("home.ts - Entered home page");
+     let userId = firebase.auth().currentUser.uid;
       this.menu.enable(true);
-      // this.createChart();
+      let that = this;
+      this._zone.run(() => {
+        this.hardwareMemories.child(userId).on('value', function(snapshot) {
+          let memories = (snapshot.val());
+          if(memories){
+            that.numMems =  Object.keys(memories).length;
+            console.log("hardware MEMS");
+            console.log(that.numMems);
+          }
+        });
+      });
     }
 
   }
