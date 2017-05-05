@@ -113,6 +113,7 @@ export class TimelinePage {
             this.memory = (snapshot.val())
             // console.log(this.timeline.memories)
             //this.timeline.memories = this.memory
+            this.timeline.memories = [];
             Object.keys(that.memory).forEach(key => {
               let eachMemory: MemoryWithKey = new MemoryWithKey();
               eachMemory.memKey = key;
@@ -131,6 +132,9 @@ export class TimelinePage {
       }
 
       deleteMem(mem_to_rm, index){
+        console.log("Deleting memory");
+        console.log(index);
+        console.log(mem_to_rm.mem.text);
         let alert = this.alertCtrl.create({
           cssClass: 'deleteconfirm',
           message: 'Are you sure you want to delete this memory?',
