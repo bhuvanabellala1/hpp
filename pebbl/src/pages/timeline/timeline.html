@@ -36,13 +36,16 @@
     <ion-item class="mem-no-margin" *ngFor="let memory of timeline.memories; let i=index">
       <hr class="vertical" />
       <ion-item class="timeline-date">
-        <span>{{ memory.mem.day }} {{ memory.mem.date }}, {{ memory.mem.month }}</span>
+        <span>{{ memory.mem.day }}, {{ memory.mem.date }} {{ memory.mem.month }}</span>
       </ion-item>
       <ion-card class="notifications-list">
         <ion-card-content>
           <hr class="vertical2" />
           <ion-item>
             <ion-avatar item-left>
+              <!--<img src="{{ user2_proPic }}" id="user2" [style.visibility]="(hide) ? 'hidden' : 'visible'"/>-->
+              <img src="img/Profile-1.svg" id="user2both" />
+
               <img *ngIf="!memory.mem.madeBy || (memory.mem.madeBy==userId && !user1.proPic) || (memory.mem.madeBy!=userId && !user2.proPic)" src="img/Profile-1.svg">
               <img *ngIf="memory.mem.madeBy && memory.mem.madeBy==userId && user1.proPic" src="{{ user1.proPic }}">
               <img *ngIf="memory.mem.madeBy && memory.mem.madeBy!=userId && user2.proPic" src="{{ user2.proPic }}">

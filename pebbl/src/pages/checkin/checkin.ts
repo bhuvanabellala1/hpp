@@ -140,11 +140,13 @@ export class CheckinPage {
       let day: string;
       let date: any;
       let month: string;
+      let year: any;
       if(this.instantMem){
         time = this.instantMem.mem.time;
         day = this.instantMem.mem.day;
         month = this.instantMem.mem.month;
         date = this.instantMem.mem.date;
+        year = this.instantMem.mem.year;
       }else{
         let timeOfDay = new Date();
         if(timeOfDay.getHours() > 12){
@@ -169,10 +171,18 @@ export class CheckinPage {
             time = time+timeOfDay.getMinutes() + "AM";
           }
         }
+
+        let mem_date: any;
+        if(timeOfDay.getDate() < 10){
+          mem_date = "0"+timeOfDay.getDate();
+        }else{
+          mem_date = timeOfDay.getDate();
+        }
         // time = timeOfDay.getHours() + ":" + timeOfDay.getMinutes();
         day = dayOfWeek[timeOfDay.getDay()];
         month = months[timeOfDay.getMonth()];
-        date = timeOfDay.getDate();
+        date = mem_date;
+        year = timeOfDay.getFullYear();
       }
       let loading = this.loadingCtrl.create({
         dismissOnPageChange: true,
@@ -183,11 +193,11 @@ export class CheckinPage {
       this.myDate = new Date();
       // //this.myDate = new Date();
       // console.log(this.myDate)
-      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng, this.venue.location.city, this.venue.location.state, this.memoryBody, time, day, month, date, this.images).then(() => {
+      this.memoryService.pushMemory(this.venue.name,this.userId,this.venue.location.lat,this.venue.location.lng, this.venue.location.city, this.venue.location.state, this.memoryBody, time, day, month, date, year, this.images).then(() => {
         this.memoryBody="";
         if(this.instantMem){
           this.hardwareMemories.child(this.userId).child(this.instantMem.memKey).remove();
-          // this.usersService.updateInstantMemNum(this.userId);
+          this.usersService.updateInstantMemNum(this.userId);
         }
         loading.dismiss().then(() => {
           //show pop up

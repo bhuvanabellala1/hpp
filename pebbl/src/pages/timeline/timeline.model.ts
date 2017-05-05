@@ -10,6 +10,7 @@ export class TimelineItemModel {
   date:any;
   city: string;
   state: string;
+  year: string;
   location:
   {
     lat: any;

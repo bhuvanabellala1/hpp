@@ -53,44 +53,11 @@ export class MemoryService {
   }
 
 
-  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, venueCity: any, venueState: any, memoryText: any, mem_time: string, mem_day: any, mem_month: any, mem_date: any, images:any){
+  pushMemory(venueName: any, userId: any, venueLat: any, venueLng: any, venueCity: any, venueState: any, memoryText: any, mem_time: string, mem_day: any, mem_month: any, mem_date: any, year: any, images:any){
     //console.log(this.fireRef.ServerValue.TIMESTAMP)
 
     var newMemoryKey = this.usersMemoryNode.child(userId).child('memories').push().key;
-    console.log("we are checking for images")
-
-    //   images.forEach(element => {
-
-    //   console.log("each element")
-    //   this.uploadImage(element).then(snapshot=> {
-    //     console.log("im am doing this GGGGGGGG");
-    //   console.log(snapshot.downloadURL);
-
-    // });
-    //   });
-
-    //   // imageRef = storageRef.child(`images/${filename}.jpg`);
-
-    //   // imageRef.putString(this.captureDataUrl, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
-    //   //  // Do something here when the data is succesfully uploaded!
-    //   // });
-
-
-    // });
-
-    // this.usersMemoryNode.child(userId).child('memories').push({
-    //     text: memoryText,
-    //     date: myDate,
-    //     location_tag: venueName,
-    //     location:
-    //     {
-    //       lat: venueLat,
-    //       long: venueLng
-    //     }
-    // })
-
-
-
+    console.log("we are checking for images");
 
     var updatePath = {};
 
@@ -113,7 +80,8 @@ export class MemoryService {
           lat: venueLat,
           long: venueLng
         },
-        madeBy: userId
+        madeBy: userId,
+        year: year
       };
 
       console.log(memoryData);
@@ -134,15 +102,6 @@ export class MemoryService {
 
 
     }
-
-
-    //   console.log("reached her")
-    //   var imageRef = this.storageRef.child(`images/test.jpg`);
-    //  console.log("reched now")
-
-    // a(function(snapshot) {
-
-    // })
 
     else if( images.length == 1){
 
@@ -172,7 +131,8 @@ export class MemoryService {
 
           },
           image: [this.myimage],
-          madeBy: userId
+          madeBy: userId,
+          year: year
         };
 
         console.log(memoryData);
@@ -226,7 +186,8 @@ export class MemoryService {
               long: venueLng
             },
             image:[this.myimage,this.myimage2],
-            madeBy: userId
+            madeBy: userId,
+            year: year
           };
 
           console.log(memoryData);
@@ -284,7 +245,8 @@ export class MemoryService {
                 long: venueLng
               },
               image:[this.myimage, this.myimage2,this.myimage3],
-              madeBy: userId
+              madeBy: userId,
+              year: year
             };
 
             console.log(memoryData);
@@ -305,86 +267,30 @@ export class MemoryService {
           });
         });
       });
-
-
     }
 
+    console.log("CHECKING TYPE OF YEARRRRR");
+    console.log(typeof mem_date);
+    let full_date: any
+    
+      full_date = mem_month + " "+ mem_date + ", " + year
+    
 
-    // this.uploadImage2(images[0]).then((snapshot : any) =>
-    //             {
-    //               console.log("success")
-    //             });
+    let that = this;
+    this.userNode.child(userId).once('value', function(snapshot){
+      if(!snapshot.val().firstMem){
+        that.userNode.child(userId).update({
+          firstMem: full_date
+        });
+        that.userNode.child(snapshot.val().user2id).update({
+          firstMem: full_date
+        });
+      }
+
+    });
 
     return this.fireRef.update(updatePath);
 
-
-    // imageRef.putString(images[0], firebase.storage.StringFormat.DATA_URL).then(snapshot=> {
-    //   console.log("Success");
-    //   console.log(snapshot.downloadURL);
-    //   this.myimage = snapshot.downloadURL;
-    //   console.log("stuck here like a bitch")
-    //    // Do something here when the data is succesfully uploaded!
-    //    //I WANT TO EXIT FROM THIS
-    //   });
-
-
-    //******************  my code to uncomment start *******************
-
-
-    // console.log("i am ourside now")
-    //   if(!memoryText){
-    //     memoryText = venueName
-    //   }
-
-    //   var memoryData = {
-    //     text: memoryText,
-    //       date: myDate,
-    //       location_tag: venueName,
-    //       location:
-    //       {
-    //         lat: venueLat,
-    //         long: venueLng
-    //       },
-    //     image: this.myimage
-    //   };
-
-    //******************  my code to uncomment end *******************
-
-    //   ref.once("value", function(snapshot) {
-    //   var data = snapshot.val();
-    //   // data === "hello"
-    // });
-
-    //  var codeRef = this.codepair.child(code);
-    // var plus = codeRef.once('value')
-
-
-    //******************  my code to uncomment start *******************
-
-
-    // var updatePath = {};
-    // updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
-
-    // var user2ref = this.usersMemoryNode.child(userId).child('user2');
-    // user2ref.once('value', function(snapshot){
-    //   var data = snapshot.val();
-    //   console.log(data)
-    //   var updatePathuser2 = {};
-    //   updatePathuser2['/user-memories/' + data+"/memories/"+newMemoryKey] = memoryData;
-    //   firebase.database().ref().update(updatePathuser2)
-    // });
-
-
-
-    //******************  my code to uncomment start *******************
-
-    //console.log(this.usersMemoryNode.child(userId).child('user2'))
-    //updatePath['/user-memories/' + userId+"/memories/"+newMemoryKey] = memoryData;
-
-
-
-
-    //return this.fireRef.update(updatePath);
   }
   // return this.fireRef.update(updatePath);
   //   }
@@ -438,11 +344,18 @@ export class MemoryService {
       }
     }else{
       mem_time = myDate.getHours() + ":";
-      if(myDate.getMinutes < 10){
-        mem_time = mem_time+"0"+myDate.getMinutes + "AM";
+      if(myDate.getMinutes() < 10){
+        mem_time = mem_time+"0"+myDate.getMinutes() + "AM";
       }else{
-        mem_time = mem_time+myDate.getMinutes + "AM";
+        mem_time = mem_time+myDate.getMinutes() + "AM";
       }
+    }
+
+    let mem_date: any;
+    if(myDate.getDate() < 10){
+      mem_date = "0"+myDate.getDate();
+    }else{
+      mem_date = myDate.getDate();
     }
     // create the unique id for this hardware memory
     let newMemoryKey = this.usersMemoryNode.child(userId).push().key;
@@ -451,7 +364,8 @@ export class MemoryService {
       time: mem_time,
       day: dayOfWeek[myDate.getDay()],
       month: months[myDate.getMonth()],
-      date: myDate.getDate(),
+      date: mem_date,
+      year: myDate.getFullYear(),
       city: cityName,
       state: stateName,
       location:
