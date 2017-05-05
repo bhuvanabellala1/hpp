@@ -18,7 +18,8 @@
 <ion-content padding>
   <div class="stats-area">
     <!--<img src="img/Profile-1.svg">-->
-    <p> Making memories since (enter first memory date) </p>
+    <p *ngIf="firstMem"> Making memories since {{ firstMem }} </p>
+    <p *ngIf!="firstMem"> Start making memories </p>
     <!--<img src="img/Profile-2.svg">-->
   </div>
   <div style="height: 10px;">
