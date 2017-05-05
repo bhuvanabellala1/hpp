@@ -27,6 +27,8 @@ export class AdventuresPage {
   arrayLength: any;
   lat: any;
   lng: any;
+  memory: any;
+  withoutClick: any;
 
   constructor(
     public navCtrl: NavController,
@@ -35,9 +37,14 @@ export class AdventuresPage {
     public locations: Locations,
     public events: Events,
     private checkinService: CheckinService) {
+      this.withoutClick = false;
     }
 
-    ionViewWillEnter() {
+    // ionViewWillEnter() {
+    //   this.grabAdventure();
+    // }
+
+    ionViewDidEnter() {
       this.grabAdventure();
     }
 
@@ -46,6 +53,8 @@ export class AdventuresPage {
         this.lat = resp.coords.latitude;
         this.lng = resp.coords.longitude;
         this.maps.addMarker(this.lat, this.lng, 20, "Current Location");
+        this.memory = {lat: this.lat, lng: this.lng};
+        this.withoutClick = true;
         this.checkinService.exploreVenues(this.lat + "," + this.lng)
         .then(data => {
           this.adventuresDetail = []
@@ -87,11 +96,13 @@ export class AdventuresPage {
 
     makeMemory = function(){
       console.log(document.getElementById("lat").innerHTML);
-      var lat = Number(document.getElementById("lat").innerHTML);
-      var lng = Number(document.getElementById("lng").innerHTML);
-      console.log(lat, lng);
-      var memory = {lat: lat, lng: lng};
-      this.navCtrl.push(CheckinPage, {adventureMem: memory});
+      if(this.withoutClick = false) {
+        this.lat = Number(document.getElementById("lat").innerHTML);
+        this.lng = Number(document.getElementById("lng").innerHTML);
+      }
+      console.log(this.lat, this.lng);
+      this.memory = {lat: this.lat, lng: this.lng};
+      this.navCtrl.push(CheckinPage, {adventureMem: this.memory});
     }
 
   }
