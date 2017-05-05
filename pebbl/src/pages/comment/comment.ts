@@ -22,11 +22,15 @@ export class CommentPage {
   private memory: MemoryWithKey;
   private comments: Array<CommentModel>;
   private usersMemoryNode: any;
+  private user1: any;
+  private user2: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private memoryService: MemoryService) {
       this.userId = firebase.auth().currentUser.uid;
       this.commentText = "";
       this.memory = this.navParams.get('mem');
+      this.user1 = this.navParams.get('user1');
+      this.user2 = this.navParams.get('user2');
       this.usersMemoryNode = firebase.database().ref('user-memories');
     }
 

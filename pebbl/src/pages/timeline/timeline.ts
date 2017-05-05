@@ -85,7 +85,7 @@ export class TimelinePage {
 
       showComments(memory){
         console.log('showing comments')
-        this.navCtrl.push(CommentPage, {mem: memory});
+        this.navCtrl.push(CommentPage, {mem: memory, user1: this.user1, user2: this.user2});
       }
 
       /*

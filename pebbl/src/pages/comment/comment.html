@@ -17,10 +17,13 @@ Ionic pages and navigation.
 <ion-content padding>
 
   <ion-list *ngIf="comments">
-    
+
     <ion-item text-wrap *ngFor="let eComment of comments">
       <ion-avatar item-left>
-      <img src="img/Profile-1.svg">
+      <img *ngIf='user1.user2id==eComment.userid && user2.proPic' src="{{ user2.proPic }}">
+      <img *ngIf='user1.user2id!=eComment.userid && user1.proPic' src="{{ user1.proPic }}">
+      <img *ngIf='user1.user2id==eComment.userid && !user2.proPic' src="img/Profile-1.svg">
+        <img *ngIf='user1.user2id!=eComment.userid && !user1.proPic' src="img/Profile-1.svg">
     </ion-avatar>
    {{ eComment.comment }}
    </ion-item>
@@ -30,12 +33,10 @@ Ionic pages and navigation.
   <ion-toolbar>
     <ion-item>
     <input type="text" [(ngModel)]="commentText" placeholder="Write a message..." clearInput>
-   
+
   </ion-item>
 
   <button ion-button (click)="sendMessage()">Send</button>
 
   </ion-toolbar>
 </ion-footer>
-  
-
