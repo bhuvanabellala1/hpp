@@ -272,11 +272,9 @@ export class MemoryService {
     console.log("CHECKING TYPE OF YEARRRRR");
     console.log(typeof mem_date);
     let full_date: any
-    if(mem_date < 10){
-      full_date = mem_month + " 0" + mem_date + ", " + year
-    }else{
-      full_date =  mem_month + " " + mem_date + ", " + year
-    }
+    
+      full_date = mem_month + " "+ mem_date + ", " + year
+    
 
     let that = this;
     this.userNode.child(userId).once('value', function(snapshot){
@@ -346,10 +344,10 @@ export class MemoryService {
       }
     }else{
       mem_time = myDate.getHours() + ":";
-      if(myDate.getMinutes < 10){
-        mem_time = mem_time+"0"+myDate.getMinutes + "AM";
+      if(myDate.getMinutes() < 10){
+        mem_time = mem_time+"0"+myDate.getMinutes() + "AM";
       }else{
-        mem_time = mem_time+myDate.getMinutes + "AM";
+        mem_time = mem_time+myDate.getMinutes() + "AM";
       }
     }
 
