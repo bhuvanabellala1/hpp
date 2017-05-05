@@ -32,6 +32,7 @@ export class TimelinePage {
   editId: any;
   user1: any;
   user2: any;
+  private userMemories: any;
   private userId: any;
   public memory: any;
   constructor(
@@ -48,6 +49,7 @@ export class TimelinePage {
     this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
     this.timeline.memories = [];
+    this.userMemories = firebase.database().ref('user-memories');
   }
 
   fetchMemories(userid:any){
@@ -126,6 +128,33 @@ export class TimelinePage {
             console.log(this.timeline.memories)
           });
         });
+      }
+
+      deleteMem(mem_to_rm, index){
+        let alert = this.alertCtrl.create({
+          cssClass: 'deleteconfirm',
+          message: 'Are you sure you want to delete this memory?',
+          buttons: [
+            {
+              text: 'Keep',
+              role: 'cancel',
+              cssClass: 'keepbutton',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'Delete',
+              handler: () => {
+                console.log('Delete clicked');
+                this.timeline.memories.splice(index, 1);
+                this.userMemories.child(this.userId).child('memories').child(mem_to_rm.memKey).remove();
+              }
+            }
+          ]
+        });
+        alert.present();
+
       }
       // Fired when you leave a page, after it stops being the active one. Similar to the previous one.
       ionViewDidLeave() {
