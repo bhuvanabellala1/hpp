@@ -206,6 +206,15 @@ ion-title {
 #sidebar-item .list-ios .item-block .item-inner {
   border-bottom: none !important;
 }
+#peekingpenguin {
+       margin: -4px 0 0 0;
+    width: 100px;
+    height: 36px;
+    position: absolute;
+    z-index: 1;
+    float: left;
+    left: 0;
+}
 // .item-ios.item-block .item-inner {
 //     border-bottom: none !important;
 
