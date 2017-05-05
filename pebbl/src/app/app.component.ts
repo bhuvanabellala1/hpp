@@ -69,7 +69,7 @@ export class MyApp {
       });
 
       this.pages = [
-        { title: 'Connect', icon: 'bluetooth', component: BluetoothPage },
+        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage },
         { title: 'Profile', icon: 'settings', component: ProfilePage },
         { title: 'FAQ', icon: 'help', component: FaqPage }
       ];

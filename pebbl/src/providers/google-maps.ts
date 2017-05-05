@@ -478,7 +478,7 @@ export class GoogleMaps {
         map: this.map,
         animation: google.maps.Animation.DROP,
         position: latLng,
-        icon: 'img/Penguin.png',
+        icon: 'img/locationpin.png',
         title: name
       });
     } else {
@@ -487,13 +487,13 @@ export class GoogleMaps {
         map: this.map,
         animation: google.maps.Animation.DROP,
         position: latLng,
-        icon: 'img/treasure.png',
+        icon: 'img/adventurepin.png',
         title: name
       });
     }
 
     window['marker'+id].addListener('click', function() {
-      document.getElementById("makeMemoryPrompt").style.visibility = "visible";
+      //document.getElementById("makeMemoryPrompt").style.visibility = "visible";
       document.getElementById("adventureplace").innerText = name;
       console.log(lat, lng);
       console.log(String(lat), String(lng));

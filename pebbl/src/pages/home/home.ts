@@ -1,5 +1,5 @@
 import{Component, NgZone}from'@angular/core';
-import { NavController, MenuController, Events}from 'ionic-angular';
+import { NavController, MenuController, Events, NavParams}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import { BluetoothPage }from '../bluetooth/bluetooth';
 import { TimelinePage }from '../timeline/timeline';
@@ -26,12 +26,16 @@ export class HomePage {
   userId: any;
 
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
-    public menu: MenuController, public events: Events) {
+    public menu: MenuController, public events: Events, private navParams: NavParams) {
       this.navPages = [
-        { title: 'Timeline', icon: 'center', path: 'img/Timeline_white.svg', component: TimelinePage },
-        { title: 'Check In', icon: 'center', path: 'img/Checkin_white.svg', component: CheckinPage },
-        { title: 'Adventures', icon: 'center', path: 'img/Adventure_white.svg', component: AdventuresPage }
+        { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
+        { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
+        { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
       ];
+
+      if(navParams.get('fm')){
+        this.firstMem = navParams.get('fm');
+      }
     }
 
     pushPage(page) {
@@ -229,21 +233,7 @@ export class HomePage {
     ionViewDidLoad() {
       console.log("home.ts - Entered home page");
       this.menu.enable(true);
-      this.createChart();
-      firebase.auth().onAuthStateChanged((user) => {
-        if(user){
-          this.userId = firebase.auth().currentUser.uid;
-          let userProfile = firebase.database().ref('users');
-          let that = this;
-          userProfile.child(this.userId).on('value', function(snapshot) {
-            if(snapshot.val().firstMem){
-              that.firstMem = snapshot.val().firstMem;
-            }else{
-              that.firstMem = null;
-            }
-          });
-        }
-      });
+      // this.createChart();
     }
 
   }

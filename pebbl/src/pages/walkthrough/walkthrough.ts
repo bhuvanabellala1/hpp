@@ -5,6 +5,7 @@ import { RegisterPage } from '../register/register';
 import { SecondregsiterPage } from '../secondregsiter/secondregsiter';
 import { UsersService } from '../../providers/users-service'
 import { LoginPage } from '../login/login';
+import * as firebase from 'firebase';
 /*
 Generated class for the Walkthrough page.
 
@@ -56,7 +57,21 @@ export class WalkthroughPage {
     submitLogin(){
 
       this.usersService.loginUser(this.emailField, this.passwordField).then(authData => {
-        this.nav.setRoot(HomePage);
+        let userId = firebase.auth().currentUser.uid;
+        let userProfile = firebase.database().ref('users');
+        let that = this;
+        console.log("Getting first mem");
+        let firstMem: any;
+        userProfile.child(userId).on('value', function(snapshot) {
+          console.log(snapshot);
+          if(snapshot.val().firstMem){
+            firstMem = snapshot.val().firstMem;
+          }else{
+            firstMem = null;
+          }
+          that.nav.setRoot(HomePage, {fm: firstMem});
+        });
+
       }, error => {
         let alert = this.alertCtrl.create({
           title: 'Error loggin in',
