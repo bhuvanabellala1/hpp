@@ -473,7 +473,6 @@ export class GoogleMaps {
 
     if (name == "Current Location") {
       console.log(name);
-      console.log(window['marker'+id]);
       window['marker'+id] = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
@@ -481,6 +480,7 @@ export class GoogleMaps {
         icon: 'img/locationpin.png',
         title: name
       });
+      console.log(window['marker'+id]);
     } else {
       console.log(name);
       window['marker'+id] = new google.maps.Marker({
@@ -513,5 +513,9 @@ export class GoogleMaps {
     }
 
     this.markers.push(window['marker'+id]);
+    if(id === -1){
+      console.log(id);
+      console.log(window['marker'+id], 'is pushed');
+    }
   }
 }

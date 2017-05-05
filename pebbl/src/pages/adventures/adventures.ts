@@ -37,7 +37,6 @@ export class AdventuresPage {
     public locations: Locations,
     public events: Events,
     private checkinService: CheckinService) {
-      this.withoutClick = false;
     }
 
     // ionViewWillEnter() {
@@ -45,22 +44,23 @@ export class AdventuresPage {
     // }
 
     ionViewDidEnter() {
-      this.grabAdventure();
     }
 
     grabAdventure(){
       Geolocation.getCurrentPosition().then((resp) => {
         this.lat = resp.coords.latitude;
         this.lng = resp.coords.longitude;
-        this.maps.addMarker(this.lat, this.lng, 20, "Current Location");
         this.memory = {lat: this.lat, lng: this.lng};
-        this.withoutClick = true;
         this.checkinService.exploreVenues(this.lat + "," + this.lng)
         .then(data => {
           this.adventuresDetail = []
           this.adventures = data;
           this.arrayLength = this.adventures.response.groups[0].items.length;
           for (var i = 0; i < this.arrayLength; i++) {
+            if(i === 0){
+              console.log('adding current marker');
+              this.maps.addMarker(this.lat, this.lng, -1, "Current Location");
+            }
             this.adventuresDetail.push(
               {
                 name : this.adventures.response.groups[0].items[i].venue.name,
@@ -84,7 +84,9 @@ export class AdventuresPage {
       this.platform.ready().then(() => {
         let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
         let locationsLoaded = this.locations.load();
-
+        console.log('after map loaded');
+        this.grabAdventure();
+        // this.maps.addMarker(this.lat, this.lng, -1, "Current Location");
         // Promise.all([mapLoaded, locationsLoaded]).then((result) => {
         //   let locations = result[1];
         //   for(let location of locations){
@@ -95,14 +97,18 @@ export class AdventuresPage {
     };
 
     makeMemory = function(){
-      console.log(document.getElementById("lat").innerHTML);
-      if(this.withoutClick = false) {
+      console.log('look here');
+      if (Number(document.getElementById("lat").innerHTML) === 0) {
+        this.memory = {lat: this.lat, lng: this.lng};
+        this.navCtrl.push(CheckinPage, {adventureMem: this.memory});
+      } else {
         this.lat = Number(document.getElementById("lat").innerHTML);
         this.lng = Number(document.getElementById("lng").innerHTML);
+        console.log(this.lat, this.lng);
+        this.memory = {lat: this.lat, lng: this.lng};
+        this.navCtrl.push(CheckinPage, {adventureMem: this.memory});
       }
-      console.log(this.lat, this.lng);
-      this.memory = {lat: this.lat, lng: this.lng};
-      this.navCtrl.push(CheckinPage, {adventureMem: this.memory});
+
     }
 
   }
