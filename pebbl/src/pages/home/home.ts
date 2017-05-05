@@ -230,14 +230,18 @@ export class HomePage {
       console.log("home.ts - Entered home page");
       this.menu.enable(true);
       this.createChart();
-      this.userId = firebase.auth().currentUser.uid;
-      let userProfile = firebase.database().ref('users');
-      let that = this;
-      userProfile.child(this.userId).on('value', function(snapshot) {
-        if(snapshot.val().firstMem){
-          that.firstMem = snapshot.val().firstMem;
-        }else{
-          that.firstMem = null;
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+          this.userId = firebase.auth().currentUser.uid;
+          let userProfile = firebase.database().ref('users');
+          let that = this;
+          userProfile.child(this.userId).on('value', function(snapshot) {
+            if(snapshot.val().firstMem){
+              that.firstMem = snapshot.val().firstMem;
+            }else{
+              that.firstMem = null;
+            }
+          });
         }
       });
     }
