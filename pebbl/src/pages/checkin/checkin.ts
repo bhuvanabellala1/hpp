@@ -187,7 +187,7 @@ export class CheckinPage {
         this.memoryBody="";
         if(this.instantMem){
           this.hardwareMemories.child(this.userId).child(this.instantMem.memKey).remove();
-          // this.usersService.updateInstantMemNum(this.userId);
+          this.usersService.updateInstantMemNum(this.userId);
         }
         loading.dismiss().then(() => {
           //show pop up

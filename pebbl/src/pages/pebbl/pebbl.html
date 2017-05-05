@@ -30,7 +30,8 @@ Ionic pages and navigation.
 </svg>
     <img class="user1" src="{{ user1_proPic }}">
 
-    <p class="user1mem">20 instant memories</p>
+    <p *ngIf="user1_instantNum == 1" class="user1mem">{{ user1_instantNum }} instant memory</p>
+    <p *ngIf="user1_instantNum != 1" class="user1mem">{{ user1_instantNum }} instant memories</p>
 
     <img src="img/bothCharmsShadow.png" alt="">
 
@@ -47,7 +48,8 @@ Ionic pages and navigation.
     </g>
 </svg>
     <img class="user2" src="{{ user2_proPic }}">
-    <p class="user2mem">36 instant memories</p>
+    <p *ngIf="user2_instantNum == 1" class="user2mem">{{ user2_instantNum }} instant memories</p>
+      <p *ngIf="user2_instantNum != 1" class="user2mem">{{ user2_instantNum }} instant memories</p>
   </div>
   <div [ngClass]="{'scroll-memories': numMems > 0}">
     <p class="mem-number" *ngIf="numMems == 0">You have no new instant memories!</p>

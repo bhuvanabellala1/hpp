@@ -26,6 +26,8 @@ export class PebblPage {
   private numMems: any;
   private user1_proPic: any;
   private user2_proPic: any;
+  private user1_instantNum: any;
+  private user2_instantNum: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private memoryService: MemoryService, private _zone: NgZone,
@@ -37,6 +39,8 @@ export class PebblPage {
       this.numMems = 0;
       this.user1_proPic = "img/Profile-1.svg";
       this.user2_proPic = "img/Profile-1.svg";
+      this.user1_instantNum = 0;
+      this.user2_instantNum = 0;
     }
 
     ionViewDidLoad() {
@@ -54,12 +58,22 @@ export class PebblPage {
         }else{
           that.user1_proPic = "img/Profile-1.svg";
         }
+        if(snapshot.val().instantMemNum){
+          that.user1_instantNum = snapshot.val().instantMemNum;
+        }else{
+          that.user1_instantNum = 0;
+        }
         if(snapshot.val().user2id != "null"){
           userProfile.child(snapshot.val().user2id).on('value', function(snapsh) {
             if(snapsh.val().proPic){
               that.user2_proPic = snapsh.val().proPic;
             }else{
               that.user2_proPic = "img/Profile-1.svg";
+            }
+            if(snapsh.val().instantMemNum){
+              that.user2_instantNum = snapsh.val().instantMemNum;
+            }else{
+              that.user2_instantNum = 0;
             }
           });
         }else{
