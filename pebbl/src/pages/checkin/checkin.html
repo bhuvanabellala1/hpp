@@ -62,7 +62,11 @@ Ionic pages and navigation.
       <ion-icon name="images"></ion-icon>
     </button>
     <ion-scroll id="scroll-photos" scrollX="true">
-      <img *ngFor="let image of images" src="{{ image }}" class="image_picks"/>
+      <img src="img/memory/m1.jpg" alt="" class="image_picks">
+      <div class="selectimagescroll" *ngFor="let image of images" >
+        <img src="{{ image }}" class="image_picks"/>
+
+      </div>
     </ion-scroll>
   </ion-card>
   <ion-card>
