@@ -158,15 +158,21 @@ page-home {
 position:absolute;
 animation: popup 50s ease infinite;
 }
+#red_balloon p {
+    position: absolute;
+    margin-top: -14%;
+    margin-left: 12%;
+    color: white;
+}
 @keyframes popup {
   0% {
-    transform: translate(950%,650%);
+    transform: translate(50%,650%);
   }
   50% {
-    transform: translate(750%,50%);
+    transform: translate(50%,50%);
   }
   100% {
-    transform: translate(950%,650%);
+    transform: translate(50%,650%);
   }
 }
 
@@ -175,10 +181,10 @@ animation: popup 50s ease infinite;
   position:absolute;
 animation: popups 65s infinite linear;
 } 
-p {
-    position: absolute;
-    margin-top: 4%;
-    margin-left: 16%;
+#blue_balloon p {
+position: absolute;
+    margin-top: 14%;
+    margin-left: 20%;
     color: white;
 }
 
@@ -199,22 +205,28 @@ p {
 position:absolute;
   animation: popupss 60s infinite linear;
 }
+#yellow_balloon p {
+    position: absolute;
+    margin-top: -14%;
+    margin-left: 9%;
+    color: white;
+}
 @keyframes popupss {
   0% {
-    transform: translate(550%,0%);
+    transform: translate(50%,0%);
 /*    transform: translateX(250px);
 */  }
   20% {
-    transform: translate(450%,450%);
+    transform: translate(40%,450%);
   }
   50% {
-    transform: translate(350%,950%);
+    transform: translate(30%,950%);
   }
   80% {
-    transform: translate(450%,450%);
+    transform: translate(40%,450%);
   }
   100% {
-    transform: translate(550%,0%);
+    transform: translate(50%,0%);
   }
 
 

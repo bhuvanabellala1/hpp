@@ -39,9 +39,9 @@
           { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
         ];
         this.numMems = 0;
-        this.redballoon = "http://i65.tinypic.com/k3rdwy.png";
-        this.yellowballoon = "assets/images/yellow_day.png";
-        this.blueballoon = "assets/images/blue_day.png";
+        this.redballoon = "img/red_day.png";
+        this.yellowballoon = "img/yellow_day.png";
+        this.blueballoon = "img/blue_day.png";
         this.card1 = "img/night_textbox.png";
         this.hardwareMemories = firebase.database().ref('hardware-memories');
 
@@ -68,8 +68,12 @@
           this.blueballoon = 'img/white_day_blue.png';
           document.getElementById('blue_card').style.visibility='visible';
         document.getElementById('blue_text').style.visibility='visible';
-        this.redballoon = "http://i65.tinypic.com/k3rdwy.png";
-        this.yellowballoon = "assets/images/yellow_day.png";
+        document.getElementById('yellow_card').style.visibility='hidden';
+        document.getElementById('yellow_text').style.visibility='hidden';
+         document.getElementById('red_card').style.visibility='hidden';
+        document.getElementById('red_text').style.visibility='hidden';
+        this.redballoon = "img/red_day.png";
+        this.yellowballoon = "img/yellow_day.png";
         }
       
       }
@@ -77,15 +81,19 @@
       yellow_click() {
 
        if(this.yellowballoon == 'img/white_day_blue.png'){
-        // document.getElementById('yellow_card').style.visibility='hidden';
-        // document.getElementById('yellow_text').style.visibility='hidden';
+        document.getElementById('yellow_card').style.visibility='hidden';
+        document.getElementById('yellow_text').style.visibility='hidden';
         this.yellowballoon = "img/yellow_day.png";
         }else{
           this.yellowballoon = 'img/white_day_blue.png';
-          // document.getElementById('yellow_card').style.visibility='visible';
-          // document.getElementById('yellow_text').style.visibility='visible';
+          document.getElementById('yellow_card').style.visibility='visible';
+          document.getElementById('yellow_text').style.visibility='visible';
+          document.getElementById('blue_card').style.visibility='hidden';
+        document.getElementById('blue_text').style.visibility='hidden';
+          document.getElementById('red_card').style.visibility='hidden';
+        document.getElementById('red_text').style.visibility='hidden';
           this.blueballoon = "img/blue_day.png";
-          this.redballoon = "http://i65.tinypic.com/k3rdwy.png";
+          this.redballoon = "img/red_day.png";
         }
       
 
@@ -94,14 +102,18 @@
       red_click() {
 
         if(this.redballoon == 'img/white_day_blue.png'){
-        // document.getElementById('red_card').style.visibility='hidden';
-        // document.getElementById('red_text').style.visibility='hidden';
-        this.redballoon = "http://i65.tinypic.com/k3rdwy.png";
+        document.getElementById('red_card').style.visibility='hidden';
+        document.getElementById('red_text').style.visibility='hidden';
+        this.redballoon = "img/red_day.png";
         }else{
           this.redballoon = 'img/white_day_blue.png';
-          // document.getElementById('red_card').style.visibility='visible';
-          // document.getElementById('red_text').style.visibility='visible';
-          this.yellowballoon = "assets/images/yellow_day.png";
+          document.getElementById('red_card').style.visibility='visible';
+          document.getElementById('red_text').style.visibility='visible';
+          document.getElementById('yellow_card').style.visibility='hidden';
+        document.getElementById('yellow_text').style.visibility='hidden';
+        document.getElementById('blue_card').style.visibility='hidden';
+        document.getElementById('blue_text').style.visibility='hidden';
+          this.yellowballoon = "img/yellow_day.png";
           this.blueballoon = "img/blue_day.png";
         }
       }
