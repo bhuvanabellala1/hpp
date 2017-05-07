@@ -86,6 +86,7 @@ export class AdventuresPage {
         let locationsLoaded = this.locations.load();
         console.log('after map loaded');
         this.grabAdventure();
+        console.log(this.maps);
         // this.maps.addMarker(this.lat, this.lng, -1, "Current Location");
         // Promise.all([mapLoaded, locationsLoaded]).then((result) => {
         //   let locations = result[1];

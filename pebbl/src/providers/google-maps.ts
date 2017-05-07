@@ -410,6 +410,7 @@ export class GoogleMaps {
         // }
 
         this.map = new google.maps.Map(this.mapElement, mapOptions);
+
         google.maps.event.addListener(this.map, 'dragend', function() {
           console.log('hi');
           // this.grabAdventure();
@@ -432,7 +433,6 @@ export class GoogleMaps {
       this.pleaseConnect.style.display = "none";
     }
   }
-
 
 
   addConnectivityListeners(): void {
