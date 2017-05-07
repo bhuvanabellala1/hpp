@@ -1,0 +1,121 @@
+<style>
+
+body{
+  background-image: url('Balloons.png');
+  background-size: 100%; 
+
+
+}
+
+#red_balloon {
+  transform: translate(150px);
+  animation: popup 40s ease infinite;
+}
+@keyframes popup {
+  0% {
+    transform: translate(600px,1050px);
+  }
+  50% {
+    transform: translate(500px,300px);
+  }
+  100% {
+    transform: translate(600px,1050px);
+  }
+}
+
+
+#blue_balloon {
+/*  transform: translateY(150px);
+*/  animation: popups 65s infinite linear;
+}
+@keyframes popups {
+  0% {
+    transform: translate(100px,1450px);
+/*    transform: translateX(250px);
+*/  }
+  50% {
+    transform: translate(100px,260px);
+  }
+  100% {
+    transform: translate(100px,1450px);
+  }
+}
+
+
+#yellow_balloon {
+  transform: translateY(150px);
+  animation: popupss 60s infinite linear;
+}
+@keyframes popupss {
+  0% {
+    transform: translate(400px,100px);
+/*    transform: translateX(250px);
+*/  }
+  20% {
+    transform: translate(260px,850px);
+  }
+  50% {
+    transform: translate(150px,1380px);
+  }
+  80% {
+    transform: translate(260px,850px);
+  }
+  100% {
+    transform: translate(400px,100px);
+  }
+
+/*
+0% {
+    transform: translate(700px,100px);
+ }
+  15% {
+    transform: translate(200px,850px);
+  }
+  25% {
+    transform: translate(50px,1450px);
+  }
+  35% {
+    transform: translate(65px,700px);
+  }
+  50% {
+    transform: translate(50px,200px);
+  }
+  65% {
+    transform: translate(65px,700px);
+  }
+  75% {
+    transform: translate(50px,1450px);
+  }
+  85% {
+    transform: translate(200px,850px);
+  }
+  100% {
+    transform: translate(700px,100px);
+  }*/
+
+  /*50% {
+    transform: translate(250px,450px);
+  }
+  100% {
+    transform: translate(350px,1250px);
+  }*/
+}
+
+
+</style>
+
+<body>
+
+
+
+<svg id="blue_balloon" width="72px" height="72px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.29 55.82"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#3996e0;}</style><linearGradient id="linear-gradient" x1="2.23" y1="8.81" x2="31.06" y2="37.64" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#063d63"/><stop offset="0.02" stop-color="#09426a"/><stop offset="0.08" stop-color="#165889"/><stop offset="0.14" stop-color="#216ca5"/><stop offset="0.22" stop-color="#2a7bbb"/><stop offset="0.31" stop-color="#3187cc"/><stop offset="0.42" stop-color="#3590d7"/><stop offset="0.57" stop-color="#3895de"/><stop offset="1" stop-color="#3996e0"/></linearGradient></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M12.73,48.21H20.5c6.26-6.34,11.34-21.57,12.61-28.54C34.67,11,25.72,0,16.62,0S-1.14,11.42.12,19.66C1.2,26.67,6.47,43.13,12.73,48.21Z"/><path class="cls-2" d="M19.35,54.84a1.27,1.27,0,0,1-1.2,1H15.08a1.27,1.27,0,0,1-1.2-1L13,50.46a.79.79,0,0,1,.8-1h5.61a.79.79,0,0,1,.8,1Z"/></g></g></svg>
+
+
+<svg id="yellow_balloon" width="88px" height="88px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.99 46.94"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#ffba49;}</style><linearGradient id="linear-gradient" x1="1.88" y1="7.41" x2="26.12" y2="31.66" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#ff9b00"/><stop offset="0.05" stop-color="#ffa10e"/><stop offset="0.13" stop-color="#ffaa24"/><stop offset="0.23" stop-color="#ffb135"/><stop offset="0.35" stop-color="#ffb640"/><stop offset="0.52" stop-color="#ffb947"/><stop offset="1" stop-color="#ffba49"/></linearGradient></defs><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M10.71,40.54h6.53c5.27-5.33,9.53-18.14,10.6-24C29.16,9.29,21.63,0,14,0S-1,9.6.1,16.53C1,22.43,5.44,36.27,10.71,40.54Z"/><path class="cls-2" d="M16.3,46a1.27,1.27,0,0,1-1.2,1H12.84a1.27,1.27,0,0,1-1.2-1L11,42.58a.79.79,0,0,1,.8-1h4.4a.79.79,0,0,1,.8,1Z"/></g></g></svg>
+
+<svg width="64px" height="64px" id = "red_balloon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.29 55.82"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:url(#linear-gradient-2);}</style><linearGradient id="linear-gradient" x1="2.23" y1="8.81" x2="31.06" y2="37.64" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#ff495c"/><stop offset="0.07" stop-color="#f75768"/><stop offset="0.17" stop-color="#ee6876"/><stop offset="0.3" stop-color="#e77381"/><stop offset="0.49" stop-color="#e37a86"/><stop offset="1" stop-color="#e27c88"/></linearGradient><linearGradient id="linear-gradient-2" x1="12.99" y1="52.65" x2="20.24" y2="52.65" xlink:href="#linear-gradient"/></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M12.73,48.21H20.5c6.26-6.34,11.34-21.57,12.61-28.54C34.67,11,25.72,0,16.62,0S-1.14,11.42.12,19.66C1.2,26.67,6.47,43.13,12.73,48.21Z"/><path class="cls-2" d="M19.35,54.84a1.27,1.27,0,0,1-1.2,1H15.08a1.27,1.27,0,0,1-1.2-1L13,50.46a.79.79,0,0,1,.8-1h5.61a.79.79,0,0,1,.8,1Z"/></g></g></svg>
+
+</body>
+
+
+<!-- <img id='balloon' src="http://i65.tinypic.com/k3rdwy.png" alt="Mountain View" style="width:304px;height:228px;"> -->

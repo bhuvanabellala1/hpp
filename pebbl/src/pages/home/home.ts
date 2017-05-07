@@ -46,11 +46,13 @@ export class HomePage {
 
   createChart() {
 
-   var width = 500,
-      height = 500,
+    console.log(screen.width);
+
+   var width = 400,
+      height = 400,
       start = 0,
-      end = 2.25,
-      numSpirals = 3,
+      end = 0.75,
+      numSpirals = 4,
       margin = {top:50,bottom:50,left:50,right:50};
 
     var theta = function(r) {
@@ -152,6 +154,14 @@ export class HomePage {
     // used to assign nodes color by group
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
+
+    // var bar_colors = {'4': 'green'};
+
+    // console.log('Hey');
+    // console.log(color);
+    // console.log('Done');
+
+
     var r = d3.min([width, height]) / 2 - 40;
 
     var radius = d3.scaleLinear()
@@ -159,10 +169,11 @@ export class HomePage {
       .range([40, r]);
 
     var svg = d3.select("#vis").append("svg")
-      .attr("width", width + margin.right + margin.left)
+      .attr("width", width + margin.right + margin.left + 80)
       .attr("height", height + margin.left + margin.right)
+      .style("margin-left", "0px")
       .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      .attr("transform", "translate(" + (width/2 - 40) + "," + height / 2 + ")");
 
     var points = d3.range(start, end + 0.001, (end - start) / 1000);
 
@@ -184,7 +195,7 @@ export class HomePage {
     var someData = [];
     for (var i = 0; i < N; i++) {
       var currentDate = new Date();
-      currentDate.setDate(currentDate.getDate() + i);
+      currentDate.setDate(currentDate.getDate() + i + 1);
       someData.push({
         date: currentDate,
         value: Math.random(),
@@ -228,12 +239,12 @@ export class HomePage {
         return d.y;
       })
       .attr("width", function(d){
-        return barWidth;
+        return barWidth + 0.5;
       })
       .attr("height", function(d){
-        return yScale(d.value);
+        return (yScale(d.value)+15);
       })
-      .style("fill", function(d){return color(d.group);})
+      .style("fill", function(d){console.log(d);})
       .style("stroke", "none")
       .attr("transform", function(d){
         return "rotate(" + d.a + "," + d.x  + "," + d.y + ")"; // rotate the bar
