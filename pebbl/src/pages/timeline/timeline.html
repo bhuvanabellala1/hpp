@@ -1,8 +1,8 @@
 <!--
-  Generated template for the Timeline page.
+Generated template for the Timeline page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
 -->
 <ion-header>
   <ion-navbar color="primary">
@@ -14,6 +14,7 @@
 </ion-header>
 
 <ion-content>
+
   <ion-list class="list-no-border">
 
     <a (click)="addEntry()">
@@ -25,7 +26,7 @@
               <g id="Group-3">
                 <polygon id="Polygon" fill=#3996E0 points="16 0 29.8564065 8 29.8564065 24 16 32 2.14359354 24 2.14359354 8"></polygon>
                 <path d="M16.8614966,15.2503154 L16.8614966,8.80458361 C16.8614966,8.35909201 16.5007934,8 16.055906,8 C15.6118241,8 15.2503154,8.36030039 15.2503154,8.80458361 L15.2503154,15.2503154 L8.80458361,15.2503154 C8.35909201,15.2503154 8,15.6110186 8,16.055906 C8,16.4999878 8.36030039,16.8614966 8.80458361,16.8614966 L15.2503154,16.8614966 L15.2503154,23.3074297 C15.2503154,23.7527199 15.6110186,24.1118119 16.055906,24.1118119 C16.4999878,24.1118119 16.8614966,23.7517129 16.8614966,23.3074297 L16.8614966,16.8614966 L23.3074297,16.8614966 C23.7527199,16.8614966 24.1118119,16.5007934 24.1118119,16.055906 C24.1118119,15.6118241 23.7517129,15.2503154 23.3074297,15.2503154 L16.8614966,15.2503154 Z"
-                  id="Page-1" fill="#FFFFFF"></path>
+                id="Page-1" fill="#FFFFFF"></path>
               </g>
             </g>
           </g>
@@ -33,46 +34,69 @@
       </svg>
     </a>
 
+    <p *ngIf="timeline.memories.length == 0">You have not made any memories.</p>
+
+
     <ion-item class="mem-no-margin" *ngFor="let memory of timeline.memories; let i=index">
       <hr class="vertical" />
       <ion-item class="timeline-date">
-        <span>{{ today }}</span>
+        <span>{{ memory.mem.day }}, {{ memory.mem.date }} {{ memory.mem.month }}</span>
       </ion-item>
       <ion-card class="notifications-list">
         <ion-card-content>
           <hr class="vertical2" />
           <ion-item>
             <ion-avatar item-left>
-              <img src="img/Profile-1.svg">
+              <!--<img src="{{ user2_proPic }}" id="user2" [style.visibility]="(hide) ? 'hidden' : 'visible'"/>-->
+              <img *ngIf="memory.mem.usBoth && ((memory.mem.madeBy==userId && !user2.proPic) || (memory.mem.madeBy!=userId && !user1.proPic))" src="img/Profile-1.svg" id="user2both" />
+              <img *ngIf="memory.mem.usBoth && memory.mem.madeBy==userId && user2.proPic" src="{{ user2.proPic }}" id="user2both" />
+              <img *ngIf="memory.mem.usBoth && memory.mem.madeBy!=userId && user1.proPic" src="{{ user1.proPic }}" id="user2both" />
+
+
+              <img *ngIf="!memory.mem.madeBy || (memory.mem.madeBy==userId && !user1.proPic) || (memory.mem.madeBy!=userId && !user2.proPic)" src="img/Profile-1.svg" />
+              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy==userId && user1.proPic" src="{{ user1.proPic }}"/>
+              <img *ngIf="memory.mem.madeBy && memory.mem.madeBy!=userId && user2.proPic" src="{{ user2.proPic }}"/>
             </ion-avatar>
-            <h2>{{ memory.location_tag }}</h2>
+            <h2>{{ memory.mem.location_tag }}</h2>
+
             <p>
-              <ion-icon name="time-outline"></ion-icon> 10:40am
-              <ion-icon name="pin-outline"></ion-icon> Berkeley, CA</p>
-          </ion-item>
-          <img id="images" src="{{ memory.image[0] }}" (click)="slideImages(i, 0)" />
-          <p id="caption">{{ memory.text }}</p>
-          
-          <div class="memorybuttons">
-            <button ion-button icon-left clear (click)="showComments()">
-              <ion-icon name="text">
-              </ion-icon><div>4 Comments</div>
-            </button>
+              <ion-icon name="time-outline"></ion-icon> {{ memory.mem.time }}
+              <ion-icon name="pin-outline"></ion-icon> {{ memory.mem.city}}, {{ memory.mem.state}}</p>
+            </ion-item>
 
-          <button ion-button icon-left clear (click)="editEntry(memory.id)">
-            <ion-icon name="create"></ion-icon>
-          </button>
-        </div>
+            <img id="images" *ngIf="memory.mem.image && memory.mem.image.length > 0" src="{{ memory.mem.image[0] }}" (click)="slideImages(i, 0)"/>
+            <p id="caption">{{ memory.mem.text }}</p>
 
-        <!-- <ion-list>
-          <ion-item *ngFor="let comment of comments" id="comment">
+            <!-- <ion-list>
+            <ion-item *ngFor="let comment of comments" id="comment">
             {{comment}}
           </ion-item>
         </ion-list> -->
+        <div class="commentbutton">
+          <button  *ngIf="memory.mem.comment && memory.mem.comment.length == 1" ion-button icon-left clear (click)="showComments(memory)">
+            <ion-icon name="text">
+            </ion-icon><div>{{ memory.mem.comment.length }} Message</div>
+          </button>
+          <button *ngIf="memory.mem.comment && memory.mem.comment.length > 1" ion-button icon-left clear (click)="showComments(memory)">
+            <ion-icon name="text">
+            </ion-icon><div>{{ memory.mem.comment.length }} Messages</div>
+          </button>
+          <button *ngIf="!memory.mem.comment" ion-button icon-left clear (click)="showComments(memory)">
+            <ion-icon name="text"></ion-icon>
+          </button>
+        </div>
+        <div class="rightbuttons">
+          <!-- <button  ion-button icon-left clear>
+            <ion-icon name="create"></ion-icon>
+          </button> -->
+          <button class="trashbutton" ion-button icon-left clear (click)="deleteMem(memory, i)">
+            <ion-icon name="trash" isActive="false"></ion-icon>
+          </button>
+        </div>
 
-        </ion-card-content>
+      </ion-card-content>
 
-      </ion-card>
-    </ion-item>
-  </ion-list>
+    </ion-card>
+  </ion-item>
+</ion-list>
 </ion-content>

@@ -11,7 +11,7 @@ page-login {
 		border-width: 0;
     }
 .main-title {
-			margin: 30% 20px 20%;
+			margin: 18% 20px 16%;
 			font-weight: 900;
 			text-align: center;
 		}
@@ -31,11 +31,11 @@ page-login {
 
 		}
         svg {
-         //   margin: 0 9%;
+         margin: -3px 12px -4px 7px;
         }
 		.skip-button {
 	color: color($colors, light);
-	margin: 30px 20px 0;
+	margin-top: 30px;
 }
-
+	
 }

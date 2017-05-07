@@ -1,5 +1,5 @@
 import{Component, NgZone}from'@angular/core';
-import { NavController, MenuController, Events}from 'ionic-angular';
+import { NavController, MenuController, Events, NavParams}from 'ionic-angular';
 import { CheckinPage}from '../checkin/checkin';
 import { BluetoothPage }from '../bluetooth/bluetooth';
 import { TimelinePage }from '../timeline/timeline';
@@ -7,6 +7,7 @@ import { AdventuresPage}from '../adventures/adventures';
 import { PebblPage } from '../pebbl/pebbl';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
+import * as firebase from 'firebase';
 
 declare var d3: any;
 
@@ -18,38 +19,40 @@ declare var d3: any;
 export class HomePage {
 
   navPages: Array<{title: string, icon: string, path: string, component: any}>;
-  // public venuesData: any;
-  // public venue: any;
   adventures: any;
   adventuresDetail: any;
   arrayLength: any;
-
+  firstMem: any;
+  userId: any;
+  private hardwareMemories: any;;
+  private numMems: any;
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
-  public menu: MenuController, public events: Events) {
-    this.navPages = [
-      { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
-      { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
-      { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
-    ];
-  }
+    public menu: MenuController, public events: Events, private navParams: NavParams) {
+      this.navPages = [
+        { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
+        { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
+        { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
+      ];
+      this.numMems = 0;
+      this.hardwareMemories = firebase.database().ref('hardware-memories');
 
-  pushPage(page) {
+      if(navParams.get('fm')){
+        this.firstMem = navParams.get('fm');
+      }
+    }
+
+    pushPage(page) {
       this.navCtrl.push(page.component);
-  }
+    }
 
+    pushInstantMemory(){
+      this.navCtrl.push(PebblPage);
+    }
 
+    createChart() {
 
-  pushInstantMemory(){
-    this.navCtrl.push(PebblPage);
-  }
-
-
-  createChart() {
-
-    console.log(screen.width);
-
-   var width = 400,
-      height = 400,
+      var width = 500,
+      height = 500,
       start = 0,
       end = 0.75,
       numSpirals = 4,
@@ -175,14 +178,14 @@ export class HomePage {
       .append("g")
       .attr("transform", "translate(" + (width/2 - 40) + "," + height / 2 + ")");
 
-    var points = d3.range(start, end + 0.001, (end - start) / 1000);
+      var points = d3.range(start, end + 0.001, (end - start) / 1000);
 
-    var spiral = d3.radialLine()
+      var spiral = d3.radialLine()
       .curve(d3.curveCardinal)
       .angle(theta)
       .radius(radius);
 
-    var path = svg.append("path")
+      var path = svg.append("path")
       .datum(points)
       .attr("id", "spiral")
       .attr("d", spiral)
@@ -202,35 +205,34 @@ export class HomePage {
         group: currentDate.getMonth()
       });
     }
-
-
     var timeScale = d3.scaleTime()
+
       .domain(d3.extent(someData, function(d){
         return d.date;
       }))
       .range([0, spiralLength]);
-    
-    // yScale for the bar height
-    var yScale = d3.scaleLinear()
+
+      // yScale for the bar height
+      var yScale = d3.scaleLinear()
       .domain([0, d3.max(someData, function(d){
         return d.value;
       })])
       .range([0, (r / numSpirals) - 30]);
 
-    svg.selectAll("rect")
+      svg.selectAll("rect")
       .data(someData)
       .enter()
       .append("rect")
       .attr("x", function(d,i){
-        
+
         var linePer = timeScale(d.date),
-            posOnLine = path.node().getPointAtLength(linePer),
-            angleOnLine = path.node().getPointAtLength(linePer - barWidth);
-      
+        posOnLine = path.node().getPointAtLength(linePer),
+        angleOnLine = path.node().getPointAtLength(linePer - barWidth);
+
         d.linePer = linePer; // % distance are on the spiral
         d.x = posOnLine.x; // x postion on the spiral
         d.y = posOnLine.y; // y position on the spiral
-        
+
         d.a = (Math.atan2(angleOnLine.y, angleOnLine.x) * 180 / Math.PI) - 90; //angle at the spiral position
 
         return d.x;
@@ -249,12 +251,12 @@ export class HomePage {
       .attr("transform", function(d){
         return "rotate(" + d.a + "," + d.x  + "," + d.y + ")"; // rotate the bar
       });
-    
-    // add date labels
-    var tF = d3.timeFormat("%b %Y"),
-        firstInMonth = {};
 
-    svg.selectAll("text")
+      // add date labels
+      var tF = d3.timeFormat("%b %Y"),
+      firstInMonth = {};
+
+      svg.selectAll("text")
       .data(someData)
       .enter()
       .append("text")
@@ -282,29 +284,29 @@ export class HomePage {
       })
 
 
-    var tooltip = d3.select("#vis")
-    .append('div')
-    .attr('class', 'tooltip')
-    .style('background', '#eee')
-    .style('box-shadow', '0 0 5px #999999')
-    .style('color', '#333')
-    .style('font-size', '12px')
-    .style('left', '130px')
-    .style('padding', '10px')
-    .style('position', 'absolute')
-    .style('text-align', 'center')
-    .style('top', '95px')
-    .style('z-index', '10')
-    .style('display', 'block')
-    .style('opacity', '0');
+      var tooltip = d3.select("#vis")
+      .append('div')
+      .attr('class', 'tooltip')
+      .style('background', '#eee')
+      .style('box-shadow', '0 0 5px #999999')
+      .style('color', '#333')
+      .style('font-size', '12px')
+      .style('left', '130px')
+      .style('padding', '10px')
+      .style('position', 'absolute')
+      .style('text-align', 'center')
+      .style('top', '95px')
+      .style('z-index', '10')
+      .style('display', 'block')
+      .style('opacity', '0');
 
-    tooltip.append('div')
-    .attr('class', 'date');
-    tooltip.append('div')
-    .attr('class', 'value');
+      tooltip.append('div')
+      .attr('class', 'date');
+      tooltip.append('div')
+      .attr('class', 'value');
 
-    svg.selectAll("rect")
-    .on('mouseover', function(d) {
+      svg.selectAll("rect")
+      .on('mouseover', function(d) {
 
         tooltip.select('.date').html("Date: <b>" + d.date.toDateString() + "</b>");
         tooltip.select('.value').html("Value: <b>" + Math.round(d.value*100)/100 + "<b>");
@@ -317,56 +319,36 @@ export class HomePage {
         tooltip.style('display', 'block');
         tooltip.style('opacity',2);
 
-    })
-    .on('mousemove', function(d) {
+      })
+      .on('mousemove', function(d) {
         tooltip.style('top', (d3.event.layerY + 10) + 'px')
         .style('left', (d3.event.layerX - 25) + 'px');
-    })
-    .on('mouseout', function(d) {
+      })
+      .on('mouseout', function(d) {
         d3.selectAll("rect")
         .style("fill", function(d){return color(d.group);})
         .style("stroke", "none")
 
         tooltip.style('display', 'none');
         tooltip.style('opacity',0);
-    });  
-}
+      });
+    }
 
-  //   function collide(alpha) {
-  //     var quadtree = d3.geom.quadtree(nodes);
-  //     return function(d) {
-  //       var r = d.radius + radius.domain()[1] + padding,
-  //       // var r = d.radius + padding,
-  //       nx1 = d.x - r,
-  //       nx2 = d.x + r,
-  //       ny1 = d.y - r,
-  //       ny2 = d.y + r;
-  //       quadtree.visit(function(quad, x1, y1, x2, y2) {
-  //         if (quad.point && (quad.point !== d)) {
-  //           var x = d.x - quad.point.x,
-  //           y = d.y - quad.point.y,
-  //           l = Math.sqrt(x * x + y * y),
-  //           // r = d.radius + quad.point.radius + (d.color !== quad.point.color) * padding;
-  //           r = 33.31370849898476;
-  //           if (l < r) {
-  //             l = (l - r) / l * alpha;
-  //             d.x -= x *= l;
-  //             d.y -= y *= l;
-  //             quad.point.x += x;
-  //             quad.point.y += y;
-  //           }
-  //         }
-  //         return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-  //       });
-  //     };
-  //   }
-  // }
+    ionViewDidLoad() {
+      console.log("home.ts - Entered home page");
+     let userId = firebase.auth().currentUser.uid;
+      this.menu.enable(true);
+      let that = this;
+      this._zone.run(() => {
+        this.hardwareMemories.child(userId).on('value', function(snapshot) {
+          let memories = (snapshot.val());
+          if(memories){
+            that.numMems =  Object.keys(memories).length;
+            console.log("hardware MEMS");
+            console.log(that.numMems);
+          }
+        });
+      });
+    }
 
-
-  ionViewDidLoad() {
-    console.log("home.ts - Entered home page");
-    this.menu.enable(true);
-    this.createChart();
   }
-
-}

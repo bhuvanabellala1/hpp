@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg width="79px" height="79px" viewBox="0 0 79 79" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Paired" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-Page-(Default-v3)-Copy" transform="translate(-148.000000, -566.000000)">
+            <g id="Bottom-Navigation" transform="translate(36.000000, 566.000000)">
+                <g id="MakeButton" transform="translate(112.000000, 0.000000)">
+                    <circle id="Middle" fill="#FFFFFF" cx="39.5" cy="39.5" r="39.5"></circle>
+                    <path d="M42,38 L42,21.9975 C42,20.8915 41.1045,20 40,20 C38.8975,20 38,20.8945 38,21.9975 L38,38 L21.9975,38 C20.8915,38 20,38.8955 20,40 C20,41.1025 20.8945,42 21.9975,42 L38,42 L38,58.003 C38,59.1085 38.8955,60 40,60 C41.1025,60 42,59.106 42,58.003 L42,42 L58.003,42 C59.1085,42 60,41.1045 60,40 C60,38.8975 59.106,38 58.003,38 L42,38 Z" id="Page-1" fill="#3996E0"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

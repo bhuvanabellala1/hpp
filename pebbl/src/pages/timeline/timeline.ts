@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {TimelineService} from './timeline.service';
 import { CheckinPage} from '../checkin/checkin';
-import {TimelineModel} from './timeline.model';
+import { TimelineModel, MemoryWithKey } from './timeline.model';
 import { MemoryslidesPage } from '../memoryslides/memoryslides';
 import { Http } from '@angular/http';
 import { NgZone, Injectable } from '@angular/core';
@@ -12,6 +12,7 @@ import { MemoryService } from '../../providers/memory-service';
 import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
 import * as firebase from 'firebase';
+import { CommentPage} from '../comment/comment';
 
 
 /*
@@ -29,7 +30,9 @@ export class TimelinePage {
   timeline: TimelineModel = new TimelineModel();
   loading: any;
   editId: any;
-  comments: any;
+  user1: any;
+  user2: any;
+  private userMemories: any;
   private userId: any;
   public memory: any;
   constructor(
@@ -45,8 +48,8 @@ export class TimelinePage {
   ) {
     this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
-    this.timeline.memories = []
-    this.comments = ['comment1', 'comment2', 'comment3'];
+    this.timeline.memories = [];
+    this.userMemories = firebase.database().ref('user-memories');
   }
 
   fetchMemories(userid:any){
@@ -56,50 +59,12 @@ export class TimelinePage {
       console.log(snapshot.val())
       this.memory = (snapshot.val())
       this.timeline.memories = this.memory;
-      //       Object.keys(this.memory).forEach(key => {
-      //     console.log(key);          // the name of the current key.
-      //     console.log(this.memory[key]);   // the value of the current key.
-      // });
-
     });
   }
 
   ionViewDidLoad() {
-    console.log("in ion view")
-
-    // this.loading.present();
-    // this.fetchMemories(this.userId)
-    // console.log("back in ion view")
-    // console.log(this.timeline.memories)
-    this._zone.run(() => {
-      this.memoryService.fetchMemory(this.userId).then(snapshot => {
-        console.log("in snapshot")
-        console.log(snapshot.val())
-        this.memory = (snapshot.val())
-        console.log(this.timeline.memories)
-        //this.timeline.memories = this.memory;
-        Object.keys(this.memory).forEach(key => {
-          console.log(key);          // the name of the current key.
-          console.log(typeof this.memory[key]);
-          this.timeline.memories = this.timeline.memories.concat(this.memory[key]) // the value of the current key.
-        });
-
-        // this.loading.dismiss();
-        console.log(this.timeline.memories)
-      });
-    });
-
-
-
-
-
-    // this.timelineService
-    // .getData()
-    // .then(mems => {
-    //   this.timeline.memories = this.memory;
-    //   this.loading.dismiss();
-    //   console.log(this.timeline.memories)
-    // });
+    console.log("in ion view");
+    this.loadUsers();
   }
 
   slideImages(memIndex, imageIndex){
@@ -120,10 +85,10 @@ export class TimelinePage {
         this.navCtrl.push(CheckinPage);
       }
 
-      // showComments(){
-      //   console.log('showing comments')
-      //   document.getElementById("comment").style.visibility = 'visible';
-      // }
+      showComments(memory){
+        console.log('showing comments')
+        this.navCtrl.push(CommentPage, {mem: memory, user1: this.user1, user2: this.user2});
+      }
 
       /*
       * if given group is the selected group, deselect it
@@ -138,9 +103,87 @@ export class TimelinePage {
         return group.show;
       };
 
+      ionViewWillEnter(){
+        console.log("timeline.ts - entering ion view");
+        let that = this;
+        this.timeline.memories = [];
+        this._zone.runOutsideAngular(()=>{
+          this.memoryService.fetchMemory(this.userId).then(snapshot => {
+            that.timeline.memories = [];
+            console.log("FETCHING MEMORIES")
+            console.log(that.timeline.memories.length);
+            if(snapshot.val()){
+              that.timeline.memories = [];
+              that.memory = (snapshot.val())
+              console.log(that.timeline.memories.length);
+              // console.log(this.timeline.memories)
+              //this.timeline.memories = this.memory
+              Object.keys(that.memory).forEach(key => {
+                let eachMemory: MemoryWithKey = new MemoryWithKey();
+                eachMemory.memKey = key;
+                eachMemory.mem = that.memory[key];
+                console.log(eachMemory.mem.madeBy);
+                that._zone.run(() => {
+                  // console.log(NgZone.current.name())
+                  that.timeline.memories.unshift(eachMemory);
+                });
+              });
+            }
+
+            // this.loading.dismiss();
+            console.log(this.timeline.memories)
+          });
+        });
+      }
+
+      deleteMem(mem_to_rm, index){
+        console.log("Deleting memory");
+        console.log(index);
+        console.log(mem_to_rm.mem.text);
+        let alert = this.alertCtrl.create({
+          cssClass: 'deleteconfirm',
+          message: 'Are you sure you want to delete this memory?',
+          buttons: [
+            {
+              text: 'Keep',
+              role: 'cancel',
+              cssClass: 'keepbutton',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'Delete',
+              handler: () => {
+                console.log('Delete clicked');
+                this.timeline.memories.splice(index, 1);
+                this.userMemories.child(this.userId).child('memories').child(mem_to_rm.memKey).remove();
+              }
+            }
+          ]
+        });
+        alert.present();
+
+      }
       // Fired when you leave a page, after it stops being the active one. Similar to the previous one.
       ionViewDidLeave() {
         this.events.publish('editMemory', this.editId);
       }
 
+      loadUsers(){
+        let that = this;
+        let userProfile = firebase.database().ref('users');
+        userProfile.child(this.userId).on('value', function(snapshot) {
+          that.user1 = snapshot.val();
+          console.log(that.user1.proPic);
+          if(snapshot.val().user2id != "null"){
+            userProfile.child(snapshot.val().user2id).on('value', function(snapsh) {
+              that.user2 = snapsh.val();
+            });
+          }else{
+            that.user2 = null;
+          }
+
+        });
+      }
     }

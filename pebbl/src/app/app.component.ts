@@ -31,14 +31,18 @@ export class MyApp {
   public user: UsersService;
   public rootPage: any = HomePage;
   pages: Array<{title: string, icon: string, component: any}>;
+  private proPic: any;
+  private userName: any;
+  public userProfile: any;
+  private userId :any;
 
 
   constructor(platform: Platform, public app: App, public menu:MenuController,
-
     private backgroundMode: BackgroundMode) {
 
 
-
+      this.proPic = "img/Profile-1-Large.svg";
+      this.userName = "Sam";
       //Initialize Firebase
       const config = {
         apiKey: "AIzaSyD70iOoMmko5N-WFL8bFq7IJFSDou4rkjs",
@@ -61,15 +65,16 @@ export class MyApp {
         cordova.plugins.backgroundMode.on('activate', function(){
           console.log("Background mode activated");
         });
-        Keyboard.disableScroll(true);
+        //Keyboard.disableScroll(true);
       });
 
       this.pages = [
-        { title: 'Settings', icon: 'settings', component: ProfilePage },
-        { title: 'FAQ', icon: 'help', component: FaqPage },
-        { title: 'Legal', icon: 'document', component: LegalPage },
-        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage }
+        { title: 'Bluetooth', icon: 'bluetooth', component: BluetoothPage },
+        { title: 'Profile', icon: 'settings', component: ProfilePage },
+        { title: 'FAQ', icon: 'help', component: FaqPage }
       ];
+
+
     }
 
 
@@ -95,7 +100,17 @@ export class MyApp {
       firebase.auth().onAuthStateChanged((user) => {
         if(user){
           console.log("authenticated")
-          // this.nav.setRoot(HomePage);
+          this.userId = firebase.auth().currentUser.uid;
+          let that = this;
+          this.userProfile = firebase.database().ref('users');
+          this.userProfile.child(this.userId).on('value', function(snapshot) {
+            if(snapshot.val().proPic){
+              that.proPic = snapshot.val().proPic;
+            }else{
+              that.proPic = "img/Profile-1-Large.svg";
+            }
+            that.userName = snapshot.val().username;
+          });
         }
         else{
           console.log("not authenticated")

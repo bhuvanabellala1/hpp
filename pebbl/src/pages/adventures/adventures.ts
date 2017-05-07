@@ -4,7 +4,7 @@ import { GoogleMaps } from '../../providers/google-maps';
 import { NavController, Platform, Events } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
-
+import { CheckinPage } from '../checkin/checkin';
 
 /*
 Generated class for the Adventures page.
@@ -25,6 +25,10 @@ export class AdventuresPage {
   adventures: any;
   adventuresDetail: any;
   arrayLength: any;
+  lat: any;
+  lng: any;
+  memory: any;
+  withoutClick: any;
 
   constructor(
     public navCtrl: NavController,
@@ -35,18 +39,28 @@ export class AdventuresPage {
     private checkinService: CheckinService) {
     }
 
-    ionViewWillEnter() {
-      this.grabAdventure();
+    // ionViewWillEnter() {
+    //   this.grabAdventure();
+    // }
+
+    ionViewDidEnter() {
     }
 
     grabAdventure(){
       Geolocation.getCurrentPosition().then((resp) => {
-        this.checkinService.exploreVenues(resp.coords.latitude + "," + resp.coords.longitude)
+        this.lat = resp.coords.latitude;
+        this.lng = resp.coords.longitude;
+        this.memory = {lat: this.lat, lng: this.lng};
+        this.checkinService.exploreVenues(this.lat + "," + this.lng)
         .then(data => {
           this.adventuresDetail = []
           this.adventures = data;
           this.arrayLength = this.adventures.response.groups[0].items.length;
           for (var i = 0; i < this.arrayLength; i++) {
+            if(i === 0){
+              console.log('adding current marker');
+              this.maps.addMarker(this.lat, this.lng, -1, "Current Location");
+            }
             this.adventuresDetail.push(
               {
                 name : this.adventures.response.groups[0].items[i].venue.name,
@@ -55,12 +69,14 @@ export class AdventuresPage {
                 lat: Number(this.adventures.response.groups[0].items[i].venue.location.lat),
                 lng: Number(this.adventures.response.groups[0].items[i].venue.location.lng)
               });
-              this.maps.addMarker(this.adventuresDetail[i].lat, this.adventuresDetail[i].lng);
+              this.maps.addMarker(this.adventuresDetail[i].lat, this.adventuresDetail[i].lng, i, this.adventuresDetail[i].name);
           }
         });
       }).catch((error) => {
         console.log('Error getting location', error);
       });
+      // this.maps.event.addListener(this.maps, 'dragend', function() { console.log('map dragged'); } );
+      // this.maps.mapElement.event.addListener(this.maps, 'dragend', function() { console.log('map dragged'); } );
     }
 
     ionViewDidLoad(){
@@ -68,12 +84,31 @@ export class AdventuresPage {
       this.platform.ready().then(() => {
         let mapLoaded = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
         let locationsLoaded = this.locations.load();
-        Promise.all([mapLoaded, locationsLoaded]).then((result) => {
-          let locations = result[1];
-          // for(let location of locations){
-          //   this.maps.addMarker(location.latitude, location.longitude);
-          // }
-        })
+        console.log('after map loaded');
+        this.grabAdventure();
+        // this.maps.addMarker(this.lat, this.lng, -1, "Current Location");
+        // Promise.all([mapLoaded, locationsLoaded]).then((result) => {
+        //   let locations = result[1];
+        //   for(let location of locations){
+        //     this.maps.addMarker(location.latitude, location.longitude);
+        //   }
+        // })
       })
     };
+
+    makeMemory = function(){
+      console.log('look here');
+      if (Number(document.getElementById("lat").innerHTML) === 0) {
+        this.memory = {lat: this.lat, lng: this.lng};
+        this.navCtrl.push(CheckinPage, {adventureMem: this.memory});
+      } else {
+        this.lat = Number(document.getElementById("lat").innerHTML);
+        this.lng = Number(document.getElementById("lng").innerHTML);
+        console.log(this.lat, this.lng);
+        this.memory = {lat: this.lat, lng: this.lng};
+        this.navCtrl.push(CheckinPage, {adventureMem: this.memory});
+      }
+
+    }
+
   }

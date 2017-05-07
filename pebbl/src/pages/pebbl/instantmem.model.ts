@@ -10,6 +10,7 @@ export class InstantMemItemModel {
   date: string;
   city: string;
   state: string;
+  year: string;
   location:
   {
     lat: any;

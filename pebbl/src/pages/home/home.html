@@ -9,16 +9,18 @@
     </ion-title>
     <ion-buttons end>
       <button class="top-navigation" (click)="pushInstantMemory()">
-        <img src="img/charmed.svg">
+        <img *ngIf="numMems > 0" src="img/redcharm.svg">
+        <img *ngIf="numMems == 0" src="img/charmed.svg">
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content no-bounce padding>
   <div class="stats-area">
     <!--<img src="img/Profile-1.svg">-->
-    <p> Making memories since (enter first memory date) </p>
+    <p *ngIf="firstMem"> Making memories since {{ firstMem }} </p>
+    <p *ngIf!="firstMem"> Start making memories </p>
     <!--<img src="img/Profile-2.svg">-->
   </div>
   <div style="height: 10px;">

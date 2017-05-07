@@ -29,7 +29,7 @@ export class UsersService {
   private fireRef: any;
   private usersMemoryNode: any;
   private hardwareMemories: any;
-
+  private storageRef: any;
 
   constructor(public http: Http, private loadingCtrl: LoadingController,
     private alertCtrl: AlertController, private memoryService: MemoryService, private sms: SMS) {
@@ -40,6 +40,7 @@ export class UsersService {
       this.usersMemoryNode = firebase.database().ref('user-memories');
       this.fireRef = firebase.database().ref();
       this.hardwareMemories = firebase.database().ref('hardware-memories');
+      this.storageRef = firebase.storage().ref();
     }
 
     fetchUid(code:any){
@@ -207,24 +208,39 @@ export class UsersService {
         }
 
 
+        uploadImage(imageString:any)
+        {
+          let image       : string  = 'mem-' + new Date().getTime() + '.jpg',
+          parseUpload: any
+          var imageRef = this.storageRef.child('memories/' + image);
+          parseUpload = imageRef.putString(imageString, firebase.storage.StringFormat.DATA_URL);
+          console.log (typeof parseUpload)
+          return parseUpload
+        }
 
+        uploadProPic(imageStr: any, userID){
+          console.log("user-service - uploading profile pic");
+          return this.uploadImage(imageStr).then((snapshot)=> {
+            console.log("Success");
+            console.log(snapshot.downloadURL);
+            this.userProfile.child(userID).update({
+                proPic: snapshot.downloadURL
+              });
+          });
+        }
 
-        // loadUser(number){
-
-        //   if (this.data){
-        //     return Promise.resolve(this.data);
-        //   }
-
-        //   return new Promise(resolve => {
-
-        //     this.http.get('https://randomuser.me/api/?results='+number)
-        //     .map(res => res.json())
-        //     .subscribe(data => {
-        //       this.data = data.results;
-        //       resolve(this.data);
-        //     })
-
-        //   })
-        // }
+        updateInstantMemNum(userId){
+              let that = this;
+              this.userProfile.child(userId).once('value', function(snapshot) {
+                console.log("updating num of Instant Mems");
+                let InstantMemNum = 0;
+                if(snapshot.val().instantMemNum){
+                  InstantMemNum  = snapshot.val().instantMemNum;
+                }
+                firebase.database().ref('/users/' + userId).update({
+                  instantMemNum: InstantMemNum + 1
+                });
+        });
+      }
 
       }
