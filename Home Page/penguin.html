@@ -7,19 +7,20 @@ body{
 
 }
 
+
 #red_balloon {
-  transform: translate(150px);
-  animation: popup 40s ease infinite;
+/*  transform: translate(150px);
+*/  animation: popup 50s ease infinite;
 }
 @keyframes popup {
   0% {
-    transform: translate(600px,1050px);
+    transform: translate(850px,1050px);
   }
   50% {
-    transform: translate(500px,300px);
+    transform: translate(600px,100px);
   }
   100% {
-    transform: translate(600px,1050px);
+    transform: translate(850px,1050px);
   }
 }
 
@@ -30,14 +31,14 @@ body{
 }
 @keyframes popups {
   0% {
-    transform: translate(100px,1450px);
+    transform: translate(-10px,1450px);
 /*    transform: translateX(250px);
 */  }
   50% {
-    transform: translate(100px,260px);
+    transform: translate(80px,260px);
   }
   100% {
-    transform: translate(100px,1450px);
+    transform: translate(-10px,1450px);
   }
 }
 
@@ -107,13 +108,30 @@ body{
 <body>
 
 
+<!-- 
+<svg onclick="document.getElementById('yellow_balloon').style.display='block';" width="72px" height="72px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.29 55.82"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#3996e0;}</style><linearGradient id="linear-gradient" x1="2.23" y1="8.81" x2="31.06" y2="37.64" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#063d63"/><stop offset="0.02" stop-color="#09426a"/><stop offset="0.08" stop-color="#165889"/><stop offset="0.14" stop-color="#216ca5"/><stop offset="0.22" stop-color="#2a7bbb"/><stop offset="0.31" stop-color="#3187cc"/><stop offset="0.42" stop-color="#3590d7"/><stop offset="0.57" stop-color="#3895de"/><stop offset="1" stop-color="#3996e0"/></linearGradient></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M12.73,48.21H20.5c6.26-6.34,11.34-21.57,12.61-28.54C34.67,11,25.72,0,16.62,0S-1.14,11.42.12,19.66C1.2,26.67,6.47,43.13,12.73,48.21Z"/><path class="cls-2" d="M19.35,54.84a1.27,1.27,0,0,1-1.2,1H15.08a1.27,1.27,0,0,1-1.2-1L13,50.46a.79.79,0,0,1,.8-1h5.61a.79.79,0,0,1,.8,1Z"/></g></g></svg>
 
-<svg id="blue_balloon" width="72px" height="72px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.29 55.82"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#3996e0;}</style><linearGradient id="linear-gradient" x1="2.23" y1="8.81" x2="31.06" y2="37.64" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#063d63"/><stop offset="0.02" stop-color="#09426a"/><stop offset="0.08" stop-color="#165889"/><stop offset="0.14" stop-color="#216ca5"/><stop offset="0.22" stop-color="#2a7bbb"/><stop offset="0.31" stop-color="#3187cc"/><stop offset="0.42" stop-color="#3590d7"/><stop offset="0.57" stop-color="#3895de"/><stop offset="1" stop-color="#3996e0"/></linearGradient></defs><title>Asset 3</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M12.73,48.21H20.5c6.26-6.34,11.34-21.57,12.61-28.54C34.67,11,25.72,0,16.62,0S-1.14,11.42.12,19.66C1.2,26.67,6.47,43.13,12.73,48.21Z"/><path class="cls-2" d="M19.35,54.84a1.27,1.27,0,0,1-1.2,1H15.08a1.27,1.27,0,0,1-1.2-1L13,50.46a.79.79,0,0,1,.8-1h5.61a.79.79,0,0,1,.8,1Z"/></g></g></svg>
+
+<svg style="display:none;" id="yellow_balloon" width="88px" height="88px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.99 46.94"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#ffba49;}</style><linearGradient id="linear-gradient" x1="1.88" y1="7.41" x2="26.12" y2="31.66" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#ff9b00"/><stop offset="0.05" stop-color="#ffa10e"/><stop offset="0.13" stop-color="#ffaa24"/><stop offset="0.23" stop-color="#ffb135"/><stop offset="0.35" stop-color="#ffb640"/><stop offset="0.52" stop-color="#ffb947"/><stop offset="1" stop-color="#ffba49"/></linearGradient></defs><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M10.71,40.54h6.53c5.27-5.33,9.53-18.14,10.6-24C29.16,9.29,21.63,0,14,0S-1,9.6.1,16.53C1,22.43,5.44,36.27,10.71,40.54Z"/><path class="cls-2" d="M16.3,46a1.27,1.27,0,0,1-1.2,1H12.84a1.27,1.27,0,0,1-1.2-1L11,42.58a.79.79,0,0,1,.8-1h4.4a.79.79,0,0,1,.8,1Z"/></g></g></svg> -->
+
+<!-- <svg width="64px" height="64px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.29 55.82"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:url(#linear-gradient-2);}</style><linearGradient id="linear-gradient" x1="2.23" y1="8.81" x2="31.06" y2="37.64" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#ff495c"/><stop offset="0.07" stop-color="#f75768"/><stop offset="0.17" stop-color="#ee6876"/><stop offset="0.3" stop-color="#e77381"/><stop offset="0.49" stop-color="#e37a86"/><stop offset="1" stop-color="#e27c88"/></linearGradient><linearGradient id="linear-gradient-2" x1="12.99" y1="52.65" x2="20.24" y2="52.65" xlink:href="#linear-gradient"/></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M12.73,48.21H20.5c6.26-6.34,11.34-21.57,12.61-28.54C34.67,11,25.72,0,16.62,0S-1.14,11.42.12,19.66C1.2,26.67,6.47,43.13,12.73,48.21Z"/><path class="cls-2" d="M19.35,54.84a1.27,1.27,0,0,1-1.2,1H15.08a1.27,1.27,0,0,1-1.2-1L13,50.46a.79.79,0,0,1,.8-1h5.61a.79.79,0,0,1,.8,1Z"/></g></g></svg> -->
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 47.15 13.84"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{mask:url(#mask);}.cls-3{fill:#fff;opacity:0.57;}</style><linearGradient id="linear-gradient" x1="23.57" x2="23.57" y2="13.84" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="0.09" stop-color="#f7f7f7"/><stop offset="0.22" stop-color="#e2e2e2"/><stop offset="0.38" stop-color="#bebebe"/><stop offset="0.57" stop-color="#8d8d8d"/><stop offset="0.77" stop-color="#4f4f4f"/><stop offset="0.99" stop-color="#040404"/><stop offset="1"/></linearGradient><mask id="mask" x="0" y="0" width="47.15" height="13.84" maskUnits="userSpaceOnUse"><path class="cls-1" d="M44.59,8.71H30a2.28,2.28,0,0,1,0-3.59h5.35a2.56,2.56,0,1,0,0-5.12H2.56a2.56,2.56,0,0,0,0,5.12H19.4a2.28,2.28,0,0,1,0,3.59H13.32a2.56,2.56,0,1,0,0,5.12H44.59a2.56,2.56,0,1,0,0-5.12Z"/></mask></defs><title>Asset 7</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><g class="cls-2"><path class="cls-3" d="M44.59,8.71H30a2.28,2.28,0,0,1,0-3.59h5.35a2.56,2.56,0,1,0,0-5.12H2.56a2.56,2.56,0,0,0,0,5.12H19.4a2.28,2.28,0,0,1,0,3.59H13.32a2.56,2.56,0,1,0,0,5.12H44.59a2.56,2.56,0,1,0,0-5.12Z"/></g></g></g></svg>
+
+<img id="red_balloon" src="http://i65.tinypic.com/k3rdwy.png" style="width:70px;height:104px;"> 
+
+<img id="yellow_balloon" src="yellow_day.png" style="width:90px;height:144px;"> 
+
+<img id="blue_balloon" onclick="myFunction()" src="blue_day.png" style="width:80px;height124px;"> 
 
 
-<svg id="yellow_balloon" width="88px" height="88px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.99 46.94"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:#ffba49;}</style><linearGradient id="linear-gradient" x1="1.88" y1="7.41" x2="26.12" y2="31.66" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#ff9b00"/><stop offset="0.05" stop-color="#ffa10e"/><stop offset="0.13" stop-color="#ffaa24"/><stop offset="0.23" stop-color="#ffb135"/><stop offset="0.35" stop-color="#ffb640"/><stop offset="0.52" stop-color="#ffb947"/><stop offset="1" stop-color="#ffba49"/></linearGradient></defs><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M10.71,40.54h6.53c5.27-5.33,9.53-18.14,10.6-24C29.16,9.29,21.63,0,14,0S-1,9.6.1,16.53C1,22.43,5.44,36.27,10.71,40.54Z"/><path class="cls-2" d="M16.3,46a1.27,1.27,0,0,1-1.2,1H12.84a1.27,1.27,0,0,1-1.2-1L11,42.58a.79.79,0,0,1,.8-1h4.4a.79.79,0,0,1,.8,1Z"/></g></g></svg>
+<script>
+function myFunction() {
+    document.getElementById("yellow_balloon").src = "blue_day.png";
+}
+</script>
 
-<svg width="64px" height="64px" id = "red_balloon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33.29 55.82"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:url(#linear-gradient-2);}</style><linearGradient id="linear-gradient" x1="2.23" y1="8.81" x2="31.06" y2="37.64" gradientUnits="userSpaceOnUse"><stop offset="0.01" stop-color="#ff495c"/><stop offset="0.07" stop-color="#f75768"/><stop offset="0.17" stop-color="#ee6876"/><stop offset="0.3" stop-color="#e77381"/><stop offset="0.49" stop-color="#e37a86"/><stop offset="1" stop-color="#e27c88"/></linearGradient><linearGradient id="linear-gradient-2" x1="12.99" y1="52.65" x2="20.24" y2="52.65" xlink:href="#linear-gradient"/></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><path class="cls-1" d="M12.73,48.21H20.5c6.26-6.34,11.34-21.57,12.61-28.54C34.67,11,25.72,0,16.62,0S-1.14,11.42.12,19.66C1.2,26.67,6.47,43.13,12.73,48.21Z"/><path class="cls-2" d="M19.35,54.84a1.27,1.27,0,0,1-1.2,1H15.08a1.27,1.27,0,0,1-1.2-1L13,50.46a.79.79,0,0,1,.8-1h5.61a.79.79,0,0,1,.8,1Z"/></g></g></svg>
+
 
 </body>
 
