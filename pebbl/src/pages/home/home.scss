@@ -155,97 +155,87 @@ page-home {
 }
 
 #red_balloon {
-  transform: translate(150px);
-  animation: popup 40s ease infinite;
+position:absolute;
+animation: popup 50s ease infinite;
+}
+#red_balloon p {
+    position: absolute;
+    margin-top: -14%;
+    margin-left: 12%;
+    color: white;
 }
 @keyframes popup {
   0% {
-    transform: translate(600px,1050px);
+    transform: translate(50%,650%);
   }
   50% {
-    transform: translate(500px,300px);
+    transform: translate(50%,50%);
   }
   100% {
-    transform: translate(600px,1050px);
+    transform: translate(50%,650%);
   }
 }
 
 
 #blue_balloon {
-/*  transform: translateY(150px);
-*/  animation: popups 65s infinite linear;
+  position:absolute;
+animation: popups 65s infinite linear;
+} 
+#blue_balloon p {
+position: absolute;
+    margin-top: 14%;
+    margin-left: 20%;
+    color: white;
 }
+
 @keyframes popups {
   0% {
-    transform: translate(80%,500%);
-/*    transform: translateX(250px);
-*/  }
+    transform: translate(20%,700%);
+}
   50% {
-    transform: translate(80%,30%);
+    transform: translate(80%,0%);
   }
   100% {
-    transform: translate(80%,500%);
+    transform: translate(20%,700%);
   }
 }
 
 
 #yellow_balloon {
-  transform: translateY(150px);
+position:absolute;
   animation: popupss 60s infinite linear;
+}
+#yellow_balloon p {
+    position: absolute;
+    margin-top: -14%;
+    margin-left: 9%;
+    color: white;
 }
 @keyframes popupss {
   0% {
-    transform: translate(400px,100px);
+    transform: translate(50%,0%);
 /*    transform: translateX(250px);
 */  }
   20% {
-    transform: translate(260px,850px);
+    transform: translate(40%,450%);
   }
   50% {
-    transform: translate(150px,1380px);
+    transform: translate(30%,950%);
   }
   80% {
-    transform: translate(260px,850px);
+    transform: translate(40%,450%);
   }
   100% {
-    transform: translate(400px,100px);
+    transform: translate(50%,0%);
   }
 
-/*
-0% {
-    transform: translate(700px,100px);
- }
-  15% {
-    transform: translate(200px,850px);
-  }
-  25% {
-    transform: translate(50px,1450px);
-  }
-  35% {
-    transform: translate(65px,700px);
-  }
-  50% {
-    transform: translate(50px,200px);
-  }
-  65% {
-    transform: translate(65px,700px);
-  }
-  75% {
-    transform: translate(50px,1450px);
-  }
-  85% {
-    transform: translate(200px,850px);
-  }
-  100% {
-    transform: translate(700px,100px);
-  }*/
 
-  /*50% {
-    transform: translate(250px,450px);
-  }
-  100% {
-    transform: translate(350px,1250px);
-  }*/
+
+
+}
+
+b{
+  position:absolute;
 }
 
 
