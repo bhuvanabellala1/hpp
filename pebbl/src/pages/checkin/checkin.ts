@@ -284,6 +284,9 @@ export class CheckinPage {
       );
     }
 
+    deleteImg(index){
+      this.images.splice(index, 1);
+    }
 
     focusOnTextArea(input){
       input.setFocus();

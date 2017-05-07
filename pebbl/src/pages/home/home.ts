@@ -29,9 +29,9 @@ export class HomePage {
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
     public menu: MenuController, public events: Events, private navParams: NavParams) {
       this.navPages = [
-        { title: 'Timeline', icon: 'center', path: 'img/Timeline_blue.svg', component: TimelinePage },
-        { title: 'Check In', icon: 'center', path: 'img/CheckIn.svg', component: CheckinPage },
-        { title: 'Adventures', icon: 'center', path: 'img/Adventure_Stretched.svg', component: AdventuresPage }
+        { title: 'Timeline', icon: 'center', path: 'img/Timeline_outline.svg', component: TimelinePage },
+        { title: 'Check In', icon: 'center', path: 'img/Checkin_outline.svg', component: CheckinPage },
+        { title: 'Adventures', icon: 'center', path: 'img/Adventure_outline.svg', component: AdventuresPage }
       ];
       this.numMems = 0;
       this.hardwareMemories = firebase.database().ref('hardware-memories');
