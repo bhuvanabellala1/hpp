@@ -28,6 +28,8 @@
     redballoon: string;
     yellowballoon: string;
     blueballoon: string;
+    hr: number;
+    backgroundscene: string;
     
     card1: string;
     private hardwareMemories: any;;
@@ -39,11 +41,24 @@
           { title: 'Check In', icon: 'center', path: 'img/Checkin_outline.svg', component: CheckinPage },
           { title: 'Adventures', icon: 'center', path: 'img/Adventure_outline.svg', component: AdventuresPage }
         ];
+        this.hr = (new Date()).getHours(); //get hours of the day in 24Hr format (0-23)
+        //this.hr = 12;
         this.numMems = 0;
-        this.redballoon = "img/red_day.png";
-        this.yellowballoon = "img/yellow_day.png";
-        this.blueballoon = "img/blue_day.png";
-        this.card1 = "img/night_textbox.png";
+        if (this.hr > 5 && this.hr < 17) {
+        this.redballoon = "img/homescreen/day-red.png";
+        this.yellowballoon = "img/homescreen/day-yellow.png";
+        this.blueballoon = "img/homescreen/day-blue.png";
+        this.card1 = "img/homescreen/day-textbox.png";
+        this.backgroundscene = "img/homescreen/day-background.png";
+      }
+      else {
+        this.redballoon = "img/homescreen/night-red.png";
+        this.yellowballoon = "img/homescreen/night-yellow.png";
+        this.blueballoon = "img/homescreen/night-blue.png";
+        this.card1 = "img/homescreen/night-textbox.png";
+        this.backgroundscene = "img/homescreen/night-background.png";
+      }
+
         this.hardwareMemories = firebase.database().ref('hardware-memories');
 
         if(navParams.get('fm')){
@@ -60,65 +75,119 @@
       }
 
       blue_click() {
-
-        if(this.blueballoon == 'img/white_day_blue.png'){
+        if (this.hr > 5 && this.hr < 17) {
+          if(this.blueballoon == 'img/homescreen/day-light.png'){
         document.getElementById('blue_card').style.visibility='hidden';
         document.getElementById('blue_text').style.visibility='hidden';
-        this.blueballoon = "img/blue_day.png";
+        this.blueballoon = "img/homescreen/day-blue.png";
         }else{
-          this.blueballoon = 'img/white_day_blue.png';
+          this.blueballoon = 'img/homescreen/day-light.png';
           document.getElementById('blue_card').style.visibility='visible';
         document.getElementById('blue_text').style.visibility='visible';
         document.getElementById('yellow_card').style.visibility='hidden';
         document.getElementById('yellow_text').style.visibility='hidden';
          document.getElementById('red_card').style.visibility='hidden';
         document.getElementById('red_text').style.visibility='hidden';
-        this.redballoon = "img/red_day.png";
-        this.yellowballoon = "img/yellow_day.png";
+        this.redballoon = "img/homescreen/day-red.png";
+        this.yellowballoon = "img/homescreen/day-yellow.png";
+        }
+        }
+        else {
+          if(this.blueballoon == 'img/homescreen/night-light.png'){
+        document.getElementById('blue_card').style.visibility='hidden';
+        document.getElementById('blue_text').style.visibility='hidden';
+        this.blueballoon = "img/homescreen/night-blue.png";
+        }else{
+          this.blueballoon = 'img/homescreen/night-light.png';
+          document.getElementById('blue_card').style.visibility='visible';
+        document.getElementById('blue_text').style.visibility='visible';
+        document.getElementById('yellow_card').style.visibility='hidden';
+        document.getElementById('yellow_text').style.visibility='hidden';
+         document.getElementById('red_card').style.visibility='hidden';
+        document.getElementById('red_text').style.visibility='hidden';
+        this.redballoon = "img/homescreen/night-red.png";
+        this.yellowballoon = "img/homescreen/night-yellow.png";
+        }
         }
       
       }
 
       yellow_click() {
+        if (this.hr > 5 && this.hr < 17) {
 
-       if(this.yellowballoon == 'img/white_day_blue.png'){
+       if(this.yellowballoon == 'img/homescreen/day-light.png'){
         document.getElementById('yellow_card').style.visibility='hidden';
         document.getElementById('yellow_text').style.visibility='hidden';
-        this.yellowballoon = "img/yellow_day.png";
+        this.yellowballoon = "img/homescreen/day-yellow.png";
         }else{
-          this.yellowballoon = 'img/white_day_blue.png';
+          this.yellowballoon = 'img/homescreen/day-light.png';
           document.getElementById('yellow_card').style.visibility='visible';
           document.getElementById('yellow_text').style.visibility='visible';
           document.getElementById('blue_card').style.visibility='hidden';
         document.getElementById('blue_text').style.visibility='hidden';
           document.getElementById('red_card').style.visibility='hidden';
         document.getElementById('red_text').style.visibility='hidden';
-          this.blueballoon = "img/blue_day.png";
-          this.redballoon = "img/red_day.png";
+          this.blueballoon = "img/homescreen/day-blue.png";
+          this.redballoon = "img/homescreen/day-red.png";
         }
-      
+      }
+      else {
 
+       if(this.yellowballoon == 'img/homescreen/night-light.png'){
+        document.getElementById('yellow_card').style.visibility='hidden';
+        document.getElementById('yellow_text').style.visibility='hidden';
+        this.yellowballoon = "img/homescreen/night-yellow.png";
+        }else{
+          this.yellowballoon = 'img/homescreen/night-light.png';
+          document.getElementById('yellow_card').style.visibility='visible';
+          document.getElementById('yellow_text').style.visibility='visible';
+          document.getElementById('blue_card').style.visibility='hidden';
+        document.getElementById('blue_text').style.visibility='hidden';
+          document.getElementById('red_card').style.visibility='hidden';
+        document.getElementById('red_text').style.visibility='hidden';
+          this.blueballoon = "img/homescreen/night-blue.png";
+          this.redballoon = "img/homescreen/night-red.png";
       }
 
+      }
+      }
       red_click() {
+        if (this.hr > 5 && this.hr < 17) {
 
-        if(this.redballoon == 'img/white_day_blue.png'){
+        if(this.redballoon == 'img/homescreen/day-light.png'){
         document.getElementById('red_card').style.visibility='hidden';
         document.getElementById('red_text').style.visibility='hidden';
-        this.redballoon = "img/red_day.png";
+        this.redballoon = "img/homescreen/day-red.png";
         }else{
-          this.redballoon = 'img/white_day_blue.png';
+          this.redballoon = 'img/homescreen/day-light.png';
           document.getElementById('red_card').style.visibility='visible';
           document.getElementById('red_text').style.visibility='visible';
           document.getElementById('yellow_card').style.visibility='hidden';
         document.getElementById('yellow_text').style.visibility='hidden';
         document.getElementById('blue_card').style.visibility='hidden';
         document.getElementById('blue_text').style.visibility='hidden';
-          this.yellowballoon = "img/yellow_day.png";
-          this.blueballoon = "img/blue_day.png";
+          this.yellowballoon = "img/homescreen/day-yellow.png";
+          this.blueballoon = "img/homescreen/day-blue.png";
         }
       }
-
+      else {
+        if(this.redballoon == 'img/homescreen/night-light.png'){
+        document.getElementById('red_card').style.visibility='hidden';
+        document.getElementById('red_text').style.visibility='hidden';
+        this.redballoon = "img/homescreen/night-red.png";
+        }else{
+          this.redballoon = 'img/homescreen/night-light.png';
+          document.getElementById('red_card').style.visibility='visible';
+          document.getElementById('red_text').style.visibility='visible';
+          document.getElementById('yellow_card').style.visibility='hidden';
+        document.getElementById('yellow_text').style.visibility='hidden';
+        document.getElementById('blue_card').style.visibility='hidden';
+        document.getElementById('blue_text').style.visibility='hidden';
+          this.yellowballoon = "img/homescreen/night-yellow.png";
+          this.blueballoon = "img/homescreen/night-blue.png";
+      }
+      }
+      }
       ionViewDidLoad() {
         console.log("home.ts - Entered home page");
        let userId = firebase.auth().currentUser.uid;

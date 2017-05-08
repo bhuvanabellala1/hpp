@@ -15,7 +15,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-bounce padding style="background-image: url('img/NoElements_Night.png');">
+<ion-content no-bounce padding [ngStyle]="{ 'background-image': 'url(' + backgroundscene + ')'}">
 
 <!-- <svg id="cloud1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 47.15 13.84"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{mask:url(#mask);}.cls-3{fill:#fff;opacity:0.57;}</style><linearGradient id="linear-gradient" x1="23.57" x2="23.57" y2="13.84" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="0.09" stop-color="#f7f7f7"/><stop offset="0.22" stop-color="#e2e2e2"/><stop offset="0.38" stop-color="#bebebe"/><stop offset="0.57" stop-color="#8d8d8d"/><stop offset="0.77" stop-color="#4f4f4f"/><stop offset="0.99" stop-color="#040404"/><stop offset="1"/></linearGradient><mask id="mask" x="0" y="0" width="47.15" height="13.84" maskUnits="userSpaceOnUse"><path class="cls-1" d="M44.59,8.71H30a2.28,2.28,0,0,1,0-3.59h5.35a2.56,2.56,0,1,0,0-5.12H2.56a2.56,2.56,0,0,0,0,5.12H19.4a2.28,2.28,0,0,1,0,3.59H13.32a2.56,2.56,0,1,0,0,5.12H44.59a2.56,2.56,0,1,0,0-5.12Z"/></mask></defs><title>Asset 7</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_5" data-name="Layer 5"><g class="cls-2"><path class="cls-3" d="M44.59,8.71H30a2.28,2.28,0,0,1,0-3.59h5.35a2.56,2.56,0,1,0,0-5.12H2.56a2.56,2.56,0,0,0,0,5.12H19.4a2.28,2.28,0,0,1,0,3.59H13.32a2.56,2.56,0,1,0,0,5.12H44.59a2.56,2.56,0,1,0,0-5.12Z"/></g></g></g></svg>
 
@@ -28,29 +28,21 @@
 
 <div id="blue_balloon">
   <p id="blue_text" style="visibility:hidden;">Making memories for 24 days</p>
-  <img (click)="blue_click()" src="{{ blueballoon }}" /> 
-  <img id="blue_card" src="{{ card1 }}" style="height:4%; visibility:hidden;"/> 
-  
-
+  <img class="balloons" (click)="blue_click()" src="{{ blueballoon }}" /> 
+  <img class="textbox" id="blue_card" src="{{ card1 }}" style="height:4%; visibility:hidden;"/> 
 </div>
 
 <div id="red_balloon">
-   <img id="red_card" src="{{ card1 }}" style="height:4%; visibility:hidden;"/> 
+   <img class="textbox" id="red_card" src="{{ card1 }}" style="height:4%; visibility:hidden;"/> 
    <p id="red_text" style="visibility:hidden;">4 day memory streak</p> 
-  <img (click)="red_click()" src="{{ redballoon }}" > 
+  <img class="balloons" (click)="red_click()" src="{{ redballoon }}" > 
 </div>
 
 <div id="yellow_balloon">
-   <img id="yellow_card" src="{{ card1 }}" style="height:4%; visibility:hidden;"/> 
+   <img class="textbox" id="yellow_card" src="{{ card1 }}" style="height:4%; visibility:hidden;"/> 
    <p id="yellow_text" style="visibility:hidden;">15 total memories made</p> 
-  <img (click)="yellow_click()" src="{{ yellowballoon }}"> 
+  <img class="balloons" (click)="yellow_click()" src="{{ yellowballoon }}"> 
 </div>
-
-
-
-
-
-
 
 
   <!--<div class="stats-area">
