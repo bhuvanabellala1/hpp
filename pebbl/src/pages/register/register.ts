@@ -27,10 +27,10 @@ export class RegisterPage {
 
   signUserUp(){
       this.usersService.signUpUser(this.emailField, this.passwordField, this.username).then(authData => {
-        //successful
         console.log("successful");
       }, error => {
-        alert("error")
+        alert(error.message);
+        console.log(error.message);
       });
 
       let loader = this.loadingCtrl.create({

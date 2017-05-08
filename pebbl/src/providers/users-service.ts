@@ -87,8 +87,12 @@ export class UsersService {
 
     signUpUser(email: string , password: string, username: string){
       return this.fireAuth.createUserWithEmailAndPassword(email, password).then((newUser) => {
+
+        console.log("created a new account");
         //sign in the user
         this.fireAuth.signInWithEmailAndPassword(email, password).then((authenticatedUser) => {
+
+          console.log("Signed new user");
           //successful login, create user profile
           this.userProfile.child(authenticatedUser.uid).set({
             email: email,

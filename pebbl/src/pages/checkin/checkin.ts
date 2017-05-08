@@ -8,6 +8,7 @@ import { UsersService } from '../../providers/users-service'
 import * as firebase from 'firebase';
 import { CacheService } from 'ionic-cache/ionic-cache';
 import {  InstantMemModel, EachMem } from '../pebbl/instantmem.model';
+declare var cordova: any;
 
 /*
 Generated class for the Checkin page.
@@ -50,6 +51,18 @@ export class CheckinPage {
       this.section = "camera";
       this.images = [];
       this.hide = true;
+      const plugin = cordova.plugins.CameraRollLocation;
+      // or getCameraRoll() with Promises
+      plugin.getCameraRoll({
+        from: new Date('2017-05-07'),
+        to: new Date('2017-05-08')
+      })
+      .then( result=>{
+        console.log("imges");
+        console.log(`plugin getCameraRoll() result[0...5]=${ result.slice(0,1) }`);
+        console.log("Got images");
+      })
+
       // this.hardware = false;
       this.hardwareMemories = firebase.database().ref('hardware-memories');
       if(this.navParams.get("mem")){
