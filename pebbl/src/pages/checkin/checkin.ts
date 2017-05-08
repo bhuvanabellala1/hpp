@@ -51,17 +51,6 @@ export class CheckinPage {
       this.section = "camera";
       this.images = [];
       this.hide = true;
-      const plugin = cordova.plugins.CameraRollLocation;
-      // or getCameraRoll() with Promises
-      plugin.getCameraRoll({
-        from: new Date('2017-05-07'),
-        to: new Date('2017-05-08')
-      })
-      .then( result=>{
-        console.log("imges");
-        console.log(`plugin getCameraRoll() result[0...5]=${ result.slice(0,1) }`);
-        console.log("Got images");
-      })
 
       // this.hardware = false;
       this.hardwareMemories = firebase.database().ref('hardware-memories');
@@ -122,6 +111,34 @@ export class CheckinPage {
       //   this.grabVenues();
       // }
       this.grabVenues();
+      // if(this.instantMem){
+      const plugin = cordova.plugins.CameraRollLocation;
+      // or getCameraRoll() with Promises
+      plugin.getCameraRoll({
+        from: new Date('2017-05-06'),
+        to: new Date()
+      })
+      .then( result=>{
+        console.log("imges");
+        console.log("plugin getCameraRoll() result[0...5]=");
+        for(var i = 0; i < result.length && i < 3; i++){
+          let x = result[i].uuid;
+          console.log(result[i].uuid);
+          console.log(result[i].filename);
+            plugin.getImage([x],{
+                            width: 640,
+                            height: 480
+                            })
+          .then( data=>{
+                  this.images.push(data[x]);
+                  console.log(data[x]);
+        });
+        } 
+        console.log(result.length)
+        console.log(result[0]);
+        console.log("Got images");
+      })
+      // }
     }
 
     grabVenues(){
