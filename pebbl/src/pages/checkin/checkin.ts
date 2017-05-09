@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 import { CacheService } from 'ionic-cache/ionic-cache';
 import {  InstantMemModel, EachMem } from '../pebbl/instantmem.model';
 declare var cordova: any;
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
 /*
 Generated class for the Checkin page.
@@ -41,12 +42,14 @@ export class CheckinPage {
   public long:any;
   private user1_proPic: any;
   private user2_proPic: any;
+  private picc: any;
 
   constructor(public navCtrl: NavController, private _zone: NgZone, public navParams: NavParams,
     private checkinService: CheckinService, public modalCtrl: ModalController,
     private memoryService: MemoryService,private loadingCtrl: LoadingController,
     private alertCtrl: AlertController, private viewCtrl: ViewController,
-    private cache: CacheService, public events: Events, private usersService: UsersService) {
+    private cache: CacheService, public events: Events, private usersService: UsersService,
+    private sanitizer: DomSanitizer) {
       this.userId = firebase.auth().currentUser.uid;
       this.section = "camera";
       this.images = [];
@@ -105,40 +108,36 @@ export class CheckinPage {
     }
 
     ionViewWillEnter(){
+      let months = {"JAN": "01", "FEB": "02", "MAR": "03", 
+                    "APR": "04", "MAY": "05", 
+                    "JUN": "06", "JUL": "07", 
+                    "AUG": "08", "SEP": "09", "OCT": "10", 
+                    "NOV": "11", "DEC": "12"};
       console.log('About to enter make memory');
-      // if(!this.hardware ){
-      //   console.log(this.hardware);
-      //   this.grabVenues();
-      // }
       this.grabVenues();
-      // if(this.instantMem){
+      if(this.instantMem){
+        let date = this.instantMem.mem.year + "-"+months[this.instantMem.mem.month] + "-" + this.instantMem.mem.date;
+        console.log(date);
       const plugin = cordova.plugins.CameraRollLocation;
-      // or getCameraRoll() with Promises
       plugin.getCameraRoll({
-        from: new Date('2017-05-06'),
+        from: new Date(date),
         to: new Date()
       })
       .then( result=>{
-        console.log("imges");
-        console.log("plugin getCameraRoll() result[0...5]=");
+        console.log("IMAGESSSS FOR HARDWARE");
         for(var i = 0; i < result.length && i < 3; i++){
           let x = result[i].uuid;
-          console.log(result[i].uuid);
-          console.log(result[i].filename);
             plugin.getImage([x],{
-                            width: 640,
-                            height: 480
-                            })
+              width: 640,
+              height: 480
+            })
           .then( data=>{
-                  this.images.push(data[x]);
-                  console.log(data[x]);
+            this.picc = this.sanitizer.bypassSecurityTrustResourceUrl(data[x])
+            this.images.push(this.picc);
         });
         } 
-        console.log(result.length)
-        console.log(result[0]);
-        console.log("Got images");
-      })
-      // }
+      });
+      }
     }
 
     grabVenues(){
@@ -263,7 +262,9 @@ export class CheckinPage {
 
       }).then((imageData) => {
         this._zone.run(() => {
+          console.log("logging images by taking pictures");
           this.images.push("data:image/jpeg;base64," + imageData);
+          console.log("data:image/jpeg;base64," + imageData);
         });
       }, (err) => {
         console.log(err);
