@@ -108,15 +108,15 @@ export class CheckinPage {
     }
 
     ionViewWillEnter(){
-      let months = {"JAN": "01", "FEB": "02", "MAR": "03", 
-                    "APR": "04", "MAY": "05", 
-                    "JUN": "06", "JUL": "07", 
-                    "AUG": "08", "SEP": "09", "OCT": "10", 
+      let months = {"JAN": "01", "FEB": "02", "MAR": "03",
+                    "APR": "04", "MAY": "05",
+                    "JUN": "06", "JUL": "07",
+                    "AUG": "08", "SEP": "09", "OCT": "10",
                     "NOV": "11", "DEC": "12"};
       console.log('About to enter make memory');
       this.grabVenues();
       if(this.instantMem){
-        let date = this.instantMem.mem.year + "-"+months[this.instantMem.mem.month] + "-" + this.instantMem.mem.date;
+        let date = this.instantMem.mem.year + "-"+months[this.instantMem.mem.month] + "-" + "07";
         console.log(date);
       const plugin = cordova.plugins.CameraRollLocation;
       plugin.getCameraRoll({
@@ -135,7 +135,7 @@ export class CheckinPage {
             this.picc = this.sanitizer.bypassSecurityTrustResourceUrl(data[x])
             this.images.push(this.picc);
         });
-        } 
+        }
       });
       }
     }

@@ -19,6 +19,7 @@ import { UsersService } from '../providers/users-service'
 import { MemoryService } from '../providers/memory-service'
 import * as firebase from 'firebase';
 import { BackgroundMode } from '@ionic-native/background-mode';
+import { Storage } from '@ionic/storage';
 
 declare var cordova: any;
 @Component({
@@ -38,11 +39,12 @@ export class MyApp {
 
 
   constructor(platform: Platform, public app: App, public menu:MenuController,
-    private backgroundMode: BackgroundMode) {
+    private backgroundMode: BackgroundMode,   private storage: Storage) {
 
 
       this.proPic = "img/Profile-1-Large.svg";
       this.userName = "Sam";
+
       //Initialize Firebase
       const config = {
         apiKey: "AIzaSyD70iOoMmko5N-WFL8bFq7IJFSDou4rkjs",
@@ -64,6 +66,17 @@ export class MyApp {
         this.backgroundMode.enable();
         cordova.plugins.backgroundMode.on('activate', function(){
           console.log("Background mode activated");
+        });
+        this.storage.get("username").then((value) => {
+          this.userName = value;
+        }).catch((error) => {
+          console.log(error);
+        });
+
+        this.storage.get("proPic").then((value) => {
+          this.proPic = value;
+        }).catch((error) => {
+          console.log(error);
         });
         //Keyboard.disableScroll(true);
       });
@@ -98,6 +111,8 @@ export class MyApp {
       firebase.initializeApp(config);
 
       firebase.auth().onAuthStateChanged((user) => {
+        this.storage.set("userId", firebase.auth().currentUser.uid);
+        console.log("USER IDD");
         if(user){
           console.log("authenticated")
           this.userId = firebase.auth().currentUser.uid;
@@ -105,17 +120,23 @@ export class MyApp {
           this.userProfile = firebase.database().ref('users');
           this.userProfile.child(this.userId).on('value', function(snapshot) {
             if(snapshot.val().proPic){
+              that.storage.set("proPic", snapshot.val().proPic);
               that.proPic = snapshot.val().proPic;
             }else{
               that.proPic = "img/Profile-1-Large.svg";
+              that.storage.set("proPic", "img/Profile-1-Large.svg");
             }
             that.userName = snapshot.val().username;
+            that.storage.set("username", snapshot.val().username);
           });
         }
         else{
           console.log("not authenticated")
           this.nav.setRoot(WalkthroughPage);
           this.menu.enable(false);
+          this.storage.remove("userId");
+          this.storage.remove("username");
+          this.storage.remove("proPic");
         }
 
 

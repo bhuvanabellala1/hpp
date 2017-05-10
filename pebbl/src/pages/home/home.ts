@@ -9,6 +9,7 @@ import { PebblPage } from '../pebbl/pebbl';
 import { Geolocation } from 'ionic-native';
 import { CheckinService } from '../../providers/checkin-service';
 import * as firebase from 'firebase';
+import { Storage } from '@ionic/storage';
 
 declare var d3: any;
 
@@ -35,7 +36,7 @@ export class HomePage {
   private hardwareMemories: any;;
   private numMems: any;
   constructor(private _zone: NgZone, public navCtrl: NavController, private checkinService: CheckinService,
-    public menu: MenuController, public events: Events, private navParams: NavParams) {
+    public menu: MenuController, public events: Events, private navParams: NavParams, private storage: Storage) {
       this.navPages = [
         { title: 'Timeline', icon: 'center', path: 'img/Timeline_outline.svg', component: TimelinePage },
         { title: 'Check In', icon: 'center', path: 'img/Checkin_outline.svg', component: CheckinPage },
@@ -196,19 +197,24 @@ export class HomePage {
     }
     ionViewDidLoad() {
       console.log("home.ts - Entered home page");
-      let userId = firebase.auth().currentUser.uid;
-      this.menu.enable(true);
-      let that = this;
-      this._zone.run(() => {
-        this.hardwareMemories.child(userId).on('value', function(snapshot) {
-          let memories = (snapshot.val());
-          if(memories){
-            that.numMems =  Object.keys(memories).length;
-            console.log("hardware MEMS");
-            console.log(that.numMems);
-          }
-        });
+      this.storage.get("userId").then((value) => {
+        this.userId = value;
+        console.log(this.userId);
+        let that = this;
+          this.hardwareMemories.child(this.userId).on('value', function(snapshot) {
+            let memories = (snapshot.val());
+            if(memories){
+                that._zone.run(() => {
+              that.numMems =  Object.keys(memories).length;
+            });
+              console.log("hardware MEMS");
+              console.log(that.numMems);
+            }
+          });
+
       });
+      this.menu.enable(true);
     }
+
 
   }

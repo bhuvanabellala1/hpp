@@ -13,6 +13,7 @@ import { VenuePage } from '../venue/venue';
 import { UsersService } from '../../providers/users-service'
 import * as firebase from 'firebase';
 import { CommentPage} from '../comment/comment';
+import { Storage } from '@ionic/storage';
 
 
 /*
@@ -43,8 +44,8 @@ export class TimelinePage {
     public loadingCtrl: LoadingController,
     public popoverCtrl: PopoverController,public http: Http, private _zone: NgZone,
     private checkinService: CheckinService, public modalCtrl: ModalController, private memoryService: MemoryService,
-    private alertCtrl: AlertController, private viewCtrl: ViewController
-
+    private alertCtrl: AlertController, private viewCtrl: ViewController,
+    private storage: Storage
   ) {
     this.loading = this.loadingCtrl.create();
     this.userId = firebase.auth().currentUser.uid;
@@ -59,6 +60,8 @@ export class TimelinePage {
       console.log(snapshot.val())
       this.memory = (snapshot.val())
       this.timeline.memories = this.memory;
+      this.storage.set("memoriess", firebase.auth().currentUser.uid);
+
     });
   }
 
@@ -131,7 +134,7 @@ export class TimelinePage {
             }
 
             // this.loading.dismiss();
-            console.log(this.timeline.memories)
+            // console.log(this.timeline.memories);
           });
         });
       }

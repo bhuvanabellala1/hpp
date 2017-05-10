@@ -6,6 +6,7 @@ import { SecondregsiterPage } from '../secondregsiter/secondregsiter';
 import { UsersService } from '../../providers/users-service'
 import { WalkthroughPage } from '../walkthrough/walkthrough';
 
+
 /*
 Generated class for the Login page.
 
