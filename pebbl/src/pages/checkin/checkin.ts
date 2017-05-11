@@ -116,27 +116,28 @@ export class CheckinPage {
       console.log('About to enter make memory');
       this.grabVenues();
       if(this.instantMem){
-        let date = this.instantMem.mem.year + "-"+months[this.instantMem.mem.month] + "-" + "07";
-        console.log(date);
-      const plugin = cordova.plugins.CameraRollLocation;
-      plugin.getCameraRoll({
-        from: new Date(date),
-        to: new Date()
-      })
-      .then( result=>{
-        console.log("IMAGESSSS FOR HARDWARE");
-        for(var i = 0; i < result.length && i < 3; i++){
-          let x = result[i].uuid;
-            plugin.getImage([x],{
-              width: 640,
-              height: 480
-            })
-          .then( data=>{
-            this.picc = this.sanitizer.bypassSecurityTrustResourceUrl(data[x])
-            this.images.push(this.picc);
-        });
-        }
-      });
+        this.images.push("assets/images/auditorium.jpeg");
+      //   let date = this.instantMem.mem.year + "-"+months[this.instantMem.mem.month] + "-" + "07";
+      //   console.log(date);
+      // const plugin = cordova.plugins.CameraRollLocation;
+      // plugin.getCameraRoll({
+      //   from: new Date(date),
+      //   to: new Date()
+      // })
+      // .then( result=>{
+      //   console.log("IMAGESSSS FOR HARDWARE");
+      //   for(var i = 0; i < result.length && i < 3; i++){
+      //     let x = result[i].uuid;
+      //       plugin.getImage([x],{
+      //         width: 640,
+      //         height: 480
+      //       })
+      //     .then( data=>{
+      //       this.picc = this.sanitizer.bypassSecurityTrustResourceUrl(data[x])
+      //       this.images.push(this.picc);
+      //   });
+      //   }
+      // });
       }
     }
 
